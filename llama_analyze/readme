@@ -1,2 +1,3 @@
 llama_try ->透過llama執行分析prompt
 output.csv ->當前測試結果(單一股票) 2330
+infer.ipynb ->學長的參考資料
