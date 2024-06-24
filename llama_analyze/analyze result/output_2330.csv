@@ -1,0 +1,18 @@
+Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
+,,,,
+Bullish,875 NTD,849 NTD,6 months,Sell if the stock price falls below 847 NTD
+Bullish,914 NTD,850 NTD,9 months,"Sell if the stock price falls below 848 NTD, or if the ROE drops to 20%."
+Bullish,,846 NTD,12 months,Trigger a sell order if the stock price falls below 854 NTD.
+Bullish,921 NTD,849 NTD,12 months,"If the stock price falls below 852 NTD, trigger a sell order to minimize losses."
+Bullish,,853 NTD,6-12 months,Trigger at -15% from current price
+Bullish,888 NTD,849 NTD,6-8 months,Sell if the stock price falls below its 50-day moving average or by more than 15%.
+Bullish,915 NTD,945 NTD,6 months,"If the stock price falls below 852 NTD, sell"
+Bullish,915 NTD,846 NTD,6 months,"Trigger a sell order if the stock price falls below 845 NTD, which is 10% lower than the current price of 940 NTD."
+Bullish,930 NTD,855 NTD,6 months,Sell if ROE falls below 20%.
+Bullish,920 NTD,910 NTD,12 months,"Trigger at 855 NTD if stock price falls below this level, or if ROE drops to 20%."
+Bullish,,851 NTD,6 months,Trigger a sell order if the stock price falls below 840 NTD or ROE drops to 20%.
+Bullish,912 NTD,1037 NTD,9 months,"Trigger at 851 NTD if price drops below this level, or if ROE falls below 20%."
+Bullish,911 NTD,,6-12 months,"If the stock price falls by 10% or more from the buying price, consider selling"
+Bullish,931 NTD,1036 NTD,12 months,Trigger at 84% ROE (current ROE is 26%) or if the stock price falls by 15%.
+Bullish,875 NTD,1037 NTD,6 months,Trigger at 857 NTD if stock price falls 10% from current price
+Bullish,913 NTD,1047 NTD,9 months,Below 875 NTD

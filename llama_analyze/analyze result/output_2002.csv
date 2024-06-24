@@ -1,0 +1,11 @@
+Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
+Bearish,21.75 NTD,,0 months,"If the stock price drops by more than 10% from the buying price, sell the stock"
+Bearish,21.38 NTD,,6 months,When the stock price falls by 15%
+Bullish,22.13 NTD,,6-12 months,"If the stock price falls below 21.51 NTD, consider selling and cutting losses at 10%."
+Bearish,21.58 NTD,,Not recommended to hold,
+Bearish,22.37 NTD,20.83 NTD,12 months,Sell when the stock price drops to 21.35 NTD
+Bearish,22.42 NTD,,3 months,"Stop-loss triggered when the stock price falls by 12% from the buying price, or if ROE drops below 0.8%."
+Bearish,22.18 NTD,,Not recommended (bearish prediction),"Stop-loss triggered when the stock price drops by 15% or more from the buying price, whichever comes first"
+Bearish,22.10 NTD,,6 months,Below 21.42 NTD
+Bearish,21.80 NTD,20.90 NTD,6 months,"Trigger a sell order when the stock price falls below 21.40 NTD, which is 10% lower than the current price."
+Bearish,22.30 NTD,,Not applicable (bearish prediction),"Trailing Stop Loss at -10%, triggered when stock price falls to 21.12 NTD"
