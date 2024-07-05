@@ -74,32 +74,41 @@ def generate_variation(prompt, recommendation):
 
 async def main():
     initial_prompt = """Evaluate the stock price of XYZ Inc. (2330) based on the following data:
-    * Current price: 570.5
-    * BPS (book value per share): 54.3
-    * Capital: 234.5B
-    * ROE (return on equity): 12.5%
-    * Revenue growth rate: 8% over the past year
-    * Profit margin: 15%
-    * Debt-to-equity ratio: 0.2
+    * Current price: 
+    * BPS (book value per share): 
+    * Capital: 
+    * ROE (return on equity): 
+
 
     Provide additional context about the company, industry, and market trends.
 
-    Assume you are a stock analyst, provide answers to the following questions:
+Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
 
-    1. Will it be bullish or bearish in the next six months?
-    2. Recommended buying price, considering a margin of error of +/- 10%?
-    3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 15%?
-    4. Recommended holding period for this investment?
-    5. Suggested stop-loss strategy?
+1. Will it be bullish or bearish in the next six months?
+2. Recommended buying price, considering a margin of error of +/- 5%?
+3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?
+4. Recommended holding period for this investment?(months)
+5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?
 
-    Criteria for evaluation:
-    * A "bullish" market is defined as an increase of at least 10% in the stock's price over the next six months.
-    * A "bearish" market is defined as a decrease of at least 15% in the stock's price over the next six months.
+Criteria for evaluation:
 
-    Please provide a detailed analysis and justification for your answers based on the provided data and the specified criteria."""
+* A "bullish" market is defined as an increase of at least 10% in the stock's price over the next six months.
+* A "bearish" market is defined as a decrease of at least 15% in the stock's price over the next six months.
+* If it is bullish, usually the selling price will be higher than the buying price. 
+* If it is bearish, you do not need to answer question 2.3.4.5
+* The Recommended selling price should be the take-profit price when bullish. If the former is bearish, it can be skipped directly.
+
+Answer according to the example format, do not explain
+answer example format:
+1. Will it be bullish or bearish in the next six months?: Bullish/Bearish
+2. Recommended buying price, considering a margin of error of +/- 5%?: [a integer] NTD
+3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?: [a integer] NTD
+4. Recommended holding period for this investment? (months): [a integer] months
+5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?: [strategy]
+"""
 
     max_iterations = 10
-    convergence_threshold = 90  # 如果得分达到或超过这个值，则认为已经收敛
+    convergence_threshold = 85  # 如果得分达到或超过这个值，则认为已经收敛
     for i in range(max_iterations):
         logging.info(f"Iteration {i+1}")
         result = await chat(initial_prompt)
