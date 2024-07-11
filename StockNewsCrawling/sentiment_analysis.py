@@ -1,17 +1,16 @@
 import os
 import jieba
+import jieba.analyse
 import re
 import matplotlib.pyplot as plt
-
-# Convert results to a DataFrame
 import pandas as pd
 
-# Define the full path to the sentiment files
-positive_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/ntusd-positive.txt"
-negative_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/ntusd-negative.txt"
+# 定義情感詞文件的完整路徑
+positive_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/NTUSD_positive_unicode.txt"
+negative_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/NTUSD_negative_unicode.txt"
 
 
-# Load and preprocess NTUSD positive and negative words
+# 載入和預處理 NTUSD 的正面和負面情感詞
 def load_sentiment_words(file_path):
     encodings = ["utf-16", "utf-8", "utf-16-le", "utf-16-be"]
     for encoding in encodings:
@@ -22,7 +21,6 @@ def load_sentiment_words(file_path):
             for line in lines:
                 clean_words = re.findall(r"\w+", line)
                 words.extend(clean_words)
-            # print(f"Loaded words from {file_path} using {encoding}: {words[:20]}")
             return words
         except UnicodeError:
             print(f"Failed to decode {file_path} using {encoding}")
@@ -33,13 +31,16 @@ def load_sentiment_words(file_path):
     return []
 
 
+# 載入正面和負面情感詞
 positive_words = load_sentiment_words(positive_file_path)
 negative_words = load_sentiment_words(negative_file_path)
 
+# 設定股票代碼和名稱
 stock_ids = ["2731"]
 stock_names = ["雄獅"]
 results = []
 
+# 迭代處理每個股票代碼
 for idx, stock_id in enumerate(stock_ids):
     folderpath = os.path.join(
         os.path.dirname(os.path.abspath(os.getcwd())),
@@ -49,22 +50,25 @@ for idx, stock_id in enumerate(stock_ids):
         stock_id,
     )
 
+    # 檢查目錄是否存在
     if not os.path.exists(folderpath):
         print(f"Directory does not exist: {folderpath}")
         continue
 
+    # 排序新聞文件
     sorted_news_files = sorted(os.listdir(folderpath))
     print("Sorted news files:", sorted_news_files)
 
+    # 迭代處理每個子目錄
     for subdir in sorted_news_files:
         subdir_path = os.path.join(folderpath, subdir)
         if os.path.isdir(subdir_path):
             subdir_files = sorted(os.listdir(subdir_path))
 
+            # 迭代處理每個新聞文件
             for file_name in subdir_files:
-                date = file_name[-8:]  # 获取文件名中的日期部分
-                # 检查日期是否属于 2023 年
-                if date.startswith("2023"):
+                date = file_name[-8:]  # 獲取文件名中的日期部分
+                if date.startswith("2022") or date.startswith("2023"):
                     print(f"Stock&News: {subdir}, File: {file_name}, Date: {date}")
                     file_path = os.path.join(subdir_path, file_name)
 
@@ -75,37 +79,59 @@ for idx, stock_id in enumerate(stock_ids):
                         print(f"Failed to read {file_path}: {e}")
                         continue
 
-                    # Initialize sentiment score
-                    score = 0
+                    # 使用 jieba 分詞
+                    jieba_result = list(jieba.cut(article, cut_all=False, HMM=True))
 
-                    # Segment text using jieba
-                    jieba_result = jieba.cut(article, cut_all=False, HMM=True)
+                    # 初始化計數
+                    positive_count = 0
+                    negative_count = 0
+                    total_words = len(jieba_result)
 
-                    # Analyze sentiment
+                    # 分析情感
                     for word in jieba_result:
                         if word in positive_words:
-                            score += 1
+                            positive_count += 1
                         elif word in negative_words:
-                            score -= 1
+                            negative_count += 1
 
-                    # Store the results
-                    results.append((date, score))
+                    # 計算情感分數百分比並四捨五入到兩位小數
+                    if total_words > 0:
+                        sentiment_weight = round(
+                            (positive_count - negative_count) / total_words * 100, 2
+                        )
+                    else:
+                        sentiment_weight = 0
 
-                    print(f"檔案: {file_path}, 總分: {score}")
+                    # 存儲結果
+                    results.append((date, sentiment_weight, article))
 
+                    print(f"檔案: {file_path}, 總分: {sentiment_weight}")
 
-df = pd.DataFrame(results, columns=["Date", "Score"])
+# 將結果轉換為 DataFrame
+df = pd.DataFrame(results, columns=["Date", "Score(%)", "Article"])
 df["Date"] = pd.to_datetime(df["Date"])
 df = df.sort_values(by="Date")
 
-# Plot the results
+# 將 DataFrame 保存為 CSV 文件
+df.to_csv(
+    f"C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/sentiment_data/{stock_id}_sentiment_analysis_results.csv",
+    index=False,
+    encoding="utf-8",
+)
+
+# 繪製結果圖表
 plt.figure(figsize=(12, 5))
-plt.plot(df["Date"], df["Score"], marker="o", linestyle="-")
+plt.plot(df["Date"], df["Score(%)"], marker="o", linestyle="-")
 plt.xlabel("Date")
 plt.ylabel("Sentiment Score")
 plt.title("Sentiment Score Over Time")
 plt.grid(True)
 plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig(f"{stock_id}_sentiment_score_over_time.png")
+
+# 定義保存圖表的路徑
+save_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/sentiment_image/"
+os.makedirs(save_path, exist_ok=True)
+plt.savefig(os.path.join(save_path, f"{stock_id}_sentiment_score_over_time.png"))
+
 plt.show()
