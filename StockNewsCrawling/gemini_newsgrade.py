@@ -26,7 +26,7 @@ def gemini_response(filepath, question):
         news = f.read()
 
     prompt = f"""
-    以下是今天的新聞資訊。請根據這些資訊判斷近期賣出是否可能獲利。請按照以下格式回答：
+    以下是今天的新聞資訊。請根據這些資訊判斷一周內賣出是否可能獲利。請按照以下格式回答：
 
     1. 如果預測可以獲利，請回答：#好
     2. 如果預測不會獲利，請回答：#不好
@@ -46,8 +46,7 @@ def gemini_response(filepath, question):
     try:
         response = model.generate_content(prompt)
         print(prompt)
-        # print("Response object:", response)
-        return response.text
+        return response.text.strip()
     except Exception as e:
         print(e)
         return "exception"
@@ -63,8 +62,10 @@ def response_to_signal(text):
         signal = -1
     elif "好" in text:
         signal = 1
-    else:
+    elif "無關" in text:
         signal = 0
+    else:
+        signal = None  # 處理未知情況
     return signal
 
 
@@ -80,8 +81,6 @@ async def chat():
             "stock_news",
             stock_id,
         )
-
-        # print("Folder path:", folderpath)
 
         if not os.path.exists(folderpath):
             print(f"Directory does not exist: {folderpath}")
@@ -107,32 +106,35 @@ async def chat():
 
                 for file_name in subdir_files:
                     date = file_name[-8:]
-                    # 檢查日期是否屬於 2023 年
-                    if date.startswith("2023"):
+                    if date.startswith("2022") or date.startswith("2023"):
                         print(f"Stock&News: {subdir},File: {file_name}, Date: {date}")
                         file_path = os.path.join(subdir_path, file_name)
 
                         ans = gemini_response(file_path, query)
                         print(ans)
                         sig = response_to_signal(ans)
-                        signals.append([subdir, file_name, sig])
-                        print(f"{file_name}: {sig}")
-                        result = f"Stock&News: {subdir}, Date: {date}, Signal: {sig}\n,Answer: {ans}\n"
-                        results.append(result)
+                        if sig is None:
+                            continue  # 跳過未知情況
 
-                        # 將結果寫入到 .txt 檔案
-                        with open(
-                            os.path.join(write_folder, f"{subdir}_{date}.txt"),
-                            "a",
-                            encoding="UTF-8",
-                        ) as f:
-                            f.write(result)
-                            print(
-                                "寫入 "
-                                + os.path.join(write_folder, f"{subdir}_{date}.txt")
-                            )
+                        if sig == 0:
+                            os.remove(file_path)
+                            print("成功刪除 #無關 資料" + file_path)
+                        else:
+                            signals.append([subdir, file_name, sig])
+                            result = f"Stock&News: {subdir}, Date: {date}, Signal: {sig}\n,Answer: {ans}\n"
+                            results.append(result)
 
-        # 將結果寫入到 .csv 檔案
+                            with open(
+                                os.path.join(write_folder, f"{subdir}_{date}.txt"),
+                                "a",
+                                encoding="UTF-8",
+                            ) as f:
+                                f.write(result)
+                                print(
+                                    "寫入 "
+                                    + os.path.join(write_folder, f"{subdir}_{date}.txt")
+                                )
+
         csv_file_path = os.path.join(write_folder, "signal.csv")
         with open(csv_file_path, "a", encoding="UTF-8", newline="") as f:
             csv_writer = csv.writer(f)
