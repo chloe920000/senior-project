@@ -1,5 +1,5 @@
 # settings.py
-api_key = " "
+api_key = "AIzaSyB46fB7XVL-TcUKMXOQeIhkD7RzkJwtNio"
 
 generation_config = {
     "temperature": 0.9,
