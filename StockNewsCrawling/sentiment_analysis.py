@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # 定義情感詞文件的完整路徑
-positive_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/NTUSD_positive_unicode.txt"
-negative_file_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/NTUSD_negative_unicode.txt"
-
+base_dir = os.path.dirname(os.path.abspath(__file__))
+positive_file_path = os.path.join(base_dir, "NTUSD_positive_unicode.txt")
+negative_file_path = os.path.join(base_dir, "NTUSD_negative_unicode.txt")
 
 # 載入和預處理 NTUSD 的正面和負面情感詞
 def load_sentiment_words(file_path):
@@ -42,13 +42,8 @@ results = []
 
 # 迭代處理每個股票代碼
 for idx, stock_id in enumerate(stock_ids):
-    folderpath = os.path.join(
-        os.path.dirname(os.path.abspath(os.getcwd())),
-        "senior-project-main",
-        "StockNewsCrawling",
-        "stock_news",
-        stock_id,
-    )
+    # 換成相對路徑
+    folderpath = os.path.join(base_dir, "stock_news", stock_id)
 
     # 檢查目錄是否存在
     if not os.path.exists(folderpath):
@@ -107,17 +102,18 @@ for idx, stock_id in enumerate(stock_ids):
 
                     print(f"檔案: {file_path}, 總分: {sentiment_weight}")
 
+# 定義保存 DataFrame 的相對路徑
+output_dir = os.path.join(base_dir, "sentiment_data")
+os.makedirs(output_dir, exist_ok=True)
+output_file_path = os.path.join(output_dir, f"{stock_id}_sentiment_analysis_results.csv")
+
 # 將結果轉換為 DataFrame
 df = pd.DataFrame(results, columns=["Date", "Score(%)", "Article"])
 df["Date"] = pd.to_datetime(df["Date"])
 df = df.sort_values(by="Date")
 
 # 將 DataFrame 保存為 CSV 文件
-df.to_csv(
-    f"C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/sentiment_data/{stock_id}_sentiment_analysis_results.csv",
-    index=False,
-    encoding="utf-8",
-)
+df.to_csv(output_file_path, index=False, encoding="utf-8")
 
 # 繪製結果圖表
 plt.figure(figsize=(12, 5))
@@ -129,8 +125,8 @@ plt.grid(True)
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-# 定義保存圖表的路徑
-save_path = "C:/Users/ziwei/source/GraduateProject/senior-project-main/StockNewsCrawling/sentiment_image/"
+# 定義保存圖表的相對路徑
+save_path = os.path.join(base_dir, "sentiment_image")
 os.makedirs(save_path, exist_ok=True)
 plt.savefig(os.path.join(save_path, f"{stock_id}_sentiment_score_over_time.png"))
 
