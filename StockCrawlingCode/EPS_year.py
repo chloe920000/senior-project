@@ -47,7 +47,7 @@ driver = webdriver.Chrome(options=options)
 driver.implicitly_wait(10)
 
 # 股票IDs
-stock_ids = ['2330', '3443', '2002']
+stock_ids = ['2330', '3443', '2002' , '2317','2731','3687']
 
 # 收集所有股票的EPS数据
 all_data_frames = []
@@ -58,7 +58,8 @@ for stock_id in stock_ids:
 # 如果有多个DataFrame，将它们并列合并
 if all_data_frames:
     combined_df = pd.concat(all_data_frames, axis=1)
-    combined_df.to_excel('all_stocks_year_eps.xlsx', index=False)
+    output_path = './StockData/year_eps.xlsx'
+    combined_df.to_excel(output_path, index=False)
 else:
     print("No data collected.")
 

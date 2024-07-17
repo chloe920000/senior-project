@@ -54,7 +54,7 @@ driver = webdriver.Chrome(options=options)
 driver.implicitly_wait(10)
 
 # Stock IDs to fetch data for
-stocks = ['2330', '3443', '2002']
+stocks = ['2330', '3443', '2002' , '2317','2731','3687']
 
 # Fetch data for each stock and store in list of DataFrames
 all_data_frames = [fetch_stock_data(stock_id) for stock_id in stocks]
@@ -63,6 +63,7 @@ all_data_frames = [fetch_stock_data(stock_id) for stock_id in stocks]
 final_df = pd.concat(all_data_frames, axis=1)
 
 # Write to Excel file
-final_df.to_excel('season_eps_multi_stocks.xlsx', index=False)
+output_path = './StockData/season_eps.xlsx'
+final_df.to_excel(output_path, index=False)
 
 driver.quit()
