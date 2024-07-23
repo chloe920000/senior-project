@@ -1,21 +1,6 @@
 Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
-Bearish,,,1 month,"Trigger at 20.65 NTD when the stock price drops by 11% from current price, indicating a strong bearish trend."
-Bearish,22.55 NTD,,1-2 months,Close below 21.75 NTD
-Bearish,22.75 NTD,Not applicable (since it's expected to be bearish),Not applicable (since it's expected to be bearish),Trigger the sell order when the stock price falls by 15% from the initial purchase price.
-Bearish,22.55 NTD,21.15 NTD,6 months,"If the stock price falls below 20.79 NTD, trigger a sell order."
-Bullish,22.15 NTD,25.35 NTD,6 months,Close below 21.75 NTD
-Bearish,21.35 NTD,,0 months,"If the stock price drops to 21.05 NTD, trigger a sell order"
-Bearish,22.65 NTD,No answer (since it's expected to be bearish),No answer (since it's expected to be bearish),"Triggered when the stock price falls below 21.53 NTD, which is 10% lower than the current price of 23.50 NTD."
-Bearish,22.35 NTD,,0 months,Close below 21.45 NTD
-Bearish,,,6 months,Below 21.55 NTD
-Bearish,22.05 NTD,Not applicable (since bearish),Not applicable (since bearish),Trigger a sell order if the stock price falls to 21.15 NTD or lower
-Bearish,22.55 NTD,21.15 NTD,6 months,"If the stock price falls by more than 7.5% from the buying price, trigger a sell order."
-Bearish,,,6 months,Triggered when the stock price falls below 21.10 NTD
-Bearish,22.35 NTD,Not applicable (since bearish prediction),Not applicable (since bearish prediction),"Sell when the stock price falls below 21.45 NTD, or after a 15% decrease in the stock's price."
-Bearish,22.55 NTD,,NA,"If the stock price falls by 10%, or if ROE drops below 0.8%."
-Bearish,22.45 NTD,,-,Trigger at a 10% loss from the buying price
-Bearish,22.55 NTD,21.15 NTD,3 months,Triggered if the stock price falls below 21.41 NTD.
-Bearish,22.55 NTD,,Not applicable,Price decrease by 15% or ROE dropping below 0.80%
-Bearish,22.15 NTD,Not applicable (bearish),1 month,Trigger when stock price falls by 15% from the buying price.
-Bearish,,Not Applicable (since it's expected to be bearish),Not Applicable (since it's expected to be bearish),Triggered when the stock price falls below 21.45 NTD
-Bearish,22.15 NTD,Not applicable (bearish prediction),0 months,Price drops below 21.35 NTD
+Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Trigger at 20.73 NTD, which is 10% below the current price of 23.40 NTD."
+Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Triggered when the stock price falls below 21.53 NTD, which is 10% lower than the current price of 23.40 NTD."
+Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Trigger at 20.73 NTD, which is 10% below the current price of 23.40 NTD."
+Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),Trigger at a price below the lowest point in the past year (-24.75893784)
+Bearish,22.15 NTD,Not applicable (bearish prediction),Not applicable (bearish prediction),"Trigger a sell order if the stock price falls below 21.93 NTD, which is 10% below the current price of 23.40 NTD."

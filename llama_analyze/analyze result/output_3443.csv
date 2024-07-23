@@ -1,11 +1,17 @@
 Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
-Bullish,1540 NTD,1758 NTD,9 months,ROE drop below 25%
-Bullish,1530 NTD,1764 NTD,6 months,"Triggered when the stock's price falls by 8.5% from the current price, or reaches a price of 1485 NTD, whichever comes first."
-Bullish,,"1,785 NTD",6 months,"If the stock price falls below 1,461 NTD, trigger a sell order"
-Bullish,1540 NTD,1778 NTD,6 months,Trigger a sell order if the stock price falls below 1490 NTD or if ROE drops below 30%.
-Bullish,1550 NTD,1754.50 NTD,6 months,"If the stock price falls below 1471.40 NTD, trigger a sell order."
-Bullish,1550 NTD,1778.50 NTD,12 months,"If the stock price falls below 1471.90 NTD, consider selling."
-Bullish,1550 NTD,1728.50 NTD,6 months,"If the stock price falls below 1461.75 NTD, trigger a sell order."
-Bullish,1545 NTD,1745 NTD,6 months,"ROE decline below 35%, or BPS drop below 67"
-Bullish,1550 NTD,1741 NTD,6 months,"Trigger sell if the stock price falls below 1479 NTD, which is 90% of the current price."
-Bullish,1553 NTD,1759 NTD,6 months,Sell if the stock price falls below 1471 NTD.
+Bullish,1470 NTD,1720 NTD,6 months,"If the stock price falls by 8% from the current price, consider selling."
+Bullish,1450 NTD,1800 NTD,6 months,"If the stock price falls below 1425 NTD, consider selling to minimize losses."
+Bullish,1433 NTD,1729 NTD,6 months,"If the stock price falls below 1443 NTD, consider selling to minimize losses."
+Bullish,1450 NTD,1700 NTD,6 months,"If the stock price falls below 1435 NTD, consider selling to minimize losses."
+Bullish,1430 NTD,1750 NTD,6 months,"Trigger a sell order if the stock price falls below 1450 NTD, or if the ROE drops below 10% for two consecutive quarters."
+Bullish,1440 NTD,1737 NTD,6 months,"If the stock price falls below 1440 NTD, consider selling and adjusting the portfolio."
+Bullish,1430 NTD,1730 NTD,6 months,Trigger at 1570 NTD if price falls below the 20-day moving average and stays there for 3 consecutive days.
+Bullish,1440 NTD,1730 NTD,6 months,"If the stock price falls below 1435 NTD, trigger a sell order"
+Bullish,1440 NTD,1740 NTD,6 months,"If the stock price falls below 1435 NTD, consider selling."
+Bullish,1440 NTD,1734 NTD,6 months,"If the stock price falls below 1430 NTD, trigger a sell order"
+Bullish,1430 NTD,1730 NTD,6 months,"If the stock price falls below 1440 NTD, consider selling and adjusting the stop-loss level to 10% below the new price."
+Bullish,1440 NTD,1724 NTD,6 months,Trigger at 1551 NTD if price falls below the 20-day moving average.
+Bullish,1540 NTD,1728 NTD,6 months,"If the stock price falls below 1450 NTD, consider selling to minimize losses."
+Bullish,1430 NTD,1750 NTD,6 months,"If the stock price falls below 1450 NTD, consider selling to minimize losses."
+Bullish,1433 NTD,1737 NTD,6 months,"If the stock price falls below 1443 NTD, consider selling."
+Bullish,1430 NTD,1750 NTD,6 months,"If the stock price falls below 1450 NTD, consider selling to minimize losses."
