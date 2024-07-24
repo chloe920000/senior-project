@@ -31,6 +31,6 @@ for stock_no in stocks:
 # Remove timezone information from the datetime index
 all_stock_data.index = all_stock_data.index.tz_localize(None)
 
-# Write to Excel file
-output_path = './StockData/daily_price.xlsx'
-all_stock_data.to_excel(output_path)
+# Write to CSV file
+output_path = './StockData/daily_price.csv'
+all_stock_data.to_csv(output_path)
