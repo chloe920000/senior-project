@@ -117,7 +117,7 @@ def get_stock_summary_string(summary):
 
 async def chat():
     stock_id = '2330'
-    end_year = 2023 #使用資料最後年分
+    end_year = 2022 #使用資料最後年分
     # 使用過去五年的資料
     start_year = end_year - 4
     
@@ -177,14 +177,15 @@ async def chat():
     print("OPM_str:", OPM_str)
     print("DBR_str:", DBR_str)
     print("summary_str:", summary_str)
-    print("current price:", get_stock_price(stock_id))
+    print("current price:", 439.8945007)
     print("company background:", company_background)
     # --------------------------------循環次數------------------------------------ #
-    for _ in range(1): 
-        stock_price = get_stock_price(stock_id)
+    for _ in range(10): 
+        #stock_price = get_stock_price(stock_id)
+        stock_price=439.8945007 #2023/1/3
 
         message_content = f'''Evaluate the stock price of TWSE{stock_id} based on the following data:
-
+* The following data is from left to right, with the years from farthest to most recent.
 * BPS (book value per share) over last 5 years: {bps_str}
 * Capital over last 5 years: {capital_str} * 100 million
 * ROE (return on equity) over last 5 years: {roe_str}%
@@ -226,10 +227,13 @@ answer example format:
 3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?: [a integer] NTD
 4. Recommended holding period for this investment? (months): [a integer] months
 5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?: [strategy]
+6. Why is it a bullish or bearish,the reason for selling or buying and recommendation price? : [a reason]
 '''
         
         # 保存每次的input message到log檔案
-        input_log_path = os.path.join('result_data', f'input_log_{stock_id}.txt')
+        input_log_path = os.path.join('result_data_2022', stock_id, f'input_log_{stock_id}.txt')
+        # 確保目錄存在
+        os.makedirs(os.path.dirname(input_log_path), exist_ok=True)
         with open(input_log_path, 'a', encoding='utf-8') as input_log_f:
             input_log_f.write(f'no.{_} === {datetime.datetime.now()} ===\n')
             input_log_f.write(message_content)
@@ -241,9 +245,9 @@ answer example format:
         }
 
         # 修改路徑
-        result_path = os.path.join('result_data', stock_id, f'output_{stock_id}.txt')
-        log_path = os.path.join('result_data', stock_id, f'output_log_{stock_id}.txt')
-        csv_path = os.path.join('result_data', stock_id, f'output_{stock_id}.csv')
+        result_path = os.path.join('result_data_2022', stock_id, f'output_{stock_id}.txt')
+        log_path = os.path.join('result_data_2022', stock_id, f'output_log_{stock_id}.txt')
+        csv_path = os.path.join('result_data_2022', stock_id, f'output_{stock_id}.csv')
 
         # 確保目錄存在
         os.makedirs(os.path.dirname(result_path), exist_ok=True)
@@ -252,7 +256,7 @@ answer example format:
 
         # 將輸出存成txt檔案
         with open(result_path, 'w', encoding='utf-8') as f:
-            async for part in await AsyncClient().chat(model='llama3.1:latest', messages=[message], stream=True, options={"temperature": 0.3}):
+            async for part in await AsyncClient().chat(model='llama3:8b', messages=[message], stream=True, options={"temperature": 0.4}):
                 f.write(part['message']['content'])
 
         # 解析輸出結果
