@@ -14,8 +14,8 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # 获取股票数据
 date = '2010-01-01'
-# stocks = ['2330.TW', '3443.TW', '2002.TW', '2317.TW', '2731.TW', '3687.TWO']
-stocks = ['3443.TW', '2002.TW', '2317.TW', '2731.TW', '3687.TWO']
+# stocks = ['2330.TW', '3443.TW', '2002.TW', '2317.TW', '2731.TW']
+stocks = ['3443.TW', '2002.TW', '2317.TW', '2731.TW']
 # 创建一个空的 DataFrame 来存储股票数据
 all_stock_data = pd.DataFrame()
 
