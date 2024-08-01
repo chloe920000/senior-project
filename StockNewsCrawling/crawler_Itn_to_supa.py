@@ -22,13 +22,14 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # 爬取新闻数据
 stock_id = "2330"
-global_url = 'https://search.ltn.com.tw/list?keyword=台積電&start_time=20221201&end_time=20240402&sort=date&type=all&page='
+global_url = 'https://search.ltn.com.tw/list?keyword=台積電&start_time=20220402&end_time=20240402&sort=date&type=all&page='
 
 page = 1
 news_url_l = []
 
-for i in range(2):
-    url =  global_url + str(i+1)
+for i in range(70):
+    # 只抓6 pages的其中一頁 避免資料過大 
+    url = global_url + str((i + 1) * 3)
     
     # 创建 WebDriver 实例
     driver = webdriver.Chrome()
