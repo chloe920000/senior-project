@@ -22,17 +22,17 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # 定义要爬取的股票ID和关键词
 stocks = [
     {"stock_id": "2330", "keyword": "台積電"},
-    {"stock_id": "3443", "keyword": "創意"},
-    {"stock_id": "2002", "keyword": "中鋼"},
-    {"stock_id": "2317", "keyword": "鴻海"},
-    {"stock_id": "2731", "keyword": "雄獅"}
+    # {"stock_id": "3443", "keyword": "創意"},
+    # {"stock_id": "2002", "keyword": "中鋼"},
+    # {"stock_id": "2317", "keyword": "鴻海"},
+    # {"stock_id": "2731", "keyword": "雄獅"}
 ]
 
 # 遍历每个股票
 for stock in stocks:
     stock_id = stock["stock_id"]
     keyword = stock["keyword"]
-    global_url = f'https://search.ltn.com.tw/list?keyword={keyword}&start_time=20220101&end_time=20240801&sort=date&type=all&page='
+    global_url = f'https://search.ltn.com.tw/list?keyword={keyword}&start_time=20220101&end_time=20230901&sort=date&type=all&page='
 
     page = 1
     news_url_l = []
@@ -80,7 +80,7 @@ for stock in stocks:
         driver.quit()
         
         # 增加页数
-        page += 2
+        page += 8
         
         # 延时避免过快请求
         time.sleep(1)
