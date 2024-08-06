@@ -22,7 +22,7 @@ stocks = [
     {"stock_id": "2317", "keyword": "鴻海"},
     {"stock_id": "2731", "keyword": "雄獅"}
 ]
-
+add_page = 2
 # 指定要爬取的日期范围
 start_date = datetime.strptime('20220101', '%Y%m%d')
 end_date = datetime.strptime('20240801', '%Y%m%d')
@@ -34,6 +34,14 @@ for stock in stocks:
     glob_url = f'https://news.tvbs.com.tw/news/searchresult/{keyword}/news/'
 
     page = 1
+    if(stock_id == '2330'):
+        add_page = 8
+    elif stock_id == '2002':
+        add_page = 3
+    elif stock_id == '2317':
+        add_page = 5
+    else:
+        add_page = 2
 
     while True:
         # 请求网页内容
@@ -100,5 +108,5 @@ for stock in stocks:
             # 如果在这个页面没有找到符合条件的新闻，停止爬虫
             break
 
-        page += 2
+        page += add_page
         time.sleep(2)
