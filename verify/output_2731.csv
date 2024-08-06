@@ -1,0 +1,21 @@
+Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
+Bullish,92 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, consider selling."
+Bullish,93 NTD,115 NTD,12 months,Close below the 20-day moving average
+Bullish,85 NTD,120 NTD,6 months,Triggered when the stock price falls by 8% from the current price.
+Bullish,85 NTD,120 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,92 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, consider selling."
+Bullish,92 NTD,117 NTD,6 months,"If the stock price falls below 95 NTD, consider selling."
+Bullish,83 NTD,117 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,85 NTD,120 NTD,6 months,"Triggered when the stock price falls below 95 NTD, or when ROE and ROA turn negative."
+Bullish,92 NTD,118 NTD,6 months,Close above the high of 2022 or a 20% increase from the current price
+Bullish,84 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,85 NTD,120 NTD,6 months,"Triggered when the stock price falls below 95 NTD, which is 10% lower than the current price."
+Bullish,84 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,85 NTD,120 NTD,6 months,"Triggered when the stock price falls below 95 NTD, or if the ROE and ROA continue to decline."
+Bullish,,118 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,84 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, consider selling."
+Bullish,92 NTD,118 NTD,6 months,"If the stock price falls below 94 NTD, consider selling."
+Bullish,92 NTD,118 NTD,6 months,"If the stock price falls below 95 NTD, trigger a sell order."
+Bullish,85 NTD,120 NTD,6 months,"If the stock price falls below 95 NTD, consider selling."
+Bullish,85 NTD,120 NTD,6 months,Sell if the stock price falls below 95 NTD or ROE drops below -20%
+Bullish,85 NTD,120 NTD,9 months,"If the stock price falls below 95 NTD, consider selling."
