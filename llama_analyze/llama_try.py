@@ -3,10 +3,20 @@ import asyncio
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import csv
 import datetime
 import os
+import csv
+from dotenv import load_dotenv
+from supabase import create_client, Client
 from ollama import AsyncClient
+
+# Load environment variables
+load_dotenv()
+# Initialize Supabase client
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+
 
 def get_stock_price(stock_id):
     
@@ -115,23 +125,43 @@ def get_stock_summary_string(summary):
 """
 
 
+def get_data_from_supabase(table_name, stock_id, start_year, end_year):
+    print(f"Fetching data from table: {table_name}")
+    response = supabase.table(table_name).select("*") \
+        .eq('stockID', stock_id) \
+        .gte('year', start_year) \
+        .lte('year', end_year) \
+        .execute()
+    
+    print(f"Response data: {response.data}")
+    df = pd.DataFrame(response.data)
+    if df.empty:
+        print(f"No data found for {table_name}")
+    else:
+        print(f"Data fetched for {table_name}: {df}")
+    df.set_index('year', inplace=True)
+    return df
+
+
 async def chat():
     stock_id = '2330'
     end_year = 2023 #使用資料最後年分
     # 使用過去五年的資料
     start_year = end_year - 4
     
-    # 讀取CSV檔案並設置索引列為字符串
-    data_bps = pd.read_csv('year_bps.csv', index_col='year', dtype={'year': str})
-    data_roe = pd.read_csv('year_roe.csv', index_col='year', dtype={'year': str})
-    data_Share_capital = pd.read_csv('year_Share_capital.csv', index_col='year', dtype={'year': str})
-    data_roa = pd.read_csv('year_roa.csv', index_col='year', dtype={'year': str})  # 新增讀取ROA的資料
-    data_eps = pd.read_csv('year_eps.csv', index_col=f'Year_{stock_id}', dtype={f'Year_{stock_id}': str})  # 新增讀取EPS的資料
-    data_per = pd.read_csv('year_per.csv', index_col='year', dtype={'year': str})  # 新增讀取PER的資料
-    #2024/7/15 新增毛利率GM 營益率OPM 負債比率DBR
-    data_GM = pd.read_csv('year_GM.csv', index_col='year', dtype={'year': str})
-    data_OPM = pd.read_csv('year_OPM.csv', index_col='year', dtype={'year': str})
-    data_DBR = pd.read_csv('year_DBR.csv', index_col='year', dtype={'year': str})
+    
+    # Fetch data from Supabase
+    data_bps = get_data_from_supabase('year_bps', int(stock_id), int(start_year), int(end_year))
+    data_roe = get_data_from_supabase('year_roe', int(stock_id), int(start_year), int(end_year))
+    data_Share_capital = get_data_from_supabase('year_share_capital', int(stock_id), int(start_year), int(end_year))
+    data_roa = get_data_from_supabase('year_roa', int(stock_id), int(start_year), int(end_year))
+    data_eps = get_data_from_supabase('year_eps', int(stock_id), int(start_year), int(end_year))
+    data_per = get_data_from_supabase('year_per', int(stock_id), int(start_year), int(end_year))
+    data_GM = get_data_from_supabase('year_gm', int(stock_id), int(start_year), int(end_year))
+    data_OPM = get_data_from_supabase('year_opm', int(stock_id), int(start_year), int(end_year))
+    data_DBR = get_data_from_supabase('year_dbr', int(stock_id), int(start_year), int(end_year))
+
+
     
     # Summarize historical stock data
     yearly_summary = summarize_stock_data('daily_price.csv', stock_id, end_year)
@@ -140,21 +170,31 @@ async def chat():
     # 取得公司背景資料
     company_background = get_company_background(stock_id)
     
-    def safe_get_value(data, year, stock_id):
-        try:
-            return data.loc[str(year), str(stock_id)]
-        except KeyError:
-            return 'NA'
+    def safe_get_value(data, year, column_name):
+            try:
+                value = data.loc[year, column_name]
+                print(f"Retrieved {column_name} for year {year}: {value}")
+                if column_name == 'share_capital':
+                    return str(value)  # 對於 capital_value，返回字符串
+                else:
+                    return float(value)  # 對於其他指標，返回浮點數
+            except KeyError:
+                print(f"KeyError: Unable to find {column_name} data for year {year}")
+                return 'NA'
+            except ValueError:
+                print(f"ValueError: Unable to convert {column_name} data for year {year}")
+                return 'NA'
 
-    bps_values = [safe_get_value(data_bps, year, stock_id) for year in range(start_year, end_year + 1)]
-    roe_values = [safe_get_value(data_roe, year, stock_id) for year in range(start_year, end_year + 1)]
-    capital_values = [safe_get_value(data_Share_capital, year, stock_id) for year in range(start_year, end_year + 1)]
-    roa_values = [safe_get_value(data_roa, year, stock_id) for year in range(start_year, end_year + 1)]
-    eps_values = [safe_get_value(data_eps, year, stock_id) for year in range(start_year, end_year + 1)]
-    per_values = [safe_get_value(data_per, year, stock_id) for year in range(start_year, end_year + 1)]
-    GM_values = [safe_get_value(data_GM, year, stock_id) for year in range(start_year, end_year + 1)]
-    OPM_values = [safe_get_value(data_OPM, year, stock_id) for year in range(start_year, end_year + 1)]
-    DBR_values = [safe_get_value(data_DBR, year, stock_id) for year in range(start_year, end_year + 1)]
+# 處理數據
+    bps_values = [safe_get_value(data_bps, year, 'bps') for year in range(start_year, end_year + 1)]
+    roe_values = [safe_get_value(data_roe, year, 'roe') for year in range(start_year, end_year + 1)]
+    capital_values = [safe_get_value(data_Share_capital, year, 'share_capital') for year in range(start_year, end_year + 1)]
+    roa_values = [safe_get_value(data_roa, year, 'roa') for year in range(start_year, end_year + 1)]
+    eps_values = [safe_get_value(data_eps, year, 'eps') for year in range(start_year, end_year + 1)]
+    per_values = [safe_get_value(data_per, year, 'per') for year in range(start_year, end_year + 1)]
+    GM_values = [safe_get_value(data_GM, year, 'gm') for year in range(start_year, end_year + 1)]
+    OPM_values = [safe_get_value(data_OPM, year, 'opm') for year in range(start_year, end_year + 1)]
+    DBR_values = [safe_get_value(data_DBR, year, 'dbr') for year in range(start_year, end_year + 1)]
     
     # 把五年的資料變成字串格式
     bps_str = ', '.join(map(str, bps_values))
@@ -184,7 +224,7 @@ async def chat():
         stock_price = get_stock_price(stock_id)
 
         message_content = f'''Evaluate the stock price of TWSE{stock_id} based on the following data:
-
+* The following data is from left to right, with the years from farthest to most recent.
 * BPS (book value per share) over last 5 years: {bps_str}
 * Capital over last 5 years: {capital_str} * 100 million
 * ROE (return on equity) over last 5 years: {roe_str}%
