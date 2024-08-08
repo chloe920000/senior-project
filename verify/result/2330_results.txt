@@ -1,0 +1,243 @@
+持有時間 : 6 個月
+第 1 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 2 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 3 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 3 個月
+第 4 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-04-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 522.3916626
+Profit or Loss after holding period: 102.39166260000002
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 5 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+Skipping entry 5 due to invalid holding period format: Not applicable (bearish)
+持有時間 : 6 個月
+第 7 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 8 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 405.0
+final_price : 570.1334229
+Profit or Loss after holding period: 165.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 9 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 10 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 11 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 3 個月
+第 12 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-04-03 00:00:00
+是否達到停利: False
+initial_price : 425.0
+final_price : 522.3916626
+Profit or Loss after holding period: 97.39166260000002
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 13 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 14 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 412.95
+final_price : 570.1334229
+Profit or Loss after holding period: 157.18342290000004
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 15 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 16 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 425.0
+final_price : 570.1334229
+Profit or Loss after holding period: 145.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 17 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 18 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 425.0
+final_price : 570.1334229
+Profit or Loss after holding period: 145.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 3 個月
+第 19 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-04-03 00:00:00
+是否達到停利: False
+initial_price : None
+final_price : 522.3916626
+Profit or Loss after holding period: N/A
+=> CORRECT!
+==============================
+持有時間 : 3 個月
+第 20 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-04-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 522.3916626
+Profit or Loss after holding period: 102.39166260000002
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 21 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 22 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 420.0
+final_price : 570.1334229
+Profit or Loss after holding period: 150.13342290000003
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 23 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 430.0
+final_price : 570.1334229
+Profit or Loss after holding period: 140.13342290000003
+=> CORRECT!
+==============================
