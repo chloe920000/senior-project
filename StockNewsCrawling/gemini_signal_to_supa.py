@@ -76,8 +76,8 @@ def response_to_signal(text):
 # title media date link article time
 async def chat(start_date, end_date):
 
-    stock_ids = ["1101"]
-    stock_names = ["台泥"]
+    stock_ids = ["2330"]
+    stock_names = ["台積電"]
     results = []
 
     for idx, stock_id in enumerate(stock_ids):
@@ -88,7 +88,7 @@ async def chat(start_date, end_date):
 
         # 從 Supabase 中提取數據
         response = (
-            supabase.from_("news_content").select("*").eq("stockID", stock_id).execute()
+            supabase.from_("news_test").select("*").eq("stockID", stock_id).execute()
         )
         news_data = response.data
 
@@ -114,19 +114,20 @@ async def chat(start_date, end_date):
                     continue  # 跳過未知情況
 
                 # 更新 Supabase 中的數據
-                supabase.from_("news_content").update({"gemini_signal": sig}).eq(
+                supabase.from_("news_test").update({"gemini_signal": sig}).eq(
                     "id", news["id"]
                 ).execute()
 
                 if sig == 0:
                     # 刪除該筆資料
-                    supabase.from_("news_content").delete().eq(
-                        "id", news["id"]
+                    supabase.from_("news_test").delete().eq(
+                        "id",
+                        news["id"],
                     ).execute()
                     print("Deleted #無關 資料")
                 else:
                     # 更新 Supabase 中的數據
-                    supabase.from_("news_content").update({"gemini_signal": sig}).eq(
+                    supabase.from_("news_test").update({"gemini_signal": sig}).eq(
                         "id", news["id"]
                     ).execute()
                     signals.append([stock_names[idx], news["id"], sig])

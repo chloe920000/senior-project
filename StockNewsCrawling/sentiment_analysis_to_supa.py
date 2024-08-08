@@ -4,12 +4,16 @@ import jieba.analyse
 import pandas as pd
 import matplotlib.pyplot as plt
 from supabase import create_client, Client
+import os
+from dotenv import load_dotenv
 
-# Supabase 資訊
-url = "https://ifdyheuivlbmhsbpuyqf.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZHloZXVpdmxibWhzYnB1eXFmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMTMxMTU2OSwiZXhwIjoyMDM2ODg3NTY5fQ.c6DehH3cUJrjHa22_ps0w32xCLRhS5AAQUqc1sHqoI0"
-# 初始化 Supabase 客戶端
-supabase: Client = create_client(url, key)
+# 加载环境变量
+load_dotenv()
+
+# Supabase 配置
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # 從 Supabase 讀取cvaw3情感詞資料
 response = supabase.table("cvaw3").select("*").execute()
@@ -47,11 +51,11 @@ else:
     raise Exception("無法從 Supabase 獲取資料")
 
 # Define the keyword for the news file
-stock_id = "1101"  # Replace with your actual keyword
+stock_id = "2330"  # Replace with your actual keyword
 
 # Read news data from Supabasess
 news_response = (
-    supabase.table("news_content").select("*").eq("stockID", stock_id).execute()
+    supabase.table("news_test").select("*").eq("stockID", stock_id).execute()
 )
 if news_response.data:
     news_data = news_response.data
@@ -118,12 +122,12 @@ for i in range(len(news["content"])):
 
     # Print id and arousal of the news
     print(
-        f"id: {news['id'][i]}, CVAW3_Arousal_Avg: {news['CVAW3_Arousal_Avg'][i]}, NTUD_Valence_Total: {news['NTUD_Valence_Total'][i]}, NTUD_Valence_Percentage: {news['NTUD_Valence_Percentage'][i]} %"
+        f"id: {news['id'][i]},CVAW3_Valence_Avg: {news['CVAW3_Valence_Avg'][i]}, CVAW3_Arousal_Avg: {news['CVAW3_Arousal_Avg'][i]}, NTUD_Valence_Total: {news['NTUD_Valence_Total'][i]}, NTUD_Valence_Percentage: {news['NTUD_Valence_Percentage'][i]} %"
     )
 
 # 更新Supabase中的對應欄位
 for i in range(len(news)):
-    supabase.table("news_content").update(
+    supabase.table("news_test").update(
         {
             "arousal": news.at[i, "CVAW3_Arousal_Avg"],
             "emotion": news.at[i, "NTUD_Valence_Percentage"],
