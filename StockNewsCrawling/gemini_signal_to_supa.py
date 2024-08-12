@@ -55,7 +55,7 @@ def gemini_response(news, question):
         print(e)
         return "exception"
 
-
+# 解析 AI 回應的文字
 def response_to_signal(text):
     """
     text: string 回答訊息
