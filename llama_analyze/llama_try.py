@@ -10,38 +10,39 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 from ollama import AsyncClient
 
-# Load environment variables
+# 載入環境變數
 load_dotenv()
-# Initialize Supabase client
+# 初始化 Supabase 客戶端
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-
+# 獲取指定股票的價格資訊
 def get_stock_price(stock_id):
     
     
     url = f'https://tw.stock.yahoo.com/quote/{stock_id}'  # Yahoo Finance stock URL
-    web = requests.get(url)  # Get the webpage content
-    soup = BeautifulSoup(web.text, "html.parser")  # Convert content
-    title = soup.find('h1').get_text()  # Get title
-    current_price = soup.select('.Fz\(32px\)')[0].get_text()  # Get current price
+    web = requests.get(url)  # 獲取網頁內容
+    soup = BeautifulSoup(web.text, "html.parser")  # 解析網頁內容
+    title = soup.find('h1').get_text()  # 獲取股票名稱
+    current_price = soup.select('.Fz\(32px\)')[0].get_text()  # 獲取當前價格
     change = soup.select('.Fz\(20px\)')[0].get_text()  # Get price change
-    status = ''  # Status: up, down, or flat
+    status = ''  # 設置狀態：上漲、下跌或持平
 
     try:
         if soup.select('#main-0-QuoteHeader-Proxy')[0].select('.C($c-trend-down)')[0]:
-            status = '-'
+            status = '-'  # 下跌
     except:
         try:
             if soup.select('#main-0-QuoteHeader-Proxy')[0].select('.C($c-trend-up)')[0]:
-                status = '+'
+                status = '+'  # 上漲
         except:
-            status = '▬'
+            status = '▬'  # 持平
 
     return f'{title} : {current_price} ( {status}{change} )'  # Return the formatted string
+   
     
-
+# 獲取公司背景資料
 def get_company_background(stock_id):
     url = f'https://tw.stock.yahoo.com/quote/{stock_id}/profile'
     web = requests.get(url)
@@ -61,7 +62,7 @@ def get_company_background(stock_id):
 
 
 
-
+# 解析模型輸出結果
 def parse_output(output):
     lines = output.split('\n')
     result = {}
@@ -78,7 +79,7 @@ def parse_output(output):
             result['Stop-loss strategy'] = line.split(':')[1].strip()
     return result
 
-
+# 彙總股票資料
 def summarize_stock_data(file_path, stock_id, end_year):
     data = pd.read_csv(file_path, index_col='Date', parse_dates=True)
     # 過濾出指定年份及之前的資料
@@ -89,7 +90,7 @@ def summarize_stock_data(file_path, stock_id, end_year):
     yearly_summary.columns = ['Open', 'Close', 'High', 'Low']
     return yearly_summary
 
-
+# 將彙總資料轉換為string格式
 def get_stock_summary_string(summary):
     summary_str = "\n".join([f"{year.strftime('%Y')}: Open={row['Open']}, Close={row['Close']}, High={row['High']}, Low={row['Low']}" 
                              for year, row in summary.iterrows()])
@@ -124,7 +125,7 @@ def get_stock_summary_string(summary):
 
 """
 
-
+# 從 Supabase 獲取資料
 def get_data_from_supabase(table_name, stock_id, start_year, end_year):
     print(f"Fetching data from table: {table_name}")
     response = supabase.table(table_name).select("*") \
@@ -144,19 +145,19 @@ def get_data_from_supabase(table_name, stock_id, start_year, end_year):
 
 
 async def chat():
-    stock_id = '2330'
+    stock_id = '8305'
     end_year = 2023 #使用資料最後年分
     # 使用過去五年的資料
     start_year = end_year - 4
     
     
-    # Fetch data from Supabase
+    # 從 Supabase 獲取資料
     data_bps = get_data_from_supabase('year_bps', int(stock_id), int(start_year), int(end_year))
     data_roe = get_data_from_supabase('year_roe', int(stock_id), int(start_year), int(end_year))
     data_Share_capital = get_data_from_supabase('year_share_capital', int(stock_id), int(start_year), int(end_year))
-    data_roa = get_data_from_supabase('year_roa', int(stock_id), int(start_year), int(end_year))
+    #data_roa = get_data_from_supabase('year_roa', int(stock_id), int(start_year), int(end_year))
     data_eps = get_data_from_supabase('year_eps', int(stock_id), int(start_year), int(end_year))
-    data_per = get_data_from_supabase('year_per', int(stock_id), int(start_year), int(end_year))
+    #data_per = get_data_from_supabase('year_per', int(stock_id), int(start_year), int(end_year))
     data_GM = get_data_from_supabase('year_gm', int(stock_id), int(start_year), int(end_year))
     data_OPM = get_data_from_supabase('year_opm', int(stock_id), int(start_year), int(end_year))
     data_DBR = get_data_from_supabase('year_dbr', int(stock_id), int(start_year), int(end_year))
@@ -189,9 +190,9 @@ async def chat():
     bps_values = [safe_get_value(data_bps, year, 'bps') for year in range(start_year, end_year + 1)]
     roe_values = [safe_get_value(data_roe, year, 'roe') for year in range(start_year, end_year + 1)]
     capital_values = [safe_get_value(data_Share_capital, year, 'share_capital') for year in range(start_year, end_year + 1)]
-    roa_values = [safe_get_value(data_roa, year, 'roa') for year in range(start_year, end_year + 1)]
+    #roa_values = [safe_get_value(data_roa, year, 'roa') for year in range(start_year, end_year + 1)]
     eps_values = [safe_get_value(data_eps, year, 'eps') for year in range(start_year, end_year + 1)]
-    per_values = [safe_get_value(data_per, year, 'per') for year in range(start_year, end_year + 1)]
+    #per_values = [safe_get_value(data_per, year, 'per') for year in range(start_year, end_year + 1)]
     GM_values = [safe_get_value(data_GM, year, 'gm') for year in range(start_year, end_year + 1)]
     OPM_values = [safe_get_value(data_OPM, year, 'opm') for year in range(start_year, end_year + 1)]
     DBR_values = [safe_get_value(data_DBR, year, 'dbr') for year in range(start_year, end_year + 1)]
@@ -200,9 +201,9 @@ async def chat():
     bps_str = ', '.join(map(str, bps_values))
     roe_str = ', '.join(map(str, roe_values))
     capital_str = ', '.join(map(str, capital_values))
-    roa_str = ', '.join(map(str, roa_values))
+    #roa_str = ', '.join(map(str, roa_values))
     eps_str = ', '.join(map(str, eps_values))
-    per_str = ', '.join(map(str, per_values))
+    #per_str = ', '.join(map(str, per_values))
     GM_str = ', '.join(map(str, GM_values))
     OPM_str = ', '.join(map(str, OPM_values))
     DBR_str = ', '.join(map(str, DBR_values))
@@ -210,9 +211,9 @@ async def chat():
     print("bps_str:", bps_str)
     print("roe_str:", roe_str)
     print("capital_str:", capital_str)
-    print("roa_str:", roa_str)
+    #print("roa_str:", roa_str)
     print("eps_str:", eps_str)
-    print("per_str:", per_str)
+    #print("per_str:", per_str)
     print("GM_str:", GM_str)
     print("OPM_str:", OPM_str)
     print("DBR_str:", DBR_str)
@@ -228,9 +229,9 @@ async def chat():
 * BPS (book value per share) over last 5 years: {bps_str}
 * Capital over last 5 years: {capital_str} * 100 million
 * ROE (return on equity) over last 5 years: {roe_str}%
-* ROA (return on assets) over last 5 years: {roa_str}%
+
 * EPS (earnings per share) over last 5 years: {eps_str}
-* PER (price earnings ratio) over last 5 years: {per_str}%
+
 * GM (gross margin) over last 5 years: {GM_str}%
 * OPM (operating profit margin) over last 5 years: {OPM_str}%
 * DBR (debt-to-assets ratio) over last 5 years: {DBR_str}%

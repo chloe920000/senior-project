@@ -4,7 +4,6 @@ import random
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 
 # 定義一些常見的User-Agent
@@ -12,7 +11,6 @@ user_agents = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",
     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0",
     "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko",
-    # 添加更多User-Agent
 ]
 
 # 將季度格式轉換為年份
@@ -104,8 +102,8 @@ def fetch_gm_data(driver, stock_id):
 def fetch_opm_data(driver, stock_id):
     return fetch_data(driver, stock_id, "OPM", 13, 'year_opm.csv')
 
-# 處理單個股票數據
-def process_stock_data(stock_id):
+# 處理多個股票數據
+def process_stocks(stock_ids):
     options = Options()
     user_agent = random.choice(user_agents)
     options.add_argument(f"user-agent={user_agent}")
@@ -114,48 +112,49 @@ def process_stock_data(stock_id):
     options.add_argument("--disable-gpu")  # 禁用GPU，對於無頭模式下的穩定性有幫助
     options.add_argument("--no-sandbox")  # 對於某些系統，這個選項可以提高穩定性
     options.add_argument("--window-size=1920,1080")  # 設定窗口大小
-    
+
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
+    stocks_processed = 0
 
-    stock_id = str(stock_id)
-    
-    if not get_data(driver, stock_id, 20, "BPS", 'year_bps.csv'):
-        driver.quit()
-        return
-    if not get_data(driver, stock_id, 16, "ROE", 'year_roe.csv'):
-        driver.quit()
-        return
-    if not get_data(driver, stock_id, 1, "Share_Capital", 'year_Share_capital.csv'):
-        driver.quit()
-        return
+    try:
+        for stock_id in stock_ids:
+            stock_id = str(stock_id)
 
-    if not fetch_eps_data(driver, stock_id):
-        driver.quit()
-        return
-    if not fetch_dbr_data(driver, stock_id):
-        driver.quit()
-        return
-    if not fetch_gm_data(driver, stock_id):
-        driver.quit()
-        return
-    if not fetch_opm_data(driver, stock_id):
-        driver.quit()
-        return
+            if not get_data(driver, stock_id, 20, "BPS", 'year_bps.csv'):
+                continue
+            if not get_data(driver, stock_id, 16, "ROE", 'year_roe.csv'):
+                continue
+            if not get_data(driver, stock_id, 1, "Share_Capital", 'year_Share_capital.csv'):
+                continue
 
-    driver.quit()
-    print(f"success to process stock {stock_id}")
-    # 隨機等待5到15秒，模擬人工操作
-    time.sleep(random.uniform(5, 8))
+            if not fetch_eps_data(driver, stock_id):
+                continue
+            if not fetch_dbr_data(driver, stock_id):
+                continue
+            if not fetch_gm_data(driver, stock_id):
+                continue
+            if not fetch_opm_data(driver, stock_id):
+                continue
 
+            print(f"成功處理股票 {stock_id}")
+            stocks_processed += 1
+            time.sleep(4) 
+
+            # 每處理50個股票，重啟一次WebDriver
+            if stocks_processed % 50 == 0:
+                print("重啟WebDriver以清理資源...")
+                driver.quit()
+                driver = webdriver.Chrome(options=options)
+                driver.implicitly_wait(10)
+
+    finally:
+        driver.quit()
 
 # 主函數
 def main():
-    for stock_id in range(1187, 10000):
-        try:
-            process_stock_data(stock_id)
-        except Exception as e:
-            print(f"Error processing stock {stock_id}: {e}")
+    stock_ids = range(1101, 10000)
+    process_stocks(stock_ids)
 
 if __name__ == "__main__":
     main()
