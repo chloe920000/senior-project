@@ -13,8 +13,8 @@ from get_prompt_data import *
 from prompt_generater import *
 
 
-date = '2022-01-03'
-stock_id = '1443'
+date = '2024-07-01'
+stock_id = '1472'
 end_year = int(date[:4])
 start_year = end_year - 4
 
