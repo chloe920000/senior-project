@@ -1,30 +1,23 @@
-StockNewsCrawling
-此資料夾包含用於股票新聞爬蟲與情緒分析的 Python 程式碼，以下是各個檔案的說明：
+# StockNewsCrawling
 
-爬蟲程式碼
-這些程式碼負責從不同新聞網站抓取與股票相關的新聞資料，並將資料整理後儲存於指定的資料庫中：
+此專案主要用於爬取不同新聞來源的股票相關新聞，並對其進行情緒分析。專案包含多個爬蟲程式及分析工具，可將資料匯入到資料庫中進行後續處理。
 
-1.crawler_chinatime_to_supa.py
-從《中國時報》網站抓取新聞資料，並將資料儲存到 SUPA 平台。
+## 專案結構
 
-2.crawler_cnye_to_supa.py
-從《中時電子報》網站抓取新聞資料，並將資料儲存到 SUPA 平台。
+- `crawler_chinatime_to_supa.py` - 爬取《中國時報》股票相關新聞並儲存到資料庫。
+- `crawler_cnye_to_supa.py` - 爬取《中時電子報》股票相關新聞並儲存到資料庫。
+- `crawler_Itn_to_supa.py` - 爬取《自由時報》股票相關新聞並儲存到資料庫。
+- `crawler_tvbs_to_supa.py` - 爬取《TVBS》股票相關新聞並儲存到資料庫。
+- `sentiment_analysis_to_supa.py` - 整合 CVAW3 與 NTUD 的情緒分析字典，對新聞進行情緒分析並將結果匯入資料庫。
+- `gemini_signal_to_supa.py` - 進行股市信號分析的模型程式碼，將分析結果匯入資料庫。
+- `settings.py` - 設定檔案，包含各種爬蟲與分析模型的配置選項。
 
-3.crawler_Itn_to_supa.py
-從《經濟日報》網站抓取新聞資料，並將資料儲存到 SUPA 平台。
+## 安裝與使用
 
-3.crawler_tvbs_to_supa.py
-從《TVBS》網站抓取新聞資料，並將資料儲存到 SUPA 平台。
+1. 請確保已安裝 Python 3.7 或更新版本。
+2. 配置 `settings.py` 中的參數，設定資料庫連接資訊以及爬蟲相關的設定。
 
-情緒分析程式碼
-這些程式碼負責分析抓取到的新聞資料中的情緒，並將分析結果與股市訊號結合：
+## 注意事項
 
-sentiment_analysis_to_supa.py
-使用 cvaw3 和 NTUD 情緒分析字典來分析新聞文本的情緒，並將結果儲存到 SUPA 平台。
-
-gemini_signal_to_supa.py
-負責處理 Gemini 模型的股市訊號，並將訊號結果儲存到 SUPA 平台。
-
-設定檔
-settings.py
-包含 Gemini 模型的相關設定，如 API 金鑰、資料庫連接資訊等。
+- 爬蟲程式運行時可能會受到新聞網站的反爬蟲機制影響，建議適當調整抓取頻率。
+- 在使用情緒分析模型時，請確保情緒字典的版本與模型相容。
