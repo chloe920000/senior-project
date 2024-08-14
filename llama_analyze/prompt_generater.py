@@ -1,47 +1,47 @@
 # prompt_generator.py 用來把股票資料塞進prompt裡面
 
 def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, stock_price, company_background):
-    return f'''Evaluate the stock price of TWSE{stock_id} based on the following data:
-* The following data is from left to right, with the years from farthest to most recent.
-* BPS (book value per share) over last 5 years: {bps_str}
-* Capital over last 5 years: {capital_str} * 100 million
-* ROE (return on equity) over last 5 years: {roe_str}%
+    return f'''Evaluate the share price of Taiwan Stock Exchange {stock_id} based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: {bps_str}
+* Capital over the past 5 years: {capital_str} * 100 million
+* ROE (return on equity) over the past 5 years: {roe_str}%
 
-* EPS (earnings per share) over last 5 years: {eps_str}
+* EPS (earnings per share) over the past 5 years: {eps_str}
 
-* GM (gross margin) over last 5 years: {GM_str}%
-* OPM (operating profit margin) over last 5 years: {OPM_str}%
-* DBR (debt-to-assets ratio) over last 5 years: {DBR_str}%
-* Reference historical prices:
+* Gross profit margin over the past 5 years: {GM_str}%
+* OPM (Operating Margin) over the past 5 years: {OPM_str}%
+*DBR (debt-to-asset ratio) over the past 5 years: {DBR_str}%
+*Reference historical prices:
 {summary_str}
 * Current price: {stock_price}
 
-Provide additional context about the company, industry, and market trends.
+Provide additional background information about the company, industry, and market trends.
 
-* Company Background:
+*Company background:
 {company_background}
 
-Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
 
-1. Will it be bullish or bearish in the next six months?
-2. Recommended buying price, considering a margin of error of +/- 5%?
-3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?
-4. Recommended holding period for this investment?(months)
-5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
 
-Criteria for evaluation:
+Evaluation criteria:
 
-* A "bullish" market is defined as an increase of at least 10% in the stock's price over the next six months.
-* A "bearish" market is defined as a decrease of at least 15% in the stock's price over the next six months.
-* If it is bullish, usually the selling price will be higher than the buying price. 
-* If it is bearish, you do not need to answer question 2.3.4.5
-* The Recommended selling price should be the take-profit price when bullish. If the former is bearish, it can be skipped directly.
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
 
-Answer according to the example format, do not explain
-answer example format:
-1. Will it be bullish or bearish in the next six months?: Bullish/Bearish
-2. Recommended buying price, considering a margin of error of +/- 5%?: [a integer] NTD
-3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?: [a integer] NTD
-4. Recommended holding period for this investment? (months): [a integer] months
-5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?: [strategy]
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: bullish/bearish
+2. Based on the current price, is it recommended to buy?: Yes/No/later
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
 '''
