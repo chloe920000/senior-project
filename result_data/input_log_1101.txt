@@ -21,8 +21,10 @@ Evaluate the stock price of TWSE1101 based on the following data:
 Provide additional context about the company, industry, and market trends.
 
 * Company Background:
-有關水泥及水泥製品之生產及運銷
-有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+有關水泥及水泥製品之生產及運銷
+
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+
 經營有關水泥工業及其附屬事業
 
 Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
@@ -73,8 +75,10 @@ Evaluate the stock price of TWSE1101 based on the following data:
 Provide additional context about the company, industry, and market trends.
 
 * Company Background:
-有關水泥及水泥製品之生產及運銷
-有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+有關水泥及水泥製品之生產及運銷
+
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+
 經營有關水泥工業及其附屬事業
 
 Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
@@ -125,8 +129,10 @@ Evaluate the stock price of TWSE1101 based on the following data:
 Provide additional context about the company, industry, and market trends.
 
 * Company Background:
-有關水泥及水泥製品之生產及運銷
-有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+有關水泥及水泥製品之生產及運銷
+
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+
 經營有關水泥工業及其附屬事業
 
 Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
@@ -177,8 +183,10 @@ Evaluate the stock price of TWSE1101 based on the following data:
 Provide additional context about the company, industry, and market trends.
 
 * Company Background:
-有關水泥及水泥製品之生產及運銷
-有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+有關水泥及水泥製品之生產及運銷
+
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+
 經營有關水泥工業及其附屬事業
 
 Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
