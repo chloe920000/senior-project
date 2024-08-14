@@ -1,2 +1,3 @@
 Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
-Bearish,32 NTD,Not applicable (bearish),6 months,"Triggered when the stock price falls below 28 NTD, or if ROE drops below 0%."
+Bearish,38 NTD,Not Applicable,Not Applicable,Sell when stock price falls by 15% from the current price or when ROE drops below 0%.
+Bullish,38 NTD,Not Applicable (since it's bullish),12 months,Trigger sell if DBR exceeds 50% or EPS drops below -3.
