@@ -34,15 +34,30 @@ def get_company_background(stock_id):
     return '无法取得公司背景资料'
 
 # 汇总股票数据
-def summarize_stock_data(file_path, stock_id, end_year):
-    data = pd.read_csv(file_path, index_col='Date', parse_dates=True)
-    # 过滤出指定年份及之前的数据
-    data = data[data.index.year <= end_year]
-    yearly_summary = data.resample('Y').agg({
-        stock_id: ['first', 'last', 'max', 'min']
-    })
+def summarize_stock_data(stock_id, end_year):
+    # 設定開始年份（過去五年）
+    start_year = end_year - 4
+
+    # 從 Supabase 中獲取指定年份範圍內的日價格資料
+    response = supabase.table('daily_price').select('date', 'adj_price') \
+        .eq('stockID', stock_id) \
+        .gte('date', f'{start_year}-01-01') \
+        .lte('date', f'{end_year}-12-31') \
+        .execute()
+
+    # 將資料轉換為 DataFrame
+    df = pd.DataFrame(response.data)
+    
+    # 確保 'date' 欄位為日期格式，並設為索引
+    df['date'] = pd.to_datetime(df['date'])
+    df.set_index('date', inplace=True)
+
+    # 按年份進行重采樣並計算統計資料
+    yearly_summary = df['adj_price'].resample('Y').agg(['first', 'last', 'max', 'min'])
     yearly_summary.columns = ['Open', 'Close', 'High', 'Low']
+
     return yearly_summary
+
 
 # 將彙總資料轉換為string格式
 def get_stock_summary_string(summary):
@@ -79,9 +94,9 @@ def select_supabase_data(stock_id, date):
     data_bps = get_data_from_supabase('year_bps', int(stock_id), int(start_year), int(end_year))
     data_roe = get_data_from_supabase('year_roe', int(stock_id), int(start_year), int(end_year))
     data_Share_capital = get_data_from_supabase('year_share_capital', int(stock_id), int(start_year), int(end_year))
-    #data_roa = get_data_from_supabase('year_roa', int(stock_id), int(start_year), int(end_year))
+    data_roa = get_data_from_supabase('year_roa', int(stock_id), int(start_year), int(end_year))
     data_eps = get_data_from_supabase('year_eps', int(stock_id), int(start_year), int(end_year))
-    #data_per = get_data_from_supabase('year_per', int(stock_id), int(start_year), int(end_year))
+    data_per = get_data_from_supabase('year_per', int(stock_id), int(start_year), int(end_year))
     data_GM = get_data_from_supabase('year_gm', int(stock_id), int(start_year), int(end_year))
     data_OPM = get_data_from_supabase('year_opm', int(stock_id), int(start_year), int(end_year))
     data_DBR = get_data_from_supabase('year_dbr', int(stock_id), int(start_year), int(end_year))
@@ -97,6 +112,8 @@ def select_supabase_data(stock_id, date):
         'data_GM': data_GM,
         'data_OPM': data_OPM,
         'data_DBR': data_DBR,
+        'data_roa': data_roa,
+        'data_per': data_per,
         'stock_price': stock_price
     }
 
@@ -118,22 +135,18 @@ def get_data_from_supabase(table_name, stock_id, start_year, end_year):
     return df
 
 def get_stock_price(stock_id, date):
-    # 读取 CSV 文件
-    df = pd.read_csv('daily_price.csv')
+    # 將輸入的日期字串轉換為 datetime 物件
+    date_obj = pd.to_datetime(date).date()
 
-    # 确保 'Date' 列被解析为日期格式
-    df['Date'] = pd.to_datetime(df['Date'])
+    # 從 Supabase 中抓取價格資料
+    response = supabase.table('daily_price').select('adj_price') \
+        .eq('stockID', stock_id) \
+        .eq('date', date_obj) \
+        .execute()
 
-    # 将输入的日期字符串转换为 datetime 对象
-    date_obj = pd.to_datetime(date)
-
-    # 过滤条件：date = 给定日期 且 id = 给定 stock_id
-    filtered_df = df[(df['Date'] == date_obj) & (df['id'] == stock_id)]
-
-    # 如果找到匹配项，返回价格，否则返回 None 或一个合适的默认值
-    if not filtered_df.empty:
-        # 假设价格存储在 'Price' 列中
-        price = filtered_df['Price'].iloc[0]
+    # 如果找到匹配的價格，則返回價格，否則返回 None 或其他合適的預設值
+    if response.data:
+        price = response.data[0]['adj_price']
         return price
     else:
         return None
