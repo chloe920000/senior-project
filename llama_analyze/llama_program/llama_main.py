@@ -224,7 +224,7 @@ async def chat():
                 # Save output as a txt file
                 with open(result_path, "w", encoding="utf-8") as f:
                     async for part in await AsyncClient().chat(
-                        model="llama3.1:latest",
+                        model="llama3.1:8B",
                         messages=[message],
                         stream=True,
                         options={"temperature": 0.3},
