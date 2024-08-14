@@ -97,3 +97,33 @@ end_year：結束年份。
 構建並發送包含所有數據的預測請求給 Ollama。
 將 Ollama 的回應寫入 TXT 和 CSV 文件中。
 輸出結果到終端。
+
+
+===============================================================================
+
+"""
+# BPS (book value per share) over last 5 years: 最近五年的每股淨值
+# 每股淨值是指公司股東權益（即公司的淨資產）除以已發行股票的數量，表示每股股票所對應的公司淨資產價值
+
+# Capital over last 5 years: 最近五年的資本
+# 資本指的是公司用來營運和發展的資金，包括股本和債務資金
+
+# ROE (return on equity) over last 5 years: 最近五年的股東權益報酬率
+# 股東權益報酬率是指公司淨利潤除以股東權益，反映公司利用股東投入資金獲得利潤的能力
+
+# ROA (return on assets) over last 5 years: 最近五年的資產報酬率
+# 資產報酬率是指公司淨利潤除以總資產，反映公司利用其資產獲得利潤的能力
+
+# EPS (earnings per share) over last 5 years: 最近五年的每股盈餘
+# 每股盈餘是指公司淨利潤除以已發行股票數量，表示每股股票所能獲得的利潤
+
+# PER (price earnings ratio) over last 5 years: 最近五年的本益比
+# 本益比是指股票價格除以每股盈餘，反映市場對公司未來盈利能力的預期
+
+# Reference historical prices: 參考歷史價格
+# 歷史價格是指股票在過去某段時間內的交易價格數據
+
+# Current price: 當前價格
+# 當前價格是指股票目前在市場上的交易價格
+
+"""
