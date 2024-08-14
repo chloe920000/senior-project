@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
-# 加载环境变量
+# 加載環境變量
 load_dotenv()
 
 # Supabase 配置
@@ -12,7 +12,7 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# 定义要爬取的股票ID和关键词
+# 定義要爬取的股票ID和關鍵詞
 stocks = [
     {"stock_id": "2330", "keyword": "台積電"},
     {"stock_id": "3443", "keyword": "創意"},
@@ -21,14 +21,14 @@ stocks = [
     {"stock_id": "2731", "keyword": "雄獅"},
 ]
 
-# 计算日期范围
+# 計算日期範圍
 end_date = datetime.today()
 start_date = end_date - timedelta(days=90)
 
 for stock in stocks:
     stock_id = stock["stock_id"]
 
-    # 从 Supabase 读取新闻数据
+    # 從 Supabase 讀取新聞數據
     news_response = (
         supabase.table("news_test").select("*").eq("stockID", stock_id).execute()
     )
@@ -39,25 +39,25 @@ for stock in stocks:
         print(
             f"Failed to fetch data from Supabase for stock_id {stock_id}: data={news_response.data}, count={news_response.count}"
         )
-        continue  # 跳过当前股票ID，继续处理下一个
+        continue  # 跳過前股票ID，繼續處理下一個
 
-    # 将日期列转换为 datetime 类型
+    # 將日期列轉換為 datetime 類型
     news["date"] = pd.to_datetime(news["date"])
 
-    # 过滤数据，只包含过去90天内的行
+    # 過濾數據，只包含過去90天内的行
     recent_news = news[(news["date"] >= start_date) & (news["date"] <= end_date)]
 
-    # 计算 arousal 列的总和和总数
+    # 計算 arousal 列的總和和總數
     total_arousal = recent_news["arousal"].sum()
     count = len(recent_news)
 
     if count > 0:
-        # 计算三个月的平均 arousal
+        # 計算三個月的平均 arousal
         mean_arousal = total_arousal / count
     else:
         mean_arousal = 0
 
-    # 将处理后的数据插入到新的表 "score_mean"
+    # 將處理后的數據插入到新的表 "score_mean"
     insert_response = (
         supabase.table("score_mean")
         .insert(
