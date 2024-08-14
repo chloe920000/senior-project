@@ -55,6 +55,7 @@ def gemini_response(news, question):
         print(e)
         return "exception"
 
+
 # 解析 AI 回應的文字
 def response_to_signal(text):
     """
@@ -76,14 +77,19 @@ def response_to_signal(text):
 # title media date link article time
 async def chat(start_date, end_date):
 
-    stock_ids = ["2330"]
-    stock_names = ["台積電"]
+    stocks = [
+        {"stock_id": "2330", "keyword": "台積電"},
+        # {"stock_id": "3443", "keyword": "創意"},
+        # {"stock_id": "2002", "keyword": "中鋼"},
+        # {"stock_id": "2317", "keyword": "鴻海"},
+        # {"stock_id": "2731", "keyword": "雄獅"}
+    ]
     results = []
 
-    for idx, stock_id in enumerate(stock_ids):
-        query = (
-            f"請找出對{stock_id}{stock_names[idx]}股票的建議投資策略有影響的新聞資料"
-        )
+    for stock in stocks:
+        stock_id = stock["stock_id"]
+        stock_name = stock["keyword"]
+        query = f"請找出對{stock_id}{stock_name}股票的建議投資策略有影響的新聞資料"
         signals = []
 
         # 從 Supabase 中提取數據
@@ -104,7 +110,7 @@ async def chat(start_date, end_date):
                 date_obj = datetime.strptime(date_obj, "%Y-%m-%d").date()
 
             if start_date <= date_obj <= end_date:
-                print(f"Stock&News: {stock_names[idx]}, Date: {date_obj}")
+                print(f"Stock&News: {stock_name}, Date: {date_obj}")
 
                 ans = gemini_response(news["content"], query)
                 print(ans)
@@ -130,8 +136,8 @@ async def chat(start_date, end_date):
                     supabase.from_("news_test").update({"gemini_signal": sig}).eq(
                         "id", news["id"]
                     ).execute()
-                    signals.append([stock_names[idx], news["id"], sig])
-                    result = f"Stock&News: {stock_names[idx]}\nDate: {date_obj}\nSignal: {sig}\nAnswer: {ans}\n"
+                    signals.append([stock_name, news["id"], sig])
+                    result = f"Stock&News: {stock_name}\nDate: {date_obj}\nSignal: {sig}\nAnswer: {ans}\n"
                     results.append(result)
         print("更新完成")
 
