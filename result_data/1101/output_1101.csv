@@ -1,0 +1,2 @@
+Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
+Bearish,32 NTD,Not applicable (bearish),6 months,"Triggered when the stock price falls below 28 NTD, or if ROE drops below 0%."

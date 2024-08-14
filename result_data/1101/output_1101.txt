@@ -1,0 +1,7 @@
+Based on the provided data, here are my answers:
+
+1. Will it be bullish or bearish in the next six months?: Bearish
+2. Recommended buying price, considering a margin of error of +/- 5%?: 32 NTD
+3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?: Not applicable (bearish)
+4. Recommended holding period for this investment? (months): 6 months
+5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?: Triggered when the stock price falls below 28 NTD, or if ROE drops below 0%.
