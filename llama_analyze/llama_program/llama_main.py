@@ -14,14 +14,15 @@ from prompt_generater import *
 
 
 date = '2022-01-03'
-stock_id = '2330'
+stock_id = '1443'
 end_year = int(date[:4])
 start_year = end_year - 4
 
-
+# 獲取腳本所在目錄
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 設置結果資料相對路徑
-result_data_dir = os.path.join('..', 'analyze result')
+result_data_dir = os.path.join(script_dir, '..', 'analyze result')
 if not os.path.exists(result_data_dir):
     os.makedirs(result_data_dir)
     
@@ -151,7 +152,7 @@ async def chat():
 
         # 將輸出存成txt檔案
         with open(result_path, 'w', encoding='utf-8') as f:
-            async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.3}):
+            async for part in await AsyncClient().chat(model='llama3.1:latest', messages=[message], stream=True, options={"temperature": 0.3}):
                 f.write(part['message']['content'])
 
         # 解析輸出結果
