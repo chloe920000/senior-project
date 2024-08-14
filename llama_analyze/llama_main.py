@@ -14,7 +14,7 @@ from prompt_generater import *
 
 date = '2023-01-01'
 stock_id = '8305'
-end_year = date[:4]
+end_year = int(date[:4])
 start_year = end_year - 4
 
 # 載入環境變數

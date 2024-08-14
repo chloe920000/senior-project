@@ -70,7 +70,7 @@ def safe_get_value(data, year, column_name):
 def select_supabase_data(stock_id, date):
 
 
-    end_year = date[:4]
+    end_year = int(date[:4])
     # 使用過去五年的資料
     start_year = end_year - 4
     date_obj = datetime.strptime(date, '%Y-%m-%d')
