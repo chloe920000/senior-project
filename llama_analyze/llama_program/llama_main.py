@@ -164,15 +164,10 @@ async def chat():
 
             fieldnames = ['Bullish/Bearish', 'Recommend buy or not', 'Recommended selling price', 'Recommended holding period', 'Stop-loss strategy']
 
-                # Save output as a txt file
-                with open(result_path, "w", encoding="utf-8") as f:
-                    async for part in await AsyncClient().chat(
-                        model="llama3.1:latest",
-                        messages=[message],
-                        stream=True,
-                        options={"temperature": 0.3},
-                    ):
-                        f.write(part["message"]["content"])
+            # 將輸出存成txt檔案
+            with open(result_path, 'w', encoding='utf-8') as f:
+                async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.3}):
+                    f.write(part['message']['content'])
 
             # 解析輸出結果
             with open(result_path, 'r', encoding='utf-8') as f:
