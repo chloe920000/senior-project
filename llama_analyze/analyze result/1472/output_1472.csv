@@ -1,3 +1,4 @@
 Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 bearish,No,,,
 bearish,No,61 NTD,6 month,Stop Loss at 10% below current price
+bearish,No,59 NTD,6 month,"Stop Loss: 20% below current price, Sell Order Triggered when DBR > 60"

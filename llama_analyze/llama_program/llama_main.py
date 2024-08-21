@@ -14,7 +14,7 @@ from prompt_generater import *
 
 
 date = '2024-07-01'
-stock_id = '1472'
+stock_id = '1203'
 end_year = int(date[:4])
 start_year = end_year - 4
 
