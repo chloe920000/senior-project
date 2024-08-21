@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 no.0 === 2024-08-21 20:18:23.366811 ===
 Evaluate the share price of Taiwan Stock Exchange 1103 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
@@ -17,6 +18,27 @@ Evaluate the share price of Taiwan Stock Exchange 1103 based on the following da
 2023: Open=16.315311, Close=18.537903, High=21.957495, Low=16.315311
 2024: Open=18.343281, Close=17.700001, High=18.489248, Low=16.640324
 * Current price: 17.954033
+=======
+no.0 === 2024-08-21 19:52:38.100774 ===
+Evaluate the share price of Taiwan Stock Exchange 1103 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 21.92, 27.21, 29.68, 35.4, 37.61
+* Capital over the past 5 years: 77.5, 77.5, 77.5, 77.5, 77.5 * 100 million
+* ROE (return on equity) over the past 5 years: 0.07, 5.57, 3.83, 6.32, 7.55%
+
+* EPS (earnings per share) over the past 5 years: -0.3, 1.35, -0.3, 0.93, 0.72
+
+* Gross profit margin over the past 5 years: 3.04, 14.7, 13.8, 10.5, -6.98%
+* OPM (Operating Margin) over the past 5 years: -14.6, -3.07, -4.95, -23.1, 40.0%
+*DBR (debt-to-asset ratio) over the past 5 years: 39.5, 32.0, 34.6, 38.9, 38.5%
+*Reference historical prices:
+2016: Open=6.642488, Close=6.238741, High=6.868617, Low=5.801578
+2017: Open=6.224448, Close=9.718667, High=9.718667, Low=6.181571
+2018: Open=9.791467, Close=10.238572, High=11.668961, Low=7.971492
+2019: Open=10.238572, Close=17.918478, High=18.239166, Low=10.238572
+2020: Open=17.918478, Close=16.172966, High=17.918478, Low=10.622812
+* Current price: 14.517467
+>>>>>>> cdb83c37d45b3067dbf6fc947efd2b67ba9be04b
 
 Provide additional background information about the company, industry, and market trends.
 

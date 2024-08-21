@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+<<<<<<< HEAD
 2024-07-01,bearish,No,37 NTD,6 month,"Trailing Stop Loss, 5% below current price"
+=======
+2020-11-13,bearish,No,30 NTD,6 month,"Stop Loss at 28 NTD, Sell if EPS < -0.5 or ROE < 2%"
+>>>>>>> cdb83c37d45b3067dbf6fc947efd2b67ba9be04b

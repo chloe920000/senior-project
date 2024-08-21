@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+<<<<<<< HEAD
 2024-07-01,[bearish],[No],[16] NTD,[6] month,[Close below 15.8]
+=======
+2020-11-13,bearish,No,13 NTD,6 month,Sell when DBR > 40% or OPM < -20%
+>>>>>>> cdb83c37d45b3067dbf6fc947efd2b67ba9be04b
