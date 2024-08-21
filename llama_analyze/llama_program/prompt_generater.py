@@ -28,6 +28,7 @@ Assuming you are a stock analyst, please answer the following questions (only an
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
 4. What is the recommended holding period for this investment?
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
 
 Evaluation criteria:
 
@@ -39,9 +40,10 @@ Evaluation criteria:
 
 Answer according to the sample format without explanation.
 Answer sample format:
-1. Is the next six months bullish or bearish?: bullish/bearish
-2. Based on the current price, is it recommended to buy?: Yes/No/later
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
 4. What is the recommended holding period for this investment? (month): [integer] month
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 '''
