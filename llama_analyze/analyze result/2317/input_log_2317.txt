@@ -1,0 +1,54 @@
+no.0 === 2024-08-21 19:10:37.506782 ===
+Evaluate the share price of Taiwan Stock Exchange 2317 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 62.26, 62.57, 87.43, 89.46, 93.59
+* Capital over the past 5 years: 1733.0, 1733.0, 1386.0, 1386.0, 1386.0 * 100 million
+* ROE (return on equity) over the past 5 years: 13.8, 11.7, 10.4, 9.68, 7.96%
+
+* EPS (earnings per share) over the past 5 years: -0.82, -0.59, 0.02, 0.29, -0.98
+
+* Gross profit margin over the past 5 years: 7.38, 6.44, 6.27, 5.91, 5.65%
+* OPM (Operating Margin) over the past 5 years: 4.01, 2.39, 2.57, 2.15, 2.07%
+*DBR (debt-to-asset ratio) over the past 5 years: 56.3, 65.6, 60.6, 57.9, 59.9%
+*Reference historical prices:
+2016: Open=62.351051, Close=76.270317, High=77.629036, Low=57.299831
+2017: Open=76.360893, Close=89.638351, High=114.401878, Low=75.455078
+2018: Open=89.450027, Close=54.613049, High=91.239044, Low=52.221794
+2019: Open=54.073082, Close=73.66481, High=75.287384, Low=52.144657
+2020: Open=73.66481, Close=78.475327, High=78.475327, Low=53.788292
+* Current price: 69.433601
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+電腦系統設備及其週邊之連接器等
+線纜組件及殼體,基座之開發、設計、製造及銷售等
+精密模具之製造及銷售等
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
