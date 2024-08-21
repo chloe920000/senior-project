@@ -1,29 +1,29 @@
-no.0 === 2024-08-14 16:14:34.085639 ===
-Evaluate the share price of Taiwan Stock Exchange 1443 based on the following data:
+no.0 === 2024-08-21 20:19:05.571164 ===
+Evaluate the share price of Taiwan Stock Exchange 1104 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
-* BPS (book value per share) over the past 5 years: 8.24, 8.62, 8.61, 10.56, 12.48
-* Capital over the past 5 years: 13.5, 13.5, 13.5, 13.5, 13.5 * 100 million
-* ROE (return on equity) over the past 5 years: -108.0, 0.37, -7.35, 20.7, 11.4%
+* BPS (book value per share) over the past 5 years: 28.54, 29.43, 32.0, 32.48, NA
+* Capital over the past 5 years: 65.4, 65.4, 65.4, 67.3, NA * 100 million
+* ROE (return on equity) over the past 5 years: 6.83, 5.84, 10.7, 10.6, NA%
 
-* EPS (earnings per share) over the past 5 years: -0.59, 2.4, -0.31, 1.94, 0.02
+* EPS (earnings per share) over the past 5 years: 0.17, -0.25, 1.46, 0.01, NA
 
-* Gross profit margin over the past 5 years: -1.24, 26.2, 27.3, 29.7, 40.8%
-* OPM (Operating Margin) over the past 5 years: -17.9, 14.3, 15.9, 21.0, 29.0%
-*DBR (debt-to-asset ratio) over the past 5 years: 84.9, 84.6, 86.1, 81.6, 79.4%
+* Gross profit margin over the past 5 years: 16.7, 18.6, 19.4, 19.8, NA%
+* OPM (Operating Margin) over the past 5 years: 9.09, 11.7, 11.9, 12.5, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 22.1, 22.8, 22.6, 19.6, NA%
 *Reference historical prices:
-2018: Open=5.1, Close=6.86, High=8.22, Low=5.1
-2019: Open=6.9, Close=9.63, High=10.1, Low=6.74
-2020: Open=9.77, Close=11.8, High=11.8, Low=8.3
-2021: Open=11.65, Close=16.85, High=17.9, Low=10.8
-2022: Open=16.75, Close=21.049999, High=21.950001, Low=15.0
-* Current price: 16.75
+2020: Open=14.494466, Close=18.096571, High=18.759592, Low=10.289966
+2021: Open=18.369581, Close=17.708551, High=21.411674, Low=15.990505
+2022: Open=17.708551, Close=19.052933, High=19.524965, Low=16.191845
+2023: Open=19.052933, Close=27.622261, High=28.133785, Low=19.052933
+2024: Open=27.622261, Close=31.15, High=34.318569, Low=26.273699
+* Current price: 33.714039
 
 Provide additional background information about the company, industry, and market trends.
 
 *Company background:
-倉儲、物流、理貨加工
-電子商務、棉紡、貿易
-委託營造廠商興建商業大樓及國民住宅出租出售
+水泥及預拌混凝土之製造與銷售。
+石膏板之生產、加工及銷售與進、出口、代理銷售。
+其餘請參考本公司登記營業項目。
 
 Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
 
@@ -32,6 +32,7 @@ Assuming you are a stock analyst, please answer the following questions (only an
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
 4. What is the recommended holding period for this investment?
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
 
 Evaluation criteria:
 
@@ -43,10 +44,11 @@ Evaluation criteria:
 
 Answer according to the sample format without explanation.
 Answer sample format:
-1. Is the next six months bullish or bearish?: bullish/bearish
-2. Based on the current price, is it recommended to buy?: Yes/No/later
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
 4. What is the recommended holding period for this investment? (month): [integer] month
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 
 

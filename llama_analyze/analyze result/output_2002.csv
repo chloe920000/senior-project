@@ -1,6 +1,0 @@
-Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
-Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Trigger at 20.73 NTD, which is 10% below the current price of 23.40 NTD."
-Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Triggered when the stock price falls below 21.53 NTD, which is 10% lower than the current price of 23.40 NTD."
-Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),"Trigger at 20.73 NTD, which is 10% below the current price of 23.40 NTD."
-Bearish,22.15 NTD,Not applicable (bearish),Not applicable (bearish),Trigger at a price below the lowest point in the past year (-24.75893784)
-Bearish,22.15 NTD,Not applicable (bearish prediction),Not applicable (bearish prediction),"Trigger a sell order if the stock price falls below 21.93 NTD, which is 10% below the current price of 23.40 NTD."

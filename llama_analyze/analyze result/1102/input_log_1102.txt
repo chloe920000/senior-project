@@ -1,29 +1,29 @@
-=== 2024-08-21 14:02:48.668500 ===
-Evaluate the share price of Taiwan Stock Exchange 3443 based on the following data:
+no.0 === 2024-08-21 20:17:40.498738 ===
+Evaluate the share price of Taiwan Stock Exchange 1102 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
-* BPS (book value per share) over the past 5 years: 33.48, 39.28, 60.15, 72.24, NA
-* Capital over the past 5 years: 13.4, 13.4, 13.4, 13.4, NA * 100 million
-* ROE (return on equity) over the past 5 years: 19.3, 30.0, 55.7, 39.5, NA%
+* BPS (book value per share) over the past 5 years: 43.96, 44.26, 45.35, 47.7, NA
+* Capital over the past 5 years: 336.0, 355.0, 355.0, 355.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 11.1, 10.0, 6.91, 5.89, NA%
 
-* EPS (earnings per share) over the past 5 years: 1.61, 4.56, 16.79, -1.51, NA
+* EPS (earnings per share) over the past 5 years: -0.86, 0.0, -1.07, -0.35, NA
 
-* Gross profit margin over the past 5 years: 30.0, 34.6, 34.7, 30.4, NA%
-* OPM (Operating Margin) over the past 5 years: 7.1, 11.1, 17.1, 15.1, NA%
-*DBR (debt-to-asset ratio) over the past 5 years: 54.0, 64.6, 62.0, 54.1, NA%
+* Gross profit margin over the past 5 years: 29.8, 23.4, 13.0, 13.0, NA%
+* OPM (Operating Margin) over the past 5 years: 25.1, 19.6, 9.49, 9.3, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 42.8, 43.1, 43.2, 43.0, NA%
 *Reference historical prices:
-2020: Open=228.997528, Close=323.86792, High=331.988495, Low=145.810669
-2021: Open=355.872559, Close=567.956177, High=640.646851, Low=290.907928
-2022: Open=562.14093, Close=629.042358, High=796.852356, Low=371.206848
-2023: Open=671.240173, Close=1723.257813, High=1886.670166, Low=637.874451
-2024: Open=1653.931274, Close=1060.0, High=1842.103149, Low=942.0
-* Current price: 1580
+2020: Open=35.616161, Close=33.644573, High=35.688988, Low=25.965565
+2021: Open=33.488811, Close=36.967804, High=41.35479, Low=31.152384
+2022: Open=36.717461, Close=37.047489, High=40.556099, Low=33.52346
+2023: Open=36.68605, Close=39.480656, High=40.481159, Low=36.385067
+2024: Open=39.194908, Close=43.5, High=43.81448, Low=37.337555
+* Current price: 42.099998
 
 Provide additional background information about the company, industry, and market trends.
 
 *Company background:
-一、研究、開發、生產、製造及銷售：各種應用積體電路1.嵌入式記
-憶體及邏輯元件。2.設計用元件資料庫。3.設計用自動化工具
-二、提供前述產品相關及客戶委託之技術服務。
+水泥,水泥之半成品,水泥製品,預拌混凝土及其添加劑之生產運銷
+水泥原料,水泥製品原料及砂石開採及爐石粉,石灰石粉之製造運銷
+其他未述及之項目請參照本公司營業執照之所營事業
 
 Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
 

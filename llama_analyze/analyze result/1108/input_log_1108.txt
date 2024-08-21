@@ -1,25 +1,27 @@
-# prompt_generator.py 用來把股票資料塞進prompt裡面
-
-def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, stock_price, company_background):
-    return f'''Evaluate the share price of Taiwan Stock Exchange {stock_id} based on the following data:
+no.0 === 2024-08-21 20:19:46.672709 ===
+Evaluate the share price of Taiwan Stock Exchange 1108 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
-* BPS (book value per share) over the past 5 years: {bps_str}
-* Capital over the past 5 years: {capital_str} * 100 million
-* ROE (return on equity) over the past 5 years: {roe_str}%
+* BPS (book value per share) over the past 5 years: 11.51, 11.48, 12.12, 12.53, NA
+* Capital over the past 5 years: 40.5, 40.5, 40.5, 40.5, NA * 100 million
+* ROE (return on equity) over the past 5 years: 8.74, 5.64, 12.2, 10.6, NA%
 
-* EPS (earnings per share) over the past 5 years: {eps_str}
+* EPS (earnings per share) over the past 5 years: 0.86, -0.32, 0.79, -0.14, NA
 
-* Gross profit margin over the past 5 years: {GM_str}%
-* OPM (Operating Margin) over the past 5 years: {OPM_str}%
-*DBR (debt-to-asset ratio) over the past 5 years: {DBR_str}%
+* Gross profit margin over the past 5 years: 15.8, 14.9, 23.9, 17.3, NA%
+* OPM (Operating Margin) over the past 5 years: 9.88, 8.98, 17.1, 12.0, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 42.0, 42.2, 49.2, 49.1, NA%
 *Reference historical prices:
-{summary_str}
-* Current price: {stock_price}
+2020: Open=7.037256, Close=10.833297, High=11.089203, Low=4.582203
+2021: Open=10.705346, Close=10.740563, High=15.994042, Low=9.084616
+2022: Open=10.740563, Close=10.222392, High=10.785691, Low=9.341582
+2023: Open=10.222392, Close=15.8, High=17.829754, Low=10.222392
+2024: Open=15.8, Close=15.9, High=17.25, Low=15.1
+* Current price: 16.75
 
 Provide additional background information about the company, industry, and market trends.
 
 *Company background:
-{company_background}
+有關水泥及水泥製品之工業及相關事業
 
 Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
 
@@ -46,4 +48,5 @@ Answer sample format:
 4. What is the recommended holding period for this investment? (month): [integer] month
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
-'''
+
+

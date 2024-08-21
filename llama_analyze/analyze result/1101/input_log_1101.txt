@@ -1,0 +1,432 @@
+no.0 === 2024-08-21 13:44:32.674189 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 14:09:45.695837 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 19:44:51.534248 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 19:45:17.464604 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 19:46:27.217215 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 20:12:43.435492 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 20:13:08.001639 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-08-21 20:17:03.550549 ===
+Evaluate the share price of Taiwan Stock Exchange 1101 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 34.41, 32.37, 29.64, 29.87, NA
+* Capital over the past 5 years: 574.0, 613.0, 716.0, 755.0, NA * 100 million
+* ROE (return on equity) over the past 5 years: 13.1, 9.54, 1.79, 4.07, NA%
+
+* EPS (earnings per share) over the past 5 years: -0.11, -1.02, -2.56, 0.32, NA
+
+* Gross profit margin over the past 5 years: 35.3, 24.9, 8.9, 18.8, NA%
+* OPM (Operating Margin) over the past 5 years: 29.9, 18.5, 1.02, 9.18, NA%
+*DBR (debt-to-asset ratio) over the past 5 years: 43.8, 48.9, 48.3, 45.9, NA%
+*Reference historical prices:
+2020: Open=31.374331, Close=34.202682, High=35.113174, Low=23.904251
+2021: Open=34.202682, Close=40.684597, High=44.099297, Low=31.787909
+2022: Open=40.218422, Close=32.223099, High=42.549309, Low=28.632114
+2023: Open=32.07946, Close=33.830994, High=38.208076, Low=30.530411
+2024: Open=33.685379, Close=34.450001, High=34.950001, Low=29.99649
+* Current price: 33.549999
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+有關水泥及水泥製品之生產及運銷
+有關水泥原料及水泥製品原料之開採製造運銷及附屬礦石之開採經銷
+經營有關水泥工業及其附屬事業
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
