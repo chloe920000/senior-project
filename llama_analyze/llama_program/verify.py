@@ -34,90 +34,95 @@ correct_count = 0  # 记录 CORRECT 的计数
 total_count = 0  # 记录总的验证数
 
 for stock_dir in os.listdir(analyze_result_path):
-    stock_symbol = stock_dir  
-    print(stock_symbol)
-    stock_folder_path = os.path.join(analyze_result_path, stock_dir)
-    
-    csv_file = os.path.join(stock_folder_path, f'output_{stock_symbol}.csv')
-    
-    # 檢查檔案是否存在
-    if not os.path.isfile(csv_file):
-        print(f"File not found: {csv_file}. Skipping...")
-        continue
-    
-    data = pd.read_csv(csv_file)
-    
-    result_file_path = os.path.join(stock_folder_path, f'{stock_symbol}_results.txt')
-
-    
-    with open(result_file_path, 'w', encoding='utf-8') as result_file:
-        for index, row in data.iterrows():
-            if pd.isna(row['Recommended holding period']):
-                result_file.write(f"Skipping entry {index} due to missing holding period.\n")
+    try:
+        stock_id = int(stock_dir)
+        if 4000 <= stock_id <= 4400:  # 只處理股票代號在 4000 到 4400 之間的
+            stock_symbol = stock_dir  
+            print(stock_symbol)
+            stock_folder_path = os.path.join(analyze_result_path, stock_dir)
+            
+            csv_file = os.path.join(stock_folder_path, f'output_{stock_symbol}.csv')
+            
+            # 檢查檔案是否存在
+            if not os.path.isfile(csv_file):
+                print(f"File not found: {csv_file}. Skipping...")
                 continue
-
-            holding_period_str = str(row['Recommended holding period'])  # 将 holding_period_str 转换为字符串
-            bullish_bearish = row['Bullish/Bearish']
             
-            if 'month' in holding_period_str:
-                holding_period_str_cleaned = re.sub(r'\[|\]', '', holding_period_str)  # 移除方括号
-                holding_period = int(holding_period_str_cleaned.split()[0].split('-')[0])
-                result_file.write(f"股票代碼 : {stock_symbol} \n")
-                result_file.write(f"持有時間 : {holding_period} 個月\n")
-            else:
-                result_file.write(f"Skipping entry {index} due to invalid holding period format: {holding_period_str}\n")
-                continue
-
-            start_date = pd.Timestamp(row['Date'])  # 使用 CSV 中的日期作为开始日期
-            print("start : ",start_date)
-            end_date = start_date + pd.DateOffset(months=holding_period)
-            print("end : ",end_date)
-            historical_prices = get_historical_prices(stock_symbol, start_date, end_date)
-
-            reached_take_profit = False
-            if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):
-                recommended_selling_price = float(row['Recommended selling price'].replace('NTD', '').replace(',', '').strip())
-                for date, price in historical_prices.items():
-                    if price >= recommended_selling_price:
-                        reached_take_profit = True
-                        break
+            data = pd.read_csv(csv_file)
             
-            final_price = historical_prices.iloc[-1] if not historical_prices.empty else None
-            initial_price = None
-            if pd.notna(row['Recommend buy or not']) and row['Recommend buy or not'] != "No":
-                initial_price = float(row['Recommend buy or not'].replace('NTD', '').replace(',', '').strip()) if is_float(row['Recommend buy or not']) else None
+            result_file_path = os.path.join(stock_folder_path, f'{stock_symbol}_results.txt')
             
-            profit_or_loss = final_price - initial_price if initial_price is not None and final_price is not None else None
+            with open(result_file_path, 'w', encoding='utf-8') as result_file:
+                for index, row in data.iterrows():
+                    if pd.isna(row['Recommended holding period']):
+                        result_file.write(f"Skipping entry {index} due to missing holding period.\n")
+                        continue
 
-            result_file.write(f"第 {index+1} 筆驗證資料:\n")
-            result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
-            result_file.write(f"開始日期 : {start_date}\n")
-            result_file.write(f"結束日期 : {end_date}\n")
-            result_file.write(f"是否達到停利: {reached_take_profit}\n")
-            result_file.write(f"初始股價 : {initial_price}\n")
-            result_file.write(f"最後股價 : {final_price}\n")
-            result_file.write(f"獲利 : {profit_or_loss if profit_or_loss is not None else 'N/A'}\n")
-            
-            if profit_or_loss is not None and initial_price is not None and initial_price != 0:
-                percentage = profit_or_loss / initial_price
-                result_file.write(f"Profit or Loss Percentage: {percentage:.2%}\n")
-            else:
-                result_file.write("Profit or Loss Percentage: N/A\n")                
+                    holding_period_str = str(row['Recommended holding period'])  # 将 holding_period_str 转换为字符串
+                    bullish_bearish = row['Bullish/Bearish']
+                    
+                    if 'month' in holding_period_str:
+                        holding_period_str_cleaned = re.sub(r'\[|\]', '', holding_period_str)  # 移除方括号
+                        holding_period = int(holding_period_str_cleaned.split()[0].split('-')[0])
+                        result_file.write(f"股票代碼 : {stock_symbol} \n")
+                        result_file.write(f"持有時間 : {holding_period} 個月\n")
+                    else:
+                        result_file.write(f"Skipping entry {index} due to invalid holding period format: {holding_period_str}\n")
+                        continue
 
-            total_count += 1  # 增加总的验证数
-            if bullish_bearish.lower() == 'bullish':
-                if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
-                    result_file.write("=> CORRECT!\n")
-                    correct_count += 1  # 增加 CORRECT 的计数
-                else:
-                    result_file.write("=> INCORRECT!\n")
-            else:  # Bearish
-                if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
-                    result_file.write("=> INCORRECT!\n")
-                else:
-                    result_file.write("=> CORRECT!\n")
-                    correct_count += 1  # 增加 CORRECT 的计数
-                result_file.write("==============================\n")
+                    start_date = pd.Timestamp(row['Date'])  # 使用 CSV 中的日期作为开始日期
+                    print("start : ",start_date)
+                    end_date = start_date + pd.DateOffset(months=holding_period)
+                    print("end : ",end_date)
+                    historical_prices = get_historical_prices(stock_symbol, start_date, end_date)
+
+                    reached_take_profit = False
+                    if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):
+                        recommended_selling_price = float(row['Recommended selling price'].replace('NTD', '').replace(',', '').strip())
+                        for date, price in historical_prices.items():
+                            if price >= recommended_selling_price:
+                                reached_take_profit = True
+                                break
+                    
+                    final_price = historical_prices.iloc[-1] if not historical_prices.empty else None
+                    initial_price = None
+                    if pd.notna(row['Recommend buy or not']) and row['Recommend buy or not'] != "No":
+                        initial_price = float(row['Recommend buy or not'].replace('NTD', '').replace(',', '').strip()) if is_float(row['Recommend buy or not']) else None
+                    
+                    profit_or_loss = final_price - initial_price if initial_price is not None and final_price is not None else None
+
+                    result_file.write(f"第 {index+1} 筆驗證資料:\n")
+                    result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
+                    result_file.write(f"開始日期 : {start_date}\n")
+                    result_file.write(f"結束日期 : {end_date}\n")
+                    result_file.write(f"是否達到停利: {reached_take_profit}\n")
+                    result_file.write(f"初始股價 : {initial_price}\n")
+                    result_file.write(f"最後股價 : {final_price}\n")
+                    result_file.write(f"獲利 : {profit_or_loss if profit_or_loss is not None else 'N/A'}\n")
+                    
+                    if profit_or_loss is not None and initial_price is not None and initial_price != 0:
+                        percentage = profit_or_loss / initial_price
+                        result_file.write(f"Profit or Loss Percentage: {percentage:.2%}\n")
+                    else:
+                        result_file.write("Profit or Loss Percentage: N/A\n")
+                        
+                    total_count += 1  # 增加总的验证数
+                    if bullish_bearish.lower() == 'bullish':
+                        if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
+                            result_file.write("=> CORRECT!\n")
+                            correct_count += 1  # 增加 CORRECT 的计数
+                        else:
+                            result_file.write("=> INCORRECT!\n")
+                    else:  # Bearish
+                        if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
+                            result_file.write("=> INCORRECT!\n")
+                        else:
+                            result_file.write("=> CORRECT!\n")
+                            correct_count += 1  # 增加 CORRECT 的计数
+
+                    result_file.write("==============================\n")
+    except ValueError:
+        print(f"Skipping invalid directory name: {stock_dir}")
         
 # 计算 CORRECT 的百分比
 correct_percentage = (correct_count / total_count) * 100 if total_count > 0 else 0
