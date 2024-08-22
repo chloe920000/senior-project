@@ -60,12 +60,21 @@ def get_all_stock_ids():
     # 将 stockID 转换为字符串类型
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
+#只取部分stock_id
+def get_some_stock_ids(begin, end):
+    # 添加查询条件，筛选 stockID 介于 2000 到 3000 之间的数据
+    response = supabase.table('stock').select('stockID').gte('stockID', begin).lte('stockID', end).execute()
+    
+    # 将 stockID 转换为字符串类型
+    stock_ids = [str(item['stockID']) for item in response.data]
+    return stock_ids
 
 dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
+# 獲取要分析的所有股票的 `stock_id` 列表
+# stock_ids = get_all_stock_ids()
+stock_ids = get_some_stock_ids(2021,3000) # 只分析部分stock_id
 
 async def chat():
-    # 獲取要分析的所有股票的 `stock_id` 列表
-    stock_ids = get_all_stock_ids()
     for date in dates:
         for stock_id in stock_ids:
             print(f'Processing stock: {stock_id}')
