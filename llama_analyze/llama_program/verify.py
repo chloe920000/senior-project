@@ -37,6 +37,12 @@ for stock_dir in os.listdir(analyze_result_path):
     stock_folder_path = os.path.join(analyze_result_path, stock_dir)
     
     csv_file = os.path.join(stock_folder_path, f'output_{stock_symbol}.csv')
+    
+    # 檢查檔案是否存在
+    if not os.path.isfile(csv_file):
+        print(f"File not found: {csv_file}. Skipping...")
+        continue
+    
     data = pd.read_csv(csv_file)
     
     result_file_path = os.path.join(stock_folder_path, f'{stock_symbol}_results.txt')
@@ -47,11 +53,13 @@ for stock_dir in os.listdir(analyze_result_path):
                 result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                 continue
 
-            holding_period_str = row['Recommended holding period']
+            holding_period_str = str(row['Recommended holding period'])  # 将 holding_period_str 转换为字符串
             bullish_bearish = row['Bullish/Bearish']
+            
             if 'month' in holding_period_str:
                 holding_period_str_cleaned = re.sub(r'\[|\]', '', holding_period_str)  # 移除方括号
                 holding_period = int(holding_period_str_cleaned.split()[0].split('-')[0])
+                result_file.write(f"股票代碼 : {stock_symbol} \n")
                 result_file.write(f"持有時間 : {holding_period} 個月\n")
             else:
                 result_file.write(f"Skipping entry {index} due to invalid holding period format: {holding_period_str}\n")
@@ -105,3 +113,4 @@ for stock_dir in os.listdir(analyze_result_path):
                     result_file.write("=> CORRECT!\n")
 
             result_file.write("==============================\n")
+
