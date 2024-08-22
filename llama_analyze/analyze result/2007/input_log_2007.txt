@@ -1,0 +1,52 @@
+no.0 === 2024-08-22 00:47:21.386332 ===
+Evaluate the share price of Taiwan Stock Exchange 2007 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 5.41, 6.07, 6.3, 5.16, 13.99
+* Capital over the past 5 years: 63.1, 53.1, 53.1, 53.1, 53.1 * 100 million
+* ROE (return on equity) over the past 5 years: -7.23, -5.57, 0.24, -10.6, -7.03%
+
+* EPS (earnings per share) over the past 5 years: 0.38, 0.06, 0.38, -1.24, 0.32
+
+* Gross profit margin over the past 5 years: 2.73, 3.34, 4.48, -3.59, -2.92%
+* OPM (Operating Margin) over the past 5 years: -0.51, 0.16, 1.6, -7.29, -6.33%
+*DBR (debt-to-asset ratio) over the past 5 years: 78.1, 82.2, 70.9, 73.0, 42.6%
+*Reference historical prices:
+2016: Open=4.55, Close=4.48, High=5.48, Low=4.13
+2017: Open=4.5, Close=5.06, High=6.33, Low=4.47
+2018: Open=5.39, Close=5.52, High=5.99, Low=4.56
+2019: Open=5.5, Close=4.17, High=5.65, Low=4.07
+2020: Open=4.26, Close=9.62, High=10.1, Low=3.39
+* Current price: 6.82
+
+Provide additional background information about the company, industry, and market trends.
+
+*Company background:
+線材
+
+Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next six months bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment?
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 10% over the next six months.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next six months.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next six months bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (month): [integer] month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
