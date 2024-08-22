@@ -36,7 +36,7 @@ total_count = 0  # 记录总的验证数
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 4000 <= stock_id <= 4400:  # 只處理股票代號在 4000 到 4400 之間的
+        if 1101 <= stock_id <= 2110:  # 只處理股票代號在 4000 到 4400 之間的
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
@@ -57,9 +57,11 @@ for stock_dir in os.listdir(analyze_result_path):
                     if pd.isna(row['Recommended holding period']):
                         result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                         continue
-
-                    holding_period_str = str(row['Recommended holding period'])  # 将 holding_period_str 转换为字符串
-                    bullish_bearish = row['Bullish/Bearish']
+                    # 清理数据中的中括号
+                    holding_period_str = re.sub(r'\[|\]', '', str(row['Recommended holding period']))
+                    bullish_bearish = re.sub(r'\[|\]', '', str(row['Bullish/Bearish']))
+                    recommended_selling_price = re.sub(r'\[|\]', '', str(row['Recommended selling price']))
+                    recommend_buy_or_not = re.sub(r'\[|\]', '', str(row['Recommend buy or not']))
                     
                     if 'month' in holding_period_str:
                         holding_period_str_cleaned = re.sub(r'\[|\]', '', holding_period_str)  # 移除方括号
@@ -85,9 +87,15 @@ for stock_dir in os.listdir(analyze_result_path):
                                 break
                     
                     final_price = historical_prices.iloc[-1] if not historical_prices.empty else None
-                    initial_price = None
-                    if pd.notna(row['Recommend buy or not']) and row['Recommend buy or not'] != "No":
-                        initial_price = float(row['Recommend buy or not'].replace('NTD', '').replace(',', '').strip()) if is_float(row['Recommend buy or not']) else None
+                    initial_price = historical_prices.loc[start_date] if start_date in historical_prices.index else None  # 当天的股价
+
+                    reached_take_profit = False
+                    if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):
+                        recommended_selling_price = float(row['Recommended selling price'].replace('NTD', '').replace(',', '').strip())
+                        for date, price in historical_prices.items():
+                            if price >= recommended_selling_price:
+                                reached_take_profit = True
+                                break
                     
                     profit_or_loss = final_price - initial_price if initial_price is not None and final_price is not None else None
 
