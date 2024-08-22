@@ -1,29 +1,29 @@
-no.0 === 2024-08-21 19:10:37.506782 ===
-Evaluate the share price of Taiwan Stock Exchange 2317 based on the following data:
+no.0 === 2024-08-22 12:11:47.224668 ===
+Evaluate the share price of Taiwan Stock Exchange 2103 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
-* BPS (book value per share) over the past 5 years: 62.26, 62.57, 87.43, 89.46, 93.59
-* Capital over the past 5 years: 1733.0, 1733.0, 1386.0, 1386.0, 1386.0 * 100 million
-* ROE (return on equity) over the past 5 years: 13.8, 11.7, 10.4, 9.68, 7.96%
+* BPS (book value per share) over the past 5 years: 18.58, 18.02, 18.54, 18.02, 17.12
+* Capital over the past 5 years: 82.6, 82.6, 82.6, 82.6, 82.6 * 100 million
+* ROE (return on equity) over the past 5 years: 6.23, 5.07, 7.4, 4.9, 1.33%
 
-* EPS (earnings per share) over the past 5 years: -0.82, -0.59, 0.02, 0.29, -0.98
+* EPS (earnings per share) over the past 5 years: 0.56, -0.14, 0.38, -0.54, -0.93
 
-* Gross profit margin over the past 5 years: 7.38, 6.44, 6.27, 5.91, 5.65%
-* OPM (Operating Margin) over the past 5 years: 4.01, 2.39, 2.57, 2.15, 2.07%
-*DBR (debt-to-asset ratio) over the past 5 years: 56.3, 65.6, 60.6, 57.9, 59.9%
+* Gross profit margin over the past 5 years: 14.4, 10.5, 11.7, 11.7, 12.2%
+* OPM (Operating Margin) over the past 5 years: 6.55, 3.79, 4.38, 3.75, 3.42%
+*DBR (debt-to-asset ratio) over the past 5 years: 42.7, 43.3, 44.2, 49.4, 45.8%
 *Reference historical prices:
-2016: Open=62.351051, Close=76.270317, High=77.629036, Low=57.299831
-2017: Open=76.360893, Close=89.638351, High=114.401878, Low=75.455078
-2018: Open=89.450027, Close=54.613049, High=91.239044, Low=52.221794
-2019: Open=54.073082, Close=73.66481, High=75.287384, Low=52.144657
-2020: Open=73.66481, Close=78.475327, High=78.475327, Low=53.788292
-* Current price: 69.433601
+2016: Open=14.311082, Close=24.646633, High=25.949701, Low=13.450267
+2017: Open=25.167864, Close=28.523628, High=29.021358, Low=23.045721
+2018: Open=28.715067, Close=21.379505, High=28.983068, Low=21.102877
+2019: Open=21.181915, Close=19.826679, High=23.078804, Low=19.443104
+2020: Open=19.826679, Close=19.735647, High=20.370916, Low=10.61262
+* Current price: 17.61809
 
 Provide additional background information about the company, industry, and market trends.
 
 *Company background:
-電腦系統設備及其週邊之連接器等
-線纜組件及殼體,基座之開發、設計、製造及銷售等
-精密模具之製造及銷售等
+SBR、BR、TPE、TPR橡膠。
+上述產品之製造及其有關原物料及加工製品之進出口及銷售。
+生產及銷售汽電共生所產生之蒸汽及工商業用電。
 
 Assuming you are a stock analyst, please answer the following questions (only answer the following questions, do not give recommendations or analysis):
 
