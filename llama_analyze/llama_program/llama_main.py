@@ -69,10 +69,11 @@ def get_some_stock_ids(begin, end):
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
 
-dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
+# dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
+dates = ['2022-12-30', '2023-06-07']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(2021,3000) # 只分析部分stock_id
+stock_ids = get_some_stock_ids(4000,5000) # 只分析部分stock_id
 
 async def chat():
     for date in dates:
@@ -177,7 +178,7 @@ async def chat():
 
                 # 將輸出存成txt檔案
                 with open(result_path, 'w', encoding='utf-8') as f:
-                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.3}):
+                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.7}):
                         f.write(part['message']['content'])
 
                 # 解析輸出結果
