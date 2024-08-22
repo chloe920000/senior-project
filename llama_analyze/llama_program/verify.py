@@ -30,6 +30,8 @@ def is_float(value):
 
 # analyze result 的 路徑
 analyze_result_path = 'C://Users//Chloe//OneDrive//桌面//senior_project//llama_analyze//analyze result'
+correct_count = 0  # 记录 CORRECT 的计数
+total_count = 0  # 记录总的验证数
 
 for stock_dir in os.listdir(analyze_result_path):
     stock_symbol = stock_dir  
@@ -46,6 +48,7 @@ for stock_dir in os.listdir(analyze_result_path):
     data = pd.read_csv(csv_file)
     
     result_file_path = os.path.join(stock_folder_path, f'{stock_symbol}_results.txt')
+
     
     with open(result_file_path, 'w', encoding='utf-8') as result_file:
         for index, row in data.iterrows():
@@ -99,11 +102,13 @@ for stock_dir in os.listdir(analyze_result_path):
                 percentage = profit_or_loss / initial_price
                 result_file.write(f"Profit or Loss Percentage: {percentage:.2%}\n")
             else:
-                result_file.write("Profit or Loss Percentage: N/A\n")
-                
+                result_file.write("Profit or Loss Percentage: N/A\n")                
+
+            total_count += 1  # 增加总的验证数
             if bullish_bearish.lower() == 'bullish':
                 if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
                     result_file.write("=> CORRECT!\n")
+                    correct_count += 1  # 增加 CORRECT 的计数
                 else:
                     result_file.write("=> INCORRECT!\n")
             else:  # Bearish
@@ -111,6 +116,11 @@ for stock_dir in os.listdir(analyze_result_path):
                     result_file.write("=> INCORRECT!\n")
                 else:
                     result_file.write("=> CORRECT!\n")
-
-            result_file.write("==============================\n")
-
+                    correct_count += 1  # 增加 CORRECT 的计数
+                result_file.write("==============================\n")
+        
+# 计算 CORRECT 的百分比
+correct_percentage = (correct_count / total_count) * 100 if total_count > 0 else 0
+print(f"\n總驗證數: {total_count}\n")
+print(f"正確數: {correct_count}\n")
+print(f"正確率: {correct_percentage:.2f}%\n")
