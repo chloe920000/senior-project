@@ -1,0 +1,1 @@
+Skipping entry 0 due to invalid holding period format: Not specified
