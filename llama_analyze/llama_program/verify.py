@@ -28,8 +28,15 @@ def is_float(value):
     except ValueError:
         return False
 
-# analyze result 的 路徑
-analyze_result_path = 'C://Users//Chloe//OneDrive//桌面//senior_project//llama_analyze//analyze result'
+import os
+
+# 獲取 verify.py 的當前檔案路徑
+current_dir = os.path.dirname(__file__)
+# 設定目標資料夾的相對路徑
+analyze_result_path = os.path.join(current_dir, '..', 'verify_result')
+# 確保路徑是絕對路徑
+analyze_result_path = os.path.abspath(analyze_result_path)
+
 correct_count = 0  # 记录 CORRECT 的计数
 total_count = 0  # 记录总的验证数
 
