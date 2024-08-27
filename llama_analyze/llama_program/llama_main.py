@@ -18,7 +18,7 @@ from prompt_generater import *
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 設置結果資料相對路徑
-result_data_dir = os.path.join(script_dir, '..', 'verify_result')
+result_data_dir = os.path.join(script_dir, '..', 'test_output')
 if not os.path.exists(result_data_dir):
     os.makedirs(result_data_dir)
     
@@ -35,7 +35,7 @@ import re
 def parse_output(output):
     result = {}
     # 使用正則表達式來匹配每個問題的答案
-    bullish_match = re.search(r'1\. Is the next six months bullish or bearish\?:(.*)', output)
+    bullish_match = re.search(r'1\. Is the next one to two and a half years bullish or bearish\?\s*:(.*)', output)
     buy_recommendation_match = re.search(r'2\. Based on the current price, is it recommended to buy\?\s*:(.*)', output)
     sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price\?\s*:(.*)', output)
     holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\s*\(month\):\s*(.*)', output)
@@ -73,7 +73,7 @@ def get_some_stock_ids(begin, end):
 dates = ['2023-12-30', '2023-06-07']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(1000,2000) # 只分析部分stock_id
+stock_ids = get_some_stock_ids(2200,2300) # 只分析部分stock_id
 
 async def chat():
     for date in dates:
@@ -178,7 +178,7 @@ async def chat():
 
                 # 將輸出存成txt檔案
                 with open(result_path, 'w', encoding='utf-8') as f:
-                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.8}):
+                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.5}):
                         f.write(part['message']['content'])
 
                 # 解析輸出結果
