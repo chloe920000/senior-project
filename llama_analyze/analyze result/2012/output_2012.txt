@@ -1,0 +1,6 @@
+1. Is the next six months bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 11,287
+4. What is the recommended holding period for this investment? (month): N/A
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Close below 12.50
+6. Please give specific reasons why you think it is bullish or bearish.: The stock price has been declining since 2018, and the current price is still lower than the historical high in 2020. The ROE and EPS have also been decreasing over the past few years, indicating a potential decline in profitability.

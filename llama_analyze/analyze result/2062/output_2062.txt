@@ -1,0 +1,6 @@
+1. Is the next six months bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 18 NTD
+4. What is the recommended holding period for this investment? (month): 6 month
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Stop Loss: 15% decline from current price, Sell Order Triggered when DBR > 60%
+6. Please give specific reasons why you think it is bullish or bearish.: The company's financial performance has been declining over the past 5 years, with decreasing BPS, EPS, and ROE. The Gross profit margin and OPM have also decreased. Additionally, the debt-to-asset ratio (DBR) has increased, indicating a higher level of indebtedness. These factors suggest that the company is facing financial difficulties, which may lead to a bearish market trend in the next six months.

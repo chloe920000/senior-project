@@ -67,19 +67,25 @@ def get_stock_summary_string(summary):
 
 #確保資料安全取值
 def safe_get_value(data, year, column_name):
-        try:
-            value = data.loc[year, column_name]
-            print(f"Retrieved {column_name} for year {year}: {value}")
-            if column_name == 'share_capital':
-                return str(value)  # 對於 capital_value，返回字符串
-            else:
-                return float(value)  # 對於其他指標，返回浮點數
-        except KeyError:
-            print(f"KeyError: Unable to find {column_name} data for year {year}")
-            return 'NA'
-        except ValueError:
-            print(f"ValueError: Unable to convert {column_name} data for year {year}")
-            return 'NA'
+    if data is None:
+        print(f"Data is None, cannot retrieve {column_name} for year {year}.")
+        return 'NA'
+    try:
+        value = data.loc[year, column_name]
+        print(f"Retrieved {column_name} for year {year}: {value}")
+        if column_name == 'share_capital':
+            return str(value)  # 對於 capital_value，返回字符串
+        else:
+            return float(value)  # 對於其他指標，返回浮點數
+    except KeyError:
+        print(f"KeyError: Unable to find {column_name} data for year {year}")
+        return 'NA'
+    except ValueError:
+        print(f"ValueError: Unable to convert {column_name} data for year {year}")
+        return 'NA'
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return 'NA'
 
 # supabase資料存取
 def select_supabase_data(stock_id, date):
@@ -131,6 +137,9 @@ def get_data_from_supabase(table_name, stock_id, start_year, end_year):
         print(f"No data found for {table_name}")
     else:
         print(f"Data fetched for {table_name}: {df}")
+    if 'year' not in df.columns:
+        print("No 'year' column found in the returned data.")
+        return None
     df.set_index('year', inplace=True)
     return df
 
