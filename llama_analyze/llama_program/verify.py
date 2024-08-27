@@ -29,14 +29,14 @@ def is_float(value):
         return False
 
 # analyze result 的 路徑
-analyze_result_path = 'C://Users//Chloe//OneDrive//桌面//senior_project//llama_analyze//analyze result'
+analyze_result_path = '../senior_project/llama_analyze/analyze result'
 correct_count = 0  # 记录 CORRECT 的计数
 total_count = 0  # 记录总的验证数
 
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 1101 <= stock_id <= 2110:  # 只處理股票代號在 4000 到 4400 之間的
+        if 1101 <= stock_id <= 2110:  # 只處理股票代號在 xxxx 到 xxxx 之間的
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
@@ -57,7 +57,7 @@ for stock_dir in os.listdir(analyze_result_path):
                     if pd.isna(row['Recommended holding period']):
                         result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                         continue
-                    # 清理数据中的中括号
+                    # 清理中括弧
                     holding_period_str = re.sub(r'\[|\]', '', str(row['Recommended holding period']))
                     bullish_bearish = re.sub(r'\[|\]', '', str(row['Bullish/Bearish']))
                     recommended_selling_price = re.sub(r'\[|\]', '', str(row['Recommended selling price']))
@@ -72,7 +72,7 @@ for stock_dir in os.listdir(analyze_result_path):
                         result_file.write(f"Skipping entry {index} due to invalid holding period format: {holding_period_str}\n")
                         continue
 
-                    start_date = pd.Timestamp(row['Date'])  # 使用 CSV 中的日期作为开始日期
+                    start_date = pd.Timestamp(row['Date'])  # 使用 CSV 中的日期作為開始日期
                     print("start : ",start_date)
                     end_date = start_date + pd.DateOffset(months=holding_period)
                     print("end : ",end_date)
@@ -114,11 +114,11 @@ for stock_dir in os.listdir(analyze_result_path):
                     else:
                         result_file.write("Profit or Loss Percentage: N/A\n")
                         
-                    total_count += 1  # 增加总的验证数
+                    total_count += 1  # 總驗證數
                     if bullish_bearish.lower() == 'bullish':
                         if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
                             result_file.write("=> CORRECT!\n")
-                            correct_count += 1  # 增加 CORRECT 的计数
+                            correct_count += 1  
                         else:
                             result_file.write("=> INCORRECT!\n")
                     else:  # Bearish
@@ -126,13 +126,12 @@ for stock_dir in os.listdir(analyze_result_path):
                             result_file.write("=> INCORRECT!\n")
                         else:
                             result_file.write("=> CORRECT!\n")
-                            correct_count += 1  # 增加 CORRECT 的计数
+                            correct_count += 1  
 
                     result_file.write("==============================\n")
     except ValueError:
         print(f"Skipping invalid directory name: {stock_dir}")
-        
-# 计算 CORRECT 的百分比
+
 correct_percentage = (correct_count / total_count) * 100 if total_count > 0 else 0
 print(f"\n總驗證數: {total_count}\n")
 print(f"正確數: {correct_count}\n")
