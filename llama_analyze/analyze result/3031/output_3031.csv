@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2021-12-30,[bullish],[Yes],[25] NTD,[24] months,"[Close price < 20 NTD, or EPS decrease by 15%]"
