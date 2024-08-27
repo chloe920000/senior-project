@@ -73,7 +73,7 @@ def get_some_stock_ids(begin, end):
 dates = ['2021-12-30']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(3021,4000) # 只分析部分stock_id
+stock_ids = get_some_stock_ids(3041,4000) # 只分析部分stock_id
 
 async def chat():
     for date in dates:

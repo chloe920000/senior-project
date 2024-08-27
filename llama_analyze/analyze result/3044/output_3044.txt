@@ -1,0 +1,8 @@
+Here are the answers to the questions based on the provided data:
+
+1. Is the next one year bullish or bearish?: [bearish]
+2. Based on the current price, is it recommended to buy?: [later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [94] NTD
+4. What is the recommended holding period for this investment?: [12] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [Close below 95]
+6. Please give specific reasons why you think it is bullish or bearish.: The stock price has been declining over the past year, and the current price is close to the historical high in 2021. However, the EPS growth rate has been negative, and the ROE and ROA have also decreased. This suggests that the company's fundamentals are not strong enough to support a bullish market.
