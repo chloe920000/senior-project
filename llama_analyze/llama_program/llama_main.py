@@ -18,7 +18,7 @@ from prompt_generater import *
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 設置結果資料相對路徑
-result_data_dir = os.path.join(script_dir, '..', 'analyze result')
+result_data_dir = os.path.join(script_dir, '..', 'test_output')
 if not os.path.exists(result_data_dir):
     os.makedirs(result_data_dir)
     

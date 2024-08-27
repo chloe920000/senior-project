@@ -17,7 +17,7 @@ def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, G
 
 Provide additional background information about the company, industry, and market trends.
 
-*Company background:
+* Company background:
 {company_background}
 
 Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
