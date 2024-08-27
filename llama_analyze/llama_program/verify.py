@@ -30,8 +30,8 @@ def is_float(value):
 
 # analyze result 的 路徑
 analyze_result_path = '../senior_project/llama_analyze/analyze result'
-correct_count = 0  # 记录 CORRECT 的计数
-total_count = 0  # 记录总的验证数
+correct_count = 0  # CORRECT 的數量
+total_count = 0  # 驗證總數
 
 for stock_dir in os.listdir(analyze_result_path):
     try:
@@ -87,7 +87,7 @@ for stock_dir in os.listdir(analyze_result_path):
                                 break
                     
                     final_price = historical_prices.iloc[-1] if not historical_prices.empty else None
-                    initial_price = historical_prices.loc[start_date] if start_date in historical_prices.index else None  # 当天的股价
+                    initial_price = historical_prices.loc[start_date] if start_date in historical_prices.index else None  # 當天股價
 
                     reached_take_profit = False
                     if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):

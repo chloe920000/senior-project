@@ -1,14 +1,14 @@
 # prompt_generator.py 用來把股票資料塞進prompt裡面
 
-def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, stock_price, company_background):
+def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, stock_price, company_background, roa_str, per_str):
     return f'''Evaluate the stock price of TWSE{stock_id} based on the following data:
 * The following data is from left to right, with the years from farthest to most recent.
 * BPS (book value per share) over last 5 years: {bps_str}
 * Capital over last 5 years: {capital_str} * 100 million
 * ROE (return on equity) over last 5 years: {roe_str}%
-
+* roa (return on assets) over last 5 years: {roa_str}%
 * EPS (earnings per share) over last 5 years: {eps_str}
-
+* PER (price earnings ratio) over last 5 years: {per_str}%
 * GM (gross margin) over last 5 years: {GM_str}%
 * OPM (operating profit margin) over last 5 years: {OPM_str}%
 * DBR (debt-to-assets ratio) over last 5 years: {DBR_str}%

@@ -1,2 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2022-12-30,bullish,Yes,45 NTD,6 month,"Stop Loss 10% below current price, Trigger Sell when EPS decreases by more than 20% or DBR increases by more than 15%"

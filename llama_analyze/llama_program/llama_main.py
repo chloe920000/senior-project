@@ -35,10 +35,10 @@ import re
 def parse_output(output):
     result = {}
     # 使用正則表達式來匹配每個問題的答案
-    bullish_match = re.search(r'1\. Is the next one to two and a half years bullish or bearish\?\s*:(.*)', output)
+    bullish_match = re.search(r'1\. Is the next one year bullish or bearish\?:(.*)', output)
     buy_recommendation_match = re.search(r'2\. Based on the current price, is it recommended to buy\?\s*:(.*)', output)
     sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price\?\s*:(.*)', output)
-    holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\s*\(month\):\s*(.*)', output)
+    holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\:\s*(.*)', output)
     stop_loss_strategy_match = re.search(r'5\. Suggested stop loss strategy\? What are your criteria for triggering a sell order\?\s*:(.*)', output)
 
     if bullish_match:
@@ -60,20 +60,8 @@ def get_all_stock_ids():
     # 将 stockID 转换为字符串类型
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
-#只取部分stock_id
-def get_some_stock_ids(begin, end):
-    # 添加查询条件，筛选 stockID 介于 2000 到 3000 之间的数据
-    response = supabase.table('stock').select('stockID').gte('stockID', begin).lte('stockID', end).execute()
-    
-    # 将 stockID 转换为字符串类型
-    stock_ids = [str(item['stockID']) for item in response.data]
-    return stock_ids
 
-# dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
-dates = ['2023-12-30', '2023-06-07']
-# 獲取要分析的所有股票的 `stock_id` 列表
-# stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(2200,2300) # 只分析部分stock_id
+dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
 
 async def chat():
     for date in dates:
@@ -147,7 +135,7 @@ async def chat():
                 stock_price = get_stock_price(stock_id,date)
 
                 # 使用 generate_message_content 生成 message_content
-                message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background)
+                message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background, roa_str,per_str)
                 
                 # 保存每次的input message到log檔案
                 input_log_path = os.path.join(result_data_dir, stock_id, f'input_log_{stock_id}.txt')
@@ -178,7 +166,7 @@ async def chat():
 
                 # 將輸出存成txt檔案
                 with open(result_path, 'w', encoding='utf-8') as f:
-                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.5}):
+                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.3}):
                         f.write(part['message']['content'])
 
                 # 解析輸出結果
@@ -277,7 +265,7 @@ async def predict_single_stock(stock_id):
     print("current price:",stock_price)
     print("company background:", company_background)
     # 使用 generate_message_content 生成 message_content
-    message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id, date), company_background)
+    message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id, date), company_background,roa_str,per_str)
     
     # 保存每次的input message到log檔案
     input_log_path = os.path.join(result_data_dir, stock_id, f'input_log_{stock_id}.txt')
@@ -307,7 +295,7 @@ async def predict_single_stock(stock_id):
 
     # 將輸出存成txt檔案
     with open(result_path, 'w', encoding='utf-8') as f:
-        async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.8}):
+        async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.4}):
             f.write(part['message']['content'])
 
     # 解析輸出結果

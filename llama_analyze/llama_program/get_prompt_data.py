@@ -159,3 +159,27 @@ def get_stock_price(stock_id, date):
         return price
     else:
         return None
+
+
+def get_stock_price_from_yahoo(stock_id):
+    
+    
+    url = f'https://tw.stock.yahoo.com/quote/{stock_id}'  # Yahoo Finance stock URL
+    web = requests.get(url)  # 獲取網頁內容
+    soup = BeautifulSoup(web.text, "html.parser")  # 解析網頁內容
+    title = soup.find('h1').get_text()  # 獲取股票名稱
+    current_price = soup.select('.Fz\(32px\)')[0].get_text()  # 獲取當前價格
+    change = soup.select('.Fz\(20px\)')[0].get_text()  # Get price change
+    status = ''  # 設置狀態：上漲、下跌或持平
+
+    try:
+        if soup.select('#main-0-QuoteHeader-Proxy')[0].select('.C($c-trend-down)')[0]:
+            status = '-'  # 下跌
+    except:
+        try:
+            if soup.select('#main-0-QuoteHeader-Proxy')[0].select('.C($c-trend-up)')[0]:
+                status = '+'  # 上漲
+        except:
+            status = '▬'  # 持平
+
+    return f'{title} : {current_price} ( {status}{change} )'  # Return the formatted string
