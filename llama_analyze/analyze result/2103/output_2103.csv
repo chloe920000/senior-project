@@ -1,2 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2020-11-13,bearish,No,15,N/A,"Stop Loss at 85% of current price, trigger sell if EPS < -0.8 or DBR > 50%"

@@ -1,24 +1,28 @@
-def generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, stock_price, company_background, roa_str, per_str):
-    return f'''Evaluate the share price of Taiwan Stock Exchange {stock_id} based on the following data:
+no.0 === 2024-08-27 21:23:17.780486 ===
+Evaluate the share price of Taiwan Stock Exchange 3018 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
-* BPS (book value per share) over the past 5 years: {bps_str}
-* Capital over the past 5 years: {capital_str} * 100 million
-* ROE (return on equity) over the past 5 years: {roe_str}(%)
-* ROA (return on assets) over the past 5 years: {roa_str}(%)
-* peratio (price to earnings ratio) over the past 5 years: {per_str}(%)
-* EPS (earnings per share) over the past 5 years: {eps_str}
+* BPS (book value per share) over the past 5 years: 13.49, 10.94, 8.08, 7.29, 3.7
+* Capital over the past 5 years: 6.59, 7.35, 7.35, 7.31, 7.31 * 100 million
+* ROE (return on equity) over the past 5 years: 6.74, -19.1, -34.1, -12.1, -78.7(%)
+* ROA (return on assets) over the past 5 years: 3.19, -9.54, -14.8, -4.17, -19.1(%)
+* peratio (price to earnings ratio) over the past 5 years: 75.8, 576.4, NA, NA, NA(%)
+* EPS (earnings per share) over the past 5 years: 0.6, -2.91, -0.96, 2.19, -3.38
 
-* Gross profit margin over the past 5 years: {GM_str}(%)
-* OPM (Operating Margin) over the past 5 years: {OPM_str}(%)
-*DBR (debt-to-asset ratio) over the past 5 years: {DBR_str}(%)
+* Gross profit margin over the past 5 years: 9.3, 6.94, -6.45, 8.84, 3.36(%)
+* OPM (Operating Margin) over the past 5 years: 1.9, -8.57, -28.7, -3.71, -6.88(%)
+*DBR (debt-to-asset ratio) over the past 5 years: 46.8, 53.0, 60.6, 69.9, 82.2(%)
 *Reference historical prices:
-{summary_str}
-* !!!Current price: {stock_price}
+2017: Open=32.734444, Close=150.640686, High=163.070404, Low=32.461655
+2018: Open=159.545547, Close=67.099998, High=173.088379, Low=50.200001
+2019: Open=67.599998, Close=45.200001, High=69.099998, Low=44.200001
+2020: Open=45.599998, Close=36.0, High=57.599998, Low=28.200001
+2021: Open=36.0, Close=40.799999, High=42.400002, Low=29.4
+* !!!Current price: 40.799999
 
 Provide additional background information about the company, industry, and market trends.
 
 *Company background:
-{company_background}
+機電系統整合工程
 
 Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
 
@@ -47,4 +51,5 @@ Answer sample format:
 4. What is the recommended holding period for this investment?: [a integer] months
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
-'''
+
+

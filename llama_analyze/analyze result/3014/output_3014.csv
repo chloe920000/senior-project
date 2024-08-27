@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2021-12-30,[bullish],[Yes],77 NTD,24 months,"Trigger a sell order if the stock price falls by 15% or more from the current price, or if the ROE and ROA ratios show a significant decline."

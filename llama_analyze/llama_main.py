@@ -36,7 +36,7 @@ def parse_output(output):
     lines = output.split('\n')
     result = {}
     for line in lines:
-        if line.startswith('1. Will it be bullish or bearish in the next six months?:'):
+        if line.startswith('1. Will it be bullish or bearish in the next in:'):
             result['Bullish/Bearish'] = line.split(':')[1].strip()
         elif line.startswith('2. Recommended buying price, considering a margin of error of +/- 5%?:'):
             result['Recommended buying price'] = line.split(':')[1].strip()
@@ -111,7 +111,7 @@ async def chat():
         stock_price = get_stock_price(stock_id,date)
 
         # 使用 generate_message_content 生成 message_content
-        message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background)
+        message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background,roa_str,per_str)
         
         # 保存每次的input message到log檔案
         input_log_path = os.path.join('result_data', f'input_log_{stock_id}.txt')
@@ -137,7 +137,7 @@ async def chat():
 
         # 將輸出存成txt檔案
         with open(result_path, 'w', encoding='utf-8') as f:
-            async for part in await AsyncClient().chat(model='llama3.1:latest', messages=[message], stream=True, options={"temperature": 0.3}):
+            async for part in await AsyncClient().chat(model='llama3.1:latest', messages=[message], stream=True, options={"temperature": 0.5}):
                 f.write(part['message']['content'])
 
         # 解析輸出結果
