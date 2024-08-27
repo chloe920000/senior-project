@@ -18,7 +18,7 @@ from prompt_generater import *
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 設置結果資料相對路徑
-result_data_dir = os.path.join(script_dir, '..', 'test_output')
+result_data_dir = os.path.join(script_dir, '..', 'analyze result')
 if not os.path.exists(result_data_dir):
     os.makedirs(result_data_dir)
     
@@ -73,7 +73,7 @@ def get_some_stock_ids(begin, end):
 dates = ['2021-12-30']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(3021,4000) # 只分析部分stock_id
+stock_ids = get_some_stock_ids(2000,3000) # 只分析部分stock_id
 
 async def chat():
     for date in dates:
