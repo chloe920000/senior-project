@@ -36,7 +36,7 @@ total_count = 0  # 驗證總數
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 1101 <= stock_id <= 2110:  # 只處理股票代號在 xxxx 到 xxxx 之間的
+        if 2000 <= stock_id <= 4000:  # 只處理股票代號在 xxxx 到 xxxx 之間的
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
