@@ -38,7 +38,7 @@ def parse_output(output):
     bullish_match = re.search(r'1\. Is the next one year bullish or bearish\?:(.*)', output)
     buy_recommendation_match = re.search(r'2\. Based on the current price, is it recommended to buy\?\s*:(.*)', output)
     sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price\?\s*:(.*)', output)
-    holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\:\s*(.*)', output)
+    holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\s*:(.*)', output)
     stop_loss_strategy_match = re.search(r'5\. Suggested stop loss strategy\? What are your criteria for triggering a sell order\?\s*:(.*)', output)
 
     if bullish_match:
@@ -60,8 +60,20 @@ def get_all_stock_ids():
     # 将 stockID 转换为字符串类型
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
+#只取部分stock_id
+def get_some_stock_ids(begin, end):
+    # 添加查询条件，筛选 stockID 介于 2000 到 3000 之间的数据
+    response = supabase.table('stock').select('stockID').gte('stockID', begin).lte('stockID', end).execute()
+    
+    # 将 stockID 转换为字符串类型
+    stock_ids = [str(item['stockID']) for item in response.data]
+    return stock_ids
 
-dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
+# dates = ['2020-11-13', '2022-04-19', '2022-09-07', '2023-06-07']
+dates = ['2021-12-30']
+# 獲取要分析的所有股票的 `stock_id` 列表
+# stock_ids = get_all_stock_ids()
+stock_ids = get_some_stock_ids(3021,4000) # 只分析部分stock_id
 
 async def chat():
     for date in dates:
