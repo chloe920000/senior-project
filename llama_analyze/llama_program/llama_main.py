@@ -166,7 +166,7 @@ async def chat():
 
                 # 將輸出存成txt檔案
                 with open(result_path, 'w', encoding='utf-8') as f:
-                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.3}):
+                    async for part in await AsyncClient().chat(model='llama3.1:8B', messages=[message], stream=True, options={"temperature": 0.5}):
                         f.write(part['message']['content'])
 
                 # 解析輸出結果
