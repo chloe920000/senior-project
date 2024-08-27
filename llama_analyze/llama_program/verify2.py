@@ -63,9 +63,8 @@ for stock_dir in os.listdir(analyze_result_path):
                     recommended_selling_price = re.sub(r'\[|\]', '', str(row['Recommended selling price']))
                     recommend_buy_or_not = re.sub(r'\[|\]', '', str(row['Recommend buy or not']))
                     
-                    if 'month' in holding_period_str:
-                        holding_period_str_cleaned = re.sub(r'\[|\]', '', holding_period_str)  # 移除方括号
-                        holding_period = int(holding_period_str_cleaned.split()[0].split('-')[0])
+                    if 'month' in holding_period_str: 
+                        holding_period = int(holding_period_str.split()[0].split('-')[0])
                         result_file.write(f"股票代碼 : {stock_symbol} \n")
                         result_file.write(f"持有時間 : {holding_period} 個月\n")
                     else:
@@ -73,56 +72,65 @@ for stock_dir in os.listdir(analyze_result_path):
                         continue
 
                     start_date = pd.Timestamp(row['Date'])  # 使用 CSV 中的日期作為開始日期
-                    print("start : ",start_date)
-                    end_date = start_date + pd.DateOffset(months=holding_period)
-                    print("end : ",end_date)
-                    historical_prices = get_historical_prices(stock_symbol, start_date, end_date)
+                    print("start : ", start_date)
 
-                    reached_take_profit = False
-                    if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):
-                        recommended_selling_price = float(row['Recommended selling price'].replace('NTD', '').replace(',', '').strip())
-                        for date, price in historical_prices.items():
-                            if price >= recommended_selling_price:
-                                reached_take_profit = True
-                                break
-                    
-                    final_price = historical_prices.iloc[-1] if not historical_prices.empty else None
+                    # Calculate the three selling dates
+                    sell_dates = [
+                        start_date + pd.DateOffset(months=holding_period - 2),
+                        start_date + pd.DateOffset(months=holding_period - 1),
+                        start_date + pd.DateOffset(months=holding_period)
+                    ]
+                    print("sell_dates: ", sell_dates)
+
+                    # Get historical prices up to the last sell date
+                    historical_prices = get_historical_prices(stock_symbol, start_date, sell_dates[-1])
+
                     initial_price = historical_prices.loc[start_date] if start_date in historical_prices.index else None  # 當天股價
-
-                    reached_take_profit = False
-                    if pd.notna(row['Recommended selling price']) and is_float(row['Recommended selling price'].replace('NTD', '').strip()):
-                        recommended_selling_price = float(row['Recommended selling price'].replace('NTD', '').replace(',', '').strip())
-                        for date, price in historical_prices.items():
-                            if price >= recommended_selling_price:
-                                reached_take_profit = True
-                                break
                     
-                    profit_or_loss = final_price - initial_price if initial_price is not None and final_price is not None else None
-
-                    result_file.write(f"第 {index+1} 筆驗證資料:\n")
-                    result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
                     result_file.write(f"開始日期 : {start_date}\n")
-                    result_file.write(f"結束日期 : {end_date}\n")
-                    result_file.write(f"是否達到停利: {reached_take_profit}\n")
                     result_file.write(f"初始股價 : {initial_price}\n")
-                    result_file.write(f"最後股價 : {final_price}\n")
-                    result_file.write(f"獲利 : {profit_or_loss if profit_or_loss is not None else 'N/A'}\n")
+                    # Calculate profits for each sell
+                    profits = []
+                    percentage_profits= []
+                    for i, sell_date in enumerate(sell_dates):
+                        final_price = historical_prices.loc[sell_date] if sell_date in historical_prices.index else None
+                        
+                        if final_price is not None and initial_price is not None:
+                            # 獲利
+                            profit = final_price - initial_price 
+                            profits.append(profit)
+                            # 報酬率
+                            percentage_profit = profit / initial_price
+                            percentage_profits.append(percentage_profit)
+                            result_file.write(f"賣出日期 {sell_date} : 獲利 {profit if profit is not None else 'N/A'} 報酬率 {percentage_profit if percentage_profit is not None else 'N/A' }\n")
+                        else:
+                            result_file.write(f"賣出日期 {sell_date} : 獲利 N/A\n")
                     
-                    if profit_or_loss is not None and initial_price is not None and initial_price != 0:
-                        percentage = profit_or_loss / initial_price
-                        result_file.write(f"Profit or Loss Percentage: {percentage:.2%}\n")
+                    # Average profit across the three sell dates
+                    if profits:
+                        #平均獲利
+                        average_profit = sum(profits) / len(profits)
+                        #平均報酬率
+                        average_percentage_profit = sum(percentage_profits) / len(percentage_profits) 
                     else:
-                        result_file.write("Profit or Loss Percentage: N/A\n")
+                        average_profit = None
+                        average_percentage_profit = None
+                    
+                    #result_file.write(f"第 {index+1} 筆驗證資料:\n")
+                    result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
+                    #result_file.write(f"賣出日期 : {sell_dates}\n")
+                    result_file.write(f"平均獲利 : {average_profit if average_profit is not None else 'N/A'}\n")
+                    result_file.write(f"平均報酬率 : {average_percentage_profit if average_percentage_profit is not None else 'N/A'}\n")
                         
                     total_count += 1  # 總驗證數
                     if bullish_bearish.lower() == 'bullish':
-                        if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
+                        if average_profit is not None and average_profit > 0:
                             result_file.write("=> CORRECT!\n")
                             correct_count += 1  
                         else:
                             result_file.write("=> INCORRECT!\n")
                     else:  # Bearish
-                        if reached_take_profit or (profit_or_loss is not None and profit_or_loss > 0):
+                        if average_profit is not None and average_profit > 0:
                             result_file.write("=> INCORRECT!\n")
                         else:
                             result_file.write("=> CORRECT!\n")
