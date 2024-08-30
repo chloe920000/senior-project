@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2020-12-31,[bearish],[No],[17] NTD,[12] months,Stop loss triggered when DBR exceeds 35% or EPS falls below -0.2.

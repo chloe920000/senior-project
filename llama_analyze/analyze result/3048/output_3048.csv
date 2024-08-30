@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2021-12-30,bullish,Yes,23 NTD,24 months,"Stop loss triggered when ROE falls below 15% or EPS falls below 0.8, and/or if the stock price drops by more than 10%"

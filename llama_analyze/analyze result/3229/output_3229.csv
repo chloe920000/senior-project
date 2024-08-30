@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2020-12-31,bearish,No,,24 months,"Trigger a sell order if the stock price falls by more than 20% from the current price, or if the company's financial performance indicators (e.g., EPS, ROE) show significant deterioration."
