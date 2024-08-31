@@ -47,4 +47,4 @@ def test_supabase():
         return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
-    app.run('0.0.0.0')
+    app.run('0.0.0.0', port=5001)
