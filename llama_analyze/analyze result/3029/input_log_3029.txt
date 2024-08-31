@@ -55,3 +55,174 @@ Answer sample format:
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 
 
+no.0 === 2024-09-01 00:39:14.884297 ===
+Evaluate the share price of Taiwan Stock Exchange 3029 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 15.67, 16.57, 17.01, 17.87, 19.42
+* Capital over the past 5 years: 12.1, 12.1, 12.2, 12.3, 12.5 * 100 million
+* ROE (return on equity) over the past 5 years: 11.0, 11.5, 9.48, 11.7, 15.1(%)
+* ROA (return on assets) over the past 5 years: 5.49, 6.74, 5.51, 6.29, 7.26(%)
+* peratio (price to earnings ratio) over the past 5 years: 13.8325, 9.7925, 11.3175, 11.125, 11.32(%)
+* EPS (earnings per share) over the past 5 years: 0.47, 0.2, -0.24, 0.45, 0.79
+
+* Gross profit margin over the past 5 years: 9.98, 9.76, 9.86, 10.3, 10.1(%)
+* OPM (Operating Margin) over the past 5 years: 3.83, 4.35, 3.93, 4.22, 4.48(%)
+*DBR (debt-to-asset ratio) over the past 5 years: 41.1, 41.6, 42.2, 49.8, 53.6(%)
+*Reference historical prices:
+2015: Open=8.656507, Close=10.196391, High=15.790108, Low=8.202306
+2016: Open=9.996463, Close=10.83358, High=11.378286, Low=8.796885
+2017: Open=10.83358, Close=12.923955, High=13.439626, Low=10.319135
+2018: Open=12.827266, Close=13.444425, High=16.114656, Low=11.73147
+2019: Open=13.512843, Close=21.727365, High=25.798994, Low=13.341794
+* !!!Current price: 21.727365
+
+Provide additional background information about the company, industry, and market trends.
+
+* Company background:
+網路軟體.硬體產品之代理製造及開發。
+產品分類：1. 網路暨資訊安全、2. IT基礎架構、
+3. 雲平台與應用、4. 大數據與應用、5. 其他。
+
+Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next one year bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment? (at least 12 months)
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "bullish" market is defined as a stock price increase of at least 10% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
+* If bullish, the selling price will usually be higher than the buying price, but aim for a balanced target that captures potential gains without excessive risk.
+* If it is bearish, no need to answer question 2.3.4.5.
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+When evaluating, consider the possibility of moderate optimism based on positive trends, but balance this with realistic assessments of market risks.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next one year bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [a integer] NTD
+4. What is the recommended holding period for this investment?: [a integer] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-09-01 00:40:05.639235 ===
+Evaluate the share price of Taiwan Stock Exchange 3029 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 14.76, 15.67, 16.57, 17.01, 17.87
+* Capital over the past 5 years: 9.47, 12.1, 12.1, 12.2, 12.3 * 100 million
+* ROE (return on equity) over the past 5 years: 8.1, 11.0, 11.5, 9.48, 11.7(%)
+* ROA (return on assets) over the past 5 years: 3.51, 5.49, 6.74, 5.51, 6.29(%)
+* peratio (price to earnings ratio) over the past 5 years: 13.325, 13.8325, 9.7925, 11.3175, 11.125(%)
+* EPS (earnings per share) over the past 5 years: 0.31, 0.47, 0.2, -0.24, 0.45
+
+* Gross profit margin over the past 5 years: 8.79, 9.98, 9.76, 9.86, 10.3(%)
+* OPM (Operating Margin) over the past 5 years: 2.67, 3.83, 4.35, 3.93, 4.22(%)
+*DBR (debt-to-asset ratio) over the past 5 years: 58.4, 41.1, 41.6, 42.2, 49.8(%)
+*Reference historical prices:
+2014: Open=10.28306, Close=8.496202, High=11.106771, Low=7.347343
+2015: Open=8.656507, Close=10.196391, High=15.790108, Low=8.202306
+2016: Open=9.996463, Close=10.83358, High=11.378286, Low=8.796885
+2017: Open=10.83358, Close=12.923955, High=13.439626, Low=10.319135
+2018: Open=12.827266, Close=13.444425, High=16.114656, Low=11.73147
+* !!!Current price: 13.444425
+
+Provide additional background information about the company, industry, and market trends.
+
+* Company background:
+網路軟體.硬體產品之代理製造及開發。
+產品分類：1. 網路暨資訊安全、2. IT基礎架構、
+3. 雲平台與應用、4. 大數據與應用、5. 其他。
+
+Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next one year bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment? (at least 12 months)
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "bullish" market is defined as a stock price increase of at least 10% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
+* If bullish, the selling price will usually be higher than the buying price, but aim for a balanced target that captures potential gains without excessive risk.
+* If it is bearish, no need to answer question 2.3.4.5.
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+When evaluating, consider the possibility of moderate optimism based on positive trends, but balance this with realistic assessments of market risks.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next one year bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [a integer] NTD
+4. What is the recommended holding period for this investment?: [a integer] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
+no.0 === 2024-09-01 00:40:52.866988 ===
+Evaluate the share price of Taiwan Stock Exchange 3029 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 17.01, 17.87, 19.42, 21.15, 25.72
+* Capital over the past 5 years: 12.2, 12.3, 12.5, 12.6, 15.2 * 100 million
+* ROE (return on equity) over the past 5 years: 9.48, 11.7, 15.1, 17.3, 16.2(%)
+* ROA (return on assets) over the past 5 years: 5.51, 6.29, 7.26, 8.23, 8.16(%)
+* peratio (price to earnings ratio) over the past 5 years: 11.3175, 11.125, 11.32, 11.0875, 11.5075(%)
+* EPS (earnings per share) over the past 5 years: -0.24, 0.45, 0.79, 0.7, 0.69
+
+* Gross profit margin over the past 5 years: 9.86, 10.3, 10.1, 10.6, 10.1(%)
+* OPM (Operating Margin) over the past 5 years: 3.93, 4.22, 4.48, 5.13, 4.86(%)
+*DBR (debt-to-asset ratio) over the past 5 years: 42.2, 49.8, 53.6, 51.2, 48.6(%)
+*Reference historical prices:
+2017: Open=10.83358, Close=12.923955, High=13.439626, Low=10.319135
+2018: Open=12.827266, Close=13.444425, High=16.114656, Low=11.73147
+2019: Open=13.512843, Close=21.727365, High=25.798994, Low=13.341794
+2020: Open=21.763397, Close=29.704151, High=35.713444, Low=18.376381
+2021: Open=29.666121, Close=36.118591, High=38.261688, Low=28.411011
+* !!!Current price: 36.118591
+
+Provide additional background information about the company, industry, and market trends.
+
+* Company background:
+網路軟體.硬體產品之代理製造及開發。
+產品分類：1. 網路暨資訊安全、2. IT基礎架構、
+3. 雲平台與應用、4. 大數據與應用、5. 其他。
+
+Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next one year bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment? (at least 12 months)
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "bullish" market is defined as a stock price increase of at least 10% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
+* If bullish, the selling price will usually be higher than the buying price, but aim for a balanced target that captures potential gains without excessive risk.
+* If it is bearish, no need to answer question 2.3.4.5.
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+When evaluating, consider the possibility of moderate optimism based on positive trends, but balance this with realistic assessments of market risks.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next one year bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [a integer] NTD
+4. What is the recommended holding period for this investment?: [a integer] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+
