@@ -36,7 +36,7 @@ total_count = 0  # 驗證總數
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 3030 <= stock_id <= 4000:  # 只處理股票代號在 xxxx 到 xxxx 之間的
+        if 2000 <= stock_id <= 4000:  # 只處理股票代號在 xxxx 到 xxxx 之間的
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
@@ -85,34 +85,16 @@ for stock_dir in os.listdir(analyze_result_path):
                     # Get historical prices up to the last sell date
                     historical_prices = get_historical_prices(stock_symbol, start_date, sell_dates[-1])
 
-                    # Get the initial price, if None, find the next available date
-                    initial_price = None
-                    if start_date in historical_prices.index:
-                        initial_price = historical_prices.loc[start_date]
-                    else:
-                        next_available_date = historical_prices.index[historical_prices.index > start_date].min()
-                        if next_available_date is not None:
-                            initial_price = historical_prices.loc[next_available_date]
-                            start_date = next_available_date  # Update the start date to the next available date
-                            result_file.write(f"初始股價不可用，使用下一個可用日期 {start_date} 的股價\n")
-                        
+                    initial_price = historical_prices.loc[start_date] if start_date in historical_prices.index else None  # 當天股價
+                    
                     result_file.write(f"開始日期 : {start_date}\n")
                     result_file.write(f"初始股價 : {initial_price}\n")
-                    
                     # Calculate profits for each sell
                     profits = []
-                    percentage_profits = []
+                    percentage_profits= []
                     for i, sell_date in enumerate(sell_dates):
-                        # Initialize final_price as None
-                        final_price = None
+                        final_price = historical_prices.loc[sell_date] if sell_date in historical_prices.index else None
                         
-                        # Find the next available price for the sell_date
-                        while sell_date not in historical_prices.index:
-                            # Move to the next day if the price for sell_date is not available
-                            sell_date += pd.DateOffset(days=1)
-                        
-                        final_price = historical_prices.loc[sell_date]  # Get the final price for the valid sell date
-
                         if final_price is not None and initial_price is not None:
                             # 獲利
                             profit = final_price - initial_price 
@@ -120,22 +102,23 @@ for stock_dir in os.listdir(analyze_result_path):
                             # 報酬率
                             percentage_profit = profit / initial_price
                             percentage_profits.append(percentage_profit)
-                            result_file.write(f"賣出日期 {sell_date} : 獲利 {profit} 報酬率 {percentage_profit}\n")
+                            result_file.write(f"賣出日期 {sell_date} : 獲利 {profit if profit is not None else 'N/A'} 報酬率 {percentage_profit if percentage_profit is not None else 'N/A' }\n")
                         else:
                             result_file.write(f"賣出日期 {sell_date} : 獲利 N/A\n")
-
-                
+                    
                     # Average profit across the three sell dates
                     if profits:
-                        # 平均獲利
+                        #平均獲利
                         average_profit = sum(profits) / len(profits)
-                        # 平均報酬率
+                        #平均報酬率
                         average_percentage_profit = sum(percentage_profits) / len(percentage_profits) 
                     else:
                         average_profit = None
                         average_percentage_profit = None
                     
+                    #result_file.write(f"第 {index+1} 筆驗證資料:\n")
                     result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
+                    #result_file.write(f"賣出日期 : {sell_dates}\n")
                     result_file.write(f"平均獲利 : {average_profit if average_profit is not None else 'N/A'}\n")
                     result_file.write(f"平均報酬率 : {average_percentage_profit if average_percentage_profit is not None else 'N/A'}\n")
                         
