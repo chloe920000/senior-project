@@ -71,13 +71,15 @@ def get_some_stock_ids(begin, end):
 
 # dates = ['2021-12-30', '2020-12-31', '2019-12-31', '2018-12-28']
 dates = ['2018-12-28']
+#dates = ['2020-12-31', '2019-12-31', '2018-12-28', '2021-12-30']
+dates = [ '2019-12-31', '2018-12-28', '2021-12-30']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(3058,4000) # 只分析部分stock_id
+stock_ids = get_some_stock_ids(3000, 4000) # 只分析部分stock_id
 
 async def chat():
-    for date in dates:
-        for stock_id in stock_ids:
+    for stock_id in stock_ids:
+        for date in dates:
             print(f'Processing stock: {stock_id}')
             end_year = int(date[:4])
             start_year = end_year - 4

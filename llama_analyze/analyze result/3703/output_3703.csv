@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2020-12-31,bearish,No,14 NTD,12 months,"Stop Loss Trigger: 15% decline from current price, Sell Order Criterion: 10% below the historical average EPS, or 20% below the historical average ROE."

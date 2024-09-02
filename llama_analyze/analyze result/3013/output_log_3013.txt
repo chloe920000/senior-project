@@ -8,3 +8,31 @@ Here are the answers to the questions:
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trigger a sell order when the stock price falls by 15% from the current price, or when the ROE/ROA ratio falls below -10%/ -20% for two consecutive years.
 6. Please give specific reasons why you think it is bullish or bearish.: The company's financial performance has been declining over the past few years, with a decrease in revenue and profitability. The debt-to-asset ratio has also increased significantly, indicating potential liquidity issues. Additionally, the industry trends are not favorable for the company's products, which may lead to further declines in market share and revenue.
 
+no.0 === 2024-09-01 00:05:33.421886 ===
+Here are the answers to the questions:
+
+1. Is the next one year bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 12 NTD
+4. What is the recommended holding period for this investment?: 6 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Stop loss at 10% below current price, or when DBR exceeds 50%
+6. Please give specific reasons why you think it is bullish or bearish.: The company's ROE and ROA have been declining over the past few years, indicating potential operational issues. Additionally, the debt-to-asset ratio has been increasing, which may indicate financial difficulties. These factors suggest a bearish market for the next one year.
+
+no.0 === 2024-09-01 00:06:18.302074 ===
+Here are the answers to the questions:
+
+1. Is the next one year bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 11 NTD
+4. What is the recommended holding period for this investment?: 12 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Stop-loss at 20% below current price, or when DBR exceeds 55%
+6. Please give specific reasons why you think it is bullish or bearish.: The company's ROE and ROA have been declining over the past few years, and the debt-to-asset ratio has increased significantly. Additionally, the gross profit margin and OPM have also declined. These indicators suggest a weakening financial performance, which could lead to a decline in stock price.
+
+no.0 === 2024-09-01 00:07:03.949976 ===
+1. Is the next one year bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 13.55 NTD
+4. What is the recommended holding period for this investment?: 6 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Close below 14.38 NTD or EPS < -0.8
+6. Please give specific reasons why you think it is bullish or bearish.: The company's ROE and ROA have been declining over the past few years, indicating potential financial struggles. Additionally, the high debt-to-asset ratio suggests a significant risk of default. Furthermore, the stock price has not shown any significant growth in recent years, which may indicate a lack of investor confidence.
+

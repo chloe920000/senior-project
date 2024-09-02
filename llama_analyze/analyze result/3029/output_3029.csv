@@ -1,2 +1,5 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,bearish,No,32 NTD,12 months,Sell when DBR exceeds 55% or EPS falls below -0.50
+2019-12-31,**bullish**,**Yes**,**24** NTD,**18** months,**Sell if EPS < 0 or ROE < 5%**
+2018-12-28,bearish,No,12 NTD,9 months,Trigger a sell order when the stock price falls by 15% or when the debt-to-asset ratio exceeds 55%
+2021-12-30,[bullish],[Yes],[39] NTD,[24] months,"[Close below 32, or ROE < 15% for two consecutive years]"

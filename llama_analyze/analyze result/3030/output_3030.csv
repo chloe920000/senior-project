@@ -1,2 +1,3 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,bearish,No,45 NTD,24 months,Sell if price falls below 42 NTD or ROA drops below 12%
+2019-12-31,,[No],[38] NTD,[6] months,"[Close below 37, or EPS < -1]"
