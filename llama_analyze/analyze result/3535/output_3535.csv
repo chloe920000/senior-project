@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2020-12-31,bearish,No,16 NTD,24 months,"Trigger a sell order when the stock price falls by 15% or more from the current price, and/or when the moving average (50-day) crosses below the moving average (200-day)."

@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2020-12-31,Bearish,No,24 NTD,9 months,"Close below 23 NTD, or if ROE < 0, or if EPS < -1."
