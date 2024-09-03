@@ -1,2 +1,3 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,[bullish],[Yes],[30] NTD,[24] months,"[Stop Loss Trigger: 15% decline from current price, Sell Order: close to 30 NTD]"
+2019-12-31,[bearish],[No],[5] NTD,[12] months,Sell when EPS < -0.2 or DBR > 90%
