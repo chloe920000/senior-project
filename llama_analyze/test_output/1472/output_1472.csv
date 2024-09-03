@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2018-12-28,bearish,No,90 NTD,24 months,Trigger a sell order when the stock price falls below the lowest historical low (34.80489 NTD) or when the 50-day moving average crosses below the 200-day moving average.

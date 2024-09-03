@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2018-12-28,bearish,No,15 NTD,at least 24 months,"Trailing Stop Loss, trigger when EPS < 0 or ROE < -20%"
