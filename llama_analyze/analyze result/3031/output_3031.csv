@@ -1,2 +1,5 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,[bullish],[Yes],[25] NTD,[24] months,"[Close price < 20 NTD, or EPS decrease by 15%]"
+2019-12-31,Bearish,No,11.69 NTD,6 months,Sell when DBR exceeds 20% or ROE turns negative.
+2018-12-28,bearish,No,7 NTD,12 months,"Close below 6 NTD, or if ROE and ROA continue to decline."
+2021-12-30,Bearish,No,20 NTD,6 months,"Sell when the stock price falls by 15% from the current price, or when the ROE and EPS indicators show significant decline."
