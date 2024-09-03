@@ -57,6 +57,7 @@ for stock_dir in os.listdir(analyze_result_path):
                     if pd.isna(row['Recommended holding period']):
                         result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                         continue
+                    
                     # 清理中括弧
                     holding_period_str = re.sub(r'\[|\]', '', str(row['Recommended holding period']))
                     bullish_bearish = re.sub(r'\[|\]', '', str(row['Bullish/Bearish']))
@@ -122,20 +123,22 @@ for stock_dir in os.listdir(analyze_result_path):
                     result_file.write(f"平均獲利 : {average_profit if average_profit is not None else 'N/A'}\n")
                     result_file.write(f"平均報酬率 : {average_percentage_profit if average_percentage_profit is not None else 'N/A'}\n")
                         
-                    total_count += 1  # 總驗證數
                     if bullish_bearish.lower() == 'bullish':
+                        total_count += 1  # 總驗證數
                         if average_profit is not None and average_profit > 0:
                             result_file.write("=> CORRECT!\n")
                             correct_count += 1  
                         else:
                             result_file.write("=> INCORRECT!\n")
                     else:  # Bearish
+                        result_file.write(" 'skip...BEARISH' \n")
+                        """
                         if average_profit is not None and average_profit > 0:
                             result_file.write("=> INCORRECT!\n")
                         else:
                             result_file.write("=> CORRECT!\n")
                             correct_count += 1  
-
+                        """
                     result_file.write("==============================\n")
     except ValueError:
         print(f"Skipping invalid directory name: {stock_dir}")
