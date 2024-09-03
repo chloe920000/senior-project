@@ -1,0 +1,11 @@
+1. Is the next one year bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. N/A
+4. N/A
+5. N/A
+6. Please give specific reasons why you think it is bearish.: 
+- The company's ROE and ROA have been consistently negative over the past 5 years, indicating poor profitability.
+- The OPM has also been negative, suggesting inefficient operations.
+- The DBR has been increasing, indicating a higher debt burden.
+- The EPS has been inconsistent and mostly low, indicating weak earnings.
+- The BPS has been decreasing, indicating a decline in the company's book value.
