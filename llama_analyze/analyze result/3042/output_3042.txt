@@ -1,6 +1,6 @@
-1. Is the next one year bullish or bearish?: bearish
-2. Based on the current price, is it recommended to buy?: No
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 77 NTD
-4. What is the recommended holding period for this investment?: 6 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell when the stock price falls by 15% from the current price or when the EPS growth rate shows signs of slowing down.
-6. Please give specific reasons why you think it is bullish or bearish.: The company's ROE and ROA have shown significant improvement in recent years, but its P/E ratio has been relatively high compared to its industry peers. The stock price has also experienced a sharp increase in 2020 and 2021, which may indicate a potential bubble. Additionally, the company's DBR has increased over the past few years, which could be a sign of financial strain.
+1. Is the next one year bullish or bearish?: [bullish]
+2. Based on the current price, is it recommended to buy?: [Yes]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 95 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell if ROE falls below 15% or EPS decreases by more than 20%
+6. Please give specific reasons why you think it is bullish or bearish.: The company's revenue and profit margins have been increasing steadily, with a high gross profit margin of 36.9%. The OPM has also been rising, indicating improved operational efficiency. Additionally, the debt-to-asset ratio has decreased, suggesting better financial management. With a strong balance sheet and growing profitability, I believe the stock is poised for further growth.

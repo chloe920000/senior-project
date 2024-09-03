@@ -2,5 +2,5 @@
 2. Based on the current price, is it recommended to buy?: No
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 28 NTD
 4. What is the recommended holding period for this investment?: 6 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell when OPM < 35% or DBR > 8%
-6. Please give specific reasons why you think it is bullish or bearish.: The company's EPS has been declining over the past few years, and the current price is already high compared to historical prices. Additionally, the industry trend shows a decline in demand for rented services and educational electronic products and software.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trigger a sell order when the stock price falls by 15% from the current price or when the ROE and EPS show significant declines.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's revenue growth has slowed down, and the industry trend is not favorable. The stock price has been relatively stable, but there are signs of potential decline in the future.
