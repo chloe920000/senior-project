@@ -36,7 +36,7 @@ total_count = 0  # 驗證總數
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 2000 <= stock_id <= 4000:  # 只處理股票代號在 xxxx 到 xxxx 之間的
+        if 1000 <= stock_id <= 4190:  # 只處理股票代號在 xxxx 到 xxxx 之間的
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
@@ -57,6 +57,7 @@ for stock_dir in os.listdir(analyze_result_path):
                     if pd.isna(row['Recommended holding period']):
                         result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                         continue
+                    
                     # 清理中括弧
                     holding_period_str = re.sub(r'\[|\]', '', str(row['Recommended holding period']))
                     bullish_bearish = re.sub(r'\[|\]', '', str(row['Bullish/Bearish']))
@@ -90,52 +91,64 @@ for stock_dir in os.listdir(analyze_result_path):
                     result_file.write(f"開始日期 : {start_date}\n")
                     result_file.write(f"初始股價 : {initial_price}\n")
                     # Calculate profits for each sell
+                    # Calculate profits for each sell
+                    # Calculate profits for each adjusted sell date
                     profits = []
-                    percentage_profits= []
-                    for i, sell_date in enumerate(sell_dates):
+                    percentage_profits = []
+                    adjusted_sell_dates = sell_dates.copy()  # Create a copy of the sell dates for adjustments
+
+                    # Check each sell date and adjust if needed
+                    for i in range(len(adjusted_sell_dates)):
+                        sell_date = adjusted_sell_dates[i]
                         final_price = historical_prices.loc[sell_date] if sell_date in historical_prices.index else None
                         
-                        if final_price is not None and initial_price is not None:
-                            # 獲利
-                            profit = final_price - initial_price 
-                            profits.append(profit)
-                            # 報酬率
-                            percentage_profit = profit / initial_price
-                            percentage_profits.append(percentage_profit)
-                            result_file.write(f"賣出日期 {sell_date} : 獲利 {profit if profit is not None else 'N/A'} 報酬率 {percentage_profit if percentage_profit is not None else 'N/A' }\n")
-                        else:
-                            result_file.write(f"賣出日期 {sell_date} : 獲利 N/A\n")
-                    
-                    # Average profit across the three sell dates
+                        # Adjust the sell date backward until a valid price is found
+                        while final_price is None:
+                            sell_date -= pd.DateOffset(days=1)  # Move back by one day
+                            final_price = historical_prices.loc[sell_date] if sell_date in historical_prices.index else None
+                            result_file.write(f"賣出日期 {sell_date + pd.DateOffset(days=1)} 的獲利為 N/A，將日期調回一天至 {sell_date}。\n")
+
+                        adjusted_sell_dates[i] = sell_date  # Update the adjusted sell date
+
+                        # Calculate profit and percentage profit
+                        profit = final_price - initial_price if initial_price is not None else None
+                        percentage_profit = profit / initial_price if initial_price is not None else None
+
+                        profits.append(profit)
+                        percentage_profits.append(percentage_profit)
+
+                        result_file.write(f"賣出日期 {sell_date} : 獲利 {profit if profit is not None else 'N/A'} 報酬率 {percentage_profit if percentage_profit is not None else 'N/A'}\n")
+
+                    # Average profit across the adjusted sell dates
                     if profits:
-                        #平均獲利
+                        # Calculate average profit
                         average_profit = sum(profits) / len(profits)
-                        #平均報酬率
-                        average_percentage_profit = sum(percentage_profits) / len(percentage_profits) 
+                        # Calculate average percentage profit
+                        average_percentage_profit = sum(percentage_profits) / len(percentage_profits)
                     else:
                         average_profit = None
                         average_percentage_profit = None
                     
-                    #result_file.write(f"第 {index+1} 筆驗證資料:\n")
                     result_file.write(f"看漲或看跌 : {bullish_bearish} \n")
-                    #result_file.write(f"賣出日期 : {sell_dates}\n")
                     result_file.write(f"平均獲利 : {average_profit if average_profit is not None else 'N/A'}\n")
                     result_file.write(f"平均報酬率 : {average_percentage_profit if average_percentage_profit is not None else 'N/A'}\n")
                         
-                    total_count += 1  # 總驗證數
                     if bullish_bearish.lower() == 'bullish':
+                        total_count += 1  # 總驗證數
                         if average_profit is not None and average_profit > 0:
                             result_file.write("=> CORRECT!\n")
                             correct_count += 1  
                         else:
                             result_file.write("=> INCORRECT!\n")
                     else:  # Bearish
+                        result_file.write(" 'skip...BEARISH' \n")
+                        """
                         if average_profit is not None and average_profit > 0:
                             result_file.write("=> INCORRECT!\n")
                         else:
                             result_file.write("=> CORRECT!\n")
                             correct_count += 1  
-
+                        """
                     result_file.write("==============================\n")
     except ValueError:
         print(f"Skipping invalid directory name: {stock_dir}")
