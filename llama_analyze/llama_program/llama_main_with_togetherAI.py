@@ -171,7 +171,7 @@ async def chat():
                 # 將輸出存成 txt 檔案
                 with open(result_path, 'w', encoding='utf-8') as f:
                     response = together_client.chat.completions.create(
-                        model="meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
+                        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
                         messages=[message],
                         max_tokens=512,
                         temperature=0.7,
