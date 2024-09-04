@@ -1,1 +1,2 @@
-Skipping entry 0 due to invalid holding period format: NA
+'4164 skip...BEARISH'
+==============================

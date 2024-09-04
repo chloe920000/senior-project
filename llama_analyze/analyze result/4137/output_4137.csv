@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2022-12-30,Bearish,No,172,6,"Stop loss at 10% decline from current price, re-enter if price recovers to original entry point"

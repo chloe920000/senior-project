@@ -1,0 +1,190 @@
+持有時間 : 6 個月
+第 1 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 75.0
+final_price : 107.2723007
+Profit or Loss after holding period: 32.2723007
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 2 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 3 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 81.0
+final_price : 107.2723007
+Profit or Loss after holding period: 26.272300700000002
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 4 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 5 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : None
+final_price : 107.2723007
+Profit or Loss after holding period: N/A
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 6 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 80.0
+final_price : 107.2723007
+Profit or Loss after holding period: 27.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 7 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 8 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 65.0
+final_price : 107.2723007
+Profit or Loss after holding period: 42.2723007
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 9 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 80.0
+final_price : 107.2723007
+Profit or Loss after holding period: 27.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 10 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 65.0
+final_price : 107.2723007
+Profit or Loss after holding period: 42.2723007
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 11 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 81.0
+final_price : 107.2723007
+Profit or Loss after holding period: 26.272300700000002
+=> CORRECT!
+==============================
+Skipping entry 11 due to invalid holding period format: Not applicable (bearish)
+持有時間 : 6 個月
+第 13 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> INCORRECT!
+==============================
+Skipping entry 13 due to invalid holding period format: Not recommended to hold
+持有時間 : 6 個月
+第 15 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> INCORRECT!
+==============================
+Skipping entry 15 due to invalid holding period format: Not applicable (bearish)
+持有時間 : 6 個月
+第 17 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: False
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 18 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 75.0
+final_price : 107.2723007
+Profit or Loss after holding period: 32.2723007
+=> INCORRECT!
+==============================
+持有時間 : 6 個月
+第 19 筆驗證資料:
+看漲或看跌 : Bullish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 85.0
+final_price : 107.2723007
+Profit or Loss after holding period: 22.272300700000002
+=> CORRECT!
+==============================
+持有時間 : 6 個月
+第 20 筆驗證資料:
+看漲或看跌 : Bearish 
+start_date : 2023-01-03 00:00:00
+end_date : 2023-07-03 00:00:00
+是否達到停利: True
+initial_price : 65.0
+final_price : 107.2723007
+Profit or Loss after holding period: 42.2723007
+=> INCORRECT!
+==============================
