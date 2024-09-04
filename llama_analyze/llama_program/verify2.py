@@ -30,8 +30,8 @@ def is_float(value):
 
 # analyze result 的路徑
 analyze_result_path = '../senior_project/llama_analyze/analyze result'
-correct_count = 0  # Count of CORRECT results
-total_count = 0  # Total validation count
+correct_count = 0  # 正確數
+total_count = 0  # bullish 總數
 
 # Initialize variables for calculating total average return rate
 total_average_percentage_profit = 0
