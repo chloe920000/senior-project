@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,bearish,No,77 NTD,6 months,Sell when the stock price falls by 15% from the current price or when the EPS growth rate shows signs of slowing down.
+2020-12-31,**bullish**,**Yes**,**67** NTD,**24** months,**20% decline from current price or 6 months without significant improvement in fundamentals**
+2019-12-31,[bullish],[Yes],[38] NTD,[24] months,"[Close below 34, then reevaluate]"
+2018-12-28,[bearish],[No],[22] NTD,[12] months,[Sell when EPS < -0.2 or ROE < 8%]
+2021-12-30,[bullish],[Yes],95 NTD,18 months,Sell if ROE falls below 15% or EPS decreases by more than 20%

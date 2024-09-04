@@ -1,2 +1,5 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2021-12-30,[bullish],[Yes],[234] NTD,[24] months,"[Stop Loss: 10% below current price, or 20% above previous high]"
+2019-12-31,[bearish],[No],[48] NTD,[12] months,[Sell if DBR > 35% or EPS < -0.2]
+2018-12-28,bearish,No,33 NTD,12 months,"Sell when the stock price drops by 15% from the current price, or when the debt-to-asset ratio exceeds 35%."
+2021-12-30,bearish,later,199 NTD,12 months,"Stop loss at 90% of the current price, and re-evaluate the situation every 3 months."

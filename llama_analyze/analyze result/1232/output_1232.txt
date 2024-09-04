@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 1. Is the next six months bullish or bearish?: bearish
 2. Based on the current price, is it recommended to buy?: No
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 94 NTD
 4. What is the recommended holding period for this investment? (month): 6 month
 5. Suggested stop loss strategy?
+=======
+1. Is the next one year bullish or bearish?: bearish
+2. Based on the current price, is it recommended to buy?: No
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 69 NTD
+4. What is the recommended holding period for this investment?: 24 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell if ROE < 15% or EPS < -0.3
+6. Please give specific reasons why you think it is bullish or bearish.: The company's growth in revenue and net income has slowed down in recent years, and the current price-to-earnings ratio is already high compared to historical levels.
+>>>>>>> c3222c1f05157d5dc24c37167e40d6da53a21da4

@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+<<<<<<< HEAD
 2020-11-13,bearish,No,30 NTD,6 month,"Stop Loss at 28 NTD, Sell if EPS < -0.5 or ROE < 2%"
+=======
+2018-12-28,bearish,No,20 NTD,24 months,Sell when DBR exceeds 45% or EPS drops below -0.50
+>>>>>>> c3222c1f05157d5dc24c37167e40d6da53a21da4

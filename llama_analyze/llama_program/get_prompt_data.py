@@ -45,6 +45,11 @@ def summarize_stock_data(stock_id, end_year):
         .lte('date', f'{end_year}-12-31') \
         .execute()
 
+    # 檢查是否有返回資料
+    if not response.data:
+        print(f"在 Supabase 中找不到 {start_year} 到 {end_year} 的資料")
+        return None  # 或者返回一個空的 DataFrame，根據您的需求
+
     # 將資料轉換為 DataFrame
     df = pd.DataFrame(response.data)
     
@@ -158,7 +163,8 @@ def get_stock_price(stock_id, date):
         price = response.data[0]['adj_price']
         return price
     else:
-        return None
+        print(f"資料庫中沒有找到日期為 {date} 的價格資料")
+        return None  # 或者返回一個預設值，例如 0 或 'NA'
 
 
 def get_stock_price_from_yahoo(stock_id):

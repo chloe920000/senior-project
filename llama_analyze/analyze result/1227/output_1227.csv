@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+<<<<<<< HEAD
 2020-11-13,bearish,No,49,N/A,"Stop loss at 45, trailing stop at 50"
+=======
+2018-12-28,[bearish],[No],[37] NTD,[12] months,[Close below 35]
+>>>>>>> c3222c1f05157d5dc24c37167e40d6da53a21da4

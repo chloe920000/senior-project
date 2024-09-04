@@ -1,2 +1,6 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+<<<<<<< HEAD
 2020-11-13,bearish,No,50 NTD,6 month,"Stop Loss at 10% below current price, or when DBR exceeds 70%"
+=======
+2018-12-28,bearish,No,47 NTD,9 months,Stop-loss triggered when DBR exceeds 60% or EPS declines by more than 20%
+>>>>>>> c3222c1f05157d5dc24c37167e40d6da53a21da4
