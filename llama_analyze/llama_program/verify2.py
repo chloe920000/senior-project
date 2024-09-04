@@ -115,7 +115,7 @@ for stock_dir in os.listdir(analyze_result_path):
                                     
                                     result_file.write(f"賣出日期 {current_date} 達到停利條件（股價超過 {target_price}），實際股價為 {current_price}。\n")
                                     print(f"達到停利條件: 日期 {current_date}, 股價 {current_price}, ")  # Print to console
-                                    result_file.write(f"獲利 {profit}, 報酬率 {percentage_profit}")
+                                    result_file.write(f"獲利 {profit}, 報酬率 {percentage_profit}\n")
                                     result_file.write("=> CORRECT!\n")
                                     result_file.write("==============================\n")
 
