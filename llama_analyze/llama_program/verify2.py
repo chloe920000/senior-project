@@ -31,7 +31,8 @@ def is_float(value):
 # analyze result 的路徑
 analyze_result_path = '../senior_project/llama_analyze/analyze result'
 correct_count = 0  # 正確數
-total_count = 0  # bullish 總數
+total_count = 0  # bullish + bearish 總數
+bullish_count = 0  # bullish 總數
 
 # Initialize variables for calculating total average return rate
 total_average_percentage_profit = 0
@@ -41,7 +42,7 @@ correct_stock_details = []  # To store details of correct stocks
 for stock_dir in os.listdir(analyze_result_path):
     try:
         stock_id = int(stock_dir)
-        if 1000 <= stock_id <= 4190:  # 驗證 股票代碼 xxxx ~ xxxx
+        if 1000 <= stock_id <= 4306:  # 驗證 股票代碼 xxxx ~ xxxx
             stock_symbol = stock_dir  
             print(stock_symbol)
             stock_folder_path = os.path.join(analyze_result_path, stock_dir)
@@ -63,17 +64,24 @@ for stock_dir in os.listdir(analyze_result_path):
                         result_file.write(f"Skipping entry {index} due to missing holding period.\n")
                         continue
                     
-                    # 清除中括弧
-                    holding_period_str = re.sub(r'\[|\]', '', str(row['Recommended holding period']))
-                    bullish_bearish = re.sub(r'\[|\]', '', str(row['Bullish/Bearish']))
-                    recommended_selling_price = re.sub(r'\[|\]', '', str(row['Recommended selling price']))
-                    recommend_buy_or_not = re.sub(r'\[|\]', '', str(row['Recommend buy or not']))
+                    # 清除中括弧和 **
+                    holding_period_str = re.sub(r'\[|\]|\*\*', '', str(row['Recommended holding period']))
+                    bullish_bearish = re.sub(r'\[|\]|\*\*', '', str(row['Bullish/Bearish']))
+                    recommended_selling_price = re.sub(r'\[|\]|\*\*', '', str(row['Recommended selling price']))
+                    recommend_buy_or_not = re.sub(r'\[|\]|\*\*', '', str(row['Recommend buy or not']))
+
                     
+                    # 計算總數 (bullish + bearish)
+                    total_count += 1
+
                     # 若是看跌 跳過
                     if bullish_bearish.lower() == 'bearish':
                         result_file.write(f"'{stock_symbol} skip...BEARISH'\n")
                         result_file.write("==============================\n")
                         continue  # Skip to the next entry
+
+                    # 計算 bullish 總數
+                    bullish_count += 1
 
                     if 'month' in holding_period_str: 
                         holding_period = int(holding_period_str.split()[0].split('-')[0])
@@ -102,7 +110,6 @@ for stock_dir in os.listdir(analyze_result_path):
                     reached_stop_profit = False
 
                     if target_price is not None:
-                        total_count += 1  # Increment the total count for bullish
                         # Check daily prices within the holding period
                         for current_date in pd.date_range(start=start_date, end=end_date):
                             if current_date in historical_prices.index:
@@ -187,21 +194,20 @@ for stock_dir in os.listdir(analyze_result_path):
                         correct_count += 1  
                         correct_stock_details.append((stock_symbol, start_date))  # Save the correct stock symbol and date
                     else:
-                        result_file.write("=> INCORRECT!\n")
-                    
-                    result_file.write("==============================\n")
-    except ValueError:
-        print(f"Skipping invalid directory name: {stock_dir}")
+                        result_file.write("=> NOT CORRECT!\n")
+                        result_file.write("==============================\n")
 
+    except Exception as e:
+        print(f"Error processing stock {stock_symbol}: {e}")
 
-correct_percentage = (correct_count / total_count) * 100 if total_count > 0 else 0
+correct_percentage = (correct_count / bullish_count) * 100 if total_count > 0 else 0
 overall_average_return = (total_average_percentage_profit / valid_stock_count) * 100 if valid_stock_count > 0 else 0  # Overall average return in percentage
-
-print(f"\n總驗證數: {total_count}\n")
-print(f"正確數: {correct_count}\n")
+# Final summary
+print(f"\n資料總數: {total_count}\n")
+print(f"正確數量: {correct_count}\n")
+print(f"bullish 數量: {bullish_count}\n")
 print(f"正確率: {correct_percentage:.2f}%\n")
-print(f"總報酬率: {overall_average_return:.2f}%\n")  # Print overall average return rate
-
+print(f"總報酬率: {overall_average_return:.2f}%\n") 
 
 print("Correct stock symbols and dates:")
 for symbol, date in correct_stock_details:

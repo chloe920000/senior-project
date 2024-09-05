@@ -1,7 +1,4 @@
-Skipping entry 0 due to missing holding period.
 '1231 skip...BEARISH'
 ==============================
-Skipping entry 2 due to missing holding period.
 '1231 skip...BEARISH'
 ==============================
-Skipping entry 4 due to missing holding period.
