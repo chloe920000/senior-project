@@ -1,5 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,[bullish],[Yes],[165] NTD,[24] months,[20% decline from current price or ROE < 15%]
-2019-12-31,bearish,No,29 NTD,6 months,Sell when the stock price falls by 15% from the current price or when the ROE and ROA indicators show a significant decline.
-2018-12-28,bearish,No,21 NTD,12 months,Sell when the stock price falls by 15% or when the ROE and ROA decline consecutively for two years.
-2021-12-30,[bullish],[Yes],145.964005 - 14.5964005 = 131.3676045 NTD,24 months,"Trigger a sell order if the stock price falls by 15% from the current price, or if the ROE and ROA indicators show a significant decline."

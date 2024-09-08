@@ -1,3 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2020-11-13,bearish,No,7 NTD,6 month,"Stop Loss at 20% below current price, Trigger Sell when EPS < -0.50 or ROE < -10%"
-2018-12-28,bearish,No,8 NTD,12 months,"Close below 9 NTD, or when ROE falls below -15%"

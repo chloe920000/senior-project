@@ -1,5 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,bullish,Yes,73.71 NTD,24 months,"Stop Loss: If the stock price falls below 60.99 NTD, trigger a sell order."
-2019-12-31,bearish,No,33.382 NTD,12 months,"Sell when DBR exceeds 75% or EPS falls below -0.1, whichever occurs first."
-2018-12-28,**bearish**,**No**,**19.83** NTD,**6** months,**Close below 20.50 or ROE < 5%**
-2021-12-30,**bullish**,**Yes**,**94** NTD,**24** months,**Sell when DBR > 75% or EPS < 2.50**

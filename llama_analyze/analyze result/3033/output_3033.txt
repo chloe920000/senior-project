@@ -1,8 +1,0 @@
-Here are the answers to the questions:
-
-1. Is the next one year bullish or bearish?: [bullish]
-2. Based on the current price, is it recommended to buy?: [Yes]
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 25 NTD
-4. What is the recommended holding period for this investment?: 24 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Close below 20 NTD, or if ROE/ROA drops to -10%/-15%
-6. Please give specific reasons why you think it is bullish or bearish.: The company's EPS has been increasing steadily over the past few years, with a high growth rate of 24.4% in the most recent year. Additionally, the stock price has broken through the psychological barrier of 25 NTD and shows no signs of reversal.

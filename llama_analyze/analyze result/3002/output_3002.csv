@@ -1,7 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,[bearish],[No],[11] NTD,[6] months,[Sell if price falls below 90% of current price]
-2019-12-31,,[No],[1060] NTD,[12] months,[ Sell if DBR > 30% or EPS < -1]
-2019-12-31,[bearish],[No],[9] NTD,[12] months,Sell when DBR > 30% or ROE < -5%
-2019-12-31,,[No],[9] NTD,[12] months,"[Close below 10.2, or if ROE/ROA/OPM/Gross profit margin falls below previous year's value by more than 20%]"
-2018-12-28,bearish,No,8 NTD,6 months,Sell when the stock price falls by 15% or when the ROE and ROA indicators show consecutive negative growth.
-2021-12-30,bearish,No,11 NTD,6 months,"Sell when the stock price falls by 15% or more from the current price, or when the ROE and ROA indicators show a significant decline."

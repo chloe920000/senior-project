@@ -1,5 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,bearish,No,76 NTD,12 months,"Sell when the stock price falls by 10% from the current price, or when the EPS growth rate slows down to less than 5%"
-2019-12-31,bearish,later,39 NTD,12 months,Trigger a sell order when the stock price drops by 15% from the current price or when the ROE and ROA indicators show a significant decline.
-2018-12-28,bearish,No,33 NTD,12 months,Sell when price drops by 15% from current price or when EPS turns negative again.
-2021-12-30,[bullish],[Yes],[90] NTD,[24] months,"[Stop Loss Trigger: 15% decline from current price, Sell Order: When price reaches or falls below the calculated selling price]"
