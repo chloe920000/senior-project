@@ -1,8 +1,0 @@
-Here are the answers to the questions:
-
-1. Is the next one year bullish or bearish?: bearish
-2. Based on the current price, is it recommended to buy?: No
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 94 NTD
-4. What is the recommended holding period for this investment?: 9 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell when EPS drops below 0 or ROE goes below 10%
-6. Please give specific reasons why you think it is bullish or bearish.: The company's EPS has been declining over the past two years, and the ROE has also decreased. Additionally, the industry is facing increasing competition and technological disruption, which may affect the company's future performance.

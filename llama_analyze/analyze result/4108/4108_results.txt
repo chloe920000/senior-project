@@ -1,5 +1,0 @@
-Skipping entry 0 due to missing holding period.
-Skipping entry 1 due to missing holding period.
-Skipping entry 2 due to missing holding period.
-Skipping entry 3 due to missing holding period.
-Skipping entry 4 due to missing holding period.

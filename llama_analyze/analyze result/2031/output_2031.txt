@@ -1,6 +1,0 @@
-1. Is the next six months bullish or bearish?: bearish
-2. Based on the current price, is it recommended to buy?: No
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 24 NTD
-4. What is the recommended holding period for this investment? (month): 6 month
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Close below 25 NTD, or if EPS < 0, or if DBR > 60%
-6. Please give specific reasons why you think it is bullish or bearish.: The company's ROE and EPS have been declining over the past few years, and the current price is already high compared to historical prices. Additionally, the industry and market trends are not favorable for steel-related companies due to global trade tensions and environmental concerns.

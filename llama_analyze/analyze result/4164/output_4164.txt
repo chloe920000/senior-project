@@ -1,6 +1,0 @@
-1. Is the next six months bullish or bearish?: [bearish]
-2. Based on the current price, is it recommended to buy?: [No]
-3. (Not applicable)
-4. What is the recommended holding period for this investment? (month): [NA]
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [Wait for 20% profit or stop loss at 10%]
-6. Please give specific reasons why you think it is bullish or bearish.: The company's financial performance has been declining in recent years, with decreasing EPS and ROE. The DBR remains high, indicating potential leverage risks.

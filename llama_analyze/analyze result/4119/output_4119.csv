@@ -1,6 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-<<<<<<< HEAD
-2022-12-30,[bullish],[Yes],[84] NTD,[6] month,"Close below 75 TWD, or when DBR exceeds 30%"
-=======
-2019-12-31,bullish,Yes,93 NTD,18 months,"Trailing stop loss with a 10% threshold, sell if the stock price falls below the 50-day moving average or if ROE drops below 12%"
->>>>>>> c3222c1f05157d5dc24c37167e40d6da53a21da4
