@@ -5,7 +5,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from together import Together
-from get_prompt_data import *
+from llama_flask.get_prompt_data import *
 from prompt_generater import *
 
 # 獲取腳本所在目錄

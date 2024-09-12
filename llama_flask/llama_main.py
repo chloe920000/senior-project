@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 from ollama import AsyncClient
 
-from get_prompt_data import *
+from llama_flask.get_prompt_data import *
 from prompt_generater import *
 
 
