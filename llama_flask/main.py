@@ -1,8 +1,10 @@
 """
-打開 terminal 終端機，
-到路徑下打上 python main.py
 虛擬環境:
 venv\Scripts\activate
+
+打開 terminal 終端機，
+到路徑下打上 python main.py
+
 """
 
 from flask import Flask
