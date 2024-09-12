@@ -1,0 +1,8 @@
+Here are the answers to the questions based on the provided data and analysis:
+
+1. Is the next one year bullish or bearish?: [bearish]
+2. Based on the current price, is it recommended to buy?: [No]
+3. (Not applicable since it's bearish)
+4. What is the recommended holding period for this investment?: 24 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell when the stock price falls by 20% or when ROE turns negative for two consecutive years.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's declining EPS, ROE, and ROA over the past few years indicate a deteriorating business performance. The rising debt-to-asset ratio also suggests financial strain. Additionally, the stock price has been volatile in recent years, with significant drops in 2020 and 2021. These factors contribute to a bearish outlook for the next one year.
