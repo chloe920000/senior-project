@@ -17,6 +17,38 @@
         type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ url_for('static', filename='dist/css/styles.css') }}" rel="stylesheet" />
+    <style>
+        #loadingMessage {
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        document.getElementById('prediction-form').onsubmit = async function (event) {
+            event.preventDefault();
+
+            document.getElementById('loadingMessage').style.display = 'block';  // 顯示等待提示
+            document.getElementById('result').innerHTML = '';  // 清空結果
+
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('loadingMessage').style.display = 'none';  // 隱藏等待提示
+
+            let table = '<table id="result-table"><tr><th>Title</th><th>Details</th></tr>';
+            for (let key in result) {
+                table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
+            }
+            table += '</table>';
+            document.getElementById('result').innerHTML = table;  // 顯示結果表格
+        };
+    </script>
 </head>
 
 <body>
@@ -43,40 +75,38 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Email address input-->
+                        <form class="form-subscribe" id="prediction-form" action="/predict" method="post">
+                            <!-- Stock ID input -->
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-control form-control-lg" id="emailAddress" type="email"
-                                        placeholder="Email Address" data-sb-validations="required,email" />
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">
-                                        Email Address is required.</div>
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email
-                                        Address Email is not valid.</div>
+                                    <input class="form-control form-control-lg" id="stock_id" name="stock_id"
+                                        type="text" placeholder="Enter Stock ID or Name" required />
+                                    <div class="invalid-feedback text-white" data-sb-feedback="stockID:required">
+                                        Stock ID is required.
+                                    </div>
                                 </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton"
-                                        type="submit">Submit</button></div>
+                                <div class="col-auto">
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-lg" onclick="run_model()">Submit</button>
+                                    </div>
+
+                                </div>
                             </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
+                            <!-- Submit success message -->
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">Form submission successful!</div>
-                                    <p>To activate this form, sign up at</p>
-                                    <a class="text-white"
-                                        href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                                 </div>
                             </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
+                            <!-- Submit error message -->
                             <div class="d-none" id="submitErrorMessage">
                                 <div class="text-center text-danger mb-3">Error sending message!</div>
                             </div>
+
                         </form>
+                        <div id="loadingMessage" style="display:none;">正在訓練中，請稍後...</div>
+                        <div id="result"></div>
+
                     </div>
                 </div>
             </div>
@@ -269,6 +299,7 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 </body>
 
 </html>
