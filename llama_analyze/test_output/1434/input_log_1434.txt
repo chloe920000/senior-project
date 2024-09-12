@@ -1,0 +1,57 @@
+no.0 === 2024-09-03 00:51:17.472595 ===
+Evaluate the share price of Taiwan Stock Exchange 1434 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 29.26, 31.33, 39.68, 41.24, 40.96
+* Capital over the past 5 years: 168.0, 168.0, 168.0, 168.0, 168.0 * 100 million
+* ROE (return on equity) over the past 5 years: 7.18, 5.95, 6.08, 6.64, 7.18(%)
+* ROA (return on assets) over the past 5 years: 5.04, 4.16, 4.46, 5.1, 5.67(%)
+* peratio (price to earnings ratio) over the past 5 years: 14.665, 17.3075, 15.89, 13.2675, 12.635(%)
+* EPS (earnings per share) over the past 5 years: 0.82, -0.41, 0.39, 0.47, 0.28
+
+* Gross profit margin over the past 5 years: 11.9, 14.3, 13.8, 12.6, 9.92(%)
+* OPM (Operating Margin) over the past 5 years: 6.01, 7.77, 6.96, 6.05, 2.47(%)
+*DBR (debt-to-asset ratio) over the past 5 years: 30.3, 30.0, 23.6, 22.7, 19.4(%)
+*Reference historical prices:
+2014: Open=21.820353, Close=19.704758, High=21.820353, Low=17.571119
+2015: Open=19.453737, Close=19.724213, High=23.156225, Low=17.423054
+2016: Open=19.263979, Close=20.16361, High=21.433641, Low=17.751791
+2017: Open=20.266138, Close=22.454788, High=22.829309, Low=20.095261
+2018: Open=22.454788, Close=26.269634, High=28.854782, Low=21.701513
+* !!!Current price: 26.269634
+
+Provide additional background information about the company, industry, and market trends.
+
+* Company background:
+尼龍多富達布、聚酯布、傘骨槽骨、輪胎簾布、棉紗、人造棉紗
+合成纖維紗、混紡紗、織布染整、成衣、被單、床單等及其相關製品
+製造高分子聚合物製品、防彈衣背心、夾克、工業用工作服
+
+Assuming you are a stock analyst, please conduct a long-term (over 12 months) prediction analysis and answer the following questions (only answer the following questions, do not give recommendations or analysis):
+
+1. Is the next one year bullish or bearish?
+2. Based on the current price, is it recommended to buy?
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?
+4. What is the recommended holding period for this investment? (at least 12 months)
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?
+6. Please give specific reasons why you think it is bullish or bearish.
+
+Evaluation criteria:
+
+* A "bullish" market is defined as a stock price increase of at least 10% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
+* A "bearish" market is defined as a stock price decline of at least 15% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
+* If bullish, the selling price will usually be higher than the buying price, but aim for a balanced target that captures potential gains without excessive risk.
+* If it is bearish, no need to answer question 2.3.4.5.
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+When evaluating, consider the possibility of moderate optimism based on positive trends, but balance this with realistic assessments of market risks.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next one year bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [a integer] NTD
+4. What is the recommended holding period for this investment?: [a integer] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+

@@ -1,0 +1,43 @@
+no.0 === 2024-08-27 21:14:54.313580 ===
+Evaluation criteria:
+
+* A "long" market is defined as a stock price increase of at least 15% over the next one to two and a half years.
+* A "bearish" market is defined as a stock price decline of at least 20% over the next one to two and a half years.
+* If bullish, the selling price will usually be higher than the buying price.
+* If it is bearish, no need to answer question 2.3.4.5
+* It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
+
+Answer according to the sample format without explanation.
+Answer sample format:
+1. Is the next one to two and a half years bullish or bearish?: [bullish/bearish]
+2. Based on the current price, is it recommended to buy?: [Yes/No/later]
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [integer] NTD
+4. What is the recommended holding period for this investment? (months): [integer] months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [strategy]
+6. Please give specific reasons why you think it is bullish or bearish.: [reason]
+
+Now, evaluate the share price of Taiwan Stock Exchange 2201 based on the following data:
+*The following data is from left to right, with the year from the furthest to the most recent.
+* BPS (book value per share) over the past 5 years: 29.36, 49.32, 53.05, 48.5, 56.39
+* Capital over the past 5 years: 157.0, 100.0, 100.0, 100.0, 107.0 * 100 million
+* ROE (return on equity) over the past 5 years: -34.7, 7.94, 11.4, -1.66, 10.5%
+* EPS (earnings per share) over the past 5 years: -18.0, 19.41, 2.02, -9.62, 9.43
+* Gross profit margin over the past 5 years: 6.69, 22.6, 30.0, 35.6, 35.1%
+* OPM (Operating Margin) over the past 5 years: -35.9, -1.48, 9.14, 13.1, 10.5%
+* DBR (debt-to-asset ratio) over the past 5 years: 81.8, 78.5, 78.2, 79.9, 77.1%
+* Reference historical prices:
+2019: Open=25.094112, Close=28.143684, High=35.197601, Low=24.744614
+2020: Open=28.215664, Close=42.924072, High=42.924072, Low=20.801855
+2021: Open=46.584972, Close=39.323719, High=46.584972, Low=32.948116
+2022: Open=40.215305, Close=60.414417, High=66.163536, Low=35.757366
+2023: Open=61.583733, Close=74.800003, High=88.577751, Low=61.583733
+* Current price: None
+
+Provide additional background information about the company, industry, and market trends.
+
+* Company background:
+汽車
+零件
+保修及其他
+
+
