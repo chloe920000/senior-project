@@ -13,7 +13,8 @@ from get_prompt_data import *
 from prompt_generater import *
 
 
-
+bullish_threshold=15
+bearish_threshold=15
 
 # 獲取腳本所在目錄
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -38,10 +39,15 @@ def parse_output(output):
     # 使用正則表達式來匹配每個問題的答案
     bullish_match = re.search(r'1\. Is the next one year bullish or bearish\?:(.*)', output)
     buy_recommendation_match = re.search(r'2\. Based on the current price, is it recommended to buy\?\s*:(.*)', output)
-    sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 15%, what is the recommended selling price\?\s*:(.*)', output)
+    
+    # 動態調整正則表達式中的損失百分比
+    sell_price_pattern = rf'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is {bearish_threshold}%, what is the recommended selling price\?\s*:(.*)'
+    sell_price_match = re.search(sell_price_pattern, output)
+    
     holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\s*:(.*)', output)
     stop_loss_strategy_match = re.search(r'5\. Suggested stop loss strategy\? What are your criteria for triggering a sell order\?\s*:(.*)', output)
 
+    # 保存匹配結果
     if bullish_match:
         result['Bullish/Bearish'] = bullish_match.group(1).strip()
     if buy_recommendation_match:
@@ -158,8 +164,9 @@ async def chat():
             for _ in range(1): 
                 stock_price = get_stock_price(stock_id,date)
 
+                
                 # 使用 generate_message_content 生成 message_content
-                message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background, roa_str,per_str)
+                message_content = generate_message_content(stock_id, bps_str, capital_str, roe_str, eps_str, GM_str, OPM_str, DBR_str, summary_str, get_stock_price(stock_id,date), company_background, roa_str,per_str,bullish_threshold,bearish_threshold)
                 
                 # 保存每次的input message到log檔案
                 input_log_path = os.path.join(result_data_dir, stock_id, f'input_log_{stock_id}.txt')
