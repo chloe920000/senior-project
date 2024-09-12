@@ -1,5 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,bearish,No,36 NTD,6 months,Sell when the stock price falls by 15% from the current price or when the EPS turns negative.
-2019-12-31,bearish,No,38,12 months,Trigger sell if DBR > 35% or EPS < -1.50
-2018-12-28,[bearish],[No],,[24] months,"Stop Loss at 37.96 NTD, sell when DBR > 35%"
-2021-12-30,bearish,No,36 NTD,12 months,"If the stock price falls by 8% or more, trigger a sell order."

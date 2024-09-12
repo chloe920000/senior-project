@@ -1,7 +1,0 @@
-1. Is the next one to two and a half years bullish or bearish?: [bullish]
-2. Based on the current price, is it recommended to buy?: [Yes]
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: [18] NTD
-4. What is the recommended holding period for this investment? (months): [24] months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: [Close below 14]
-6. Please give specific reasons why you think it is bullish or bearish.: 
-Reason: The company's ROE and EPS have shown an upward trend in recent years, indicating improving profitability. The gross profit margin and OPM have also been stable, suggesting a solid business performance. Additionally, the reference historical prices show a strong growth in 2020, which may indicate a potential for further growth.

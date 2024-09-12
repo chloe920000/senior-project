@@ -1,4 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,[bullish],[Yes],[18] NTD,[24] months,[Close below 15.50 and then sell]
-2019-12-31,**bullish**,**Yes**,**14** NTD,**24** months,**Close price < 12.7225 or DBR > 50%**
-2018-12-28,**bearish**,**No**,**6.44** NTD,**12** months,"**If the stock price falls by 5% or more from the current price, trigger a sell order.**"

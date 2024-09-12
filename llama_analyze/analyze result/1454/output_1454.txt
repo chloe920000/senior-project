@@ -1,6 +1,0 @@
-1. Is the next one year bullish or bearish?: bearish
-2. Based on the current price, is it recommended to buy?: No
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 6.5 NTD
-4. What is the recommended holding period for this investment?: 24 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Sell when the stock price falls by 15% from the current price, or when the ROE and ROA indicators show a significant decline.
-6. Please give specific reasons why you think it is bullish or bearish.: The company's recent performance has shown declining profitability (ROE and ROA) and increasing debt-to-asset ratio, indicating potential financial difficulties. The stock price has also been volatile in the past few years, with a high P/E ratio suggesting market optimism that may not be justified by fundamental data.

@@ -1,6 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2021-12-30,[bearish],[No],[19] NTD,[24] months,[Stop loss triggered when DBR > 95% or EPS < -0.5]
-2020-12-31,[bearish],[No],23 NTD,24 months,Sell when EPS < -0.3 or ROE < -50%
-2019-12-31,bearish,No,8 NTD,24 months,"Stop loss at 15% decline from current price, re-enter long position when ROE > 50%"
-2018-12-28,,No,11 NTD,6 months,Sell when the stock price falls by 15% from the current price or when the ROE becomes negative again.
-2021-12-30,bearish,No,17 NTD,12 months,Triggering a sell order when the stock price falls by 15% from the current price or when the ROE and ROA turn negative again.
