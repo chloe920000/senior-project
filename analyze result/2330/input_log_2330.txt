@@ -1,0 +1,52 @@
+no.0 === 2024-09-12 10:53:50.109119 ===
+Evaluate the stock price of TWSE2330 based on the following data:
+* The following data is from left to right, with the years from farthest to most recent.
+* BPS (book value per share) over last 5 years: 47.11, 53.58, 58.7, 64.67, 62.53
+* Capital over last 5 years: 2593.0, 2593.0, 2593.0, 2593.0, 2593.0 * 100 million
+* ROE (return on equity) over last 5 years: 27.0, 25.6, 23.6, 21.9, 20.9%
+* roa (return on assets) over last 5 years: 19.4, 18.9, 17.7, 17.2, 15.9%
+* EPS (earnings per share) over last 5 years: 1.64, 1.07, 0.34, 0.31, -0.22
+* PER (price earnings ratio) over last 5 years: 12.5, 13.7725, 16.0875, 17.73, 20.3%
+* GM (gross margin) over last 5 years: 48.7, 50.1, 50.6, 48.3, 46.0%
+* OPM (operating profit margin) over last 5 years: 37.9, 39.9, 39.4, 37.2, 34.8%
+* DBR (debt-to-assets ratio) over last 5 years: 26.2, 26.3, 23.6, 19.7, 28.4%
+* Reference historical prices:
+2015: Open=105.174286, Close=111.241653, High=116.483345, Low=89.460091
+2016: Open=108.518959, Close=146.728271, High=156.02507, Low=102.295639
+2017: Open=147.940872, Close=191.716797, High=203.829666, Low=145.111404
+2018: Open=194.222916, Close=195.240967, High=229.440643, Low=183.552475
+2019: Open=190.046066, Close=300.53299, High=310.971191, Low=180.089218
+* Current price: 300.53299
+
+Provide additional context about the company, industry, and market trends.
+
+* Company Background:
+依客戶之訂單與其提供之產品設計說明，以從事製造與銷售積體電路
+以及其他晶圓半導體裝置。提供前述產品之封裝與測試服務、積體電
+路之電腦輔助設計技術服務。提供製造光罩及其設計服務。
+
+Assume you are a stock analyst, provide answers to the following questions (Only answer the following questions, do not give suggestions or analysis):
+
+1. Will it be bullish or bearish in the next six months?
+2. Recommended buying price, considering a margin of error of +/- 5%?
+3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?
+4. Recommended holding period for this investment?(months)
+5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?
+
+Criteria for evaluation:
+
+* A "bullish" market is defined as an increase of at least 10% in the stock's price over the next six months.
+* A "bearish" market is defined as a decrease of at least 15% in the stock's price over the next six months.
+* If it is bullish, usually the selling price will be higher than the buying price. 
+* If it is bearish, you do not need to answer question 2.3.4.5
+* The Recommended selling price should be the take-profit price when bullish. If the former is bearish, it can be skipped directly.
+
+Answer according to the example format, do not explain
+answer example format:
+1. Will it be bullish or bearish in the next six months?: Bullish/Bearish
+2. Recommended buying price, considering a margin of error of +/- 5%?: [a integer] NTD
+3. Recommended selling price, assuming a stop-loss strategy with a maximum loss of 10%?: [a integer] NTD
+4. Recommended holding period for this investment? (months): [a integer] months
+5. Suggested stop-loss strategy? What would be your criteria for triggering a sell order?: [strategy]
+
+
