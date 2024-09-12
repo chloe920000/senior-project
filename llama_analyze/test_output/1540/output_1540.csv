@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2018-12-28,[bearish],[No],[11] NTD,[24] months,"[Stop Loss: 10% below current price, Trigger Sell if EPS < -0.5 or ROE < 2]"
