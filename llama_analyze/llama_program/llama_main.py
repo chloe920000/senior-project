@@ -8,9 +8,10 @@ import csv
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from ollama import AsyncClient
-
+import random
 from get_prompt_data import *
 from prompt_generater import *
+
 
 
 
@@ -37,7 +38,7 @@ def parse_output(output):
     # 使用正則表達式來匹配每個問題的答案
     bullish_match = re.search(r'1\. Is the next one year bullish or bearish\?:(.*)', output)
     buy_recommendation_match = re.search(r'2\. Based on the current price, is it recommended to buy\?\s*:(.*)', output)
-    sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price\?\s*:(.*)', output)
+    sell_price_match = re.search(r'3\. Based on the current price, assuming the maximum loss of the stop loss strategy is 15%, what is the recommended selling price\?\s*:(.*)', output)
     holding_period_match = re.search(r'4\. What is the recommended holding period for this investment\?\s*:(.*)', output)
     stop_loss_strategy_match = re.search(r'5\. Suggested stop loss strategy\? What are your criteria for triggering a sell order\?\s*:(.*)', output)
 
@@ -68,14 +69,24 @@ def get_some_stock_ids(begin, end):
     # 将 stockID 转换为字符串类型
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
+#隨機挑幾支出來
+def get_random_stock_ids(nums):
+    # Fetch all stock IDs from Supabase
+    stock_ids = get_all_stock_ids()
+    
+    # Randomly sample 'nums' stock IDs from the list
+    if nums > len(stock_ids):
+        raise ValueError("Requested number exceeds available stock IDs")
+    
+    random_stock_ids = random.sample(stock_ids, nums)
+    return random_stock_ids
 
+dates = ['2020-12-31', '2019-12-31', '2018-12-28', '2021-12-30']
 
-#dates = ['2020-12-31', '2019-12-31', '2018-12-28', '2021-12-30']
-dates = [ '2019-12-31', '2018-12-28', '2021-12-30']
 # 獲取要分析的所有股票的 `stock_id` 列表
 # stock_ids = get_all_stock_ids()
-stock_ids = get_some_stock_ids(3051, 4000) # 只分析部分stock_id
-
+# stock_ids = get_some_stock_ids(2000, 3000) # 只分析部分stock_id
+stock_ids = get_random_stock_ids(50) # 隨機挑幾支出來
 async def chat():
     for stock_id in stock_ids:
         for date in dates:
