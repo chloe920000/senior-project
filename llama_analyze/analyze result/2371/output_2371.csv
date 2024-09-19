@@ -1,2 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2020-12-31,[bullish],[Yes],[31] NTD,[24] months,"Trigger a sell order if the stock price falls by more than 10% from the current price, or if the EPS (earnings per share) falls below -2."
