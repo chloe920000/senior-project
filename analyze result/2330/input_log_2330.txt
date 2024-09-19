@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 no.0 === 2024-09-12 10:45:33.225990 ===
+=======
+no.0 === 2024-09-12 10:53:50.109119 ===
+>>>>>>> 0368c4042db4c4e446ecfaea3ce93d7a867502ee
 Evaluate the stock price of TWSE2330 based on the following data:
 * The following data is from left to right, with the years from farthest to most recent.
 * BPS (book value per share) over last 5 years: 47.11, 53.58, 58.7, 64.67, 62.53
