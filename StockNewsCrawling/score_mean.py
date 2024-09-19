@@ -23,7 +23,7 @@ stocks = [
 
 # 計算日期範圍
 end_date = datetime.today()
-start_date = end_date - timedelta(days=90)
+start_date = end_date - timedelta(days=30)
 
 for stock in stocks:
     stock_id = stock["stock_id"]
@@ -44,7 +44,7 @@ for stock in stocks:
     # 將日期列轉換為 datetime 類型
     news["date"] = pd.to_datetime(news["date"])
 
-    # 過濾數據，只包含過去90天内的行
+    # 過濾數據，只包含過去30天内的行
     recent_news = news[(news["date"] >= start_date) & (news["date"] <= end_date)]
 
     # 計算 arousal 列的總和和總數
