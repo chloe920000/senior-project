@@ -1,2 +1,9 @@
 1. Will it be bullish or bearish in the next six months?: Bearish
+<<<<<<< HEAD
+2. No answer needed
+3. No answer needed
+4. No answer needed
+5. No answer needed
+=======
 (No need to answer the rest)
+>>>>>>> 0368c4042db4c4e446ecfaea3ce93d7a867502ee
