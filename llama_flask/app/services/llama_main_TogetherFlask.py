@@ -5,8 +5,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from together import Together
-from get_prompt_data import *
-from prompt_generater import *
+from app.services.get_prompt_data import *
+from app.services.prompt_generater import *
 
 # 獲取腳本所在目錄
 script_dir = os.path.dirname(os.path.abspath(__file__))

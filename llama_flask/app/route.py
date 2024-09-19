@@ -3,7 +3,8 @@ import sys
 import os
 import asyncio
 from flask import render_template, request, jsonify
-import llama_flask.llama_program.llama_main_TogetherFlask as llama_main_TogetherFlask
+import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
+
 
 
 def index():
