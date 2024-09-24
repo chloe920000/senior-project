@@ -45,8 +45,8 @@
             for (let key in result) {
                 table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
             }
-            table += '</table>';
-            document.getElementById('result').innerHTML = table;  // 顯示結果表格
+            // 將結果插入到指定區塊 ('.features-icons-item')
+            document.querySelector('.features-icons-item').innerHTML = table;  
         };
     </script>
 </head>
@@ -75,7 +75,7 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form class="form-subscribe" id="prediction-form" action="/predict" method="post">
+                        <form class="form-subscribe" id="prediction-form" method="post">
                             <!-- Stock ID input -->
                             <div class="row">
                                 <div class="col">
@@ -87,22 +87,25 @@
                                 </div>
                                 <div class="col-auto">
                                     <div class="col-auto">
-                                        <button class="btn btn-primary btn-lg" onclick="run_model()">Submit</button>
+                                        <button class="btn btn-primary btn-lg">Submit</button>
                                     </div>
-
                                 </div>
                             </div>
-                            <!-- Submit success message -->
+                        
+                            <!-- 提交成功與錯誤信息 -->
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">Form submission successful!</div>
                                 </div>
                             </div>
-                            <!-- Submit error message -->
                             <div class="d-none" id="submitErrorMessage">
                                 <div class="text-center text-danger mb-3">Error sending message!</div>
                             </div>
-
+                        
+                            <!-- 等待消息 -->
+                            <div id="loadingMessage" style="display:none;">
+                                Processing your request...
+                            </div>
                         </form>
                         <div id="loadingMessage" style="display:none;">正在訓練中，請稍後...</div>
                         <div id="result"></div>
@@ -118,7 +121,9 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                        <div class="features-icons-icon d-flex">
+                            <i class="bi-window m-auto text-primary"></i>
+                        </div>
                         <h3>Fully Responsive</h3>
                         <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
                     </div>

@@ -5,7 +5,7 @@ import asyncio
 from flask import render_template, request, jsonify
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 
-
+@app.route('/predict', methods=['POST'])
 def index():
     return render_template("index.html")  # 渲染出 html 檔，使用 render_template 函數
 
