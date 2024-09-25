@@ -75,15 +75,44 @@ def response_to_signal(text):
 
 
 # title media date link article time
-async def chat(start_date, end_date):
+async def chat(start_date, end_date, stock_id=None, keyword=None):
+    # 確保至少 stock_id 或 keyword 其中一個有值
+    if not stock_id and not keyword:
+        raise ValueError("At least one of stock_id or keyword must be provided.")
 
-    stocks = [
-        {"stock_id": "2330", "keyword": "台積電"},
-        # {"stock_id": "3443", "keyword": "創意"},
-        # {"stock_id": "2002", "keyword": "中鋼"},
-        # {"stock_id": "2317", "keyword": "鴻海"},
-        # {"stock_id": "2731", "keyword": "雄獅"}
-    ]
+    # 如果只有 keyword 沒有 stock_id，從 Supabase 查詢 stockID
+    if not stock_id and keyword:
+        stock_response = (
+            supabase.from_("stock")
+            .select("stockID")
+            .eq("stock_name", keyword)
+            .execute()
+        )
+        stock_data = stock_response.data
+
+        if not stock_data or len(stock_data) == 0:
+            raise ValueError(f"No stockID found for keyword: {keyword}")
+
+        # 獲取 stockID
+        stock_id = stock_data[0]["stockID"]
+
+    # 如果只有 stock_id 沒有 keyword，從 Supabase 查詢 stock_name
+    if not keyword and stock_id:
+        stock_response = (
+            supabase.from_("stock")
+            .select("stock_name")
+            .eq("stockID", stock_id)
+            .execute()
+        )
+        stock_data = stock_response.data
+
+        if not stock_data or len(stock_data) == 0:
+            raise ValueError(f"No keyword (stock_name) found for stockID: {stock_id}")
+
+        # 獲取 stock_name
+        keyword = stock_data[0]["stock_name"]
+
+    stocks = [{"stock_id": stock_id, "keyword": keyword}]
     results = []
 
     for stock in stocks:
@@ -145,5 +174,6 @@ async def chat(start_date, end_date):
 # 設定起始與結束日期
 start_date = datetime.strptime("20240101", "%Y%m%d").date()
 end_date = datetime.strptime("20240731", "%Y%m%d").date()
-
-asyncio.run(chat(start_date, end_date))
+stock_id = "2330"
+keyword = "台積電"
+asyncio.run(chat(start_date, end_date, stock_id, keyword))
