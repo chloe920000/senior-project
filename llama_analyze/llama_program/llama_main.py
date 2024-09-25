@@ -12,6 +12,13 @@ import random
 from get_prompt_data import *
 from prompt_generater import *
 
+# 載入環境變數
+load_dotenv()
+# 初始化 Supabase 客戶端
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+
 
 bullish_threshold=15
 bearish_threshold=15
@@ -24,12 +31,6 @@ result_data_dir = os.path.join(script_dir, '..', 'analyze result')
 if not os.path.exists(result_data_dir):
     os.makedirs(result_data_dir)
     
-# 載入環境變數
-load_dotenv()
-# 初始化 Supabase 客戶端
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
-supabase: Client = create_client(url, key)
 
 # 解析模型輸出結果
 import re
@@ -75,6 +76,8 @@ def get_some_stock_ids(begin, end):
     # 将 stockID 转换为字符串类型
     stock_ids = [str(item['stockID']) for item in response.data]
     return stock_ids
+
+
 #隨機挑幾支出來
 def get_random_stock_ids(nums):
     # Fetch all stock IDs from Supabase
