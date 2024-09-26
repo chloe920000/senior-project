@@ -45,14 +45,24 @@
         
                     if (response.ok) {
                         // 解析 JSON 結果
-                        const result = await response.json();
+                        const [sentiment_mean, result] = await response.json();
                         document.getElementById('loadingMessage').style.display = 'none'; // 隱藏等待提示
         
                         // 動態生成結果表格
                         let table = '<table class="table table-bordered"><thead><tr><th>Title</th><th>Details</th></tr></thead><tbody>';
+                        
+                        // 顯示 sentiment_mean 的內容
+                        table += `<tr><td colspan="2"><strong>Sentiment Mean</strong></td></tr>`;
+                        for (let key in sentiment_mean) {
+                            table += `<tr><td>${key}</td><td>${sentiment_mean[key]}</td></tr>`;
+                        }
+        
+                        // 顯示 result 的內容
+                        table += `<tr><td colspan="2"><strong>Predictions</strong></td></tr>`;
                         for (let key in result) {
                             table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
                         }
+        
                         table += '</tbody></table>';
         
                         // 將結果插入到指定的區塊中
@@ -66,6 +76,7 @@
                 }
             };
         });
+        
     </script>
     
 </head>
@@ -98,7 +109,7 @@
                             <!-- Stock ID input -->
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-control form-control-lg" id="stock_id" name="stock_id"
+                                    <input class="form-control form-control-lg" id="stock_data" name="stock_data"
                                         type="text" placeholder="Enter Stock ID or Name" required />
                                     <div class="invalid-feedback text-white" data-sb-feedback="stockID:required">
                                         Stock ID is required.

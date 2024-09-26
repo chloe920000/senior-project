@@ -6,3 +6,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2019-12-31,bearish,No,,,
 2019-12-31,bullish,Yes,375 NTD,18 months,"Trailing stop loss strategy, sell when price falls below 270 NTD or when ROE falls below 18%"
 2019-12-31,bearish,No,,(Skipped due to bearish prediction),(Skipped due to bearish prediction)
+2024-07-30,bullish,Yes,1300 NTD,18 months,"Trailing stop loss at 10% below the highest price since purchase, or a fixed stop loss at 846 NTD."
