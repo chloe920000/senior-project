@@ -92,8 +92,9 @@ def get_some_stock_ids(begin, end):
 # stock_ids = get_some_stock_ids(4106, 4119)  # 只分析部分 stock_id
 
 
-async def chat(dates, stock_ids):
-    for stock_id in stock_ids:
+async def chat(dates, stocks):
+    for stock in stocks:
+        stock_id = stock.get("stock_id")
         for date in dates:
             print(f"Processing stock: {stock_id}")
             end_year = int(date[:4])
@@ -307,5 +308,5 @@ async def chat(dates, stock_ids):
     return parsed_result
 
 
-def get_stock_predictions(dates, stock_ids):
-    return asyncio.run(chat(dates, stock_ids))
+def get_stock_predictions(dates, stocks):
+    return asyncio.run(chat(dates, stocks))

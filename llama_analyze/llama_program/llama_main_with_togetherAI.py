@@ -88,8 +88,8 @@ def get_some_stock_ids(begin, end):
     return stock_ids
 
 
-dates = ["2019-12-31"]
-stock_ids = get_some_stock_ids(4106, 4119)  # 只分析部分 stock_id
+dates = ["2023-12-29"]
+stock_ids = get_some_stock_ids(2454, 2454)  # 只分析部分 stock_id
 
 
 async def chat():

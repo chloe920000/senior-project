@@ -1,0 +1,9 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2019-12-31,bearish,No,,,
+2019-12-31,bullish,Yes,375 NTD,18 months,"Trailing stop loss with a 10% threshold, triggered by a decline in stock price below the 50-day moving average or a significant decline in quarterly earnings."
+2019-12-31,bullish,Yes,396 NTD,18 months,"Trailing stop loss with a 10% drop from the highest price since buying, or if the stock price falls below the 50-day moving average."
+2019-12-31,bearish,No,,,
+2019-12-31,bearish,No,,,
+2019-12-31,bullish,Yes,375 NTD,18 months,"Trailing stop loss strategy, sell when price falls below 270 NTD or when ROE falls below 18%"
+2019-12-31,bearish,No,,(Skipped due to bearish prediction),(Skipped due to bearish prediction)
+2024-07-30,bullish,Yes,1300 NTD,18 months,"Trailing stop loss at 10% below the highest price since purchase, or a fixed stop loss at 846 NTD."
