@@ -96,3 +96,102 @@ no.0 === 2024-09-26 21:27:07.379462 ===
 6. Please give specific reasons why you think it is bullish or bearish.: 
 Increasing BPS and stable capital over the past 4 years, high ROE and ROA, recent high gross profit margin and OPM, decreasing DBR, and the company's position in the growing semiconductor industry.
 
+no.0 === 2024-09-26 21:33:46.139056 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price since buying, or if ROE drops below 20% for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical ROE above 25%, increasing BPS, stable capital, recent high gross profit margin and OPM, low DBR, and the company's position in the growing semiconductor industry.
+
+no.0 === 2024-09-26 21:33:55.859994 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1244 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a trailing stop loss at 10% below the highest price reached since the investment, and adjust it as the price increases.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's increasing book value per share, stable capital, and high return on equity indicate strong financial fundamentals. The recent increase in price-to-earnings ratio and the historical price trend suggest potential for growth. The company's involvement in the semiconductor industry, which is expected to continue growing, also supports a bullish outlook.
+
+no.0 === 2024-09-26 21:46:33.581216 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1298 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 5-10% drop from recent high, or if EPS declines by more than 20% in a single quarter.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing BPS, stable ROE, and recent high gross profit margin suggest strong company fundamentals. Historical price trends show potential for growth, and the semiconductor industry is expected to continue growing in the next year.
+
+no.0 === 2024-09-26 21:48:35.523524 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the recent high, and sell if the stock price falls below the 50-day moving average or if ROE falls below 20% for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: The company has a strong track record of profitability, with high ROE and ROA, and a stable debt-to-asset ratio. The recent increase in the price-to-earnings ratio suggests that investors are optimistic about the company's future growth prospects. Additionally, the company's position in the semiconductor industry, which is expected to continue growing, and its diversified product offerings, including manufacturing and testing services, provide a solid foundation for long-term growth.
+
+no.0 === 2024-09-26 21:59:42.114107 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with a 10% threshold, or if the stock price falls below the 50-day moving average.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical ROE and ROA show strong profitability, recent price surge indicates market confidence, and the semiconductor industry is expected to grow due to increasing demand for electronics and emerging technologies.
+
+no.0 === 2024-09-26 22:08:10.605833 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1140 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price since buying, or a fixed stop loss at 846 NTD
+6. Please give specific reasons why you think it is bullish or bearish.: Historically stable ROE, increasing BPS, recovering EPS, strong industry demand, and the company's competitive position in the semiconductor market.
+
+no.0 === 2024-09-26 22:13:47.346113 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss strategy with a 10% stop loss limit, sell if price falls below 846 NTD or if ROE drops below 20% for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical EPS growth, stable ROE, increasing BPS, and high gross profit margin indicate strong financial performance. The recent price surge and historical trends suggest potential for further growth.
+
+no.0 === 2024-09-26 22:18:02.971542 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss (10% below the highest price reached since buying)
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical ROE and ROA show strong profitability, Gross profit margin and OPM indicate stable operations, DBR suggests manageable debt, recent price trends and industry growth potential.
+
+no.0 === 2024-09-26 22:28:46.448810 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price reached, with a review every 3 months.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+- Increasing BPS and stable capital over the past 4 years
+- High ROE and ROA in recent years
+- Low DBR ratio
+- Growing demand for semiconductors and IC manufacturing services
+- Positive industry trends and market outlook
+- Historical price patterns showing potential for growth after a dip.
+
+no.0 === 2024-09-26 22:31:46.297701 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1148 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the recent high price, or when the quarterly EPS growth rate drops below 10% for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical ROE and ROA indicate strong profitability; recent price surge and increasing EPS growth rate suggest a positive trend; the semiconductor industry is expected to grow due to increasing demand for AI and IoT applications; and the company's diversified product offerings and design services provide a competitive edge.
+
+no.0 === 2024-09-26 22:37:10.029894 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with a 10% threshold, and sell if the stock price falls below the 50-day moving average or if ROE falls below 20%.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's historical data shows a strong and stable financial performance, with increasing BPS and high ROE. The industry trend of increasing demand for semiconductors and the company's position as a leading manufacturer also contribute to the bullish outlook. Additionally, the current price is reasonable compared to the historical PE ratio, and the company's gross profit margin and operating margin are stable and high.
+
