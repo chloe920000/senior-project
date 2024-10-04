@@ -96,6 +96,7 @@ async def chat(dates, stocks):
     for stock in stocks:
         stock_id = stock.get("stock_id")
         for date in dates:
+            print("today date :", date)
             print(f"Processing stock: {stock_id}")
             end_year = int(date[:4])
             start_year = end_year - 4

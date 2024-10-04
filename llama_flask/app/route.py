@@ -4,9 +4,12 @@ from flask import render_template, request, jsonify
 from flask import Blueprint, render_template, request, jsonify
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 import app.services.score_mean as score_mean  # 引入score_mean模塊
+import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
+import app.services.sentiment_analysis_to_supa as sentiment_analysis_to_supa  # 引入sentiment_analysis模塊
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
+from datetime import datetime
 
 # 加載環境變量
 load_dotenv()
@@ -16,13 +19,15 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # 建立 Blueprint
-app = Blueprint('app', __name__)
+app = Blueprint("app", __name__)
 
-@app.route('/', methods=['GET'])
+
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")  # 渲染出 html 檔，使用 render_template 函數
 
-@app.route('/predict', methods=['POST'])
+
+@app.route("/predict", methods=["POST"])
 def predict():
     # 從請求中獲取 stock_data
     stock_data = request.form["stock_data"]
@@ -94,15 +99,25 @@ def predict():
     if not stocks:
         return jsonify({"error": "Stocks list cannot be empty."}), 400
 
-    # 指定 dates 列表
-    dates = ["2024-07-30"]  # 假設你需要處理的日期，這可以根據需求動態獲取
+    # (op.1)指定 date 為當日
+    # date = datetime.today().strftime("%Y-%m-%d")
+    # (op.2)自由指定 date
+    date = "2024-07-30"
+    print("Today Date:", date)
+
+    # 日期放入 dates 列表
+    dates = [date]  # 假設你需要處理的日期，這可以根據需求動態獲取
 
     # 獲取股票預測結果
     result = llama_main_TogetherFlask.get_stock_predictions(dates, stocks)
 
-    # 計算新聞情緒平均分數，將 stocks 列表作為參數傳遞
-    sentiment_mean = score_mean.scoreMean(dates, stocks)
+    # 刪除無關新聞，標記好、不好，並寫入supa
+    gemini_score = gemini_signal_to_supa.get_gemini_response(date, stocks)
+    # 將剩餘新聞情緒評分
+    sentiment_score = sentiment_analysis_to_supa.get_sentiment_score(date, stocks)
 
+    # 計算新聞情緒平均分數，將 stocks 列表作為參數傳遞
+    sentiment_mean = score_mean.scoreMean(date, stocks)
 
     # return jsonify(combined_result)
-    return jsonify(sentiment_mean,result)
+    return jsonify(sentiment_mean, result)

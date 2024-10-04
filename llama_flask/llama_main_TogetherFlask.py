@@ -93,8 +93,10 @@ def get_some_stock_ids(begin, end):
 
 
 async def chat(dates, stock_ids):
+    
     for stock_id in stock_ids:
         for date in dates:
+            print("today date :",date)
             print(f"Processing stock: {stock_id}")
             end_year = int(date[:4])
             start_year = end_year - 4

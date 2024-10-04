@@ -1,6 +1,14 @@
 1. Is the next one year bullish or bearish?: bullish
 2. Based on the current price, is it recommended to buy?: Yes
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with a 10% threshold, and sell if the stock price falls below the 50-day moving average or if ROE falls below 20%.
-6. Please give specific reasons why you think it is bullish or bearish.: The company's historical data shows a strong and stable financial performance, with increasing BPS and high ROE. The industry trend of increasing demand for semiconductors and the company's position as a leading manufacturer also contribute to the bullish outlook. Additionally, the current price is reasonable compared to the historical PE ratio, and the company's gross profit margin and operating margin are stable and high.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss strategy with a 10% threshold, sell if the stock price falls below the 50-day moving average.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+- Increasing book value per share over the past 4 years
+- Stable capital structure
+- High return on equity and return on assets
+- Recovering earnings per share after a decline
+- Increasing gross profit margin and operating margin
+- Decreasing debt-to-asset ratio
+- Positive industry trends in the semiconductor sector
+- Favorable market conditions with a potential for growth in the technology sector.
