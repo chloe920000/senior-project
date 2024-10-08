@@ -232,9 +232,21 @@
                     style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                     <h2>Easy to Use & Customize</h2>
-                    <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand
-                        some deeper customization options. Out of the box, just add your content and images, and your
-                        new landing page will be ready to go!</p>
+                        <h1>News for {{ stock_name }}</h1>
+                        {% if news_all %}
+                            {% for source, news_list in news_all.items() %}
+                                <h2>{{ source }}</h2>
+                                <ul>
+                                    {% for news in news_list %}
+                                        <li>
+                                            <a href="{{ news['url'] }}" target="_blank">{{ news['title'] }}</a> - {{ news['date'] }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endfor %}
+                        {% else %}
+                            <p>No news available for this stock.</p>
+                        {% endif %}
                 </div>
             </div>
         </div>
