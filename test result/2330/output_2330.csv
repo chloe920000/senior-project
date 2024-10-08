@@ -1,2 +1,0 @@
-Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
-2019-12-31,bullish,Yes,363 NTD,18 months,"Set stop loss at 270 NTD, trigger sell order if price falls below 270 NTD or if ROE drops below 18% for two consecutive quarters."

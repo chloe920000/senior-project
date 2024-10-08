@@ -1,5 +1,0 @@
-Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
-Bullish,1240 NTD,1650 NTD,6 months,"If the stock price falls below 1330 NTD, consider selling to minimize losses."
-Bullish,1340 NTD,1650 NTD,6 months,"If the stock price falls below 1300 NTD, consider selling to minimize losses."
-Bearish,1280 NTD,Not applicable (bearish),6 months,Trigger at 1350 NTD when the stock price falls by 15%.
-Bullish,1240 NTD,1650 NTD,6 months,"If the stock price drops by 8% from the current price, consider selling to minimize losses."
