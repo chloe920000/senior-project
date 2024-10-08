@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
 from app.services import settings
-
+import os
 # 配置生成式 AI 模型
 genai.configure(api_key=settings.api_key)
 
@@ -16,8 +16,8 @@ chat_model = model.start_chat(history=[])
 
 
 # Supabase 資訊
-url = "https://ifdyheuivlbmhsbpuyqf.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZHloZXVpdmxibWhzYnB1eXFmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMTMxMTU2OSwiZXhwIjoyMDM2ODg3NTY5fQ.c6DehH3cUJrjHa22_ps0w32xCLRhS5AAQUqc1sHqoI0"
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 
