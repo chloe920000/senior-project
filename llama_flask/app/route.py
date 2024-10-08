@@ -139,3 +139,26 @@ def sse_stock_analysis():
         yield "data: 分析完成!\n\n"  # 最終消息
 
     return Response(stream_with_context(generate_stock_data()), content_type='text/event-stream')
+
+
+@app.route('/news', methods=['POST'])
+def show_news():
+    stock_id = request.form.get('stock_id')
+    stock_name = crawler_for_flask.get_stock_name(stock_id)
+
+    if stock_name:
+        news_ltn = crawler_for_flask.fetch_news_ltn(stock_name)
+        news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
+        news_cnye = crawler_for_flask.fetch_news_cnye(stock_name)
+        news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
+
+        # 合併所有的新聞
+        news_all = {
+            'Liberty Times Net (LTN)': news_ltn,
+            'TVBS': news_tvbs,
+            'CNYE': news_cnye,
+            'Chinatime': news_chinatime
+        }
+        return render_template('index.html', stock_name=stock_name, news_all=news_all)
+    else:
+        return "Stock name not found in database."
