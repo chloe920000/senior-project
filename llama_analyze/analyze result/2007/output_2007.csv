@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2021-12-30,[bullish],[Yes],[24] NTD,[12-18] months,Trailing Stop with 15% threshold above highest high in recent 3 months.

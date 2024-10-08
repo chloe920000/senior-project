@@ -1,0 +1,7 @@
+Bullish/Bearish,Recommended buying price,Recommended selling price,Recommended holding period,Stop-loss strategy
+Bearish,22.35 NTD,Not applicable (bearish),6 months,"Triggered when the stock price falls below 20.85 NTD, or when ROE and ROA both decline by more than 10% from their current levels."
+Bearish,24.15 NTD,20.85 NTD,6 months,"If the stock price falls below 23.15 NTD, consider selling to minimize loss."
+Bearish,25.95 NTD,Not applicable (bearish),6 months,"Trigger a sell order if the stock price falls below 20.95 NTD, which is 10% below the current price of 23.15 NTD."
+Bearish,22.38 NTD,Not applicable (bearish),Not applicable (bearish),"Trigger at 20.23 NTD, which is the lowest price in the last 5 years, to minimize loss."
+Bearish,20 NTD,Not Applicable (bearish),Not Applicable (bearish),"Triggered when the price falls below 21 NTD, with a maximum loss of 10%."
+Bearish,21.50 NTD,Not applicable (bearish),Not applicable (bearish),"Triggered when the stock price falls below 20.50 NTD, which is 10% below the current price of 23.15 NTD."
