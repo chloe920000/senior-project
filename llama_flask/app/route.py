@@ -1,7 +1,6 @@
 # 建立網頁的後端函數。
 import re
-from flask import render_template, request, jsonify
-from flask import Blueprint, render_template, request, jsonify
+from flask import render_template, request, jsonify,Blueprint,Response, stream_with_context
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 import app.services.score_mean as score_mean  # 引入score_mean模塊
 import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
@@ -10,7 +9,7 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
 from datetime import datetime
-
+import time
 # 加載環境變量
 load_dotenv()
 
@@ -121,3 +120,22 @@ def predict():
 
     # return jsonify(combined_result)
     return jsonify(sentiment_mean, result)
+
+# 用來做前端的 SSE 股票分析跑馬燈
+@app.route("/sse_stock_analysis")
+def sse_stock_analysis():
+    def generate_stock_data():
+        # 模擬股票分析數據的逐步生成
+        analysis_steps = [
+            "Fetching stock data...",
+            "Analyzing trends...",
+            "Calculating metrics...",
+            "Generating predictions..."
+        ]
+        for step in analysis_steps:
+            yield f"data: {step}\n\n"  # SSE 格式
+            time.sleep(1)  # 模擬延遲
+
+        yield "data: 分析完成!\n\n"  # 最終消息
+
+    return Response(stream_with_context(generate_stock_data()), content_type='text/event-stream')
