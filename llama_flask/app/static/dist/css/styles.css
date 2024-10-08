@@ -10917,3 +10917,21 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+#marquee {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+}
+
+/* 跑馬燈文字滾動效果 */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
