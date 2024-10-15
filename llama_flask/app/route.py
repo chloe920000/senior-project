@@ -2,6 +2,7 @@
 import re
 from flask import render_template, request, jsonify,Blueprint,Response, stream_with_context
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
+import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_flask模塊
 import app.services.score_mean as score_mean  # 引入score_mean模塊
 import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
 import app.services.sentiment_analysis_to_supa as sentiment_analysis_to_supa  # 引入sentiment_analysis模塊

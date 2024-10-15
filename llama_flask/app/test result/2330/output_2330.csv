@@ -46,3 +46,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2024-07-30,bullish,Yes,1300 NTD,18 months,"Trailing stop loss with a 10% drop from the highest price since buying, or a 15% drop from the current price."
 2024-07-30,bullish,Yes,1250 NTD,18 months,"Trailing stop loss strategy, sell when the stock price falls below 850 NTD or when the moving average of the past 50 days is lower than the moving average of the past 200 days."
 2024-07-30,bullish,Yes,1250 NTD,18 months,"Trailing stop loss at 10% below the highest price since buying, or when the stock price falls below the 50-day moving average."
+2024-07-30,bullish,Yes,1240 NTD,18 months,"Set stop loss at 846 NTD (10% below the current price) and adjust it to 950 NTD if the stock price reaches 1050 NTD. Criteria for triggering a sell order include a decline in ROE, a significant decrease in EPS, or a substantial increase in DBR."
