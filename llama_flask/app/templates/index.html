@@ -51,99 +51,100 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('prediction-form').onsubmit = async function (event) {
-                event.preventDefault(); // 防止表單的預設提交行為
-
-                // 顯示等待提示
+                event.preventDefault(); // Prevent default form submission behavior
+        
+                // Show loading message
                 document.getElementById('loadingMessage').style.display = 'block';
-                document.getElementById('result').innerHTML = '';  // 清空之前的結果
-                document.getElementById('marquee').innerHTML = '正在分析中...';  // 初始跑馬燈內容
-                document.getElementById('marquee').classList.add('marquee-animation'); // 啟動跑馬燈動畫
-    
-                const formData = new FormData(this); // 獲取表單資料
+                document.getElementById('result').innerHTML = '';  // Clear previous results
+                document.getElementById('marquee').innerHTML = '正在分析中...';  // Initial marquee content
+                document.getElementById('marquee').classList.add('marquee-animation'); // Start marquee animation
+        
+                const formData = new FormData(this); // Get form data
+        
                 try {
-                    // 發送 AJAX 請求至 Flask 的 /predict 路由
-                    const response = await fetch('/predict', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    if (response.ok) {
-                        // 解析 JSON 結果
-                        const [sentiment_mean, result] = await response.json();
-                        document.getElementById('loadingMessage').style.display = 'none'; // 隱藏等待提示
-
-                        // 動態生成 result 結果表格
+                    // Send both AJAX requests in parallel
+                    const [predictResponse, newsResponse] = await Promise.all([
+                        fetch('/predict', {
+                            method: 'POST',
+                            body: formData
+                        }),
+                        fetch('/news', {
+                            method: 'POST',
+                            body: formData
+                        })
+                    ]);
+        
+                    // Handle prediction response
+                    if (predictResponse.ok) {
+                        const [sentiment_mean, result] = await predictResponse.json();
+                        document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
+        
+                        // Build and display prediction result table
                         let table = '<table class="table table-bordered"><thead><tr><th>Title</th><th>Details</th></tr></thead><tbody>';
-                        // 顯示 result 的內容
                         table += `<tr><td colspan="2"><strong>Predictions</strong></td></tr>`;
                         for (let key in result) {
                             table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
                         }
                         table += '</tbody></table>';
-
-                        // 假設 sentiment_mean 是一個物件（包含日期、arousal_mean、stockID 和 count）
+                        document.getElementById('dynamic-result').innerHTML = table;
+        
+                        // Handle sentiment_mean data
                         let sentimentTable = '<table class="table table-bordered"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>';
                         sentimentTable += `<tr><td colspan="2"><strong>Sentiment Mean</strong></td></tr>`;
-
-                        // 假設 sentiment_mean['2330'] 包含日期對應的數據
                         for (let stockID in sentiment_mean) {
-                            if (sentiment_mean.hasOwnProperty(stockID)) {
-                                // stockID 為外層 key，取得其中的日期對應物件
-                                let stockData = sentiment_mean[stockID];
-
-                                for (let dateStr in stockData) {
-                                    if (stockData.hasOwnProperty(dateStr)) {
-                                        let data = stockData[dateStr];
-
-                                        // 顯示 stockID 和日期
-                                        sentimentTable += `<tr><td>Stock ID</td><td>${stockID}</td></tr>`;
-                                        sentimentTable += `<tr><td>Date</td><td>${data['date']}</td></tr>`;
-
-                                        // 顯示 arousal_mean
-                                        sentimentTable += `<tr><td>Arousal Mean</td><td>${data['arousal_mean']}</td></tr>`;
-
-                                        // 顯示 count
-                                        sentimentTable += `<tr><td>Count</td><td>${data['count']}</td></tr>`;
-                                    }
-                                }
+                            let stockData = sentiment_mean[stockID];
+                            for (let dateStr in stockData) {
+                                let data = stockData[dateStr];
+                                sentimentTable += `<tr><td>Stock ID</td><td>${stockID}</td></tr>`;
+                                sentimentTable += `<tr><td>Date</td><td>${data['date']}</td></tr>`;
+                                sentimentTable += `<tr><td>Arousal Mean</td><td>${data['arousal_mean']}</td></tr>`;
+                                sentimentTable += `<tr><td>Count</td><td>${data['count']}</td></tr>`;
                             }
                         }
-
                         sentimentTable += '</tbody></table>';
-
-                        // 將結果插入到指定的區塊中
-                        document.getElementById('dynamic-result').innerHTML = table;
                         document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentTable;
-
-                        // 開始 SSE 連接
-                        const eventSource = new EventSource('/sse_stock_analysis');
-                        eventSource.onmessage = function (event) {
-                            // 更新跑馬燈的內容
-                            const marquee = document.getElementById('marquee');
-                            marquee.innerHTML = event.data;
-        
-                            // 啟動跑馬燈動畫效果
-                            marquee.classList.add('marquee-animation');
-        
-                            // 檢查是否已完成分析
-                            if (event.data === "分析完成!") {
-                                eventSource.close();  // 關閉 SSE 連接
-                                marquee.classList.remove('marquee-animation');  // 停止跑馬燈
-                                marquee.innerHTML = "分析完成!";
-                            }
-                        };
-
                     } else {
                         document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得預測結果';
                     }
+        
+                    // Handle news response
+                    if (newsResponse.ok) {
+                        const newsData = await newsResponse.json();
+                        let newsHtml = '';
+                        for (const [source, newsList] of Object.entries(newsData)) {
+                            newsHtml += `<h2>${source}</h2><ul>`;
+                            newsList.forEach(news => {
+                                newsHtml += `<li><a href="${news.link}" target="_blank">${news.headline}</a></li>`;
+                            });
+                            newsHtml += `</ul>`;
+                        }
+                        document.getElementById('news-results').innerHTML = newsHtml; // Display news results in the new container
+                    } else {
+                        console.error('Error fetching news:', newsResponse.statusText);
+                        document.getElementById('news-results').innerHTML = 'Error fetching news: ' + newsResponse.statusText;                    
+                    }
+        
+                    // SSE for stock analysis
+                    const eventSource = new EventSource('/sse_stock_analysis');
+                    eventSource.onmessage = function (event) {
+                        const marquee = document.getElementById('marquee');
+                        marquee.innerHTML = event.data;
+                        marquee.classList.add('marquee-animation');
+                        if (event.data === "分析完成!") {
+                            eventSource.close();
+                            marquee.classList.remove('marquee-animation');
+                            marquee.innerHTML = "分析完成!";
+                        }
+                    };
+        
                 } catch (error) {
                     console.error('Error:', error);
                     document.getElementById('loadingMessage').innerHTML = 'Error: 無法連接到伺服器';
                 }
             };
         });
-
     </script>
+    
 
 </head>
 
@@ -242,7 +243,9 @@
                     <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                         <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
                         <h3>市場情緒</h3>
+                        
                         <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                        <div id="news-results" class="mt-3" style="font-size: 20px;"></div>
                     </div>
                 </div>
             </div>
@@ -252,6 +255,7 @@
     <section class="showcase">
         <div class="container-fluid p-0">
             <div class="row g-0">
+                <!-- Showcase 1 -->
                 <div class="col-lg-6 order-lg-2 text-white showcase-img"
                     style="background-image: url('assets/img/bg-showcase-1.jpg')"></div>
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
@@ -261,7 +265,9 @@
                         responsively!</p>
                 </div>
             </div>
+    
             <div class="row g-0">
+                <!-- Showcase 2 -->
                 <div class="col-lg-6 text-white showcase-img"
                     style="background-image: url('assets/img/bg-showcase-2.jpg')"></div>
                 <div class="col-lg-6 my-auto showcase-text">
@@ -271,30 +277,20 @@
                         Bootstrap 5!</p>
                 </div>
             </div>
+    
             <div class="row g-0">
+                <!-- Showcase 3 -->
                 <div class="col-lg-6 order-lg-2 text-white showcase-img"
                     style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                     <h2>Easy to Use & Customize</h2>
-                        <h1>News for {{ stock_name }}</h1>
-                        {% if news_all %}
-                            {% for source, news_list in news_all.items() %}
-                                <h2>{{ source }}</h2>
-                                <ul>
-                                    {% for news in news_list %}
-                                        <li>
-                                            <a href="{{ news['url'] }}" target="_blank">{{ news['title'] }}</a> - {{ news['date'] }}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endfor %}
-                        {% else %}
-                            <p>No news available for this stock.</p>
-                        {% endif %}
+                    <h1>Testing News Section</h1>
+
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- Testimonials-->
     <section class="testimonials text-center bg-light">
         <div class="container">

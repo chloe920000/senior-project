@@ -2,9 +2,11 @@
 import re
 from flask import render_template, request, jsonify,Blueprint,Response, stream_with_context
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
+import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_flask模塊
 import app.services.score_mean as score_mean  # 引入score_mean模塊
 import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
 import app.services.sentiment_analysis_to_supa as sentiment_analysis_to_supa  # 引入sentiment_analysis模塊
+import app.services.crawler_for_flask as crawler_for_flask
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
@@ -139,3 +141,32 @@ def sse_stock_analysis():
         yield "data: 分析完成!\n\n"  # 最終消息
 
     return Response(stream_with_context(generate_stock_data()), content_type='text/event-stream')
+
+
+@app.route('/news', methods=['POST'])
+def news():
+    # Fetch stock ID from form data
+    stock_id = request.form.get('stock_data')
+    
+    if not stock_id:
+        return jsonify({"error": "Stock ID is required"}), 400
+
+    # Get stock name from Supabase
+    stock_name = crawler_for_flask.get_stock_name(stock_id)
+    
+    if not stock_name:
+        return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
+
+    # Fetch news from various sources
+    news_ltn = crawler_for_flask.fetch_news_ltn(stock_name)
+    news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
+    news_cnye = crawler_for_flask.fetch_news_cnye(stock_name)
+    news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
+
+    # Return news data as JSON response
+    return jsonify({
+        "ltn": news_ltn,
+        "tvbs": news_tvbs,
+        "cnye": news_cnye,
+        "chinatime": news_chinatime
+    })
