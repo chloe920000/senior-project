@@ -103,7 +103,7 @@ def predict():
     # (op.1)指定 date 為當日
     # date = datetime.today().strftime("%Y-%m-%d")
     # (op.2)自由指定 date
-    date = "2024-07-30"
+    date = datetime.today().strftime("%Y-%m-%d")
     print("Today Date:", date)
 
     # 日期放入 dates 列表
