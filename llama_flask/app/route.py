@@ -1,6 +1,13 @@
 # 建立網頁的後端函數。
 import re
-from flask import render_template, request, jsonify,Blueprint,Response, stream_with_context
+from flask import (
+    render_template,
+    request,
+    jsonify,
+    Blueprint,
+    Response,
+    stream_with_context,
+)
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_flask模塊
 import app.services.score_mean as score_mean  # 引入score_mean模塊
@@ -12,6 +19,7 @@ from supabase import create_client, Client
 import os
 from datetime import datetime
 import time
+
 # 加載環境變量
 load_dotenv()
 
@@ -114,14 +122,18 @@ def predict():
 
     # 刪除無關新聞，標記好、不好，並寫入supa
     gemini_score = gemini_signal_to_supa.get_gemini_response(date, stocks)
+
     # 將剩餘新聞情緒評分
     sentiment_score = sentiment_analysis_to_supa.get_sentiment_score(date, stocks)
+
+    # 30天新聞摘要
 
     # 計算新聞情緒平均分數，將 stocks 列表作為參數傳遞
     sentiment_mean = score_mean.scoreMean(date, stocks)
 
     # return jsonify(combined_result)
     return jsonify(sentiment_mean, result)
+
 
 # 用來做前端的 SSE 股票分析跑馬燈
 @app.route("/sse_stock_analysis")
@@ -132,7 +144,7 @@ def sse_stock_analysis():
             "Fetching stock data...",
             "Analyzing trends...",
             "Calculating metrics...",
-            "Generating predictions..."
+            "Generating predictions...",
         ]
         for step in analysis_steps:
             yield f"data: {step}\n\n"  # SSE 格式
@@ -140,20 +152,22 @@ def sse_stock_analysis():
 
         yield "data: 分析完成!\n\n"  # 最終消息
 
-    return Response(stream_with_context(generate_stock_data()), content_type='text/event-stream')
+    return Response(
+        stream_with_context(generate_stock_data()), content_type="text/event-stream"
+    )
 
 
-@app.route('/news', methods=['POST'])
+@app.route("/news", methods=["POST"])
 def news():
     # Fetch stock ID from form data
-    stock_id = request.form.get('stock_data')
-    
+    stock_id = request.form.get("stock_data")
+
     if not stock_id:
         return jsonify({"error": "Stock ID is required"}), 400
 
     # Get stock name from Supabase
     stock_name = crawler_for_flask.get_stock_name(stock_id)
-    
+
     if not stock_name:
         return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
 
@@ -164,9 +178,11 @@ def news():
     news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
 
     # Return news data as JSON response
-    return jsonify({
-        "ltn": news_ltn,
-        "tvbs": news_tvbs,
-        "cnye": news_cnye,
-        "chinatime": news_chinatime
-    })
+    return jsonify(
+        {
+            "ltn": news_ltn,
+            "tvbs": news_tvbs,
+            "cnye": news_cnye,
+            "chinatime": news_chinatime,
+        }
+    )
