@@ -158,9 +158,9 @@ def news():
         return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
 
     # Fetch news from various sources
-    news_ltn = crawler_for_flask.fetch_news_ltn(stock_name)
+    news_ltn = crawler_for_flask.fetch_news_ltn(stock_id, stock_name)
     news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
-    news_cnye = crawler_for_flask.fetch_news_cnye(stock_name)
+    news_cnye = crawler_for_flask.fetch_news_cnye(stock_id, stock_name)
     news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
 
     # Return news data as JSON response
