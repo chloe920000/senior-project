@@ -6,6 +6,7 @@ import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_
 import app.services.score_mean as score_mean  # 引入score_mean模塊
 import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
 import app.services.sentiment_analysis_to_supa as sentiment_analysis_to_supa  # 引入sentiment_analysis模塊
+import app.services.gemini_news_prompt as gemini_news_prompt
 import app.services.crawler_for_flask as crawler_for_flask
 from dotenv import load_dotenv
 from supabase import create_client, Client
@@ -117,11 +118,13 @@ def predict():
     # 將剩餘新聞情緒評分
     sentiment_score = sentiment_analysis_to_supa.get_sentiment_score(date, stocks)
 
+    #30天的新聞summary分析 
+    gemini_30dnews_response = gemini_news_prompt.get_gemini_30dnews_response(date , stocks)
     # 計算新聞情緒平均分數，將 stocks 列表作為參數傳遞
     sentiment_mean = score_mean.scoreMean(date, stocks)
 
     # return jsonify(combined_result)
-    return jsonify(sentiment_mean, result)
+    return jsonify(result, gemini_30dnews_response, sentiment_mean,)
 
 # 用來做前端的 SSE 股票分析跑馬燈
 @app.route("/sse_stock_analysis")

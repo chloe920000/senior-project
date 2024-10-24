@@ -26,24 +26,6 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 
-# 中文分詞器與句子分割器
-class ChineseTokenizer:
-    def tokenize(self, text):
-        return list(jieba.cut(text))  # 使用 jieba 進行中文分詞
-
-    def to_sentences(self, text):
-        # 使用常見的中文句子分隔符號來分割文本
-        delimiters = ["。", "！", "？"]
-        sentences = []
-        start = 0
-        for i, char in enumerate(text):
-            if char in delimiters:
-                sentences.append(text[start : i + 1].strip())
-                start = i + 1
-        if start < len(text):  # 如果還有剩餘的文本
-            sentences.append(text[start:].strip())
-        return sentences
-
 
 # 中文分辭器与句子分割器
 class ChineseTokenizer:
@@ -203,9 +185,9 @@ async def chat(date, stocks):
                 f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
             )
             results.append(result)
-
+    
     print("gemini評分更新完成")
-
+    return results
 
 # 封裝 async chat 函數
 def get_gemini_30dnews_response(date, stocks):
