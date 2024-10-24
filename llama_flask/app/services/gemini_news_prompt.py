@@ -194,6 +194,7 @@ def get_gemini_30dnews_response(date, stocks):
     return asyncio.run(chat(date, stocks))
 
 
+"""
 def test_get_gemini_response():
     date = "2024-10-20"  # 使用当前日期
     stocks = [
@@ -205,3 +206,4 @@ def test_get_gemini_response():
 
 # 跳用測試函数
 test_get_gemini_response()
+"""
