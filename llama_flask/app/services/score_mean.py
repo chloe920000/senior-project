@@ -4,6 +4,12 @@ import os
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
+"""
+todo :
+新增emotion平均
+
+
+"""
 # 加載環境變量
 load_dotenv()
 
@@ -69,24 +75,35 @@ def scoreMean(date, stocks):
             "count": news_count,
         }
 
-        # 准备插入的数据
-        insert_data = {
-            "date": end_date.strftime("%Y-%m-%d"),
-            "arousal_mean": mean_arousal,
-            "stockID": stock_id,
-            "count": news_count,
-        }
+        # 檢查是否已存在該日期和股票ID的資料
+        check_response = (
+            supabase.table("stock_news_summary_30")
+            .select("id")
+            .eq("stockID", stock_id)
+            .eq("date", end_date.strftime("%Y-%m-%d"))
+            .execute()
+        )
 
-        # 將處理后的數據插入到新的表 "score_mean"
-        insert_response = supabase.table("score_mean").insert(insert_data).execute()
-
-        if insert_response.data is None:
-            print(f"Failed to insert data for stock_id {stock_id}: {insert_response}")
-            raise Exception("Data insertion failed")
-
-        print(f"Data for stock_id {stock_id} processed and inserted successfully.")
-
-    print(mean_data)
+        if check_response.data:
+            # 資料存在，更新該筆資料的 arousal_mean 欄位
+            update_response = (
+                supabase.table("stock_news_summary_30")
+                .update(
+                    {"arousal_mean": mean_arousal, "count": news_count}
+                )  # 更新 count 和 arousal_mean
+                .eq("stockID", stock_id)
+                .eq("date", end_date.strftime("%Y-%m-%d"))
+                .execute()
+            )
+            if update_response.data is None:
+                print(
+                    f"Failed to update data for stock_id {stock_id}: {update_response}"
+                )
+                raise Exception("Data update failed")
+            else:
+                print(f"Data for stock_id {stock_id} updated successfully.")
+        print("total arousal:", total_arousal)
+        print(mean_data)
     print("新聞分數平均計算完成\n")
 
     # 返回將要插入的字典列表
@@ -96,15 +113,14 @@ def scoreMean(date, stocks):
 """
 # test
 if __name__ == "__main__":
-    # Define test dates and stock
-    test_dates = ["2024-07-30"]
+    # Define a test date as a single string
+    test_date = "2024-10-20"
 
     # 測試传入股票的 stocks 列表格式
     test_stocks = [{"stock_id": "2330", "stock_name": "台積電"}]
     try:
         print("Testing with keyword '台積電'...")
-        mean_result = scoreMean(test_dates, test_stocks)
+        mean_result = scoreMean(test_date, test_stocks)  # 傳入單個日期字串
         print("Inserted data:", mean_result)
     except Exception as e:
-        print(f"Error testing with keyword '台積電': {e}")
-"""
+        print(f"Error testing with keyword '台積電': {e}")"""
