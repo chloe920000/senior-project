@@ -135,7 +135,7 @@ def predict():
     sentiment_mean = score_mean.scoreMean(date, stocks)
 
     # return jsonify(combined_result)
-    return jsonify(result, gemini_30dnews_response, sentiment_mean,)
+    return jsonify(result, gemini_30dnews_response, sentiment_mean)
 
 
 # 用來做前端的 SSE 股票分析跑馬燈

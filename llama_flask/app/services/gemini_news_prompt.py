@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
-import settings
+from app.services import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -123,6 +123,7 @@ async def chat(date, stocks):
     start_date = end_date - timedelta(days=30)
 
     results = []
+    results_list = []
 
     for stock in stocks:
         stock_id = stock.get("stock_id")
@@ -181,13 +182,23 @@ async def chat(date, stocks):
             ).execute()
 
             # for flask
-            result = (
-                f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
-            )
-            results.append(result)
+            # result = (
+            #     f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
+            # )
+            # results.append(result)
+            
+            # 保存該次處理結果到 results_list 中
+            results_list.append({
+                "stockID": stock_id,
+                "gemini_signal": signal,
+                "gemini_ans": ans,
+                "date": end_date.strftime("%Y-%m-%d"),
+                "summary": combined_summary,
+            })
     
     print("gemini評分更新完成")
-    return results
+    return results_list
+    
 
 # 封裝 async chat 函數
 def get_gemini_30dnews_response(date, stocks):

@@ -76,7 +76,7 @@
         
                     // Handle prediction response
                     if (predictResponse.ok) {
-                        const [sentiment_mean, result] = await predictResponse.json();
+                        const [result, gemini_30dnews_response, sentiment_mean] = await predictResponse.json();
                         document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
         
                         // Build and display prediction result table
