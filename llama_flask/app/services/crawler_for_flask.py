@@ -26,20 +26,28 @@ SUPABASE_URL = os.getenv('SUPABASE_URL')
 SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-def insert_news_batch_to_supabase(news_data):
-    """Batch insert the news headlines into Supabase"""
-    try:
-        # 插入資料到 Supabase 的 news_test 表格
-        response = supabase.table('news_test').insert(news_data).execute()
-        
-        # 檢查是否有錯誤
-        if response.error:
-            print(f"Failed to insert news batch: {response.error}")
-        else:
-            print(f"Successfully inserted {len(news_data)} news items.")
+def insert_news_to_supabase(stock_id, headline):
+    """Insert the news headline into Supabase"""
+    today = datetime.today().strftime('%Y-%m-%d')
     
+    try:
+        response = supabase.table('news_test').insert({
+            'stockID': stock_id,
+            'date': today,
+            'content': headline,
+            'gemini_signal': None,
+            'emotion': None,
+            'arousal': None
+        }).execute()
+
+
+        print(f"News inserted: {headline}")
+        
     except Exception as e:
         print(f"Error inserting news into Supabase: {e}")
+
+
+
 
 def get_stock_name(stock_id):
     """Fetch stock name from Supabase using stock ID"""
@@ -51,8 +59,8 @@ def get_stock_name(stock_id):
         print(f"Error fetching stock name for {stock_id}: {e}")
         return None
 
-def fetch_news_ltn(stock_id, stock_name):
-    """Fetch news from Liberty Times Net for the given stock name"""
+def fetch_news_ltn(stock_id, stock_name):  
+    """Fetch news from Liberty Times Net for the given stock name and insert into Supabase"""
     today = datetime.today().strftime('%Y%m%d')
     news_list = []
 
@@ -68,14 +76,10 @@ def fetch_news_ltn(stock_id, stock_name):
             for item in news_items[:3]:  # 只返回前三條新聞
                 headline = item.find('a').text.strip()
                 link = item.find('a')['href']
-                news_list.append({
-                    'stockID': stock_id,
-                    'date': datetime.today().strftime('%Y-%m-%d'),
-                    'content': headline,
-                    'gemini_signal': None,
-                    'emotion': None,
-                    'arousal': None
-                })
+                news_list.append({"headline": headline, "link": link})
+
+                # 將新聞標題插入到 Supabase
+                insert_news_to_supabase(stock_id, headline)
 
     except Exception as e:
         print(f"Error fetching news from LTN for {stock_name}: {e}")
@@ -83,7 +87,7 @@ def fetch_news_ltn(stock_id, stock_name):
     return news_list
 
 def fetch_news_tvbs(stock_id, stock_name):
-    """Fetch news from TVBS for the given stock ID and name"""
+    """Fetch news from TVBS for the given stock ID and name and insert into Supabase"""
     today = datetime.today().strftime('%Y/%m/%d')
     news_list = []
     keyword = f'{stock_id}{stock_name}'
@@ -112,14 +116,10 @@ def fetch_news_tvbs(stock_id, stock_name):
             if headline == "No title":
                 continue
             
-            news_list.append({
-                'stockID': stock_id,
-                'date': datetime.today().strftime('%Y-%m-%d'),
-                'content': headline,
-                'gemini_signal': None,
-                'emotion': None,
-                'arousal': None
-            })
+            news_list.append({"headline": headline, "link": link})
+
+            # 將新聞標題插入到 Supabase
+            insert_news_to_supabase(stock_id, headline)
 
             if len(news_list) >= 3:
                 break
@@ -129,6 +129,7 @@ def fetch_news_tvbs(stock_id, stock_name):
 
     return news_list
 
+
 def fetch_news_cnye(stock_id, stock_name):
     """Fetch news from CNYE for the given stock name"""
     url = f"https://www.cnyes.com/search/news?keyword={stock_name}"
@@ -136,7 +137,6 @@ def fetch_news_cnye(stock_id, stock_name):
     driver = webdriver.Chrome()
     driver.get(url)
 
-    news_list = []
     try:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//a[contains(@class, "jsx-1986041679") and contains(@class, "news")]'))
@@ -144,25 +144,21 @@ def fetch_news_cnye(stock_id, stock_name):
 
         elements = driver.find_elements(By.XPATH, '//a[contains(@class, "jsx-1986041679") and contains(@class, "news")]')
 
+        news_list = []
         for e in elements[:3]:
             href = e.get_attribute("href")
             headline = e.text.strip()
-            news_list.append({
-                'stockID': stock_id,
-                'date': datetime.today().strftime('%Y-%m-%d'),
-                'content': headline,
-                'gemini_signal': None,
-                'emotion': None,
-                'arousal': None
-            })
+            news_list.append({"headline": headline, "link": href})
+            insert_news_to_supabase(stock_id, headline)
+
+        return news_list
 
     except Exception as e:
         print(f"Error fetching news from CNYE: {e}")
+        return []
     
     finally:
         driver.quit()
-
-    return news_list
 
 def fetch_news_chinatime(stock_id, stock_name):
     """Fetch news from Chinatime for the given stock name"""
@@ -205,15 +201,8 @@ def fetch_news_chinatime(stock_id, stock_name):
                     link_element = article.find_element(By.TAG_NAME, "a")
                     link_url = link_element.get_attribute("href")
 
-                    news_list.append({
-                        'stockID': stock_id,
-                        'date': datetime.today().strftime('%Y-%m-%d'),
-                        'content': title_text,
-                        'gemini_signal': None,
-                        'emotion': None,
-                        'arousal': None
-                    })
-                    
+                    news_list.append({"headline": title_text, "link": link_url})
+                    insert_news_to_supabase(stock_id, title_text)
                     if len(news_list) >= 3:
                         driver.quit()
                         return news_list
@@ -232,7 +221,7 @@ def print_news(news_list, source):
     if news_list:
         print(f"\nNews from {source}:")
         for news in news_list:
-            print(f"title: {news['content']}\n")
+            print(f"title: {news['headline']}\nlink: {news['link']}\n")
     else:
         print(f"No news available from {source}.")
 
@@ -242,24 +231,14 @@ def main():
 
     if stock_name:
         print(f"\nFetching news for {stock_id} {stock_name}...\n")
-        all_news = []
-        
-        news_ltn = fetch_news_ltn(stock_id, stock_name)
-        all_news.extend(news_ltn)
-        
+        news_ltn = fetch_news_ltn(stock_id,stock_name)
         news_tvbs = fetch_news_tvbs(stock_id, stock_name)
-        all_news.extend(news_tvbs)
-        
-        news_cnye = fetch_news_cnye(stock_id, stock_name)
-        all_news.extend(news_cnye)
-        
+        news_cnye = fetch_news_cnye(stock_id,stock_name)
         news_chinatime = fetch_news_chinatime(stock_id, stock_name)
-        all_news.extend(news_chinatime)
-        
-        print_news(all_news, "all sources")
-        
-        if all_news:
-            insert_news_batch_to_supabase(all_news)
+        print_news(news_ltn, "Liberty Times Net (LTN)")
+        print_news(news_tvbs, "TVBS")
+        print_news(news_cnye, "CNYE")
+        print_news(news_chinatime, "Chinatime")
     else:
         print("Stock name not found in database.")
 

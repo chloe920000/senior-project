@@ -111,7 +111,7 @@ def predict():
     # (op.1)指定 date 為當日
     # date = datetime.today().strftime("%Y-%m-%d")
     # (op.2)自由指定 date
-    date = "2024-07-30"
+    date = datetime.today().strftime("%Y-%m-%d")
     print("Today Date:", date)
 
     # 日期放入 dates 列表
@@ -172,9 +172,9 @@ def news():
         return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
 
     # Fetch news from various sources
-    news_ltn = crawler_for_flask.fetch_news_ltn(stock_name)
+    news_ltn = crawler_for_flask.fetch_news_ltn(stock_id, stock_name)
     news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
-    news_cnye = crawler_for_flask.fetch_news_cnye(stock_name)
+    news_cnye = crawler_for_flask.fetch_news_cnye(stock_id, stock_name)
     news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
 
     # Return news data as JSON response
