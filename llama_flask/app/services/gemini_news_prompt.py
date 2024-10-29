@@ -212,14 +212,14 @@ def get_gemini_30dnews_response(date, stocks):
     return asyncio.run(chat(date, stocks))
 
 
-def test_get_gemini_response():
-    date = "2024-10-20"  # 使用当前日期
-    stocks = [
-        {"stock_id": "2330", "stock_name": "台積電"},
-    ]
+# def test_get_gemini_response():
+#     date = "2024-10-20"  # 使用当前日期
+#     stocks = [
+#         {"stock_id": "2330", "stock_name": "台積電"},
+#     ]
 
-    get_gemini_30dnews_response(date, stocks)
+#     get_gemini_30dnews_response(date, stocks)
 
 
-# 跳用測試函数
-test_get_gemini_response()
+# # 跳用測試函数
+# test_get_gemini_response()
