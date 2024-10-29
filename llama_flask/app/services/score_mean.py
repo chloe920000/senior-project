@@ -54,13 +54,16 @@ def scoreMean(date, stocks):
 
         # 計算 arousal 列的總和和總數
         total_arousal = recent_news["arousal"].sum()
+        total_emotion = recent_news["emotion"].sum()
         news_count = len(recent_news)
 
         if news_count > 0:
             # 計算過去30天的平均 arousal
             mean_arousal = round(total_arousal / news_count, 5)
+            mean_emotion = round(total_emotion / news_count, 5)
         else:
             mean_arousal = 0
+            mean_emotion = 0
 
         # 構建用來存儲的數據結構，使用 stockID 和日期作為索引
         if stock_id not in mean_data:
@@ -71,6 +74,7 @@ def scoreMean(date, stocks):
         mean_data[stock_id][date] = {
             "date": end_date.strftime("%Y-%m-%d"),
             "arousal_mean": mean_arousal,
+            "emotion_mean": mean_emotion,
             "stockID": stock_id,
             "count": news_count,
         }
@@ -89,7 +93,11 @@ def scoreMean(date, stocks):
             update_response = (
                 supabase.table("stock_news_summary_30")
                 .update(
-                    {"arousal_mean": mean_arousal, "count": news_count}
+                    {
+                        "arousal_mean": mean_arousal,
+                        "emotion_mean": mean_emotion,
+                        "count": news_count,
+                    }
                 )  # 更新 count 和 arousal_mean
                 .eq("stockID", stock_id)
                 .eq("date", end_date.strftime("%Y-%m-%d"))
@@ -103,18 +111,18 @@ def scoreMean(date, stocks):
             else:
                 print(f"Data for stock_id {stock_id} updated successfully.")
         print("total arousal:", total_arousal)
-        print(mean_data)
-    print("新聞分數平均計算完成\n")
+        print("total emotion:", total_emotion)
+        print("mean_data:", mean_data)
+    print(f"{stock_id}30日的新聞分數平均計算完成\n")
 
     # 返回將要插入的字典列表
     return mean_data
 
 
-"""
 # test
 if __name__ == "__main__":
     # Define a test date as a single string
-    test_date = "2024-10-20"
+    test_date = "2024-10-19"
 
     # 測試传入股票的 stocks 列表格式
     test_stocks = [{"stock_id": "2330", "stock_name": "台積電"}]
@@ -123,4 +131,4 @@ if __name__ == "__main__":
         mean_result = scoreMean(test_date, test_stocks)  # 傳入單個日期字串
         print("Inserted data:", mean_result)
     except Exception as e:
-        print(f"Error testing with keyword '台積電': {e}")"""
+        print(f"Error testing with keyword '台積電': {e}")
