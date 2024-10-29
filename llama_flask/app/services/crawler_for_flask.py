@@ -27,10 +27,23 @@ SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def insert_news_to_supabase(stock_id, headline):
-    """Insert the news headline into Supabase"""
+    """Insert the news headline into Supabase, if not exists"""
     today = datetime.today().strftime('%Y-%m-%d')
-    
+
     try:
+        # Check if the news already exists in the database
+        response = supabase.table('news_test') \
+            .select('*') \
+            .eq('stockID', stock_id) \
+            .eq('date', today) \
+            .eq('content', headline) \
+            .execute()
+
+        if response.data:
+            print(f"Duplicate news found, not inserting: {headline}")
+            return
+
+        # Insert the news if it doesn't exist
         response = supabase.table('news_test').insert({
             'stockID': stock_id,
             'date': today,
@@ -40,11 +53,11 @@ def insert_news_to_supabase(stock_id, headline):
             'arousal': None
         }).execute()
 
-
         print(f"News inserted: {headline}")
-        
+
     except Exception as e:
         print(f"Error inserting news into Supabase: {e}")
+
 
 
 

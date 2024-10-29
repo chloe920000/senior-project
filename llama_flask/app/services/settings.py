@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Retrieve the API key from environment variables
-api_key = os.environ.get("GEMINI_KEY")
+api_key = os.environ.get("GOOGLE_API_KEY")
 
 generation_config = {
     "temperature": 0.9,
