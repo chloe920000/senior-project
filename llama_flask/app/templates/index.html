@@ -6,191 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Landing Page - Start Bootstrap Theme</title>
-    <!-- Favicon-->
+    <title>漲LLa!嗎?</title>
+
+    <!-- 網站圖標 -->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='dist/assets/favicon.ico') }}" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"
-        type="text/css" />
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-        type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+
+    <!-- Google 字體 -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
+    <!-- 主題樣式表，包含 Bootstrap 核心樣式 -->
     <link href="{{ url_for('static', filename='dist/css/styles.css') }}" rel="stylesheet" />
-    <style>
-        #loadingMessage {
-            font-size: 16px;
-            color: #555;
-            text-align: center;
-            margin-top: 20px;
-        }
-        #marquee {
-            display: inline-block;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            color: white;
-            font-size: 20px;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-        }
-        
-        /* 跑馬燈動畫效果 */
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-    
-        /* 當加上 marquee-animation 時，啟動跑馬燈效果 */
-        .marquee-animation {
-            animation: marquee 10s linear infinite;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('prediction-form').onsubmit = async function (event) {
-                event.preventDefault(); // Prevent default form submission behavior
-        
-                // Show loading message
-                document.getElementById('loadingMessage').style.display = 'block';
-                document.getElementById('result').innerHTML = '';  // Clear previous results
-                document.getElementById('marquee').innerHTML = '正在分析中...';  // Initial marquee content
-                document.getElementById('marquee').classList.add('marquee-animation'); // Start marquee animation
-        
-                const formData = new FormData(this); // Get form data
-        
-                try {
-                    // Send both AJAX requests in parallel
-                    const [predictResponse, newsResponse] = await Promise.all([
-                        fetch('/predict', {
-                            method: 'POST',
-                            body: formData
-                        }),
-                        fetch('/news', {
-                            method: 'POST',
-                            body: formData
-                        })
-                    ]);
-        
-                    // Handle prediction response
-                    if (predictResponse.ok) {
-                        const [sentiment_mean, result] = await predictResponse.json();
-                        document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
-        
-                        // Build and display prediction result table
-                        let table = '<table class="table table-bordered"><thead><tr><th>Title</th><th>Details</th></tr></thead><tbody>';
-                        table += `<tr><td colspan="2"><strong>Predictions</strong></td></tr>`;
-                        for (let key in result) {
-                            table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
-                        }
-                        table += '</tbody></table>';
-                        document.getElementById('dynamic-result').innerHTML = table;
-        
-                        // Handle sentiment_mean data
-                        let sentimentTable = '<table class="table table-bordered"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>';
-                        sentimentTable += `<tr><td colspan="2"><strong>Sentiment Mean</strong></td></tr>`;
-                        for (let stockID in sentiment_mean) {
-                            let stockData = sentiment_mean[stockID];
-                            for (let dateStr in stockData) {
-                                let data = stockData[dateStr];
-                                sentimentTable += `<tr><td>Stock ID</td><td>${stockID}</td></tr>`;
-                                sentimentTable += `<tr><td>Date</td><td>${data['date']}</td></tr>`;
-                                sentimentTable += `<tr><td>Arousal Mean</td><td>${data['arousal_mean']}</td></tr>`;
-                                sentimentTable += `<tr><td>Count</td><td>${data['count']}</td></tr>`;
-                            }
-                        }
-                        sentimentTable += '</tbody></table>';
-                        document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentTable;
-                    } else {
-                        document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得預測結果';
-                    }
-        
-                    // Handle news response
-                    if (newsResponse.ok) {
-                        const newsData = await newsResponse.json();
-                        let newsHtml = '';
-                        for (const [source, newsList] of Object.entries(newsData)) {
-                            newsHtml += `<h2>${source}</h2><ul>`;
-                            newsList.forEach(news => {
-                                newsHtml += `<li><a href="${news.link}" target="_blank">${news.headline}</a></li>`;
-                            });
-                            newsHtml += `</ul>`;
-                        }
-                        document.getElementById('news-results').innerHTML = newsHtml; // Display news results in the new container
-                    } else {
-                        console.error('Error fetching news:', newsResponse.statusText);
-                        document.getElementById('news-results').innerHTML = 'Error fetching news: ' + newsResponse.statusText;                    
-                    }
-        
-                    // SSE for stock analysis
-                    const eventSource = new EventSource('/sse_stock_analysis');
-                    eventSource.onmessage = function (event) {
-                        const marquee = document.getElementById('marquee');
-                        marquee.innerHTML = event.data;
-                        marquee.classList.add('marquee-animation');
-                        if (event.data === "分析完成!") {
-                            eventSource.close();
-                            marquee.classList.remove('marquee-animation');
-                            marquee.innerHTML = "分析完成!";
-                        }
-                    };
-        
-                } catch (error) {
-                    console.error('Error:', error);
-                    document.getElementById('loadingMessage').innerHTML = 'Error: 無法連接到伺服器';
-                }
-            };
-        });
-    </script>
-    
-
 </head>
 
 <body>
-    <!-- Navigation-->
+    <!-- 導航欄 -->
     <nav class="navbar navbar-light bg-light static-top">
         <div class="container">
+            <!-- 網站名稱 -->
             <a class="navbar-brand" href="#!">Start Bootstrap</a>
+            <!-- 註冊按鈕 -->
             <a class="btn btn-primary" href="#signup">Sign Up</a>
         </div>
     </nav>
-    <!-- Masthead-->
+
+    <!-- 頁面主體 -->
     <header class="masthead">
         <div class="container position-relative">
             <div class="row justify-content-center">
                 <div class="col-xl-6">
                     <div class="text-center text-white">
-                        <!-- Page heading-->
+                        <!-- 頁面標題 -->
                         <h1 class="mb-5">歡迎來到『漲LLa!嗎?』</h1>
 
-                        <!-- Signup form-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
+                        <!-- 股票查詢表單 -->
                         <form class="form-subscribe" id="prediction-form" action="/predict" method="post">
-                            <!-- Stock ID input -->
+                            <!-- 股票代碼輸入框 -->
                             <div class="row">
                                 <div class="col">
-                                    <input class="form-control form-control-lg" id="stock_data" name="stock_data"
-                                        type="text" placeholder="請輸入股票代碼或名稱！" required />
-                                    <div class="invalid-feedback text-white" data-sb-feedback="stockID:required">
-                                        Stock ID is required.
-                                    </div>
+                                    <input class="form-control form-control-lg" id="stock_data" name="stock_data" type="text" placeholder="請輸入股票代碼或名稱！" required />
+                                    <div class="invalid-feedback text-white">Stock ID is required.</div>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="col-auto">
-                                        <button class="btn btn-primary btn-lg">Submit</button>
-                                    </div>
+                                    <button class="btn btn-primary btn-lg" type="submit">Submit</button>
                                 </div>
                             </div>
 
-                            <!-- 提交成功與錯誤信息 -->
+                            <!-- 成功與錯誤信息顯示區 -->
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">Form submission successful!</div>
@@ -200,25 +64,26 @@
                                 <div class="text-center text-danger mb-3">Error sending message!</div>
                             </div>
 
-                            <!-- 等待消息 -->
-                            <div id="loadingMessage" style="display:none; color: white;">
-                                正在訓練中，請稍後...
-                            </div>
+                            <!-- 加載狀態 -->
+                            <div id="loadingMessage" style="display:none; color: white;">正在訓練中，請稍後...</div>
+
                             <!-- 跑馬燈區域 -->
                             <div id="marquee" class="mt-3"></div>
                         </form>
 
+                        <!-- 結果顯示區 -->
                         <div id="result"></div>
-
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- Icons Grid-->
+
+    <!-- 特徵展示區 -->
     <section class="features-icons bg-light text-center">
         <div class="container">
             <div class="row">
+                <!-- LLama預測區 -->
                 <div class="col-lg-4">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                         <div class="features-icons-icon d-flex">
@@ -226,24 +91,29 @@
                         </div>
                         <h3>LLama預測</h3>
                         <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                        <!-- 添加一個用於顯示結果的容器 -->
                         <div id="dynamic-result" class="mt-3" style="font-size: 20px;"></div>
                     </div>
                 </div>
+
+                <!-- 市場情緒區 -->
                 <div class="col-lg-4">
                     <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                        <div class="features-icons-icon d-flex">
+                            <i class="bi-layers m-auto text-primary"></i>
+                        </div>
                         <h3>市場情緒</h3>
                         <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                        <!-- 添加一個用於顯示結果的容器 -->
                         <div id="dynamic-sentiment-mean" class="mt-3" style="font-size: 20px;"></div>
                     </div>
                 </div>
+
+                <!-- 重要新聞區 -->
                 <div class="col-lg-4">
                     <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                        <h3>市場情緒</h3>
-                        
+                        <div class="features-icons-icon d-flex">
+                            <i class="bi-terminal m-auto text-primary"></i>
+                        </div>
+                        <h3>重要新聞</h3>
                         <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
                         <div id="news-results" class="mt-3" style="font-size: 20px;"></div>
                     </div>
@@ -251,133 +121,12 @@
             </div>
         </div>
     </section>
-    <!-- Image Showcases-->
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row g-0">
-                <!-- Showcase 1 -->
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                    style="background-image: url('assets/img/bg-showcase-1.jpg')"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Fully Responsive Design</h2>
-                    <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will
-                        look great on any device, whether it's a phone, tablet, or desktop the page will behave
-                        responsively!</p>
-                </div>
-            </div>
-    
-            <div class="row g-0">
-                <!-- Showcase 2 -->
-                <div class="col-lg-6 text-white showcase-img"
-                    style="background-image: url('assets/img/bg-showcase-2.jpg')"></div>
-                <div class="col-lg-6 my-auto showcase-text">
-                    <h2>Updated For Bootstrap 5</h2>
-                    <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the
-                        way in mobile responsive web development! All of the themes on Start Bootstrap are now using
-                        Bootstrap 5!</p>
-                </div>
-            </div>
-    
-            <div class="row g-0">
-                <!-- Showcase 3 -->
-                <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                    style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
-                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                    <h2>Easy to Use & Customize</h2>
-                    <h1>Testing News Section</h1>
 
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials-->
-    <section class="testimonials text-center bg-light">
-        <div class="container">
-            <h2 class="mb-5">What people are saying...</h2>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="..." />
-                        <h5>Margaret E.</h5>
-                        <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="..." />
-                        <h5>Fred S.</h5>
-                        <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of
-                            super nice landing pages."</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                        <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="..." />
-                        <h5>Sarah W.</h5>
-                        <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to
-                            us!"</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Call to Action-->
-    <section class="call-to-action text-white text-center" id="signup">
-        <div class="container position-relative">
-            <div class="row justify-content-center">
-                <div class="col-xl-6">
-                    <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-                    <!-- Signup form-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
-                        <!-- Email address input-->
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-control form-control-lg" id="emailAddressBelow" type="email"
-                                    placeholder="Email Address" data-sb-validations="required,email" />
-                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">
-                                    Email Address is required.</div>
-                                <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">
-                                    Email Address Email is not valid.</div>
-                            </div>
-                            <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton"
-                                    type="submit">Submit</button></div>
-                        </div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                <p>To activate this form, sign up at</p>
-                                <a class="text-white"
-                                    href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage">
-                            <div class="text-center text-danger mb-3">Error sending message!</div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer-->
+    <!-- 頁腳 -->
     <footer class="footer bg-light">
         <div class="container">
             <div class="row">
+                <!-- 左側資訊 -->
                 <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item"><a href="#!">About</a></li>
@@ -390,6 +139,8 @@
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
                 </div>
+
+                <!-- 右側社交媒體 -->
                 <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item me-4">
@@ -406,14 +157,12 @@
             </div>
         </div>
     </footer>
-    <!-- Bootstrap core JS-->
+
+    <!-- Bootstrap 核心 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- 主題 JS 文件 -->
+    <script src="{{ url_for('static', filename='dist/js/scripts.js') }}"></script>
+    <!-- SB Forms JS 用於表單提交 -->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 </body>

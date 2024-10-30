@@ -1,15 +1,7 @@
 1. Is the next one year bullish or bearish?: bullish
 2. Based on the current price, is it recommended to buy?: Yes
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price since buying, or when the stock price falls below the 50-day moving average.
-6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE, high gross profit margin, stable DBR, and a growing semiconductor industry.
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1240 NTD
-4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set stop loss at 846 NTD (10% below the current price) and adjust it to 950 NTD if the stock price reaches 1050 NTD. Criteria for triggering a sell order include a decline in ROE, a significant decrease in EPS, or a substantial increase in DBR.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set stop loss at 850 NTD, criteria: if the stock price falls below the 50-day moving average or if ROE decreases by 20% in a quarter.
 6. Please give specific reasons why you think it is bullish or bearish.: 
-- The company's ROE has been consistently high, indicating strong profitability.
-- The increasing BPS over the years suggests a growing book value.
-- The company operates in the semiconductor industry, which has a promising outlook due to the rising demand for technology and electronic devices.
-- The historical price trend shows a recovery from the 2022 low, and the current price is near the all-time high, indicating a potential for further growth.
-- The company's products and services, including IC manufacturing and testing, are in high demand, supporting a positive outlook.
+Increasing ROE, stable capital, increasing BPS, high gross profit margin, high operating margin, decreasing DBR, and the company's position in the growing semiconductor industry.
