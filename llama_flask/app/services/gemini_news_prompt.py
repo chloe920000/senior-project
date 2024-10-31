@@ -1,8 +1,16 @@
+"""
+從 Supabase 中提取過去30天的新聞資料，生成摘要，
+並使用生成式AI模型分析股市情況，最後將結果儲存到資料庫。
+
+"""
+
 import asyncio
 from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
-from app.services import settings
+
+# from app.services import settings
+import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -29,10 +37,9 @@ supabase: Client = create_client(url, key)
 # 中文分詞器與句子分割器
 class ChineseTokenizer:
     def tokenize(self, text):
-        return list(jieba.cut(text))  # 使用 jieba 進行中文分詞
+        return list(jieba.cut(text))  # 分詞
 
     def to_sentences(self, text):
-        # 使用常見的中文句子分隔符號來分割文本
         delimiters = ["。", "！", "？"]
         sentences = []
         start = 0
@@ -44,40 +51,19 @@ class ChineseTokenizer:
             sentences.append(text[start:].strip())
         return sentences
 
-
-# 中文分辭器与句子分割器
-class ChineseTokenizer:
-    def tokenize(self, text):
-        return list(jieba.cut(text))  # 使用 jieba 進行中文分辭
-
-    def to_sentences(self, text):
-        # 使用常見的中文句子分隔符號来分割文本
-        delimiters = ["。", "！", "？"]
-        sentences = []
-        start = 0
-        for i, char in enumerate(text):
-            if char in delimiters:
-                sentences.append(text[start : i + 1].strip())
-                start = i + 1
-        if start < len(text):  # 如果还有剩余的文本
-            sentences.append(text[start:].strip())
-        return sentences
-
-    def to_words(self, sentence):
-        # 使用 jieba 分词
-        return list(jieba.cut(sentence))  # 返回分词后的列表
+    def to_words(self, text):
+        return self.tokenize(text)  # 实现 to_words 方法，调用 tokenize 方法
 
 
 # 使用 Sumy 生成新闻摘要
-def summarize_text(news, sentence_count=7):
+def summarize_text(news, tokenizer, sentence_count=7):
     """
     使用 Sumy 的 LSA 方法来生成摘要
     :param news: string, 原始新闻
     :param sentence_count: int, 摘要的句子数量限制
     :return: string, 摘要后的新闻
     """
-    tokenizer = ChineseTokenizer()  # 使用中文分词器
-    sentences = tokenizer.to_sentences(news)  # 分割为句子
+    sentences = tokenizer.to_sentences(news)
     parser = PlaintextParser.from_string(" ".join(sentences), tokenizer)
     summarizer = LsaSummarizer()
     summary = summarizer(parser.document, sentence_count)
@@ -117,12 +103,12 @@ def gemini_response(news):
         return "exception"
 
 
+"""
 def response_to_signal(text):
-    """
-    text: string 回答訊息
+    
+    #text: string 回答訊息
 
-    return: int 回答訊號
-    """
+    #return: int 回答訊號
     if "不好" in text:
         signal = -1
     elif "好" in text:
@@ -132,77 +118,66 @@ def response_to_signal(text):
     else:
         signal = None  # 處理未知情況
     return signal
+"""
 
 
 # title media date link article time
 async def chat(date, stocks):
+    # 解析單一股票 ID 和名稱
+    stock_id = stocks.get("stock_id")
+    stock_name = stocks.get("stock_name")
 
     end_date = datetime.strptime(date, "%Y-%m-%d")
     start_date = end_date - timedelta(days=30)
 
-    results = []
+    # 從 Supabase 中提取指定日期範圍內的數據
+    response = (
+        supabase.from_("news_test")
+        .select("*")
+        .eq("stockID", stock_id)
+        .gte("date", start_date.strftime("%Y-%m-%d"))
+        .lte("date", end_date.strftime("%Y-%m-%d"))
+        .execute()
+    )
+    news_data = response.data
 
-    for stock in stocks:
-        stock_id = stock.get("stock_id")
-        stock_name = stock.get("stock_name")
+    if not news_data:
+        print(f"No news found for stockID: {stock_id}")
+        return
 
-        # 從 Supabase 中提取數據
-        response = (
-            supabase.from_("news_test").select("*").eq("stockID", stock_id).execute()
-        )
-        news_data = response.data
+    # 收集30天內的新聞摘要
+    news_summaries = []
+    tokenizer = ChineseTokenizer()  # 初始化一次分詞器
+    for news in news_data:
+        # 對每篇新聞進行摘要處理
+        summary = summarize_text(news["content"], tokenizer, sentence_count=7)
+        print(f"Summary for article dated {news['date']}:\n{summary}\n")
+        news_summaries.append(summary)
 
-        if not news_data:
-            print(f"No news found for stockID: {stock_id}")
-            continue
+    # 合併所有的摘要成一篇文章
+    combined_summary = "\n".join(news_summaries)
+    print(f"Combined Summary for {stock_name}:\n{combined_summary}\n")
 
-        # 收集30天內的新聞摘要
-        news_summaries = []
-        for news in news_data:
-            date_obj = news["date"]  # Directly using the date from the database
+    # 將合併後的摘要傳入 Gemini
+    if combined_summary:
+        ans = gemini_response(combined_summary)
+        print(f"Gemini 回答: {ans}")
+        # signal = response_to_signal(ans)
 
-            # 確保 date_obj 是 date type
-            if isinstance(date_obj, str):
-                date_obj = datetime.strptime(date_obj, "%Y-%m-%d").date()
+        # 將 stock_id、ans、date、combined_summary 寫入到 stock_news_summary_30 表中
+        supabase.from_("stock_news_summary_30").insert(
+            {
+                "stockID": stock_id,
+                # "gemini_signal": signal,
+                "gemini_ans": ans,
+                "date": end_date.strftime("%Y-%m-%d"),  # 插入處理日期
+                "summary": combined_summary,
+            }
+        ).execute()
 
-            if start_date.date() <= date_obj <= end_date.date():
-                print(f"Processing stock: {stock_name}, Date: {date_obj}")
-
-                # 對每篇新聞進行摘要處理
-                summary = summarize_text(news["content"], sentence_count=7)
-                print(
-                    f"Summary for article dated {date_obj}:\n{summary}\n"
-                )  # 打印每篇新闻的摘要
-                news_summaries.append(summary)
-
-        # 合併所有的摘要成一篇文章
-        combined_summary = "\n".join(news_summaries)
-        print(
-            f"Combined Summary for {stock_name}:\n{combined_summary}\n"
-        )  # 輸出合併後的摘要
-
-        # 將合併後的摘要傳入 Gemini
-        if combined_summary:
-            ans = gemini_response(combined_summary)
-            print(f"Gemini 回答: {ans}")
-            signal = response_to_signal(ans)
-
-            # 將 stock_id、ans、date、combined_summary 寫入到 stock_news_summary_30 table 中
-            supabase.from_("stock_news_summary_30").insert(
-                {
-                    "stockID": stock_id,
-                    "gemini_signal": signal,
-                    "gemini_ans": ans,
-                    "date": end_date.strftime("%Y-%m-%d"),  # 插入當前處理的日期
-                    "summary": combined_summary,
-                }
-            ).execute()
-
-            # for flask
-            result = (
-                f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
-            )
-            results.append(result)
+        # 結果格式化，方便後續輸出
+        result = f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
+        return result
 
     print("gemini評分更新完成")
 
@@ -212,14 +187,12 @@ def get_gemini_30dnews_response(date, stocks):
     return asyncio.run(chat(date, stocks))
 
 
-# def test_get_gemini_response():
-#     date = "2024-10-20"  # 使用当前日期
-#     stocks = [
-#         {"stock_id": "2330", "stock_name": "台積電"},
-#     ]
+def test_get_gemini_response():
+    date = "2024-07-20"  # 使用當前日期
+    stocks = {"stock_id": "2330", "stock_name": "台積電"}  # 改為字典
 
-#     get_gemini_30dnews_response(date, stocks)
+    get_gemini_30dnews_response(date, stocks)
 
 
 # # 跳用測試函数
-# test_get_gemini_response()
+test_get_gemini_response()
