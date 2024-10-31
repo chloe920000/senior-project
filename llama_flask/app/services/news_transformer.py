@@ -1,3 +1,8 @@
+"""
+pip install --upgrade numpy tensorflow transformers
+
+"""
+
 import asyncio
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 from supabase import create_client, Client
@@ -63,158 +68,145 @@ def bert_sentiment_analysis(news):
     }
 
 
-async def analyze_and_store_sentiments(date, stocks):
+async def analyze_and_store_sentiments(date, stock):
     """
     分析並存儲距離指定日期前 30 天範圍內、指定股票的新聞情緒。
     date: string 日期 (格式: "YYYY-MM-DD")
-    stocks: list 包含多個 stock_id 的列表
+    stock: dict 包含 stock_id 的字典
     """
+    stock_id = stock.get("stock_id")
     end_date = datetime.strptime(date, "%Y-%m-%d")
     start_date = end_date - timedelta(days=30)
 
-    for stock in stocks:
-        stock_id = stock.get("stock_id")
+    # Check if there's already an existing, non-empty `transformer_mean` for this stock_id and date
+    existing_summary = (
+        supabase.from_("stock_news_summary_30")
+        .select("transformer_mean")
+        .eq("stockID", stock_id)
+        .eq("date", date)
+        .execute()
+    )
 
-        # Check if there's already an existing, non-empty `transformer_mean` for this stock_id and date
-        existing_summary = (
-            supabase.from_("stock_news_summary_30")
-            .select("transformer_mean")
-            .eq("stockID", stock_id)
-            .eq("date", date)
-            .execute()
+    if (
+        existing_summary.data
+        and existing_summary.data[0]["transformer_mean"] is not None
+    ):
+        print(f"Data already exists for stockID {stock_id} on date {date}. Skipping...")
+        return  # Skip this stock_id since it has already been processed
+
+    # Continue with sentiment analysis and data processing
+    response = (
+        supabase.from_("news_test")  # news_content
+        .select("*")
+        .gte("date", start_date)
+        .lte("date", end_date)
+        .eq("stockID", stock_id)
+        .execute()
+    )
+    news_data = response.data
+
+    if not news_data:
+        print(
+            f"No news data found for stock_id {stock_id} within the specified date range."
         )
+        return
 
-        if (
-            existing_summary.data
-            and existing_summary.data[0]["transformer_mean"] is not None
-        ):
-            print(
-                f"Data already exists for stockID {stock_id} on date {date}. Skipping..."
+    total_sentiment_score = 0
+    count = 0
+
+    for news in news_data:
+        try:
+            print(f"Processing news ID: {news['id']} for stock_id: {stock_id}")
+
+            # Perform sentiment analysis
+            sentiment_result = bert_sentiment_analysis(news["content"])
+            sentiment_score = sentiment_result["score"]
+            star = sentiment_result["star"]
+            emotion = sentiment_result["emotion"]
+
+            # Accumulate sentiment score
+            total_sentiment_score += sentiment_score
+            count += 1
+
+            # Insert sentiment data for each news item
+            existing_sentiment = (
+                supabase.from_("transformer_sentiment")
+                .select("id")
+                .eq("news_id", news["id"])
+                .execute()
             )
-            continue  # Skip this stock_id since it has already been processed
 
-        # Continue with sentiment analysis and data processing
-        response = (
-            supabase.from_("news_test")
-            .select("*")
-            .gte("date", start_date)
-            .lte("date", end_date)
-            .eq("stockID", stock_id)
-            .execute()
-        )
-        news_data = response.data
+            if existing_sentiment.data:
+                supabase.from_("transformer_sentiment").delete().eq(
+                    "news_id", news["id"]
+                ).execute()
 
-        if not news_data:
-            print(
-                f"No news data found for stock_id {stock_id} within the specified date range."
+            insert_response = (
+                supabase.from_("transformer_sentiment")
+                .insert(
+                    {
+                        "news_id": news["id"],
+                        "stockID": stock_id,
+                        "sentiment": sentiment_score,
+                        "star": star,
+                        "emotion": emotion,
+                    }
+                )
+                .execute()
             )
-            continue
 
-        total_sentiment_score = 0
-        count = 0
-
-        for news in news_data:
-            try:
-                print(f"Processing news ID: {news['id']} for stock_id: {stock_id}")
-
-                # Perform sentiment analysis
-                sentiment_result = bert_sentiment_analysis(news["content"])
-                sentiment_score = sentiment_result["score"]
-                star = sentiment_result["star"]
-                emotion = sentiment_result["emotion"]
-
-                # Accumulate sentiment score
-                total_sentiment_score += sentiment_score
-                count += 1
-
-                # Insert sentiment data for each news item
-                existing_sentiment = (
-                    supabase.from_("transformer_sentiment")
-                    .select("id")
-                    .eq("news_id", news["id"])
-                    .execute()
-                )
-
-                if existing_sentiment.data:
-                    supabase.from_("transformer_sentiment").delete().eq(
-                        "news_id", news["id"]
-                    ).execute()
-
-                insert_response = (
-                    supabase.from_("transformer_sentiment")
-                    .insert(
-                        {
-                            "news_id": news["id"],
-                            "stockID": stock_id,
-                            "sentiment": sentiment_score,
-                            "star": star,
-                            "emotion": emotion,
-                        }
-                    )
-                    .execute()
-                )
-
-                if insert_response.data:
-                    print(f"Successfully inserted sentiment for news ID: {news['id']}")
-                else:
-                    print(
-                        f"Failed to insert sentiment for news ID {news['id']}. Response: {insert_response}"
-                    )
-
-            except Exception as e:
-                print(f"Failed to process news ID {news['id']}. Error: {str(e)}")
-
-        # Calculate and store the average sentiment score if count > 0
-        if count > 0:
-            average_sentiment = total_sentiment_score / count
-
-            if existing_summary.data:
-                update_response = (
-                    supabase.from_("stock_news_summary_30")
-                    .update({"transformer_mean": average_sentiment})
-                    .eq("stockID", stock_id)
-                    .eq("date", date)
-                    .execute()
-                )
-                if update_response.data:
-                    print(
-                        f"Updated transformer_mean for stockID {stock_id} on date {date} to {average_sentiment}"
-                    )
-                else:
-                    print(
-                        f"Failed to update transformer_mean for stockID {stock_id} on date {date}. Response: {update_response}"
-                    )
+            if insert_response.data:
+                print(f"Successfully inserted sentiment for news ID: {news['id']}")
             else:
-                insert_response = (
-                    supabase.from_("stock_news_summary_30")
-                    .insert(
-                        {
-                            "stockID": stock_id,
-                            "date": date,
-                            "transformer_mean": average_sentiment,
-                        }
-                    )
-                    .execute()
+                print(
+                    f"Failed to insert sentiment for news ID {news['id']}. Response: {insert_response}"
                 )
-                if insert_response.data:
-                    print(
-                        f"Inserted new transformer_mean for stockID {stock_id} on date {date} with average {average_sentiment}"
-                    )
-                else:
-                    print(
-                        f"Failed to insert transformer_mean for stockID {stock_id} on date {date}. Response: {insert_response}"
-                    )
+
+        except Exception as e:
+            print(f"Failed to process news ID {news['id']}. Error: {str(e)}")
+
+    # Calculate and store the average sentiment score if count > 0
+    if count > 0:
+        average_sentiment = total_sentiment_score / count
+
+        if existing_summary.data:
+            update_response = (
+                supabase.from_("stock_news_summary_30")
+                .update(
+                    {"transformer_mean": average_sentiment, "count": count}
+                )  # 合併兩個字段為一個字典
+                .eq("stockID", stock_id)
+                .eq("date", date)
+                .execute()
+            )
+
+            if update_response.data:
+                print(
+                    f"Updated transformer_mean and count for stockID {stock_id} on date {date} to {average_sentiment}"
+                )
+            else:
+                print(
+                    f"Failed to update transformer_mean for stockID {stock_id} on date {date}. Response: {update_response}"
+                )
+        else:
+            print(
+                f"Summary data does not exist for stockID {stock_id} on date {date}."
+            )  # 新增的提示信息
+    else:
+        print(
+            f"Count is not greater than 0 for stockID {stock_id} on date {date}."
+        )  # 可選，處理 count <= 0 的情況
 
 
 def main():
     """
     主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
     """
-    date = "2024-7-25"  # 指定分析的目標日期
-    test_stocks = [{"stock_id": "2330", "stock_name": "台積電"}]
+    date = "2024-07-20"  # 指定分析的目標日期
+    stock = {"stock_id": "2330", "stock_name": "台積電"}  # 改為單一股票字典
 
     print("Starting sentiment analysis...")
-    asyncio.run(analyze_and_store_sentiments(date, test_stocks))
+    asyncio.run(analyze_and_store_sentiments(date, stock))
     print("Sentiment analysis completed.")
 
 
