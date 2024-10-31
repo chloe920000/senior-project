@@ -55,22 +55,46 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // 處理新聞響應
-            if (newsResponse.ok) {
-                const newsData = await newsResponse.json();  // 獲取新聞數據
-                let newsHtml = '';  // 初始化 HTML 字串
-                // 動態生成新聞列表
-                for (const [source, newsList] of Object.entries(newsData)) {
-                    newsHtml += `<h2>${source}</h2><ul>`;
-                    newsList.forEach(news => {
-                        newsHtml += `<li><a href="${news.link}" target="_blank">${news.headline}</a></li>`;
-                    });
-                    newsHtml += `</ul>`;
-                }
-                document.getElementById('news-results').innerHTML = newsHtml;  // 顯示新聞結果
-            } else {
-                console.error('Error fetching news:', newsResponse.statusText);
-                document.getElementById('news-results').innerHTML = 'Error fetching news: ' + newsResponse.statusText;  // 顯示新聞錯誤信息
+        if (newsResponse.ok) {
+            const newsData = await newsResponse.json();  // 獲取新聞數據
+            let newsHtml = '';  // 初始化 HTML 字串
+
+            // 動態生成新聞卡片
+            for (const [source, newsList] of Object.entries(newsData)) {
+                newsHtml += `
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header text-white bg-primary">
+                            <h4 class="mb-0">${source}</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                `;
+                newsList.forEach(news => {
+                    newsHtml += `
+                        <li class="py-2 border-bottom">
+                            <a href="${news.link}" target="_blank" class="text-dark text-decoration-none">
+                                ${news.headline}
+                            </a>
+                        </li>
+                    `;
+                });
+                newsHtml += `
+                            </ul>
+                        </div>
+                    </div>
+                `;
             }
+            document.getElementById('news-results').innerHTML = newsHtml;  // 顯示新聞結果
+        } else {
+            console.error('找不到相關的新聞', newsResponse.statusText);
+            document.getElementById('news-results').innerHTML = `
+                <div class="alert alert-warning" role="alert">
+                    找不到相關的新聞: ${newsResponse.statusText}
+                </div>
+            `;  // 顯示新聞錯誤信息
+        }
+
+
 
             // 使用 SSE（Server-Sent Events）實時更新股票分析結果
             const eventSource = new EventSource('/sse_stock_analysis');
