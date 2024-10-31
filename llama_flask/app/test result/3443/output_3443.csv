@@ -1,5 +1,9 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2024-07-30,bullish,Yes,1400 NTD,18 months,"Set stop loss at 985 NTD, review and adjust every 3 months, sell if the stock price falls below the stop loss or if ROE and ROA show significant decline."
+<<<<<<< HEAD
 2024-10-29,bullish,Yes,1378 NTD,18 months,Set stop loss at 10% below the purchase price and adjust it to break-even when the stock price rises by 20%.
 2024-10-29,bullish,Yes,1300 NTD,18 months,"Trailing stop loss with a 10% drop from the highest price, or a fixed stop loss at 950 NTD"
 2024-10-29,bullish,Yes,1375 NTD,18 months,Set a stop-loss order at 10% below the current price and adjust it to 5% below the current price if the stock price rises by 20% within the first 6 months.
+=======
+2024-10-29,bullish,Yes,1378 NTD,18 months,Set stop loss at 10% below the purchase price and adjust it to break-even when the stock price rises by 20%.
+>>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620

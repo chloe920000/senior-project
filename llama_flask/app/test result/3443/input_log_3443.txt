@@ -112,6 +112,7 @@ Answer sample format:
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 
 
+<<<<<<< HEAD
 no.0 === 2024-10-29 17:33:07.304279 ===
 Evaluate the share price of Taiwan Stock Exchange 3443 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
@@ -226,3 +227,5 @@ Answer sample format:
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 
 
+=======
+>>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
