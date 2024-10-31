@@ -81,19 +81,6 @@ def scoreMean(date, stocks):
             "count": news_count,
         }
 
-<<<<<<< HEAD
-        # 將處理后的數據插入到新的表 "score_mean"
-        insert_response = supabase.table("score_mean").insert(insert_data).execute()
-
-        if insert_response.data is None:
-            print(f"Failed to insert data for stock_id {stock_id}: {insert_response}")
-            raise Exception("Data insertion failed")
-
-        print(f"Data for stock_id {stock_id} processed and inserted successfully.")
-
-    print(mean_data)
-    print("新聞分數平均計算完成\n")
-=======
         if check_response.data:
             # 資料存在，更新該筆資料的 arousal_mean 欄位
             update_response = (
@@ -120,7 +107,6 @@ def scoreMean(date, stocks):
         print("total emotion:", total_emotion)
         print("mean_data:", mean_data)
     print(f"{stock_id}30日的新聞分數平均計算完成\n")
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
 
     # 返回將要插入的字典列表
     return mean_data
@@ -128,13 +114,8 @@ def scoreMean(date, stocks):
 
 # test
 if __name__ == "__main__":
-<<<<<<< HEAD
-    # Define test dates and stock
-    test_dates = ["2024-07-30"]
-=======
     # Define a test date as a single string
     test_date = "2024-10-19"
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
 
     # 測試传入股票的 stocks 列表格式
     test_stocks = [{"stock_id": "2330", "stock_name": "台積電"}]
@@ -144,7 +125,3 @@ if __name__ == "__main__":
         print("Inserted data:", mean_result)
     except Exception as e:
         print(f"Error testing with keyword '台積電': {e}")
-<<<<<<< HEAD
-"""
-=======
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620

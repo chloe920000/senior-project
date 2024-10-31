@@ -1,8 +1,5 @@
 # 建立網頁的後端函數。
 import re
-<<<<<<< HEAD
-from flask import render_template, request, jsonify,Blueprint,Response, stream_with_context
-=======
 from flask import (
     render_template,
     request,
@@ -11,7 +8,6 @@ from flask import (
     Response,
     stream_with_context,
 )   
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_flask模塊
 import app.services.score_mean as score_mean  # 引入score_mean模塊
@@ -129,12 +125,9 @@ def predict():
     # 將剩餘新聞情緒評分
     sentiment_score = sentiment_analysis_to_supa.get_sentiment_score(date, stocks)
 
-<<<<<<< HEAD
-=======
 
     #30天的新聞summary分析 
     gemini_30dnews_response = gemini_news_prompt.get_gemini_30dnews_response(date , stocks)
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
     # 計算新聞情緒平均分數，將 stocks 列表作為參數傳遞
     sentiment_mean = score_mean.scoreMean(date, stocks)
     
