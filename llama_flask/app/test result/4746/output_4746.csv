@@ -1,0 +1,2 @@
+Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
+2024-10-29,bullish,Yes,130 NTD,24 months,"Trailing stop loss with 10% threshold, sell if stock price falls below 85 NTD or if ROE falls below 5% for two consecutive quarters."
