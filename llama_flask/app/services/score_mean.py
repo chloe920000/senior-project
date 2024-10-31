@@ -4,6 +4,12 @@ import os
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
+"""
+todo :
+新增emotion平均
+
+
+"""
 # 加載環境變量
 load_dotenv()
 
@@ -73,13 +79,14 @@ def scoreMean(date, stocks):
             "count": news_count,
         }
 
-        # 准备插入的数据
-        insert_data = {
-            "date": end_date.strftime("%Y-%m-%d"),
-            "arousal_mean": mean_arousal,
-            "stockID": stock_id,
-            "count": news_count,
-        }
+        # 檢查是否已存在該日期和股票ID的資料
+        check_response = (
+            supabase.table("stock_news_summary_30")
+            .select("id")
+            .eq("stockID", stock_id)
+            .eq("date", end_date.strftime("%Y-%m-%d"))
+            .execute()
+        )
 
         if check_response.data:
             # 資料存在，更新該筆資料的 arousal_mean 欄位
@@ -121,7 +128,7 @@ if __name__ == "__main__":
     test_stocks = [{"stock_id": "2330", "stock_name": "台積電"}]
     try:
         print("Testing with keyword '台積電'...")
-        mean_result = scoreMean(test_dates, test_stocks)
+        mean_result = scoreMean(test_date, test_stocks)  # 傳入單個日期字串
         print("Inserted data:", mean_result)
     except Exception as e:
         print(f"Error testing with keyword '台積電': {e}")

@@ -19,135 +19,6 @@
 
     <!-- 主題樣式表，包含 Bootstrap 核心樣式 -->
     <link href="{{ url_for('static', filename='dist/css/styles.css') }}" rel="stylesheet" />
-    <style>
-        #loadingMessage {
-            font-size: 16px;
-            color: #555;
-            text-align: center;
-            margin-top: 20px;
-        }
-        #marquee {
-            display: inline-block;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            color: white;
-            font-size: 20px;
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-        }
-        
-        /* 跑馬燈動畫效果 */
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-    
-        /* 當加上 marquee-animation 時，啟動跑馬燈效果 */
-        .marquee-animation {
-            animation: marquee 10s linear infinite;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('prediction-form').onsubmit = async function (event) {
-                event.preventDefault(); // Prevent default form submission behavior
-        
-                // Show loading message
-                document.getElementById('loadingMessage').style.display = 'block';
-                document.getElementById('result').innerHTML = '';  // Clear previous results
-                document.getElementById('marquee').innerHTML = '正在分析中...';  // Initial marquee content
-                document.getElementById('marquee').classList.add('marquee-animation'); // Start marquee animation
-        
-                const formData = new FormData(this); // Get form data
-        
-                try {
-                    // Send both AJAX requests in parallel
-                    const [predictResponse, newsResponse] = await Promise.all([
-                        fetch('/predict', {
-                            method: 'POST',
-                            body: formData
-                        }),
-                        fetch('/news', {
-                            method: 'POST',
-                            body: formData
-                        })
-                    ]);
-        
-                    // Handle prediction response
-                    if (predictResponse.ok) {
-                        const [sentiment_mean, result] = await predictResponse.json();
-                        document.getElementById('loadingMessage').style.display = 'none'; // Hide loading message
-        
-                        // Build and display prediction result table
-                        let table = '<table class="table table-bordered"><thead><tr><th>Title</th><th>Details</th></tr></thead><tbody>';
-                        table += `<tr><td colspan="2"><strong>Predictions</strong></td></tr>`;
-                        for (let key in result) {
-                            table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
-                        }
-                        table += '</tbody></table>';
-                        document.getElementById('dynamic-result').innerHTML = table;
-        
-                        // Handle sentiment_mean data
-                        let sentimentTable = '<table class="table table-bordered"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>';
-                        sentimentTable += `<tr><td colspan="2"><strong>Sentiment Mean</strong></td></tr>`;
-                        for (let stockID in sentiment_mean) {
-                            let stockData = sentiment_mean[stockID];
-                            for (let dateStr in stockData) {
-                                let data = stockData[dateStr];
-                                sentimentTable += `<tr><td>Stock ID</td><td>${stockID}</td></tr>`;
-                                sentimentTable += `<tr><td>Date</td><td>${data['date']}</td></tr>`;
-                                sentimentTable += `<tr><td>Arousal Mean</td><td>${data['arousal_mean']}</td></tr>`;
-                                sentimentTable += `<tr><td>Count</td><td>${data['count']}</td></tr>`;
-                            }
-                        }
-                        sentimentTable += '</tbody></table>';
-                        document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentTable;
-                    } else {
-                        document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得預測結果';
-                    }
-        
-                    // Handle news response
-                    if (newsResponse.ok) {
-                        const newsData = await newsResponse.json();
-                        let newsHtml = '';
-                        for (const [source, newsList] of Object.entries(newsData)) {
-                            newsHtml += `<h2>${source}</h2><ul>`;
-                            newsList.forEach(news => {
-                                newsHtml += `<li><a href="${news.link}" target="_blank">${news.headline}</a></li>`;
-                            });
-                            newsHtml += `</ul>`;
-                        }
-                        document.getElementById('news-results').innerHTML = newsHtml; // Display news results in the new container
-                    } else {
-                        console.error('Error fetching news:', newsResponse.statusText);
-                        document.getElementById('news-results').innerHTML = 'Error fetching news: ' + newsResponse.statusText;                    
-                    }
-        
-                    // SSE for stock analysis
-                    const eventSource = new EventSource('/sse_stock_analysis');
-                    eventSource.onmessage = function (event) {
-                        const marquee = document.getElementById('marquee');
-                        marquee.innerHTML = event.data;
-                        marquee.classList.add('marquee-animation');
-                        if (event.data === "分析完成!") {
-                            eventSource.close();
-                            marquee.classList.remove('marquee-animation');
-                            marquee.innerHTML = "分析完成!";
-                        }
-                    };
-        
-                } catch (error) {
-                    console.error('Error:', error);
-                    document.getElementById('loadingMessage').innerHTML = 'Error: 無法連接到伺服器';
-                }
-            };
-        });
-    </script>
-    
-
 </head>
 
 <body>
@@ -239,16 +110,10 @@
                 <!-- 重要新聞區 -->
                 <div class="col-lg-4">
                     <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-<<<<<<< HEAD
-                        <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                        <h3>最新新聞</h3>
-                        
-=======
                         <div class="features-icons-icon d-flex">
                             <i class="bi-terminal m-auto text-primary"></i>
                         </div>
                         <h3>重要新聞</h3>
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
                         <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
                         <div id="news-results" class="mt-3" style="font-size: 20px;"></div>
                     </div>
@@ -302,8 +167,4 @@
 
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620

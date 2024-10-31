@@ -199,14 +199,9 @@ def fetch_news_chinatime(stock_id, stock_name):
                 )
             except:
                 print(f"Error: Article list not found on page {i}.")
-                break  # 沒有找到文章列表，結束爬蟲
+                continue
 
             articles = article_list.find_elements(By.TAG_NAME, "li")
-
-            # 如果沒有找到任何文章，結束爬蟲
-            if not articles:
-                print(f"No articles found on page {i}. Stopping crawl.")
-                break
 
             for article in articles:
                 try:
@@ -221,8 +216,6 @@ def fetch_news_chinatime(stock_id, stock_name):
 
                     news_list.append({"headline": title_text, "link": link_url})
                     insert_news_to_supabase(stock_id, title_text)
-
-                    # 如果已經找到足夠的文章，結束爬蟲
                     if len(news_list) >= 3:
                         driver.quit()
                         return news_list
@@ -235,7 +228,6 @@ def fetch_news_chinatime(stock_id, stock_name):
         driver.quit()
 
     return news_list
-
 
 def print_news(news_list, source):
     """以統一格式輸出新聞標題和連結"""

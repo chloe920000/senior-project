@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
-import settings
+from app.services import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -212,27 +212,14 @@ def get_gemini_30dnews_response(date, stocks):
     return asyncio.run(chat(date, stocks))
 
 
-<<<<<<< HEAD
-def test_get_gemini_response():
-    date = "2024-10-20"  # 使用当前日期
-    stocks = [
-        {"stock_id": "2330", "stock_name": "台積電"},
-    ]
-=======
 # def test_get_gemini_response():
 #     date = "2024-10-20"  # 使用当前日期
 #     stocks = [
 #         {"stock_id": "2330", "stock_name": "台積電"},
 #     ]
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
 
 #     get_gemini_30dnews_response(date, stocks)
 
 
-<<<<<<< HEAD
-# 跳用測試函数
-test_get_gemini_response()
-=======
 # # 跳用測試函数
 # test_get_gemini_response()
->>>>>>> 2bf07f63dd988058fc13e7c187e7ca855aa8c620
