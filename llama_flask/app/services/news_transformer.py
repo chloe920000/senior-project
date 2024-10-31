@@ -197,11 +197,14 @@ async def analyze_and_store_sentiments(date, stock):
             f"Count is not greater than 0 for stockID {stock_id} on date {date}."
         )  # 可選，處理 count <= 0 的情況
 
+    return average_sentiment
 
+
+"""
 def main():
-    """
-    主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
-    """
+    
+    #主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
+
     date = "2024-07-20"  # 指定分析的目標日期
     stock = {"stock_id": "2330", "stock_name": "台積電"}  # 改為單一股票字典
 
@@ -212,3 +215,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
