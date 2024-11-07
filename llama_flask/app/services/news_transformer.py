@@ -12,6 +12,10 @@ from dotenv import load_dotenv
 import os
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+import jieba
 import plotly.express as px
 import pandas as pd
 import base64
@@ -38,6 +42,36 @@ emotion_counts = {"positive": 0, "neutral": 0, "negative": 0}
 star_counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
 
 
+# 中文分詞器與句子分割器
+class ChineseTokenizer:
+    def tokenize(self, text):
+        return list(jieba.cut(text))  # 分詞
+
+    def to_sentences(self, text):
+        delimiters = ["。", "！", "？"]
+        sentences = []
+        start = 0
+        for i, char in enumerate(text):
+            if char in delimiters:
+                sentences.append(text[start : i + 1].strip())
+                start = i + 1
+        if start < len(text):  # 如果還有剩餘的文本
+            sentences.append(text[start:].strip())
+        return sentences
+
+
+# 使用 Sumy 生成 512 字新聞摘要
+def summarize_text(news, tokenizer, word_limit=512):
+    sentences = tokenizer.to_sentences(news)
+    parser = PlaintextParser.from_string(" ".join(sentences), tokenizer)
+    summarizer = LsaSummarizer()
+    preliminary_summary = summarizer(parser.document, 10)
+    summary_text = " ".join(str(sentence) for sentence in preliminary_summary)
+    if len(summary_text) > word_limit:
+        summary_text = summary_text[:word_limit] + "..."
+    return summary_text
+
+
 def bert_sentiment_analysis(news):
     """
     使用 nlptown 的多語言 BERT 模型進行情緒分析
@@ -45,7 +79,9 @@ def bert_sentiment_analysis(news):
 
     return: dict 包含 sentiment_score, star, 和 emotion (1: positive, 0: neutral, -1: negative)
     """
-    result = sentiment_analyzer(news[:512])[0]  # 模型有 token 限制，這裡截取前512個字元
+    tokenizer = ChineseTokenizer()
+    summarized_news = summarize_text(news, tokenizer, word_limit=512)
+    result = sentiment_analyzer(summarized_news)[0]
     sentiment_label = result["label"]  # 例如 "5 stars"
     sentiment_score = result["score"]  # 置信度分數
 

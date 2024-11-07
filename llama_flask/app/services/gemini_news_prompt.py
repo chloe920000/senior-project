@@ -55,20 +55,28 @@ class ChineseTokenizer:
         return self.tokenize(text)  # 实现 to_words 方法，调用 tokenize 方法
 
 
+
 # 使用 Sumy 生成新闻摘要
-def summarize_text(news, tokenizer, sentence_count=7):
+def summarize_text(news, tokenizer, word_limit=512):
     """
-    使用 Sumy 的 LSA 方法来生成摘要
+    使用 Sumy 的 LSA 方法来生成摘要，限制摘要字數
     :param news: string, 原始新闻
-    :param sentence_count: int, 摘要的句子数量限制
+    :param word_limit: int, 摘要的字數限制
     :return: string, 摘要后的新闻
     """
     sentences = tokenizer.to_sentences(news)
     parser = PlaintextParser.from_string(" ".join(sentences), tokenizer)
     summarizer = LsaSummarizer()
-    summary = summarizer(parser.document, sentence_count)
-    return " ".join(str(sentence) for sentence in summary)
-
+    
+    # 初步生成較多的句子
+    preliminary_summary = summarizer(parser.document, 10)  # 先生成 10 個句子的摘要
+    summary_text = " ".join(str(sentence) for sentence in preliminary_summary)
+    
+    # 根據字數限制進行裁剪
+    if len(summary_text) > word_limit:
+        summary_text = summary_text[:word_limit] + "..."
+    
+    return summary_text
 
 # 過去30天的新聞"內容"
 def gemini_response(news):
@@ -150,7 +158,7 @@ async def chat(date, stocks):
     tokenizer = ChineseTokenizer()  # 初始化一次分詞器
     for news in news_data:
         # 對每篇新聞進行摘要處理
-        summary = summarize_text(news["content"], tokenizer, sentence_count=7)
+        summary = summarize_text(news["content"], tokenizer, word_limit=512)
         print(f"Summary for article dated {news['date']}:\n{summary}\n")
         news_summaries.append(summary)
 
