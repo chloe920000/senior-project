@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('marquee').classList.add('marquee-animation'); // 開始跑馬燈動畫
 
         // 獲取表單數據
-        const formData = new FormData(this); 
+        const formData = new FormData(this);
 
         try {
             // 同時發送兩個 AJAX 請求，一個用於預測，一個用於獲取新聞數據
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 處理預測響應
             if (predictResponse.ok) {
-                const [sentiment_mean, result] = await predictResponse.json();  // 獲取預測結果
+                const { sentiment_mean, result, chart_image_base64 } = await predictResponse.json();  // 獲取預測結果
                 document.getElementById('loadingMessage').style.display = 'none'; // 隱藏加載信息
 
                 // 構建並顯示預測結果表格
@@ -49,19 +49,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 sentimentTable += '</tbody></table>';
                 document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentTable; // 顯示情緒數據
+
+                // 顯示情緒趨勢圖（Base64 編碼的圖片）
+                if (chart_image_base64) {
+                    const imgElement = `<img src="data:image/png;base64,${chart_image_base64}" alt="情緒趨勢圖" style="width:100%; height:auto;" />`;
+                    document.getElementById('dynamic-sentiment-chart-image').innerHTML = imgElement;
+                } else {
+                    // 顯示錯誤消息
+                    document.getElementById('loadingMessage').innerHTML = 'Error: 圖像生成失敗';
+                }
+
+
             } else {
                 // 預測請求失敗，顯示錯誤信息
                 document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得預測結果';
             }
 
             // 處理新聞響應
-        if (newsResponse.ok) {
-            const newsData = await newsResponse.json();  // 獲取新聞數據
-            let newsHtml = '';  // 初始化 HTML 字串
+            if (newsResponse.ok) {
+                const newsData = await newsResponse.json();  // 獲取新聞數據
+                let newsHtml = '';  // 初始化 HTML 字串
 
-            // 動態生成新聞卡片
-            for (const [source, newsList] of Object.entries(newsData)) {
-                newsHtml += `
+                // 動態生成新聞卡片
+                for (const [source, newsList] of Object.entries(newsData)) {
+                    newsHtml += `
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header text-white bg-primary">
                             <h4 class="mb-0">${source}</h4>
@@ -69,30 +80,30 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class="card-body">
                             <ul class="list-unstyled mb-0">
                 `;
-                newsList.forEach(news => {
-                    newsHtml += `
+                    newsList.forEach(news => {
+                        newsHtml += `
                         <li class="py-2 border-bottom">
                             <a href="${news.link}" target="_blank" class="text-dark text-decoration-none">
                                 ${news.headline}
                             </a>
                         </li>
                     `;
-                });
-                newsHtml += `
+                    });
+                    newsHtml += `
                             </ul>
                         </div>
                     </div>
                 `;
-            }
-            document.getElementById('news-results').innerHTML = newsHtml;  // 顯示新聞結果
-        } else {
-            console.error('找不到相關的新聞', newsResponse.statusText);
-            document.getElementById('news-results').innerHTML = `
+                }
+                document.getElementById('news-results').innerHTML = newsHtml;  // 顯示新聞結果
+            } else {
+                console.error('找不到相關的新聞', newsResponse.statusText);
+                document.getElementById('news-results').innerHTML = `
                 <div class="alert alert-warning" role="alert">
                     找不到相關的新聞: ${newsResponse.statusText}
                 </div>
             `;  // 顯示新聞錯誤信息
-        }
+            }
 
 
 

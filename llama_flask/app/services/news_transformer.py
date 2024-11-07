@@ -1,5 +1,7 @@
 """
 pip install --upgrade numpy tensorflow transformers
+pip install plotly
+pip install kaleido
 
 """
 
@@ -10,6 +12,10 @@ from dotenv import load_dotenv
 import os
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+import plotly.express as px
+import pandas as pd
+import base64
+from io import BytesIO
 
 # 加載 .env 文件，確保 SUPABASE_URL 和 SUPABASE_KEY 被正確讀取
 load_dotenv()
@@ -78,6 +84,8 @@ async def analyze_and_store_sentiments(date, stock):
     end_date = datetime.strptime(date, "%Y-%m-%d")
     start_date = end_date - timedelta(days=30)
 
+    print("date:", date)
+
     # Check if there's already an existing, non-empty `transformer_mean` for this stock_id and date
     existing_summary = (
         supabase.from_("stock_news_summary_30")
@@ -113,6 +121,7 @@ async def analyze_and_store_sentiments(date, stock):
 
     total_sentiment_score = 0
     count = 0
+    new_with_sentiment = []
 
     for news in news_data:
         try:
@@ -121,13 +130,15 @@ async def analyze_and_store_sentiments(date, stock):
             # Perform sentiment analysis
             sentiment_result = bert_sentiment_analysis(news["content"])
             sentiment_score = sentiment_result["score"]
-            star = sentiment_result["star"]
-            emotion = sentiment_result["emotion"]
+            # star = sentiment_result["star"]
+            # emotion = sentiment_result["emotion"]
 
             # Accumulate sentiment score
             total_sentiment_score += sentiment_score
             count += 1
-
+            news["sentiment"] = sentiment_score
+            new_with_sentiment.append(news)
+            """
             # Insert sentiment data for each news item
             existing_sentiment = (
                 supabase.from_("transformer_sentiment")
@@ -148,8 +159,8 @@ async def analyze_and_store_sentiments(date, stock):
                         "news_id": news["id"],
                         "stockID": stock_id,
                         "sentiment": sentiment_score,
-                        "star": star,
-                        "emotion": emotion,
+                        #"star": star,
+                        #"emotion": emotion,
                     }
                 )
                 .execute()
@@ -160,7 +171,7 @@ async def analyze_and_store_sentiments(date, stock):
             else:
                 print(
                     f"Failed to insert sentiment for news ID {news['id']}. Response: {insert_response}"
-                )
+                )"""
 
         except Exception as e:
             print(f"Failed to process news ID {news['id']}. Error: {str(e)}")
@@ -182,37 +193,71 @@ async def analyze_and_store_sentiments(date, stock):
 
             if update_response.data:
                 print(
-                    f"Updated transformer_mean and count for stockID {stock_id} on date {date} to {average_sentiment}"
+                    f"Updated transformer_mean and count for stockID {stock_id} on date {date}."
                 )
             else:
-                print(
-                    f"Failed to update transformer_mean for stockID {stock_id} on date {date}. Response: {update_response}"
-                )
-        else:
-            print(
-                f"Summary data does not exist for stockID {stock_id} on date {date}."
-            )  # 新增的提示信息
+                print(f"Failed to update transformer_mean. Response: {update_response}")
     else:
-        print(
-            f"Count is not greater than 0 for stockID {stock_id} on date {date}."
-        )  # 可選，處理 count <= 0 的情況
+        print(f"No valid sentiment data found for stockID {stock_id} on date {date}.")
 
-    return average_sentiment
+    return average_sentiment, new_with_sentiment
 
 
-"""
-def main():
-    
-    #主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
+def plot_sentiment_timeseries(news_with_sentiment):
+    # 1. 資料處理
+    data = pd.DataFrame(news_with_sentiment)
+    data["date"] = pd.to_datetime(data["date"])
+    daily_sentiment = data.groupby("date")["sentiment"].mean().reset_index()
+    # 2. 繪製圖表
+    fig = px.line(
+        daily_sentiment,
+        x="date",
+        y="sentiment",
+        title="Daily Average Sentiment Score Over Time",
+    )
+    fig.update_layout(xaxis_title="Date", yaxis_title="Average Sentiment Score")
 
+    # 3. 將圖表儲存至內存並轉為 Base64 字符串
+    img_bytes = BytesIO()
+    fig.write_image(img_bytes, format="png")  # 儲存為 PNG 格式
+    img_bytes.seek(0)
+
+    # 編碼為 Base64
+    img_base64 = base64.b64encode(img_bytes.read()).decode("utf-8")
+
+    # 4. 返回 Base64 編碼字符串
+    return img_base64
+
+
+async def main():
+    # 主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
     date = "2024-07-20"  # 指定分析的目標日期
     stock = {"stock_id": "2330", "stock_name": "台積電"}  # 改為單一股票字典
 
     print("Starting sentiment analysis...")
-    asyncio.run(analyze_and_store_sentiments(date, stock))
+
+    # 呼叫 analyze_and_store_sentiments，並檢查回傳的值
+    result = await analyze_and_store_sentiments(date, stock)
+
+    # 檢查 result 是否為 None，如果不是則進行解包
+    if result is not None:
+        average_sentiment, news_with_sentiment = result
+
+        if news_with_sentiment:
+            print("視覺化產生中...")
+
+            plot_sentiment_timeseries(news_with_sentiment)
+            print("30 days mean:", average_sentiment)
+
     print("Sentiment analysis completed.")
 
 
 if __name__ == "__main__":
-    main()
-"""
+    try:
+        asyncio.run(main())
+    except RuntimeError as e:
+        if str(e).startswith("This event loop is already running"):
+            print("An event loop is already running. Skipping asyncio.run.")
+            asyncio.get_running_loop().create_task(main())
+        else:
+            raise

@@ -131,14 +131,25 @@ def predict():
         date, stocks
     )
     # 30天transformer情緒分數平均
-    sentiment_mean = asyncio.run(
+    print("Starting sentiment analysis...")
+    sentiment_mean, news_with_sentiment = asyncio.run(
         news_transformer.analyze_and_store_sentiments(date, stocks)
     )
+    # 30天情緒趨勢圖表-> 生成 Base64 圖像
+    print("圖表產生中...")
+    chart_image_base64 = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
+    print(chart_image_base64)  # 確認圖像是否正確生成
 
     with open("gemini_output.log", "w") as f:
         f.write(str(gemini_30dnews_response))
     # return jsonify(combined_result)
-    return jsonify(sentiment_mean, result)
+    return jsonify(
+        {
+            "sentiment_mean": sentiment_mean,
+            "result": result,
+            "chart_image_base64": chart_image_base64,
+        }
+    )
 
 
 # 用來做前端的 SSE 股票分析跑馬燈
