@@ -10,6 +10,8 @@ import google.generativeai as genai
 from supabase import create_client, Client
 from app.services import settings
 
+from app.services import settings
+
 # import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
