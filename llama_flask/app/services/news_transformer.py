@@ -59,6 +59,9 @@ class ChineseTokenizer:
             sentences.append(text[start:].strip())
         return sentences
 
+    def to_words(self, text):
+        return self.tokenize(text)  # 实现 to_words 方法，调用 tokenize 方法
+
 
 # 使用 Sumy 生成 512 字新聞摘要
 def summarize_text(news, tokenizer, word_limit=512):
@@ -240,29 +243,47 @@ async def analyze_and_store_sentiments(date, stock):
 
 
 def plot_sentiment_timeseries(news_with_sentiment):
-    # 1. 資料處理
-    data = pd.DataFrame(news_with_sentiment)
-    data["date"] = pd.to_datetime(data["date"])
-    daily_sentiment = data.groupby("date")["sentiment"].mean().reset_index()
-    # 2. 繪製圖表
-    fig = px.line(
-        daily_sentiment,
-        x="date",
-        y="sentiment",
-        title="Daily Average Sentiment Score Over Time",
-    )
-    fig.update_layout(xaxis_title="Date", yaxis_title="Average Sentiment Score")
+    try:
+        # 1. Data processing
+        data = pd.DataFrame(news_with_sentiment)
+        if "date" not in data.columns or "sentiment" not in data.columns:
+            raise ValueError(
+                "The input data must contain 'date' and 'sentiment' columns."
+            )
 
-    # 3. 將圖表儲存至內存並轉為 Base64 字符串
-    img_bytes = BytesIO()
-    fig.write_image(img_bytes, format="png")  # 儲存為 PNG 格式
-    img_bytes.seek(0)
+        data["date"] = pd.to_datetime(data["date"])
+        daily_sentiment = data.groupby("date")["sentiment"].mean().reset_index()
 
-    # 編碼為 Base64
-    img_base64 = base64.b64encode(img_bytes.read()).decode("utf-8")
+        # 2. Plot the chart
+        print("Generating chart...")
+        fig = px.line(
+            daily_sentiment,
+            x="date",
+            y="sentiment",
+            title="Daily Average Sentiment Score Over Time",
+        )
+        fig.update_layout(xaxis_title="Date", yaxis_title="Average Sentiment Score")
 
-    # 4. 返回 Base64 編碼字符串
-    return img_base64
+        # 3. Save the chart as an HTML file
+        html_filename = "sentiment_chart.html"
+        fig.write_html(html_filename)
+        print(f"Chart saved as HTML: {html_filename}")
+
+        #  4. Save the chart to memory and encode as Base64
+        img_bytes = BytesIO()
+        fig.write_image(img_bytes, format="png")  # Use write_image for Plotly
+        img_bytes.seek(0)
+
+        # Encode as Base64
+        img_base64 = base64.b64encode(img_bytes.read()).decode("utf-8")
+        print("Chart generated successfully.")
+
+        # 5. Return the Base64-encoded string
+        return img_base64
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 
 async def main():
