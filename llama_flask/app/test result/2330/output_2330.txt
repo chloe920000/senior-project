@@ -1,0 +1,6 @@
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1150 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 10% maximum loss, sell when stock price falls below 50-day moving average or when ROE and ROA decline by 20% or more.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing book value per share, stable capital, high gross profit margin, and high operating margin, along with a positive trend in historical prices, indicate a strong financial foundation and growth potential.

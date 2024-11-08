@@ -9,8 +9,8 @@ from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
 
-# from app.services import settings
-import settings
+from app.services import settings
+# import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
