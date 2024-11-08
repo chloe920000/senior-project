@@ -7,12 +7,16 @@ from flask import (
     Blueprint,
     Response,
     stream_with_context,
+    session,
+    redirect,
+    url_for,
 )
 import app.services.llama_main_TogetherFlask as llama_main_TogetherFlask
 import app.services.crawler_for_flask as crawler_for_flask  # 引入crawler_for_flask模塊
 import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemini_signal模塊
 import app.services.news_transformer as news_transformer
 import app.services.gemini_news_prompt as gemini_news_prompt
+import app.services.together_news_prompt as together_news_prompt
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
@@ -30,10 +34,29 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # 建立 Blueprint
 app = Blueprint("app", __name__)
 
-
+"""
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")  # 渲染出 html 檔，使用 render_template 函數
+"""
+
+
+@app.route("/")
+def index():
+    # 清空 session
+    session.clear()
+    # 從 session 獲取 sentiment_mean 和 result
+    sentiment_mean = session.get("sentiment_mean")
+    result = session.get("result")
+    chart_filename = session.get("chart_filename")
+
+    # 返回 index.html 並傳遞這些數據
+    return render_template(
+        "index.html",
+        sentiment_mean=sentiment_mean,
+        result=result,
+        chart_filename=chart_filename,
+    )
 
 
 @app.route("/predict", methods=["POST"])
@@ -126,30 +149,79 @@ def predict():
     stocks = {"stock_id": stock_id, "stock_name": stock_name}  # 字典型態
     # 輸出 stocks 列表
     print("Stocks data:", stocks)
-    # 30天的新聞summary分析
-    gemini_30dnews_response = gemini_news_prompt.get_gemini_30dnews_response(
+
+    # 30天的新聞summary+分析_gemini
+    """thirtydnews_response = gemini_news_prompt.get_gemini_30dnews_response(
         date, stocks
     )
+
+    with open("gemini_output.log", "w") as f:
+        f.write(str(gemini_30dnews_response))
+    """
+
+    # 30天的新聞summary+分析_together(llama)
+    print("======together(llama)開始分析30天的新聞summary======")
+    thirtydnews_response = together_news_prompt.get_together_30dnews_response(
+        date, stocks
+    )
+    with open("together_output.log", "w") as f:
+        f.write(str(thirtydnews_response))
+
     # 30天transformer情緒分數平均
     print("Starting sentiment analysis...")
     sentiment_mean, news_with_sentiment = asyncio.run(
         news_transformer.analyze_and_store_sentiments(date, stocks)
     )
-    # 30天情緒趨勢圖表-> 生成 Base64 圖像
-    print("圖表產生中...")
-    chart_image_base64 = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
-    print(chart_image_base64)  # 確認圖像是否正確生成
 
-    with open("gemini_output.log", "w") as f:
-        f.write(str(gemini_30dnews_response))
-    # return jsonify(combined_result)
+    # 30天情緒趨勢圖表-> 生成 html
+    print("準備產生圖表...")
+    # 生成情绪趋势图表并保存为 HTML 文件
+    chart_html = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
+
+    # 保存圖表文件
+    # 設定 charts 資料夾路徑
+    charts_dir = os.path.join(app.root_path, "static", "chart")
+
+    # 檢查 charts 資料夾是否存在，若不存在則創建
+    if not os.path.exists(charts_dir):
+        os.makedirs(charts_dir)
+    # 保存圖表文件
+    # chart_filename = os.path.join(charts_dir, f"sentiment_chart_{stock_id}_{date}.html")
+    # 使用 f-string 格式化生成圖表的檔名
+    chart_filename = f"sentiment_chart_{stock_id}_{date}.html"
+    # 保存圖表文件到 static/chart 資料夾
+    with open(os.path.join(charts_dir, chart_filename), "w") as f:
+        f.write(chart_html)
+
+    # 保存結果到 session
+    session["result"] = result
+    session["chart_filename"] = chart_filename
+    session["sentiment_mean"] = sentiment_mean
+
+    print("llama_result: ", result)
+    print("chart_filename: ", chart_filename)
+    print("sentiment_mean: ", sentiment_mean)
+    # 返回 JSON 格式的響應
     return jsonify(
         {
-            "sentiment_mean": sentiment_mean,
             "result": result,
-            "chart_image_base64": chart_image_base64,
+            "sentiment_mean": sentiment_mean,
+            "chart_filename": chart_filename,
+            "thirtydnews_response": thirtydnews_response,
         }
     )
+
+
+@app.route("/sentiment-chart")
+def sentiment_chart():
+    # Fetch stored data from session
+    chart_filename = session.get("chart_filename")
+
+    # Read the HTML file contents
+    if chart_filename and os.path.exists(chart_filename):
+        return render_template("chart.html", chart_filename=chart_filename)
+    else:
+        return "<p>Chart not available.</p>"
 
 
 # 用來做前端的 SSE 股票分析跑馬燈
@@ -182,24 +254,32 @@ def news():
     if not stock_id:
         return jsonify({"error": "Stock ID is required"}), 400
 
-    # Get stock name from Supabase
-    stock_name = crawler_for_flask.get_stock_name(stock_id)
+    try:
+        # Get stock name from Supabase
+        stock_name = crawler_for_flask.get_stock_name(stock_id)
 
-    if not stock_name:
-        return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
+        if not stock_name:
+            return jsonify({"error": f"Stock name for ID {stock_id} not found"}), 404
 
-    # Fetch news from various sources
-    news_ltn = crawler_for_flask.fetch_news_ltn(stock_id, stock_name)
-    news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
-    news_cnye = crawler_for_flask.fetch_news_cnye(stock_id, stock_name)
-    news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
+        # Fetch news from various sources
+        news_ltn = crawler_for_flask.fetch_news_ltn(stock_id, stock_name)
+        news_tvbs = crawler_for_flask.fetch_news_tvbs(stock_id, stock_name)
+        news_cnye = crawler_for_flask.fetch_news_cnye(stock_id, stock_name)
+        news_chinatime = crawler_for_flask.fetch_news_chinatime(stock_id, stock_name)
 
-    # Return news data as JSON response
-    return jsonify(
-        {
-            "ltn": news_ltn,
-            "tvbs": news_tvbs,
-            "cnye": news_cnye,
-            "chinatime": news_chinatime,
-        }
-    )
+        # Log the fetched news data
+        print("News data:", news_ltn, news_tvbs, news_cnye, news_chinatime)
+
+        # Return news data as JSON response
+        return jsonify(
+            {
+                "ltn": news_ltn,
+                "tvbs": news_tvbs,
+                "cnye": news_cnye,
+                "chinatime": news_chinatime,
+            }
+        )
+
+    except Exception as e:
+        print(f"Error fetching news: {str(e)}")
+        return jsonify({"error": "Failed to fetch news"}), 500

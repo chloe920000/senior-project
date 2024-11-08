@@ -8,9 +8,9 @@ import asyncio
 from datetime import datetime, timedelta
 import google.generativeai as genai
 from supabase import create_client, Client
+from app.services import settings
 
-# from app.services import settings
-import settings
+# import settings
 import os
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
@@ -55,7 +55,6 @@ class ChineseTokenizer:
         return self.tokenize(text)  # 实现 to_words 方法，调用 tokenize 方法
 
 
-
 # 使用 Sumy 生成新闻摘要
 def summarize_text(news, tokenizer, word_limit=512):
     """
@@ -67,16 +66,17 @@ def summarize_text(news, tokenizer, word_limit=512):
     sentences = tokenizer.to_sentences(news)
     parser = PlaintextParser.from_string(" ".join(sentences), tokenizer)
     summarizer = LsaSummarizer()
-    
+
     # 初步生成較多的句子
     preliminary_summary = summarizer(parser.document, 10)  # 先生成 10 個句子的摘要
     summary_text = " ".join(str(sentence) for sentence in preliminary_summary)
-    
+
     # 根據字數限制進行裁剪
     if len(summary_text) > word_limit:
         summary_text = summary_text[:word_limit] + "..."
-    
+
     return summary_text
+
 
 # 過去30天的新聞"內容"
 def gemini_response(news):
@@ -184,10 +184,12 @@ async def chat(date, stocks):
         ).execute()
 
         # 結果格式化，方便後續輸出
-        result = f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
-        return result
+        result_out = (
+            f"Stock: {stock_name}\nSummary: {combined_summary}\nAnswer: {ans}\n"
+        )
+        return ans
 
-    print("gemini評分更新完成")
+    print("gemini 完成分析30天內相關新聞。")
 
 
 # 封裝 async chat 函數
@@ -195,6 +197,7 @@ def get_gemini_30dnews_response(date, stocks):
     return asyncio.run(chat(date, stocks))
 
 
+"""
 def test_get_gemini_response():
     date = "2024-07-20"  # 使用當前日期
     stocks = {"stock_id": "2330", "stock_name": "台積電"}  # 改為字典
@@ -202,5 +205,7 @@ def test_get_gemini_response():
     get_gemini_30dnews_response(date, stocks)
 
 
-# # 跳用測試函数
+#跳用測試函数
 test_get_gemini_response()
+
+"""

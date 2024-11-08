@@ -239,6 +239,8 @@ async def analyze_and_store_sentiments(date, stock):
     else:
         print(f"No valid sentiment data found for stockID {stock_id} on date {date}.")
 
+    # average_sentiment取到小數點後四位
+    average_sentiment = round(average_sentiment, 4)
     return average_sentiment, new_with_sentiment
 
 
@@ -265,27 +267,25 @@ def plot_sentiment_timeseries(news_with_sentiment):
         fig.update_layout(xaxis_title="Date", yaxis_title="Average Sentiment Score")
 
         # 3. Save the chart as an HTML file
-        html_filename = "sentiment_chart.html"
-        fig.write_html(html_filename)
-        print(f"Chart saved as HTML: {html_filename}")
+        # html_filename = "try_sentiment_chart.html"
+        # fig.write_html(html_filename)
+        # print(f"Chart saved as HTML: {html_filename}")
 
-        #  4. Save the chart to memory and encode as Base64
-        img_bytes = BytesIO()
-        fig.write_image(img_bytes, format="png")  # Use write_image for Plotly
-        img_bytes.seek(0)
+        # 4. Convert the chart to HTML string
+        plot_html = fig.to_html(
+            full_html=False
+        )  # Convert to HTML snippet without full HTML structure
+        print("Chart to_html() generated successfully.")
 
-        # Encode as Base64
-        img_base64 = base64.b64encode(img_bytes.read()).decode("utf-8")
-        print("Chart generated successfully.")
-
-        # 5. Return the Base64-encoded string
-        return img_base64
+        # 4. Return the HTML string
+        return plot_html
 
     except Exception as e:
         print(f"Error: {e}")
         return None
 
 
+"""
 async def main():
     # 主程式入口，負責觸發情緒分析和存儲過程，並在完成後生成圖表
     date = "2024-07-20"  # 指定分析的目標日期
@@ -318,3 +318,4 @@ if __name__ == "__main__":
             asyncio.get_running_loop().create_task(main())
         else:
             raise
+"""
