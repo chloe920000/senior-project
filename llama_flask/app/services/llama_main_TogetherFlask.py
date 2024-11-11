@@ -201,7 +201,7 @@ async def chat(dates, stocks):
 
             # --------------------------------循環次數------------------------------------ #
             for _ in range(1):
-                stock_price = get_stock_price(stock_id, date)
+                stock_price = get_stock_price_from_yahoo(stock_id)
 
                 # 使用 generate_message_content 生成 message_content
                 message_content = generate_message_content(

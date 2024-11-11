@@ -161,55 +161,76 @@ def predict():
 
     # 30天的新聞summary+分析_together(llama)
     print("======together(llama)開始分析30天的新聞summary======")
-    thirtydnews_response = together_news_prompt.get_together_30dnews_response(
-        date, stocks
-    )
-    with open("together_output.log", "w") as f:
-        f.write(str(thirtydnews_response))
+    try:
+        thirtydnews_response = together_news_prompt.get_together_30dnews_response(date, stocks)
+        with open("together_output.log", "w", encoding="utf-8") as f:
+            f.write(str(thirtydnews_response))
+    except Exception as e:
+        print(f"Failed to get thirty days news response. Error: {str(e)}")
+        thirtydnews_response = "No data available."  # 設置默認值
 
     # 30天transformer情緒分數平均
     print("Starting sentiment analysis...")
-    sentiment_mean, news_with_sentiment = asyncio.run(
-        news_transformer.analyze_and_store_sentiments(date, stocks)
-    )
+    try:
+        sentiment_mean, news_with_sentiment = asyncio.run(
+            news_transformer.analyze_and_store_sentiments(date, stocks)
+        )
+        if sentiment_mean is None:
+            raise ValueError("No valid sentiment data available.")
+    except Exception as e:
+        print(f"Sentiment analysis failed. Error: {str(e)}")
+        sentiment_mean = None
+        news_with_sentiment = []
 
     # 30天情緒趨勢圖表-> 生成 html
     print("準備產生圖表...")
-    # 生成情绪趋势图表并保存为 HTML 文件
-    chart_html = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
+    if news_with_sentiment:
+        try:
+            # 生成情绪趋势图表并保存为 HTML 文件
+            chart_html = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
+            if chart_html is None:
+                raise ValueError("Chart HTML generation failed.")
+            
+            # 設定 charts 資料夾路徑
+            charts_dir = os.path.join(app.root_path, "static", "chart")
 
-    # 保存圖表文件
-    # 設定 charts 資料夾路徑
-    charts_dir = os.path.join(app.root_path, "static", "chart")
+            # 檢查 charts 資料夾是否存在，若不存在則創建
+            if not os.path.exists(charts_dir):
+                os.makedirs(charts_dir)
 
-    # 檢查 charts 資料夾是否存在，若不存在則創建
-    if not os.path.exists(charts_dir):
-        os.makedirs(charts_dir)
-    # 保存圖表文件
-    # chart_filename = os.path.join(charts_dir, f"sentiment_chart_{stock_id}_{date}.html")
-    # 使用 f-string 格式化生成圖表的檔名
-    chart_filename = f"sentiment_chart_{stock_id}_{date}.html"
-    # 保存圖表文件到 static/chart 資料夾
-    with open(os.path.join(charts_dir, chart_filename), "w") as f:
-        f.write(chart_html)
+            # 使用 f-string 格式化生成圖表的檔名
+            chart_filename = f"sentiment_chart_{stocks['stock_id']}_{date}.html"
+
+            # 保存圖表文件到 static/chart 資料夾
+            with open(os.path.join(charts_dir, chart_filename), "w", encoding="utf-8") as f:
+                f.write(chart_html)
+
+        except Exception as e:
+            print(f"Chart generation failed. Error: {str(e)}")
+            chart_filename = None
+    else:
+        print("No sentiment data available for generating chart.")
+        chart_filename = None
 
     # 保存結果到 session
-    session["result"] = result
-    session["chart_filename"] = chart_filename
-    session["sentiment_mean"] = sentiment_mean
+    session["result"] = result if 'result' in locals() else "No result available."
+    session["chart_filename"] = chart_filename if chart_filename else "No chart available."
+    session["sentiment_mean"] = sentiment_mean if sentiment_mean is not None else "No sentiment data available."
 
-    print("llama_result: ", result)
-    print("chart_filename: ", chart_filename)
-    print("sentiment_mean: ", sentiment_mean)
+    print("llama_result: ", session["result"])
+    print("chart_filename: ", session["chart_filename"])
+    print("sentiment_mean: ", session["sentiment_mean"])
+
     # 返回 JSON 格式的響應
     return jsonify(
         {
-            "result": result,
-            "sentiment_mean": sentiment_mean,
-            "chart_filename": chart_filename,
+            "result": session["result"],
+            "sentiment_mean": session["sentiment_mean"],
+            "chart_filename": session["chart_filename"],
             "thirtydnews_response": thirtydnews_response,
         }
     )
+
 
 
 @app.route("/sentiment-chart")

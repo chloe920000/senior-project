@@ -114,11 +114,6 @@ def bert_sentiment_analysis(news):
 
 
 async def analyze_and_store_sentiments(date, stock):
-    """
-    分析並存儲距離指定日期前 30 天範圍內、指定股票的新聞情緒。
-    date: string 日期 (格式: "YYYY-MM-DD")
-    stock: dict 包含 stock_id 的字典
-    """
     stock_id = stock.get("stock_id")
     end_date = datetime.strptime(date, "%Y-%m-%d")
     start_date = end_date - timedelta(days=30)
@@ -139,11 +134,11 @@ async def analyze_and_store_sentiments(date, stock):
         and existing_summary.data[0]["transformer_mean"] is not None
     ):
         print(f"Data already exists for stockID {stock_id} on date {date}. Skipping...")
-        return  # Skip this stock_id since it has already been processed
+        return existing_summary.data[0]["transformer_mean"], []  # 確保有返回值
 
     # Continue with sentiment analysis and data processing
     response = (
-        supabase.from_("news_test")  # news_content
+        supabase.from_("news_test")
         .select("*")
         .gte("date", start_date)
         .lte("date", end_date)
@@ -153,10 +148,8 @@ async def analyze_and_store_sentiments(date, stock):
     news_data = response.data
 
     if not news_data:
-        print(
-            f"No news data found for stock_id {stock_id} within the specified date range."
-        )
-        return
+        print(f"No news data found for stock_id {stock_id} within the specified date range.")
+        return None, []  # 確保有返回值
 
     total_sentiment_score = 0
     count = 0
@@ -169,79 +162,39 @@ async def analyze_and_store_sentiments(date, stock):
             # Perform sentiment analysis
             sentiment_result = bert_sentiment_analysis(news["content"])
             sentiment_score = sentiment_result["score"]
-            # star = sentiment_result["star"]
-            # emotion = sentiment_result["emotion"]
 
             # Accumulate sentiment score
             total_sentiment_score += sentiment_score
             count += 1
             news["sentiment"] = sentiment_score
             new_with_sentiment.append(news)
-            """
-            # Insert sentiment data for each news item
-            existing_sentiment = (
-                supabase.from_("transformer_sentiment")
-                .select("id")
-                .eq("news_id", news["id"])
-                .execute()
-            )
-
-            if existing_sentiment.data:
-                supabase.from_("transformer_sentiment").delete().eq(
-                    "news_id", news["id"]
-                ).execute()
-
-            insert_response = (
-                supabase.from_("transformer_sentiment")
-                .insert(
-                    {
-                        "news_id": news["id"],
-                        "stockID": stock_id,
-                        "sentiment": sentiment_score,
-                        #"star": star,
-                        #"emotion": emotion,
-                    }
-                )
-                .execute()
-            )
-
-            if insert_response.data:
-                print(f"Successfully inserted sentiment for news ID: {news['id']}")
-            else:
-                print(
-                    f"Failed to insert sentiment for news ID {news['id']}. Response: {insert_response}"
-                )"""
 
         except Exception as e:
             print(f"Failed to process news ID {news['id']}. Error: {str(e)}")
 
     # Calculate and store the average sentiment score if count > 0
     if count > 0:
-        average_sentiment = total_sentiment_score / count
+        average_sentiment = round(total_sentiment_score / count, 4)
 
         if existing_summary.data:
             update_response = (
                 supabase.from_("stock_news_summary_30")
-                .update(
-                    {"transformer_mean": average_sentiment, "count": count}
-                )  # 合併兩個字段為一個字典
+                .update({"transformer_mean": average_sentiment, "count": count})
                 .eq("stockID", stock_id)
                 .eq("date", date)
                 .execute()
             )
 
             if update_response.data:
-                print(
-                    f"Updated transformer_mean and count for stockID {stock_id} on date {date}."
-                )
+                print(f"Updated transformer_mean and count for stockID {stock_id} on date {date}.")
             else:
                 print(f"Failed to update transformer_mean. Response: {update_response}")
     else:
         print(f"No valid sentiment data found for stockID {stock_id} on date {date}.")
+        average_sentiment = None  # 如果沒有有效的數據，設為 None
 
-    # average_sentiment取到小數點後四位
-    average_sentiment = round(average_sentiment, 4)
     return average_sentiment, new_with_sentiment
+
 
 
 def plot_sentiment_timeseries(news_with_sentiment):

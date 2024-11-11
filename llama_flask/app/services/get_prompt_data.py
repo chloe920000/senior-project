@@ -107,7 +107,7 @@ def select_supabase_data(stock_id, date):
     data_OPM = get_data_from_supabase('year_opm', int(stock_id), int(start_year), int(end_year))
     data_DBR = get_data_from_supabase('year_dbr', int(stock_id), int(start_year), int(end_year))
     
-    stock_price = get_stock_price(stock_id, date)
+    stock_price = get_stock_price_from_yahoo(stock_id)
     
     # 返回所有数据作为字典
     return {
