@@ -62,7 +62,7 @@ def load_news_data(date, stock_id):
 
     # Query for news within the date range
     news_response = (
-        supabase.table("news_test")
+        supabase.table("news_content")
         .select("*")
         .eq("stockID", stock_id)
         .gte("date", start_date)  # Filter for news on or after start_date
@@ -145,7 +145,7 @@ def analyze_sentiment(news, cvaw3, positive_words, negative_words):
 def update_news_to_supabase(news):
     """Update the processed sentiment analysis back to Supabase."""
     for i in range(len(news)):
-        supabase.table("news_test").update(
+        supabase.table("news_content").update(
             {
                 "arousal": news.at[i, "CVAW3_Arousal_Avg"],
                 "emotion": news.at[i, "NTUD_Valence_Percentage"],

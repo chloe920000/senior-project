@@ -46,7 +46,7 @@ def insert_news_to_supabase(stock_id, headline):
     today = datetime.today().strftime('%Y-%m-%d')
 
     try:
-        response = supabase.table('news_test') \
+        response = supabase.table('news_content') \
             .select('*') \
             .eq('stockID', stock_id) \
             .eq('date', today) \
@@ -57,7 +57,7 @@ def insert_news_to_supabase(stock_id, headline):
             print(f"Duplicate news found, not inserting: {headline}")
             return
 
-        supabase.table('news_test').insert({
+        supabase.table('news_content').insert({
             'stockID': stock_id,
             'date': today,
             'content': headline,

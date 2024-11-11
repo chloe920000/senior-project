@@ -138,7 +138,7 @@ async def analyze_and_store_sentiments(date, stock):
 
     # Continue with sentiment analysis and data processing
     response = (
-        supabase.from_("news_test")
+        supabase.from_("news_content")
         .select("*")
         .gte("date", start_date)
         .lte("date", end_date)

@@ -122,7 +122,7 @@ async def chat(date, stocks):
 
     # Fetch data from Supabase
     response = (
-        supabase.from_("news_test")
+        supabase.from_("news_content")
         .select("*")
         .eq("stockID", stock_id)
         .gte("date", start_date.strftime("%Y-%m-%d"))
