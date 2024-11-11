@@ -270,11 +270,35 @@ def sse_stock_analysis():
 @app.route("/news", methods=["POST"])
 def news():
     # Fetch stock ID from form data
-    stock_id = request.form.get("stock_data")
-
+    stock_data = request.form.get("stock_data")
+    stock_id = None
+    stock_name = None
+    # if not stock_id:
+    #     return jsonify({"error": "Stock ID is required"}), 400
+    if re.match(r"[\u4e00-\u9fff]+", stock_data):
+        stock_name = stock_data
+    else:
+        stock_id = stock_data
+        
+    # 如果只有 stock_name 沒有 stock_id，從 Supabase 查詢 stockID
     if not stock_id:
-        return jsonify({"error": "Stock ID is required"}), 400
+        stock_response = (
+            supabase.from_("stock")
+            .select("stockID")
+            .eq("stock_name", stock_name)
+            .execute()
+        )
+        stock_data = stock_response.data
 
+        if not stock_data or len(stock_data) == 0:
+            return (
+                jsonify({"error": f"No stockID found for stock_name: {stock_name}"}),
+                404,
+            )
+
+        # 獲取 stockID
+        stock_id = stock_data[0]["stockID"]
+        
     try:
         # Get stock name from Supabase
         stock_name = crawler_for_flask.get_stock_name(stock_id)

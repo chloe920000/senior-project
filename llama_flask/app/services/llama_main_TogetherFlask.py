@@ -222,7 +222,7 @@ async def chat(dates, stocks):
 
                 # 保存每次的 input message 到 log 檔案
                 input_log_path = os.path.join(
-                    result_data_dir, stock_id, f"input_log_{stock_id}.txt"
+                    result_data_dir, str(stock_id), f"input_log_{stock_id}.txt"
                 )
 
                 # 確保目錄存在
@@ -237,13 +237,13 @@ async def chat(dates, stocks):
 
                 # 修改路徑
                 result_path = os.path.join(
-                    result_data_dir, stock_id, f"output_{stock_id}.txt"
+                    result_data_dir, str(stock_id), f"output_{stock_id}.txt"
                 )
                 log_path = os.path.join(
-                    result_data_dir, stock_id, f"output_log_{stock_id}.txt"
+                    result_data_dir, str(stock_id), f"output_log_{stock_id}.txt"
                 )
                 csv_path = os.path.join(
-                    result_data_dir, stock_id, f"output_{stock_id}.csv"
+                    result_data_dir, str(stock_id), f"output_{stock_id}.csv"
                 )
 
                 # 確保目錄存在
