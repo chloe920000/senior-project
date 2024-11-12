@@ -127,68 +127,71 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('loadingMessage').style.display = 'block'; // 顯示加載提示
         document.getElementById('result').innerHTML = '';  // 清除之前的結果
         document.getElementById('marquee').innerHTML = '正在分析中...';  // 設置跑馬燈的初始內容
-        document.getElementById('marquee').classList.add('marquee-animation'); // 開始跑馬燈動畫
+        //document.getElementById('marquee').classList.add('marquee-animation'); // 開始跑馬燈動畫
 
         // 獲取表單數據
         const formData = new FormData(this);
 
         try {
-            // 發送 /predict 請求
-            const predictResponse = await fetch('/predict', { method: 'POST', body: formData });
-            if (predictResponse.ok) {
-                const { sentiment_mean, result, chart_filename, thirtydnews_response } = await predictResponse.json();
-                document.getElementById('loadingMessage').style.display = 'none';
+    // 發送 /predict 請求
+    const predictResponse = await fetch('/predict', { method: 'POST', body: formData });
+    if (predictResponse.ok) {
+        const { sentiment_mean, result, chart_filename, thirtydnews_response } = await predictResponse.json();
+        document.getElementById('loadingMessage').style.display = 'none';
 
-                // 顯示預測結果表格
-                let table = '<table class="table table-bordered"><thead><tr><th>Title</th><th>Details</th></tr></thead><tbody>';
-                for (let key in result) {
-                    table += `<tr><td>${key}</td><td>${result[key]}</td></tr>`;
-                }
-                table += '</tbody></table>';
-                document.getElementById('dynamic-result').innerHTML = table;
-
-                // 顯示情緒平均分數
-                if (sentiment_mean) {
-                    let sentimentMeanHTML = '<h4>情緒平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
-                    document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
-
-                } else {
-                    document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
-                }
-
-                // 顯示情緒趨勢圖
-                if (chart_filename) {
-                    let chartHTML = `<h4>情緒趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="100%" height="600px"></iframe>`;
-                    document.getElementById('dynamic-chart').innerHTML = chartHTML;
-                } else {
-                    document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';
-                }
-
-                // 顯示 Gemini 30天新聞理由
-                if (thirtydnews_response && thirtydnews_response !== "exception") {
-                    let geminiResponseHTML = `
-                   
-                    <div class="gemini-response-container">
-                        <h4>市場分析</h4>
-                        <div class="gemini-answer">
-                            <pre>${thirtydnews_response}</pre>
-                        </div>
-                    </div>
-                `;
-                    document.getElementById('dynamic-geminiResponse').innerHTML = geminiResponseHTML;
-                }
-                else {
-                    document.getElementById('dynamic-geminiResponse').innerHTML = '<p>尚未生成或資源已耗盡。</p>';
-                }
-
-
-            } else {
-                document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得predict結果';
-            }
-        } catch (error) {
-            console.error('Error fetching /predict:', error);
-            document.getElementById('loadingMessage').innerHTML = 'Error: predict無法連接到伺服器';
+        // 顯示預測結果表格（行列顛倒）
+        let table = '<table class="table table-bordered style="width: 100%"><thead><tr>';
+        // 第一列：顯示所有 keys
+        table += '<th>Details</th>';
+        for (let key in result) {
+            table += `<th>${key}</th>`;
         }
+        table += '</tr></thead><tbody><tr><td>Result</td>';
+        // 第二列：顯示所有 values
+        for (let key in result) {
+            table += `<td>${result[key]}</td>`;
+        }
+        table += '</tr></tbody></table>';
+        document.getElementById('dynamic-result').innerHTML = table;
+
+        // 顯示情緒平均分數
+        if (sentiment_mean) {
+            let sentimentMeanHTML = '<h4>情緒平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
+            document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
+        } else {
+            document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
+        }
+
+        // 顯示情緒趨勢圖
+        if (chart_filename) {
+            let chartHTML = `<h4>情緒趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="100%" height="600px"></iframe>`;
+            document.getElementById('dynamic-chart').innerHTML = chartHTML;
+        } else {
+            document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';
+        }
+
+        // 顯示 Gemini 30天新聞理由
+        if (thirtydnews_response && thirtydnews_response !== "exception") {
+            let geminiResponseHTML = `
+            <div class="gemini-response-container">
+                <h4>市場分析</h4>
+                <div class="gemini-answer">
+                    <pre>${thirtydnews_response}</pre>
+                </div>
+            </div>
+            `;
+            document.getElementById('dynamic-geminiResponse').innerHTML = geminiResponseHTML;
+        } else {
+            document.getElementById('dynamic-geminiResponse').innerHTML = '<p>尚未生成或資源已耗盡。</p>';
+        }
+
+    } else {
+        document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得 predict 結果';
+    }
+} catch (error) {
+    console.error("Error:", error);
+}
+
 
         try {
             // 發送 /news 請求
@@ -197,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const newsData = await newsResponse.json();
                 let newsHtml = '';
 
+                
                 // 動態生成新聞卡片
                 for (const [source, newsList] of Object.entries(newsData)) {
                     newsHtml += `
@@ -245,13 +249,27 @@ document.addEventListener('DOMContentLoaded', function () {
         eventSource.onmessage = function (event) {
             const marquee = document.getElementById('marquee');
             marquee.innerHTML = event.data;
-            marquee.classList.add('marquee-animation');
+            //marquee.classList.add('marquee-animation');
 
             if (event.data === "分析完成!") {
                 eventSource.close();
-                marquee.classList.remove('marquee-animation');
+                //marquee.classList.remove('marquee-animation');
                 marquee.innerHTML = "分析完成!";
+
+                // Pause the video
+                const video = document.getElementById('video');
+                video.pause();
+
             }
         };
     };
 });
+
+// 控制影片播放的函數
+function playVideo() {
+    var video = document.getElementById("video");
+
+    // 顯示影片並播放
+    video.style.display = "block";  // 顯示影片
+    video.play();                  // 播放影片
+}
