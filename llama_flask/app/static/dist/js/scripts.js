@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 顯示情緒趨勢圖
         if (chart_filename) {
-            let chartHTML = `<h4>情緒趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="100%" height="600px"></iframe>`;
+            let chartHTML = `<h4>情緒趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="800px" height="600px"></iframe>`;
             document.getElementById('dynamic-chart').innerHTML = chartHTML;
         } else {
             document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';

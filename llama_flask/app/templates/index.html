@@ -30,21 +30,24 @@
             <!-- 網站名稱 -->
             <a class="navbar-brand" href="#!">Start Bootstrap</a>
 
-            <a href="#page1">HOME</a>
-            <a href="#page2">SEARCH</a>
-            <a href="#page3">RESULT</a>
+            <a href="#page1">首頁</a>
+            <a href="#page2">查詢</a>
+            <a href="#page3">結果</a>
+            <a href="#page4">模型預測</a>
+            <a href="#page5">市場情緒</a>
+            <a href="#page6">重要新聞</a>
 
-            <!-- 註冊按鈕 -->
-            <a class="btn btn-primary" href="#signup">Sign Up</a>
+            <!-- 註冊按鈕 
+            <a class="btn btn-primary" href="#signup">Sign Up</a>-->
         </div>
     </nav>
 
-     <!-- 第一個區塊 -->
-     <div id="page1" class="section">
+    <!-- 第一個區塊 -->
+    <div id="page1" class="section" style="background-image: url('{{ url_for('static', filename='media/back2.jpg') }}');">
         <!-- 頁面標題 -->
         <h1 class="mb-5">歡迎來到『漲LLa!嗎?』</h1>
-
     </div>
+
 
     <!--第二個區塊 -->
     <header class="masthead" id = "page2">
@@ -70,7 +73,7 @@
                                 <div class="invalid-feedback text-white">Stock ID is required.</div>
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-primary btn-lg" type="submit" onclick="playVideo()">Submit</button>
+                                <button class="btn btn-primary btn-lg" type="submit" onclick="playVideo()">查詢</button>
                             </div>
                         </div>
 
@@ -96,25 +99,26 @@
         </div>
     </header>
 
-    <!-- 第三個區塊 -->
-    <!-- 特徵展示區 -->
+    <!-- 第三個區塊 
     <section class="features-icons bg-light text-center" id="page3">
         <div class="container">
             <div class="row justify-content-center text-start">
-                <!-- LLama預測區 -->
+                
+                LLama預測區 
                 <div class="col-12 mb-4">
                     <div class="features-icons-item d-flex align-items-center">
                         <div class="features-icons-icon d-flex align-items-center">
                             <i class="bi-window m-2 text-primary"></i>
                         </div>
                         <div class="topic">
-                            <h3 class="text-start">LLama預測</h3>
+                            <h3 class="text-start">模型預測</h3>
                         </div>
                         <div id="dynamic-result" class="ms-4" style="font-size: 20px;"></div>
                     </div>
                 </div>
                 <hr>
-                <!-- 市場情緒區 -->
+                
+                市場情緒區 
                 <div class="col-12 mb-4">
                     <div class="features-icons-item d-flex align-items-center">
                         <div class="features-icons-icon d-flex align-items-center">
@@ -130,7 +134,8 @@
                     </div>
                 </div>
                 <hr>
-                <!-- 重要新聞區 -->
+                
+                 重要新聞區 
                 <div class="col-12 mb-4">
                     <div class="features-icons-item d-flex align-items-center ">
                         <div class="features-icons-icon d-flex align-items-center">
@@ -140,6 +145,77 @@
                             <h3 class="text-start">重要新聞</h3>
                         </div>
                         <div id="news-results" class="d-flex flex-wrap" style="font-size: 20px;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section> 
+    -->
+
+    <!-- 第4個區塊 -->
+    <section class="features-icons bg-light text-center" id="page3">
+        <div class="container">
+            <div class="row justify-content-center text-start">
+                <div id="page4" class="section">
+                    <!-- LLama預測區 -->
+                    <div class="col-12 mb-4">
+                        <div class="features-icons-item d-flex align-items-center">
+                            <div class="features-icons-icon d-flex align-items-center">
+                                <i class="bi-window m-2 text-primary"></i>
+                            </div>
+                            <div class="topic">
+                                <h3 class="text-start">模型預測</h3>
+                            </div>
+                            <div id="dynamic-result" class="ms-4" style="font-size: 20px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第5個區塊 -->
+    <section class="features-icons bg-light text-center" id="page3">
+        <div class="container">
+            <div class="row justify-content-center text-start">
+                <div id="page5" class="section">
+                    <!-- 市場情緒區 -->
+                    <div class="col-12 mb-4">
+                        <div class="features-icons-item d-flex align-items-center">
+                            <div class="features-icons-icon d-flex align-items-center">
+                                <i class="bi-layers m-2 text-primary"></i>
+                            </div>
+                            <div class="topic">
+                                <h3 class="text-start">市場情緒</h3>
+                            </div>
+                            <div id="dynamic-sentiment-mean" class="mt-3" style="font-size: 20px;"></div>
+
+                            <div id="dynamic-chart"></div>
+                            <div id="dynamic-geminiResponse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第6個區塊 -->
+    <section class="features-icons bg-light text-center" id="page3">
+        <div class="container">
+            <div class="row justify-content-center text-start">
+                <div id="page6" class="section">
+                    <!-- 重要新聞區 -->
+                    <div class="col-12 mb-4">
+                        <div class="features-icons-item d-flex align-items-center ">
+                            <div class="features-icons-icon d-flex align-items-center">
+                                <i class="bi-terminal m-2 text-primary"></i>
+                            </div>
+                            <div class="topic">
+                                <h3 class="text-start">重要新聞</h3>
+                            </div>
+                            <div id="news-results" class="d-flex flex-wrap" style="font-size: 20px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
