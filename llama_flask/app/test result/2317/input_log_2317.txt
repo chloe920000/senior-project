@@ -568,7 +568,11 @@ Answer sample format:
 6. Please give specific reasons why you think it is bullish or bearish.: [reason]
 
 
+<<<<<<< HEAD
+no.0 === 2024-11-14 15:52:23.375297 ===
+=======
 no.0 === 2024-11-13 17:03:15.823553 ===
+>>>>>>> 15dc74bdbc0c070e0a2fcab0bf126d45f601e75c
 Evaluate the share price of Taiwan Stock Exchange 2317 based on the following data:
 *The following data is from left to right, with the year from the furthest to the most recent.
 * BPS (book value per share) over the past 5 years: 93.59, 99.59, 104.65, 107.72, NA
@@ -587,7 +591,11 @@ Evaluate the share price of Taiwan Stock Exchange 2317 based on the following da
 2022: Open=91.09726, Close=92.913521, High=105.097374, Low=88.443939
 2023: Open=92.169464, Close=101.887505, High=109.200005, Low=91.146393
 2024: Open=102.375, Close=176.0, High=226.5, Low=96.135002
+<<<<<<< HEAD
+* !!!Current price: Yahoo奇摩財經 : 211.5 ( ▬3.00 )
+=======
 * !!!Current price: Yahoo奇摩財經 : 214.5 ( ▬0.50 )
+>>>>>>> 15dc74bdbc0c070e0a2fcab0bf126d45f601e75c
 
 Provide additional background information about the company, industry, and market trends.
 

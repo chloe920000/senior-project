@@ -25,7 +25,7 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 # 初始化 Together 客戶端
-together_client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+together_client = Together(api_key=os.environ.get("TOGETHER_API_KEY2"))
 
 # 解析模型輸出結果
 import re

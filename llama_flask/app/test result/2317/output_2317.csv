@@ -8,4 +8,8 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2024-11-13,bullish,Yes,270 NTD,18 months,Trailing stop loss strategy with a 10% stop loss threshold and a 5% trailing step.
 2024-11-13,bullish,Yes,253 NTD,18 months,"Trailing stop loss with 10% threshold, sell if price falls below 193 NTD or if ROE drops below 8% for two consecutive quarters"
 2024-11-13,bullish,Yes,255 NTD,18 months,"Trailing stop loss at 10% below the highest price reached, or a fixed stop loss at 193 NTD"
+<<<<<<< HEAD
+2024-11-14,bullish,Yes,255 NTD,18 months,"Trailing stop loss with a 10% threshold, sell if price falls below 190 NTD or if ROE drops below 8%"
+=======
 2024-11-13,bullish,Yes,270 NTD,18 months,Trailing stop loss strategy with a 10% stop loss limit and a 5% trailing stop loss trigger.
+>>>>>>> 15dc74bdbc0c070e0a2fcab0bf126d45f601e75c
