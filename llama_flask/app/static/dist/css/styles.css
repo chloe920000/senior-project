@@ -12896,3 +12896,42 @@ footer.footer {
   position: relative;
   height: 100vh; /* 讓區塊高度等於視窗高度 */
 }
+
+#page4,#page5,#page6{
+  background-color: #91AEC4;
+  padding:0;
+
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  min-height: 100vh; /* 滿高，讓內容置中 */
+}
+
+
+/*導覽列的topic樣式*/
+a {
+  text-decoration: none; /* 移除底線 */
+  color: black; /* 初始文字顏色 */
+  transition: color 0.3s ease; /* 添加漸變效果 */
+}
+
+a:hover {
+  color: #FF4500; /* 滑鼠移上時的顏色，可根據需求更換 */
+}
+
+/*導覽列的 漲lla!嗎? 文字樣式*/
+.navbar-brand {
+  color:white; 
+  background-color:#D6C5AE ; /* 棕色背景 */
+  padding: 5px 10px; /* 方框內邊距，可調整 */
+  border-radius: 4px; /* 方框圓角，可選 */
+  text-decoration: none; /* 移除底線 */
+  display: inline-block; /* 讓背景框符合文字大小 */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 漸變效果 */
+  font-weight: bold;
+}
+
+.navbar-brand:hover {
+  background-color: #c9ba9b; /* 滑鼠懸停時更深的棕色 */
+  color: #FFFFFF; /* 滑鼠懸停時文字顏色變白 */
+}
