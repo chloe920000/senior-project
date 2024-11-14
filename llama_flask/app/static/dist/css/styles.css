@@ -3303,19 +3303,19 @@ fieldset:disabled .btn {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #0d6efd;
-  --bs-btn-border-color: #0d6efd;
+  --bs-btn-bg: #D6C5AE;
+  --bs-btn-border-color: #D6C5AE;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0b5ed7;
-  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-hover-bg: #D6C5AE;
+  --bs-btn-hover-border-color: #D6C5AE;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #0a58ca;
-  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-bg: #D6C5AE;
+  --bs-btn-active-border-color: #D6C5AE;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #0d6efd;
-  --bs-btn-disabled-border-color: #0d6efd;
+  --bs-btn-disabled-bg: #D6C5AE;
+  --bs-btn-disabled-border-color: #D6C5AE;
 }
 
 .btn-secondary {
@@ -12813,8 +12813,6 @@ footer.footer {
   text-align: center;
 }
 
-
-
 .video-container {
   position: absolute;
   top: 0;
@@ -12895,18 +12893,11 @@ footer.footer {
 #page4,#page5,#page6 {
   position: relative;
   height: 100vh; /* 讓區塊高度等於視窗高度 */
-}
-
-#page4,#page5,#page6{
-  background-color: #91AEC4;
-  padding:0;
-
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
   min-height: 100vh; /* 滿高，讓內容置中 */
 }
-
 
 /*導覽列的topic樣式*/
 a {
@@ -12934,4 +12925,28 @@ a:hover {
 .navbar-brand:hover {
   background-color: #c9ba9b; /* 滑鼠懸停時更深的棕色 */
   color: #FFFFFF; /* 滑鼠懸停時文字顏色變白 */
+}
+
+
+
+
+.features-icons {
+  position: relative;
+}
+
+.features-icons .features-icons-item {
+  position: absolute;
+  top: 20px; /* 調整上方間距 */
+  left: 20px; /* 調整左側間距 */
+  display: flex;
+  align-items: center;
+}
+
+.features-icons-icon i {
+  font-size: 24px; /* 調整 icon 大小 */
+}
+
+.topic h3 {
+  margin: 0;
+  padding-left: 10px; /* 調整 h3 與 icon 的間距 */
 }
