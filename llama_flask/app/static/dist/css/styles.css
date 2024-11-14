@@ -12953,7 +12953,7 @@ a:hover {
 
 /* 模型預測區塊 */
 #dynamic-result-container {
-  width: 1000px;
+  width: 1500px;
   margin: 0 auto; /* 水平置中 */
   display: flex;
   justify-content: center; /* 水平置中 */
@@ -12963,4 +12963,11 @@ a:hover {
 
 #dynamic-result {
   font-size: 20px;
+}
+
+#news-results .card {
+  flex: 1 1 300px; /* 每張卡片最小寬度為 300px */
+  max-width: 300px; /* 最大寬度 */
+  box-sizing: border-box;
+  margin: 10px; /* 卡片之間的間距 */
 }
