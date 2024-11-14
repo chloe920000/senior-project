@@ -2,6 +2,5 @@
 2. Based on the current price, is it recommended to buy?: Yes
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 53 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set stop loss at 36.45 NTD, criteria include a 10% decline in stock price or a significant decline in quarterly EPS.
-6. Please give specific reasons why you think it is bullish or bearish.: 
-Increasing ROE, decreasing DBR, increasing gross profit margin, and decreasing PERatio indicate a positive trend in the company's financial performance. The airline industry is expected to recover from the pandemic, and the company's focus on international routes may benefit from the growth in global travel demand.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a stop-loss order at 36.45 NTD (10% below the current price) and adjust it to 42.5 NTD when the stock price reaches 45 NTD. Criteria: A drop in ROE or a significant decline in EPS.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and EPS, decreasing debt-to-asset ratio, and a low price-to-earnings ratio compared to historical data, along with a positive trend in the airline industry.

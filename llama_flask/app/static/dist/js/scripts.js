@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 顯示情緒平均分數
         if (sentiment_mean) {
-            let sentimentMeanHTML = '<h4>情緒平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
+            let sentimentMeanHTML = '<h4>平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
             document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
         } else {
             document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 顯示情緒趨勢圖
         if (chart_filename) {
-            let chartHTML = `<h4>情緒趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="800px" height="600px"></iframe>`;
+            let chartHTML = `<h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="400px" height="300px"></iframe>`;
             document.getElementById('dynamic-chart').innerHTML = chartHTML;
         } else {
             document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';

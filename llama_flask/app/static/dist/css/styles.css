@@ -12950,3 +12950,17 @@ a:hover {
   margin: 0;
   padding-left: 10px; /* 調整 h3 與 icon 的間距 */
 }
+
+/* 模型預測區塊 */
+#dynamic-result-container {
+  width: 1000px;
+  margin: 0 auto; /* 水平置中 */
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  height: 100vh; /* 設定區塊高度，以便實現垂直置中，根據需要可調整 */
+}
+
+#dynamic-result {
+  font-size: 20px;
+}
