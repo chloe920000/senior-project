@@ -1,12 +1,10 @@
 1. Is the next one year bullish or bearish?: bullish
 2. Based on the current price, is it recommended to buy?: Yes
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 255 NTD
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 270 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price reached, or a fixed stop loss at 193 NTD
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss strategy with a 10% stop loss limit and a 5% trailing stop loss trigger.
 6. Please give specific reasons why you think it is bullish or bearish.: 
-- Increasing BPS and stable capital over the past 4 years
-- Relatively stable ROE and ROA over the past 4 years
-- Recent significant increase in stock price, potentially driven by positive market sentiment
-- Gross profit margin and OPM have been stable or increasing over the past 4 years
-- DBR has been stable or decreasing over the past 4 years
-- Historical prices show a general upward trend over the past 4 years, with a significant increase in 2024.
+Increasing ROE and ROA, stable BPS, and decreasing DBR indicate a healthy financial condition. 
+Increasing gross profit margin and OPM indicate improved operational efficiency. 
+The recent price surge and historical high price indicate strong market momentum. 
+The company's focus on developing and manufacturing high-tech products aligns with the growing demand for technology and innovation.
