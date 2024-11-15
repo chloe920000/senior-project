@@ -38,15 +38,32 @@ def summarize_stock_data(stock_id, end_year):
     # 設定開始年份（過去五年）
     start_year = end_year - 4
 
-    # 從 Supabase 中獲取指定年份範圍內的日價格資料
-    response = supabase.table('daily_price').select('date', 'adj_price') \
-        .eq('stockID', stock_id) \
-        .gte('date', f'{start_year}-01-01') \
-        .lte('date', f'{end_year}-12-31') \
-        .execute()
+    # 設定每次查詢的範圍（每次最多查詢1000條記錄）
+    batch_size = 1000
+    offset = 0
+    all_data = []
+
+    while True:
+        # 從 Supabase 中獲取指定年份範圍內的日價格資料（分批查詢）
+        response = supabase.table('daily_price').select('date', 'adj_price') \
+            .eq('stockID', stock_id) \
+            .gte('date', f'{start_year}-01-01') \
+            .lte('date', f'{end_year}-12-31') \
+            .range(offset, offset + batch_size - 1) \
+            .execute()
+
+        # 若沒有資料則退出循環
+        if not response.data:
+            break
+        
+        # 將資料儲存到 all_data 中
+        all_data.extend(response.data)
+
+        # 更新 offset，準備查詢下一批資料
+        offset += batch_size
 
     # 將資料轉換為 DataFrame
-    df = pd.DataFrame(response.data)
+    df = pd.DataFrame(all_data)
     
     # 確保 'date' 欄位為日期格式，並設為索引
     df['date'] = pd.to_datetime(df['date'])
@@ -57,6 +74,7 @@ def summarize_stock_data(stock_id, end_year):
     yearly_summary.columns = ['Open', 'Close', 'High', 'Low']
 
     return yearly_summary
+
 
 
 # 將彙總資料轉換為string格式
