@@ -142,10 +142,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // 顯示預測結果表格（行列顛倒）
         let table = '<table class="table table-bordered style="width: 100%"><thead><tr>';
         // 第一列：顯示所有 keys
-        table += '<th>Details</th>';
-        for (let key in result) {
-            table += `<th>${key}</th>`;
-        }
+        table += '<th>細項</th>';
+        table += '<th>看漲/看跌</th>';
+        table += '<th>日期</th>';
+        table += '<th>是否推薦買入</th>';
+        table += '<th>推薦持有時間</th>';
+        table += '<th>推薦賣出價格</th>';
+        table += '<th>止損策略</th>';
+        
         table += '</tr></thead><tbody><tr><td>Result</td>';
         // 第二列：顯示所有 values
         for (let key in result) {

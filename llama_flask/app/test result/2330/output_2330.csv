@@ -3,3 +3,5 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2024-11-11,bullish,Yes,"1,394 NTD",18 months,"Trailing stop loss with 10% threshold and 5% increment, sell order triggered if price falls below 976 NTD"
 2024-11-14,bullish,Yes,"1,250 NTD",18 months,"Trailing stop loss with 10% maximum loss from peak price, or a drop below 50-day moving average."
 2024-11-14,bullish,Yes,1285 NTD,18 months,"Trailing stop loss at 10% below the highest price reached after purchase, with a minimum holding period of 12 months"
+2024-11-16,bullish,Yes,"1,350 NTD",18 months,"Trailing stop loss, 10% below the recent high price, or if ROE drops below 20%"
+2024-11-18,bullish,Yes,1280 NTD,18 months,"Trailing stop loss, 10% below the highest price since the investment, or when ROE drops below 20% for two consecutive quarters."
