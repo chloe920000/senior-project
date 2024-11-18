@@ -139,6 +139,7 @@ async def chat(date, stocks):
     news_summaries = []
     tokenizer = ChineseTokenizer()  # Initialize tokenizer
     news_by_date = {}  # 用於計算每天的新聞數量
+    total_length = 0  # 記錄 summaries 的總字數
     
     for news in news_data:
         
@@ -150,6 +151,10 @@ async def chat(date, stocks):
         summary = summarize_text(news["content"], tokenizer, word_limit=512)
         print(f"Summary for article dated {news['date']}:\n{summary}\n")
         news_summaries.append(summary)
+        
+        total_length += len(summary)  # 累加每次新增的摘要字數
+        if total_length > 7500:
+            break
 
     combined_summary = "\n".join(news_summaries)
     print(f"Combined Summary for {stock_name}:\n{combined_summary}\n")

@@ -9,6 +9,7 @@ import csv
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from ollama import AsyncClient
+import time
 
 # 載入環境變數
 load_dotenv()
@@ -61,6 +62,7 @@ def summarize_stock_data(stock_id, end_year):
 
         # 更新 offset，準備查詢下一批資料
         offset += batch_size
+        time.sleep(0.1) 
 
     # 將資料轉換為 DataFrame
     df = pd.DataFrame(all_data)

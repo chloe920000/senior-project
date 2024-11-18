@@ -26,8 +26,8 @@ stocks = (
 )
 add_page = 2
 # 指定要爬取的日期范围
-start_date = datetime.strptime("20241008", "%Y%m%d")
-end_date = datetime.strptime("20241108", "%Y%m%d")
+start_date = datetime.strptime("20241018", "%Y%m%d")
+end_date = datetime.strptime("20241118", "%Y%m%d")
 
 # 遍历每个股票
 for stock in stocks:
