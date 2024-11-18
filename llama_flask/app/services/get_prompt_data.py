@@ -35,14 +35,20 @@ def get_company_background(stock_id):
     return '无法取得公司背景资料'
 
 # 汇总股票数据
+import time
+import pandas as pd
+
 def summarize_stock_data(stock_id, end_year):
     # 設定開始年份（過去五年）
     start_year = end_year - 4
 
-    # 設定每次查詢的範圍（每次最多查詢1000條記錄）
-    batch_size = 1000
+    # 設定每次查詢的範圍
+    batch_size = 1000  # 這裡減少批次大小
     offset = 0
     all_data = []
+
+    # 設定會話級別的超時時間為 60 秒
+    supabase.rpc('set_statement_timeout', {'timeout': 120000})  # 使用RPC調用執行SQL
 
     while True:
         # 從 Supabase 中獲取指定年份範圍內的日價格資料（分批查詢）
@@ -64,6 +70,9 @@ def summarize_stock_data(stock_id, end_year):
         offset += batch_size
         time.sleep(0.1) 
 
+        # 增加延遲，防止請求過於頻繁
+        time.sleep(0.1)  
+
     # 將資料轉換為 DataFrame
     df = pd.DataFrame(all_data)
     
@@ -76,6 +85,7 @@ def summarize_stock_data(stock_id, end_year):
     yearly_summary.columns = ['Open', 'Close', 'High', 'Low']
 
     return yearly_summary
+
 
 
 
