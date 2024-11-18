@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 from ollama import AsyncClient
 import time
+
 # 載入環境變數
 load_dotenv()
 # 初始化 Supabase 客戶端
@@ -41,8 +42,8 @@ def summarize_stock_data(stock_id, end_year):
     # 設定開始年份（過去五年）
     start_year = end_year - 4
 
-    # 設定每次查詢的範圍（每次最多查詢1000條記錄）
-    batch_size = 1000
+    # 設定每次查詢的範圍
+    batch_size = 1000  # 這裡減少批次大小
     offset = 0
     all_data = []
 
@@ -67,9 +68,10 @@ def summarize_stock_data(stock_id, end_year):
 
         # 更新 offset，準備查詢下一批資料
         offset += batch_size
+        time.sleep(0.1) 
 
         # 增加延遲，防止請求過於頻繁
-        time.sleep(0.5)  # 可根據需要調整延遲時間
+        time.sleep(0.1)  
 
     # 將資料轉換為 DataFrame
     df = pd.DataFrame(all_data)
@@ -83,7 +85,6 @@ def summarize_stock_data(stock_id, end_year):
     yearly_summary.columns = ['Open', 'Close', 'High', 'Low']
 
     return yearly_summary
-
 
 
 
