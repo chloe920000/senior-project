@@ -140,22 +140,36 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('loadingMessage').style.display = 'none';
 
         // 顯示預測結果表格（行列顛倒）
-        let table = '<table class="table table-bordered style="width: 100%"><thead><tr>';
-        // 第一列：顯示所有 keys
-        table += '<th>細項</th>';
-        table += '<th>看漲/看跌</th>';
-        table += '<th>日期</th>';
-        table += '<th>是否推薦買入</th>';
-        table += '<th>推薦持有時間</th>';
-        table += '<th>推薦賣出價格</th>';
-        table += '<th>止損策略</th>';
-        
-        table += '</tr></thead><tbody><tr><td>Result</td>';
-        // 第二列：顯示所有 values
+        let table = `
+        <table class="table table-bordered" style="width: 100%; table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">細項</th>
+                    <th style="text-align: center;">看漲/看跌</th>
+                    <th style="text-align: center;">日期</th>
+                    <th style="text-align: center;">是否推薦買入</th>
+                    <th style="text-align: center;">推薦持有時間</th>
+                    <th style="text-align: center;">推薦賣出價格</th>
+                    <th style="text-align: center;">止損策略</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;">結果</td>
+        `;
+
         for (let key in result) {
-            table += `<td>${result[key]}</td>`;
+            table += `<td style="text-align: center;">${result[key]}</td>`;
         }
-        table += '</tr></tbody></table>';
+
+        table += `</tr>`;
+
+        
+
+        table += `
+            </tbody>
+        </table>
+        `;
         document.getElementById('dynamic-result').innerHTML = table;
 
         // 顯示情緒平均分數

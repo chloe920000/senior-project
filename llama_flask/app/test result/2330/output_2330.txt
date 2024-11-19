@@ -1,13 +1,7 @@
 1. Is the next one year bullish or bearish?: bullish
 2. Based on the current price, is it recommended to buy?: Yes
-<<<<<<< HEAD
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1280 NTD
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1300 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss, 10% below the highest price since the investment, or when ROE drops below 20% for two consecutive quarters.
-6. Please give specific reasons why you think it is bullish or bearish.: Historically high ROE and ROA, stable capital, increasing BPS, recent high gross profit margin and OPM, and a relatively low DBR.
-=======
-3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 1250 NTD
-4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a stop loss at 920 NTD, if the stock price falls below this level, sell immediately. Criteria for triggering a sell order: if the stock price falls by more than 10% within a 3-month period, or if the company's quarterly earnings report shows a significant decline in revenue or profit.
-6. Please give specific reasons why you think it is bullish or bearish.: The company's historical data shows a strong track record of growth, with increasing book value per share, high return on equity, and stable debt-to-asset ratio. The industry trend is also positive, with growing demand for semiconductors and related products. The current price is reasonable compared to the company's earnings and growth potential.
->>>>>>> 80f6d297d4b4c4a1b8c542602bb085006cd9b9e7
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a trailing stop loss at 10% below the highest price reached since purchase, or if the stock price falls below the 50-day moving average.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Historical ROE and ROA indicate strong profitability, recent price increases suggest upward momentum, and the company's involvement in the growing semiconductor industry supports long-term growth potential.

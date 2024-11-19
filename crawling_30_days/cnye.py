@@ -26,15 +26,15 @@ stocks = (
     supabase
     .table("stock")
     .select("stockID, stock_name")
-    .gte("stockID", 1217)
-    .lte("stockID", 1300)
+    .gte("stockID", 2486)
+    .lte("stockID", 9999)
     .execute()
     .data
 )
 
 # Specify the date range
-start_date = datetime.strptime("20241008", "%Y%m%d")
-end_date = datetime.strptime("20241108", "%Y%m%d")
+start_date = datetime.strptime("20241018", "%Y%m%d")
+end_date = datetime.strptime("20241118", "%Y%m%d")
 
 # CSV file setup for appending data
 csv_file = "cnye_news.csv"
@@ -57,7 +57,7 @@ for stock in stocks:
     # Scroll and gather news links
     for i in range(2):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(1)
+        #time.sleep(1)
         
         # Retry fetching elements to avoid StaleElementReferenceException
         try:
@@ -138,4 +138,4 @@ for stock in stocks:
         except Exception as e:
             print(f"Scraping failed: {e}")
             print("link", link)
-        time.sleep(1)
+        #time.sleep(1)

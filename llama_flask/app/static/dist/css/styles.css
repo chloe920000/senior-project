@@ -12927,9 +12927,6 @@ a:hover {
   color: #FFFFFF; /* 滑鼠懸停時文字顏色變白 */
 }
 
-
-
-
 .features-icons {
   position: relative;
 }
@@ -12971,3 +12968,9 @@ a:hover {
   box-sizing: border-box;
   margin: 10px; /* 卡片之間的間距 */
 }
+
+/* 
+#page4 {
+  background-color: #B08968 !important;
+}
+*/

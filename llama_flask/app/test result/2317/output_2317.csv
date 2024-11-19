@@ -21,3 +21,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 =======
 2024-11-15,bullish,Yes,240 NTD,18 months,"Trailing stop loss with a 10% threshold, sell if the stock price falls below the 50-day moving average or if ROE drops below 8%."
 >>>>>>> 80f6d297d4b4c4a1b8c542602bb085006cd9b9e7
+2024-11-18,bullish,Yes,275 NTD,18 months,"Trailing stop loss strategy, sell when price falls below 10% of the highest price since buying."
