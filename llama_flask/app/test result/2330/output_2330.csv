@@ -12,3 +12,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 >>>>>>> 80f6d297d4b4c4a1b8c542602bb085006cd9b9e7
 2024-11-18,bullish,Yes,1300 NTD,18 months,"Trailing stop loss at 10% below the highest price since purchase, or if the stock price falls below the 50-day moving average by more than 5%."
 2024-11-18,bullish,Yes,1300 NTD,18 months,"Set a trailing stop loss at 10% below the highest price reached since purchase, or if the stock price falls below the 50-day moving average."
+2024-11-19,bullish,Yes,1280 NTD,18 months,"Trailing stop loss, sell if price falls below 936 NTD (10% below current price) or if the stock experiences a 15% decline within a 3-month period."

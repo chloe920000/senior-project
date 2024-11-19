@@ -1,0 +1,6 @@
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 18
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set stop loss at 13.05 (10% below current price) and adjust as the stock price moves upward, maintaining a 10% trailing stop loss.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's recent financial data shows a recovery in profitability, with a positive trend in ROE and ROA. The textile industry is also experiencing growth, driven by increasing demand for sustainable and high-tech materials. Additionally, the company's debt-to-asset ratio has decreased, indicating improved financial health. The current price-to-earnings ratio is relatively low compared to the industry average, suggesting undervaluation.

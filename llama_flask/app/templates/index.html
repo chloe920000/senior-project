@@ -45,7 +45,7 @@
     <div id="page1" class="section"
         style="background-image: url('{{ url_for('static', filename='media/back3.jpg') }}');">
         <!-- 頁面標題 -->
-        <h1 class="mb-5">歡迎來到『漲LLa!嗎?』</h1>
+        <h1>歡迎來到『漲LLa!嗎?』</h1>
     </div>
 
     <!--第二個區塊 -->
@@ -57,7 +57,7 @@
                     <!-- 影片 -->
                     <div class="video-container">
                         <video id="video">
-                            <source src="{{ url_for('static', filename='media/run.mp4') }}" type="video/mp4">
+                            <source src="{{ url_for('static', filename='media/run2.mp4') }}" type="video/mp4">
                             您的瀏覽器不支援影片播放。
                         </video>
                     </div>
@@ -134,9 +134,9 @@
                 <div class="col-12 mb-4">
                     <div id="dynamic-result-container">
                         <div id="dynamic-container">
-                            <div id="dynamic-sentiment-mean" class="mt-3" style="font-size: 20px;"></div>
-                            <div id="dynamic-chart"></div>
-                            <div id="dynamic-geminiResponse"></div>
+                            <div id="dynamic-sentiment-mean" class="content-block" style="font-size: 20px;"></div>
+                            <div id="dynamic-chart" class="content-block"></div>
+                            <div id="dynamic-geminiResponse" class="content-block"></div>
                         </div>
                     </div>
                 </div>

@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
         <table class="table table-bordered" style="width: 100%; table-layout: fixed;">
             <thead>
                 <tr>
-                    <th style="text-align: center;">細項</th>
                     <th style="text-align: center;">看漲/看跌</th>
                     <th style="text-align: center;">日期</th>
                     <th style="text-align: center;">是否推薦買入</th>
@@ -155,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </thead>
             <tbody>
                 <tr>
-                    <td style="text-align: center;">結果</td>
         `;
 
                 for (let key in result) {
@@ -187,8 +185,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>新聞資料不足</p>';
                     } else if (sentiment_mean && sentiment_mean !== "No sentiment data available.") {
                         let sentimentMeanHTML = `
-                            <h4>平均分數</h4>
-                            <p style="color: blue; font-weight: bold;">${sentiment_mean}</p>
+                        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 250px; height: 250px; margin: 20px auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <h4 style="margin: 0;">平均分數</h4>
+                            <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                <p style="color: blue; font-weight: bold; font-size: 60px; margin: 0;">${sentiment_mean}</p>
+                            </div>
+                        </div>
                         `;
                         document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
                     } else {
@@ -202,9 +204,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('dynamic-chart').innerHTML = '<p>繪製圖表失敗</p>';
                     } else if (chart_filename) {
                         let chartHTML = `
-                            <h4>趨勢圖</h4>
-                            <iframe src="/static/chart/${chart_filename}" width="400px" height="300px"></iframe>
-                        `;
+                        <div class="gemini-response-container">
+                            <h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="450px" height="300px"></iframe>
+                        </div>`;
                         document.getElementById('dynamic-chart').innerHTML = chartHTML;
                     }
 
@@ -256,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newsList.forEach(news => {
                         newsHtml += `
                         <li class="py-2 border-bottom">
-                            <a href="${news.link}" target="_blank" class="text-dark text-decoration-none">
+                            <a href="${news.link}" target="_blank" class="text-dark">
                                 ${news.headline}
                             </a>
                         </li>
