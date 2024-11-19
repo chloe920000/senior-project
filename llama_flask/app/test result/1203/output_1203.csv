@@ -1,2 +1,11 @@
 Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended holding period,Stop-loss strategy
 2024-11-19,bullish,Yes,63 NTD,18 months,"Trailing stop loss with a 10% threshold, sell if the stock price falls below the 50-day moving average or if ROE drops below 8%."
+2024-11-19,bullish,Yes,63 NTD,18 months,Trailing stop loss with a 10% threshold and a 5% trailing step
+2024-11-19,bullish,Yes,53 NTD,18 months,"Trailing stop loss, 10% below the highest price since buying"
+2024-11-19,bullish,Yes,63 NTD,18 months,"Trailing stop loss with 8% trailing distance from the highest price since entry, and sell when the stock price falls below the 100-day moving average."
+2024-11-19,bullish,Yes,63 NTD,18 months,"Trailing stop loss with 8% trailing stop loss threshold, sell order triggered if price falls below 39.5 NTD or if the stock price drops by more than 15% within a 3-month period."
+2024-11-19,bullish,Yes,63 NTD,18 months,Trailing stop loss with a 10% drop from the highest price
+2024-11-19,bullish,Yes,53 NTD,18 months,Trailing stop loss with a 10% threshold and a 5% trailing stop interval
+2024-11-19,bullish,Yes,53 NTD,18 months,"Trailing stop loss, sell if the price falls 10% below the highest price reached since purchase"
+2024-11-19,bullish,Yes,53 NTD,18 months,"Trailing stop loss, if the stock price falls below 38.75 NTD"
+2024-11-19,bullish,Yes,53 NTD,18 months,Trailing stop loss with a 10% drop from the highest price since buying

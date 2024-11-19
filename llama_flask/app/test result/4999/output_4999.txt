@@ -4,9 +4,8 @@
 4. N/A
 5. N/A
 6. Please give specific reasons why you think it is bearish.: 
-- Low and declining ROE and ROA over the past 5 years
-- Unstable and decreasing EPS over the past 5 years
+- Declining ROE and ROA over the past 5 years
 - High debt-to-asset ratio
-- Decreasing gross profit margin and operating margin over the past 5 years
-- High price-to-earnings ratio compared to historical data
-- Unstable historical stock prices with a downward trend in recent years
+- Unstable EPS and declining gross profit margin
+- Historical price trends show a decline in stock price over the past 3 years
+- Current P/E ratio is high compared to historical data

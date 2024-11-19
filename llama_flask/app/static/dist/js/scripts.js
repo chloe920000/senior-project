@@ -159,27 +159,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (let key in result) {
                     table += `<td style="text-align: center;">${result[key]}</td>`;
                 }
-
                 table += `</tr>`;
-
-
-
                 table += `
             </tbody>
         </table>
         `;
                 document.getElementById('dynamic-result').innerHTML = table;
 
-
                 // Check if all conditions indicate no news data
-                if (
-                    sentiment_mean === "No news data available." &&
-                    chart_filename === "No chart available." &&
-                    thirtydnews_response === "No news data available."
-                ) {
-                    // Display "新聞資料不足" and hide all sections
-                    document.getElementById('dynamic-container').innerHTML = '<p>新聞資料不足</p>';
-                } else {
+                if (sentiment_mean === "No news data available." && 
+                    chart_filename === "No chart available." && 
+                    thirtydnews_response === "No news data available.") {
+                    // Display "新聞資料不足"
+                    document.getElementById('dynamic-container').innerHTML = '新聞資料不足';
+                }else {
                     // Display sentiment mean
                     if (sentiment_mean === "No news data available.") {
                         document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>新聞資料不足</p>';
@@ -316,4 +309,16 @@ function playVideo() {
     // 顯示影片並播放
     video.style.display = "block";  // 顯示影片
     video.play();                  // 播放影片
+}
+
+//刷新、清空內容
+function clearContent() {
+    // 清空區塊的內容
+    document.getElementById("dynamic-result").innerHTML = "";
+    document.getElementById("dynamic-sentiment-mean").innerHTML = "";
+    // 清空 dynamic-container
+    document.getElementById('dynamic-container').innerHTML = '';
+    document.getElementById("dynamic-chart").innerHTML = "";
+    document.getElementById("dynamic-geminiResponse").innerHTML = "";
+    document.getElementById("news-results").innerHTML = "";
 }
