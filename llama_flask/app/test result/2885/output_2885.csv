@@ -9,3 +9,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2024-11-19,bullish,Yes,43 NTD,18 months,Trailing stop loss with a 10% threshold and a 5% trailing interval
 2024-11-19,bullish,Yes,43 NTD,18 months,Trailing stop loss at 10% below the recent high
 2024-11-19,bullish,Yes,41 NTD,18 months,"Trailing stop loss with a 10% threshold, triggered by a 5% decline in BPS or a 10% decline in EPS"
+2024-11-19,bullish,Yes,41 NTD,18 months,"Trailing stop loss with a 10% threshold, or a drop below the 200-day moving average"

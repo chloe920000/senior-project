@@ -12770,7 +12770,7 @@ footer.footer {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 500px;
-  height: 450px;
+  height: 400px;
   margin: 20px auto;
 }
 
@@ -12786,7 +12786,7 @@ footer.footer {
 
 /* Summary and answer sections */
 .gemini-summary {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -12818,12 +12818,18 @@ footer.footer {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   opacity: 0.5; /* Sets transparency to 30% */
   z-index: -1; /* Sends the video to the background */
   object-position: left; /* Aligns the video to the left */
+}
+/* 影片樣式 */
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保持影片比例並裁剪以填滿區塊 */
 }
 
 #page2 {
@@ -12970,11 +12976,13 @@ a:hover {
   margin: 10px; /* 卡片之間的間距 */
 }
 
+
+#dynamic-result-container .content-block {
+  margin-right: 30px; /* 設定每個區塊的間距 */
+}
+
 /* 
 #page4 {
   background-color: #B08968 !important;
 }
 */
-#dynamic-result-container .content-block {
-  margin-right: 30px; /* 設定每個區塊的間距 */
-}
