@@ -174,7 +174,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 顯示情緒平均分數
         if (sentiment_mean) {
-            let sentimentMeanHTML = '<h4>平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
+            let sentimentMeanHTML = `
+            <div class="gemini-response-container">
+                <h4>平均分數</h4>
+                <p style="color: blue; font-weight: bold; text-align: center; font-size: 60px;">${sentiment_mean}</p>
+            </div>`;
             document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
         } else {
             document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
@@ -182,7 +186,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 顯示情緒趨勢圖
         if (chart_filename) {
-            let chartHTML = `<h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="400px" height="300px"></iframe>`;
+            let chartHTML = `
+            <div class="gemini-response-container">
+                <h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="450px" height="300px"></iframe>
+            </div>`
+            
             document.getElementById('dynamic-chart').innerHTML = chartHTML;
         } else {
             document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';
@@ -232,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newsList.forEach(news => {
                         newsHtml += `
                         <li class="py-2 border-bottom">
-                            <a href="${news.link}" target="_blank" class="text-dark text-decoration-none">
+                            <a href="${news.link}" target="_blank" class="text-dark">
                                 ${news.headline}
                             </a>
                         </li>
