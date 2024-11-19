@@ -140,7 +140,7 @@ async def analyze_and_store_sentiments(date, stock):
         print(
             f"No news data found for stock_id {stock_id} within the specified date range."
         )
-        return
+        return "No news data available.", "No news data available."
 
     total_sentiment_score = 0
     count = 0
@@ -257,9 +257,9 @@ def plot_sentiment_timeseries(news_with_sentiment):
         fig.update_layout(xaxis_title="Date", yaxis_title="Average Sentiment Score")
 
         # 3. Save the chart as an HTML file
-        html_filename = "try_sentiment_chart.html"
-        fig.write_html(html_filename)
-        print(f"Chart saved as HTML: {html_filename}")
+        # html_filename = "try_sentiment_chart.html"
+        # fig.write_html(html_filename)
+        # print(f"Chart saved as HTML: {html_filename}")
 
         # 4. Convert the chart to HTML string
         plot_html = fig.to_html(

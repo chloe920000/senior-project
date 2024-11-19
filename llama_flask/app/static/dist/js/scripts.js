@@ -133,14 +133,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(this);
 
         try {
-    // 發送 /predict 請求
-    const predictResponse = await fetch('/predict', { method: 'POST', body: formData });
-    if (predictResponse.ok) {
-        const { sentiment_mean, result, chart_filename, thirtydnews_response } = await predictResponse.json();
-        document.getElementById('loadingMessage').style.display = 'none';
+            // 發送 /predict 請求
+            const predictResponse = await fetch('/predict', { method: 'POST', body: formData });
+            if (predictResponse.ok) {
+                const { sentiment_mean, result, chart_filename, thirtydnews_response } = await predictResponse.json();
+                document.getElementById('loadingMessage').style.display = 'none';
 
-        // 顯示預測結果表格（行列顛倒）
-        let table = `
+                // 顯示預測結果表格（行列顛倒）
+                let table = `
         <table class="table table-bordered" style="width: 100%; table-layout: fixed;">
             <thead>
                 <tr>
@@ -158,57 +158,81 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td style="text-align: center;">結果</td>
         `;
 
-        for (let key in result) {
-            table += `<td style="text-align: center;">${result[key]}</td>`;
-        }
+                for (let key in result) {
+                    table += `<td style="text-align: center;">${result[key]}</td>`;
+                }
 
-        table += `</tr>`;
+                table += `</tr>`;
 
-        
 
-        table += `
+
+                table += `
             </tbody>
         </table>
         `;
-        document.getElementById('dynamic-result').innerHTML = table;
+                document.getElementById('dynamic-result').innerHTML = table;
 
-        // 顯示情緒平均分數
-        if (sentiment_mean) {
-            let sentimentMeanHTML = '<h4>平均分數</h4><p style="color: blue; font-weight: bold;">' + sentiment_mean + '</p>';
-            document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
-        } else {
-            document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
+
+                // Check if all conditions indicate no news data
+                if (
+                    sentiment_mean === "No news data available." &&
+                    chart_filename === "No chart available." &&
+                    thirtydnews_response === "No news data available."
+                ) {
+                    // Display "新聞資料不足" and hide all sections
+                    document.getElementById('dynamic-container').innerHTML = '<p>新聞資料不足</p>';
+                } else {
+                    // Display sentiment mean
+                    if (sentiment_mean === "No news data available.") {
+                        document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>新聞資料不足</p>';
+                    } else if (sentiment_mean && sentiment_mean !== "No sentiment data available.") {
+                        let sentimentMeanHTML = `
+                            <h4>平均分數</h4>
+                            <p style="color: blue; font-weight: bold;">${sentiment_mean}</p>
+                        `;
+                        document.getElementById('dynamic-sentiment-mean').innerHTML = sentimentMeanHTML;
+                    } else {
+                        document.getElementById('dynamic-sentiment-mean').innerHTML = '<p>情緒平均分數未生成。</p>';
+                    }
+
+                    // Display sentiment trend chart
+                    if (chart_filename === "No sentiment data for chart.") {
+                        document.getElementById('dynamic-chart').innerHTML = '<p>沒有足夠情緒資料</p>';
+                    } else if (chart_filename === "No chart available.") {
+                        document.getElementById('dynamic-chart').innerHTML = '<p>繪製圖表失敗</p>';
+                    } else if (chart_filename) {
+                        let chartHTML = `
+                            <h4>趨勢圖</h4>
+                            <iframe src="/static/chart/${chart_filename}" width="400px" height="300px"></iframe>
+                        `;
+                        document.getElementById('dynamic-chart').innerHTML = chartHTML;
+                    }
+
+                    // Display Gemini 30-day news analysis
+                    if (thirtydnews_response === "No news data available.") {
+                        document.getElementById('dynamic-geminiResponse').innerHTML = '<p>新聞資料不足</p>';
+                    } else if (thirtydnews_response && thirtydnews_response !== "exception") {
+                        let geminiResponseHTML = `
+                            <div class="gemini-response-container">
+                                <h4>市場分析</h4>
+                                <div class="gemini-answer">
+                                    <pre>${thirtydnews_response}</pre>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('dynamic-geminiResponse').innerHTML = geminiResponseHTML;
+                    } else if (thirtydnews_response === "No data available.") {
+                        document.getElementById('dynamic-geminiResponse').innerHTML = '<p>尚未生成或資源已耗盡。</p>';
+                    }
+                }
+
+
+            } else {
+                document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得 predict 結果';
+            }
+        } catch (error) {
+            console.error("Error:", error);
         }
-
-        // 顯示情緒趨勢圖
-        if (chart_filename) {
-            let chartHTML = `<h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="400px" height="300px"></iframe>`;
-            document.getElementById('dynamic-chart').innerHTML = chartHTML;
-        } else {
-            document.getElementById('dynamic-chart').innerHTML = '<p>尚未生成圖表。</p>';
-        }
-
-        // 顯示 Gemini 30天新聞理由
-        if (thirtydnews_response && thirtydnews_response !== "exception") {
-            let geminiResponseHTML = `
-            <div class="gemini-response-container">
-                <h4>市場分析</h4>
-                <div class="gemini-answer">
-                    <pre>${thirtydnews_response}</pre>
-                </div>
-            </div>
-            `;
-            document.getElementById('dynamic-geminiResponse').innerHTML = geminiResponseHTML;
-        } else {
-            document.getElementById('dynamic-geminiResponse').innerHTML = '<p>尚未生成或資源已耗盡。</p>';
-        }
-
-    } else {
-        document.getElementById('loadingMessage').innerHTML = 'Error: 無法取得 predict 結果';
-    }
-} catch (error) {
-    console.error("Error:", error);
-}
 
 
         try {
@@ -218,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const newsData = await newsResponse.json();
                 let newsHtml = '';
 
-                
+
                 // 動態生成新聞卡片
                 for (const [source, newsList] of Object.entries(newsData)) {
                     newsHtml += `

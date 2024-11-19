@@ -162,7 +162,9 @@ def predict():
     # 30天的新聞summary+分析_together(llama)
     print("======together(llama)開始分析30天的新聞summary======")
     try:
-        thirtydnews_response = together_news_prompt.get_together_30dnews_response(date, stocks)
+        thirtydnews_response = together_news_prompt.get_together_30dnews_response(
+            date, stocks
+        )
         with open("together_output.log", "w", encoding="utf-8") as f:
             f.write(str(thirtydnews_response))
     except Exception as e:
@@ -190,7 +192,7 @@ def predict():
             chart_html = news_transformer.plot_sentiment_timeseries(news_with_sentiment)
             if chart_html is None:
                 raise ValueError("Chart HTML generation failed.")
-            
+
             # 設定 charts 資料夾路徑
             charts_dir = os.path.join(app.root_path, "static", "chart")
 
@@ -202,7 +204,9 @@ def predict():
             chart_filename = f"sentiment_chart_{stocks['stock_id']}_{date}.html"
 
             # 保存圖表文件到 static/chart 資料夾
-            with open(os.path.join(charts_dir, chart_filename), "w", encoding="utf-8") as f:
+            with open(
+                os.path.join(charts_dir, chart_filename), "w", encoding="utf-8"
+            ) as f:
                 f.write(chart_html)
 
         except Exception as e:
@@ -210,12 +214,16 @@ def predict():
             chart_filename = None
     else:
         print("No sentiment data available for generating chart.")
-        chart_filename = None
+        chart_filename = "No sentiment data for chart."
 
     # 保存結果到 session
-    session["result"] = result if 'result' in locals() else "No result available."
-    session["chart_filename"] = chart_filename if chart_filename else "No chart available."
-    session["sentiment_mean"] = sentiment_mean if sentiment_mean is not None else "No sentiment data available."
+    session["result"] = result if "result" in locals() else "No result available."
+    session["chart_filename"] = (
+        chart_filename if chart_filename is not None else "No chart available."
+    )
+    session["sentiment_mean"] = (
+        sentiment_mean if sentiment_mean is not None else "No sentiment data available."
+    )
 
     print("llama_result: ", session["result"])
     print("chart_filename: ", session["chart_filename"])
@@ -232,7 +240,6 @@ def predict():
     )
 
 
-
 @app.route("/sentiment-chart")
 def sentiment_chart():
     # Fetch stored data from session
@@ -242,7 +249,7 @@ def sentiment_chart():
     if chart_filename and os.path.exists(chart_filename):
         return render_template("chart.html", chart_filename=chart_filename)
     else:
-        return "<p>Chart not available.</p>"
+        return "Chart not available."
 
 
 # 用來做前端的 SSE 股票分析跑馬燈
@@ -279,7 +286,7 @@ def news():
         stock_name = stock_data
     else:
         stock_id = stock_data
-        
+
     # 如果只有 stock_name 沒有 stock_id，從 Supabase 查詢 stockID
     if not stock_id:
         stock_response = (
@@ -298,7 +305,7 @@ def news():
 
         # 獲取 stockID
         stock_id = stock_data[0]["stockID"]
-        
+
     try:
         # Get stock name from Supabase
         stock_name = crawler_for_flask.get_stock_name(stock_id)

@@ -133,25 +133,25 @@ async def chat(date, stocks):
 
     if not news_data:
         print(f"No news found for stockID: {stock_id}")
-        return
+        return "No news data available."
 
     # Summarize news for the past 30 days
     news_summaries = []
     tokenizer = ChineseTokenizer()  # Initialize tokenizer
     news_by_date = {}  # 用於計算每天的新聞數量
     total_length = 0  # 記錄 summaries 的總字數
-    
+
     for news in news_data:
-        
-        news_date = news['date']
+
+        news_date = news["date"]
         # 檢查此日期的新聞數量是否達到 2 篇
         if news_by_date.get(news_date, 0) >= 2:
             continue  # 當天新聞數量已滿，跳過此新聞
-        
+
         summary = summarize_text(news["content"], tokenizer, word_limit=512)
         print(f"Summary for article dated {news['date']}:\n{summary}\n")
         news_summaries.append(summary)
-        
+
         total_length += len(summary)  # 累加每次新增的摘要字數
         if total_length > 7500:
             break
