@@ -4,6 +4,7 @@ import google.generativeai as genai
 from supabase import create_client, Client
 from app.services import settings
 import os
+
 # 配置生成式 AI 模型
 genai.configure(api_key=settings.api_key)
 
@@ -115,11 +116,6 @@ async def chat(date, stocks):
                 if sig is None:
                     continue  # 跳過未知情況
 
-                # 更新 Supabase 中的數據
-                supabase.from_("news_content").update({"gemini_signal": sig}).eq(
-                    "id", news["id"]
-                ).execute()
-
                 if sig == 0:
                     # 刪除該筆資料
                     supabase.from_("news_content").delete().eq(
@@ -128,10 +124,11 @@ async def chat(date, stocks):
                     ).execute()
                     print("Deleted #無關 資料")
                 else:
+                    """
                     # 更新 Supabase 中的數據
                     supabase.from_("news_content").update({"gemini_signal": sig}).eq(
                         "id", news["id"]
-                    ).execute()
+                    ).execute()"""
                     signals.append([stock_name, news["id"], sig])
                     result = f"Stock&News: {stock_name}\nDate: {date_obj}\nSignal: {sig}\nAnswer: {ans}\n"
                     results.append(result)
