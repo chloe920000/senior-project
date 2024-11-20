@@ -141,29 +141,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // 顯示預測結果表格（行列顛倒）
                 let table = `
-        <table class="table table-bordered" style="width: 100%; table-layout: fixed;">
-            <thead>
-                <tr>
-                    <th style="text-align: center;">看漲/看跌</th>
-                    <th style="text-align: center;">日期</th>
-                    <th style="text-align: center;">是否推薦買入</th>
-                    <th style="text-align: center;">推薦持有時間</th>
-                    <th style="text-align: center;">推薦賣出價格</th>
-                    <th style="text-align: center;">止損策略</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-        `;
+                <table class="table table-bordered" style="width: 100%; table-layout: fixed;box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">看漲/看跌</th>
+                            <th style="text-align: center;">日期</th>
+                            <th style="text-align: center;">是否推薦買入</th>
+                            <th style="text-align: center;">推薦持有時間</th>
+                            <th style="text-align: center;">推薦賣出價格</th>
+                            <th style="text-align: center;">止損策略</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                `;
 
-                for (let key in result) {
-                    table += `<td style="text-align: center;">${result[key]}</td>`;
-                }
-                table += `</tr>`;
-                table += `
-            </tbody>
-        </table>
-        `;
+                        for (let key in result) {
+                            table += `<td style="text-align: center;">${result[key]}</td>`;
+                        }
+                        table += `</tr>`;
+                        table += `
+                    </tbody>
+                </table>
+                `;
                 document.getElementById('dynamic-result').innerHTML = table;
 
                 // Check if all conditions indicate no news data
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newsList.forEach(news => {
                         newsHtml += `
                         <li class="py-2 border-bottom">
-                            <a href="${news.link}" target="_blank" class="text-dark">
+                            <a href="${news.link}" target="_blank" class="news-link">
                                 ${news.headline}
                             </a>
                         </li>
@@ -321,4 +321,5 @@ function clearContent() {
     document.getElementById("dynamic-chart").innerHTML = "";
     document.getElementById("dynamic-geminiResponse").innerHTML = "";
     document.getElementById("news-results").innerHTML = "";
+    document.getElementById("loadingMessage").innerHTML = "";
 }

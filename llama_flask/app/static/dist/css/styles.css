@@ -2040,7 +2040,6 @@ progress {
 
 .table {
   --bs-table-color: var(--bs-body-color);
-  --bs-table-bg: transparent;
   --bs-table-border-color: var(--bs-border-color);
   --bs-table-accent-bg: transparent;
   --bs-table-striped-color: var(--bs-body-color);
@@ -2056,9 +2055,20 @@ progress {
   border-color: var(--bs-table-border-color);
 }
 
+.table th {
+  background-color:rgba(120, 101, 91, 0.7);
+  color: white; /* 白色文字，讓文字清晰可見 */
+  text-align: center; /* 文字居中 */
+  vertical-align: middle; /* 垂直居中 */
+}
+.table td {
+  background-color:white;
+  color: black;
+  text-align: center; /* 文字居中 */
+  vertical-align: middle; /* 垂直居中 */
+}
 .table> :not(caption)>*>* {
   padding: 0.5rem 0.5rem;
-  background-color: var(--bs-table-bg);
   border-bottom-width: 1px;
   box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
 }
@@ -9127,7 +9137,7 @@ fieldset:disabled .btn {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: #D6C5AE!important;
+  background-color: rgba(120, 101, 91, 0.7)!important;
 }
 
 .bg-secondary {
@@ -12620,16 +12630,16 @@ fieldset:disabled .btn {
 }
 
 .features-icons {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .features-icons .features-icons-item {
-  max-width: 100%;
+  width: 14rem;
 }
 
 .features-icons .features-icons-item .features-icons-icon {
-  height: 7rem;
+  height: 5rem;
 }
 
 .features-icons .features-icons-item .features-icons-icon i {
@@ -12735,10 +12745,9 @@ footer.footer {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  color: white;
-  font-size: 20px;
-  background-color: #333;
-  padding: 10px;
+  color:#78655b;
+  font-size: 30px;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -12861,10 +12870,6 @@ footer.footer {
   font-size: 1.25rem; /* Increase font size for easier readability */
 }
 
-.topic{
-  width:300px;
-}
-
 /* 設置背景圖片滿版和透明度 */
 #page1 {
   position: relative;
@@ -12930,7 +12935,7 @@ a:hover {
 }
 
 .navbar-brand:hover {
-  background-color: #c9ba9b; /* 滑鼠懸停時更深的棕色 */
+  background-color: rgba(181, 166, 135, 0.7); /* 滑鼠懸停時更深的棕色 */
   color: #FFFFFF; /* 滑鼠懸停時文字顏色變白 */
 }
 
@@ -12981,8 +12986,52 @@ a:hover {
   margin-right: 30px; /* 設定每個區塊的間距 */
 }
 
-/* 
+ 
 #page4 {
-  background-color: #B08968 !important;
+  background-color: #F3E9D8 !important;
 }
-*/
+
+#page5 {
+  background-color: #f0e5d5 !important;
+}
+
+#page6 {
+  background-color: #ECE1D1 !important;
+}
+
+/* 預設新聞連結樣式 */
+#news-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease; /* 添加過渡效果 */
+}
+
+/* 滑鼠移到連結上時的樣式 */
+#news-link:hover {
+  color: #FF4500;
+}
+
+
+.underline {
+  font-size: 40px; /* 字體大小，可根據需要調整 */
+  font-weight: bold; /* 加粗 */
+  text-align: center; /* 文字置中 */
+  color: #6c757d; /* 字體顏色 */
+  position: relative; /* 設定相對定位，用於放置底線 */
+  margin: 20px 0; /* 增加上下間距 */
+}
+
+.underline::after {
+  content: ""; /* 生成虛擬元素 */
+  display: block; /* 讓虛擬元素顯示為區塊 */
+  width: 100%; /* 底線寬度，可根據需求調整 */
+  height: 3px; /* 底線高度 */
+  background-color: #d3d3d3; /* 底線顏色 */
+  margin: 0 auto; /* 底線置中 */
+  margin-top: 5px; /* 與文字的間距 */
+}
+
+.move-box {
+  margin-top: 100px; /* 往下移動 */
+  margin-left: 100px; /* 往右移動 */
+}

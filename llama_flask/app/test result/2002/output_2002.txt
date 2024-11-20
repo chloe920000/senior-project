@@ -1,11 +1,7 @@
 1. Is the next one year bullish or bearish?: bearish
 2. Based on the current price, is it recommended to buy?: No
-3. N/A
-4. N/A
-5. N/A
-6. Please give specific reasons why you think it is bullish or bearish.: 
-   - Unstable ROE and ROA over the past 5 years, indicating potential management and operational issues.
-   - Negative EPS in 3 out of the past 5 years, indicating potential profitability concerns.
-   - High debt-to-asset ratio (DBR) of around 49%, indicating potential financial risks.
-   - Unstable gross profit margin and operating margin, indicating potential risks in the company's operations.
-   - Historical price trends show a decline in the stock price over the past year, indicating potential market concerns about the company's performance.
+3. (skipped)
+4. (skipped)
+5. (skipped)
+6. Please give specific reasons why you think it is bearish.: 
+   The company's financial performance has been inconsistent, with fluctuating ROE and ROA over the past five years. The recent decline in EPS and the high debt-to-asset ratio also raise concerns. The steel industry is highly competitive and subject to market fluctuations, which may negatively impact the company's future performance. The current price-to-earnings ratio is also relatively high, indicating potential overvaluation.
