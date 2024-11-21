@@ -12630,6 +12630,12 @@ fieldset:disabled .btn {
 }
 
 .features-icons {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 加陰影 */
+  padding: 20px;
+  background: white;
+}
+
+.features-icons {
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
@@ -13039,6 +13045,8 @@ a:hover {
   margin-left: 100px; /* 往右移動 */
 }
 
+
+/*新聞資料不足按鈕設計*/
 .press {
   position: relative;
   z-index: 1;
