@@ -17,6 +17,7 @@ import app.services.gemini_signal_to_supa as gemini_signal_to_supa  # 引入gemi
 import app.services.news_transformer as news_transformer
 import app.services.gemini_news_prompt as gemini_news_prompt
 import app.services.together_news_prompt as together_news_prompt
+import app.services.together_filter as together_filter
 from dotenv import load_dotenv
 from supabase import create_client, Client
 import os
@@ -143,21 +144,14 @@ def predict():
     # 獲取股票預測結果
     result = llama_main_TogetherFlask.get_stock_predictions(dates, stocks)
 
-    # 刪除無關新聞，標記好、不好，並寫入supa
-    gemini_score = gemini_signal_to_supa.get_gemini_response(date, stocks)
+    # 刪除無關新聞，標記好、不好
+    # gemini_score = gemini_signal_to_supa.get_gemini_response(date, stocks)
+    # together_filter 刪除無關新聞
+    together_filter.get_together_response(date, stocks)
 
     stocks = {"stock_id": stock_id, "stock_name": stock_name}  # 字典型態
     # 輸出 stocks 列表
     print("Stocks data:", stocks)
-
-    # 30天的新聞summary+分析_gemini
-    """thirtydnews_response = gemini_news_prompt.get_gemini_30dnews_response(
-        date, stocks
-    )
-
-    with open("gemini_output.log", "w") as f:
-        f.write(str(gemini_30dnews_response))
-    """
 
     # 30天的新聞summary+分析_together(llama)
     print("======together(llama)開始分析30天的新聞summary======")
