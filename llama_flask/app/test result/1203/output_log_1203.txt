@@ -273,3 +273,79 @@ no.0 === 2024-11-21 15:57:42.544064 ===
 5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 10% threshold, review every 3 months
 6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE, stable DBR, growing BPS, and relatively low PERatio compared to historical data, along with a moderate optimism based on positive trends in the food manufacturing industry.
 
+no.0 === 2024-11-21 16:17:41.125981 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price reached since purchase
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing BPS, stable capital, relatively stable ROE, increasing gross profit margin in recent years before NA, stable DBR, recent high price breakthrough, and growing demand for the company's products.
+
+no.0 === 2024-11-21 16:27:10.081457 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with a 10% threshold below the recent high
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and stable capital over the past years, rising historical prices, and stable debt-to-asset ratio, despite some fluctuations in EPS and operating margins.
+
+no.0 === 2024-11-21 16:31:38.141866 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 10% maximum loss, review every 3 months
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Increasing BPS, stable capital, relatively stable ROE and ROA, and a recent increase in stock price indicate a positive trend; however, rising PER and inconsistent EPS suggest caution, while the company's diversified business segments and stable debt-to-asset ratio provide a foundation for growth.
+
+no.0 === 2024-11-21 16:45:59.817780 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 10% threshold and 5% increment
+6. Please give specific reasons why you think it is bullish or bearish.: 
+- Increasing BPS and stable capital over the past 4 years
+- Recovering ROE and ROA after a decline in 2022
+- Historical price trend shows a steady increase in the long term
+- Low debt-to-asset ratio and stable operating margin
+- Potential for growth in the food and beverage industry
+
+no.0 === 2024-11-21 16:50:54.731576 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set stop loss at 38.92 NTD, and adjust the stop loss price to the break-even point when the stock price rises by 15%
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Increasing ROE and stable capital, recent price drop from the high of 58.29 NTD, stable debt-to-asset ratio, and relatively low P/E ratio compared to recent years.
+
+no.0 === 2024-11-21 16:56:33.120984 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 10% threshold, review quarterly
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Increasing ROE and stable DBR, 
+historical price trend shows growth potential, 
+stable BPS and capital structure, 
+expanding product lines in the food industry, 
+growth in EPS expected due to market trends and company diversification.
+
+no.0 === 2024-11-21 17:00:13.525875 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price since buying
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and stable debt-to-asset ratio, combined with a relatively low P/E ratio and a growth trend in the food industry, indicate potential for long-term growth.
+
+no.0 === 2024-11-21 17:02:28.014364 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 63 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a stop-loss at 38.9 NTD (10% below the current price), and re-evaluate the position if the price falls below this level or if the company's fundamentals deteriorate.
+6. Please give specific reasons why you think it is bullish or bearish.: The company's book value per share and capital have shown stability, and the return on equity has been relatively high. The price-to-earnings ratio is increasing, but the current price is lower than the recent high. The company's diversified business segments, including food manufacturing, import/export, and automobile services, provide a stable revenue stream. Additionally, the historical prices show an upward trend, and the current price is relatively low compared to the recent high.
+

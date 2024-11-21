@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     chart_filename === "No chart available." && 
                     thirtydnews_response === "No news data available.") {
                     // Display "新聞資料不足"
-                    document.getElementById('dynamic-container').innerHTML = '新聞資料不足';
+                    document.getElementById('dynamic-container').innerHTML = 
+                    '<a href="#page6" class="press" data-text="新聞資料不足"><span>查</span><span>看</span><span>重</span><span>要</span><span>新</span><span>聞</span></a>';
                 }else {
                     // Display sentiment mean
                     if (sentiment_mean === "No news data available.") {
