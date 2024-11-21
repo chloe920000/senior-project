@@ -147,7 +147,7 @@ async def chat(date, stocks):
 
         # 從 Supabase 中提取數據
         response = (
-            supabase.from_("news_test").select("*").eq("stockID", stock_id).execute()
+            supabase.from_("news_content").select("*").eq("stockID", stock_id).execute()
         )
         news_data = response.data
 
@@ -183,7 +183,7 @@ async def chat(date, stocks):
 
                 if sig == 0:
                     # 刪除該筆資料
-                    supabase.from_("news_test").delete().eq(
+                    supabase.from_("news_content").delete().eq(
                         "id",
                         news["id"],
                     ).execute()

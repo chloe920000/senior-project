@@ -290,3 +290,28 @@ no.0 === 2024-11-21 15:50:25.106987 ===
 6. Please give specific reasons why you think it is bullish or bearish.: 
 Increasing ROE and ROA, decreasing debt-to-asset ratio, stable capital growth, and a relatively low P/E ratio compared to historical values.
 
+no.0 === 2024-11-21 19:05:14.192156 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 55 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with a 10% threshold, sell if the stock price falls below the 50-day moving average or if ROE/ROA significantly declines.
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Increasing ROE/ROA, decreasing debt-to-asset ratio, and improving gross profit margin/operating margin over the past few years; recent price-to-earnings ratio indicates undervaluation; industry recovery and growth potential; historical price trend shows upward momentum.
+
+no.0 === 2024-11-21 19:05:20.937083 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 55 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss at 10% below the highest price since purchase, or if the quarterly EPS drops by more than 20% compared to the previous quarter.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE, decreasing debt-to-asset ratio, increasing gross profit margin, and a relatively low P/E ratio compared to historical values, indicating potential for growth and undervaluation.overy and growth potential; historical price trend shows upward momentum.
+
+no.0 === 2024-11-21 19:05:32.128367 ===
+1. Is the next one year bullish or bearish?: bullish
+2. Based on the current price, is it recommended to buy?: Yes
+3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 55 NTD
+4. What is the recommended holding period for this investment?: 18 months
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss strategy with a 10% stop loss threshold, and sell when the stock price falls below the 50-day moving average or if ROE and ROA decline for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and ROA, decreasing debt-to-asset ratio, increasing gross profit margin, and decreasing price-to-earnings ratio indicate improved financial health and growth potential; industry trends and market demand for international air transportation are expected to recover and grow.
+

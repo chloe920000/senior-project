@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('dynamic-chart').innerHTML = '<p>繪製圖表失敗</p>';
                     } else if (chart_filename) {
                         let chartHTML = `
-                        <div class="gemini-response-container">
+                        <div class="gemini-response-container" style="text-align: center;">
                             <h4>趨勢圖</h4><iframe src="/static/chart/${chart_filename}" width="450px" height="300px"></iframe>
                         </div>`;
                         document.getElementById('dynamic-chart').innerHTML = chartHTML;
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         document.getElementById('dynamic-geminiResponse').innerHTML = '<p>新聞資料不足</p>';
                     } else if (thirtydnews_response && thirtydnews_response !== "exception") {
                         let geminiResponseHTML = `
-                            <div class="gemini-response-container">
+                            <div class="gemini-response-container" style="text-align: center;">
                                 <h4>市場分析</h4>
                                 <div class="gemini-answer">
                                     <pre>${thirtydnews_response}</pre>

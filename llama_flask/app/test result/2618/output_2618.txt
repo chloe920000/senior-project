@@ -2,6 +2,5 @@
 2. Based on the current price, is it recommended to buy?: Yes
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 55 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 8% threshold, review every 3 months, sell if DBR exceeds 75% or ROE drops below 10%
-6. Please give specific reasons why you think it is bullish or bearish.: 
-Increasing ROE and ROA, decreasing debt-to-asset ratio, stable capital growth, and a relatively low P/E ratio compared to historical values.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss strategy with a 10% stop loss threshold, and sell when the stock price falls below the 50-day moving average or if ROE and ROA decline for two consecutive quarters.
+6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and ROA, decreasing debt-to-asset ratio, increasing gross profit margin, and decreasing price-to-earnings ratio indicate improved financial health and growth potential; industry trends and market demand for international air transportation are expected to recover and grow.
