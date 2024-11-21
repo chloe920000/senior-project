@@ -200,6 +200,7 @@ def get_together_response(date, stocks):
     asyncio.run(chat(date, stocks))
 
 
+"""
 # 示例日期
 test_date = "2024-11-01"
 
@@ -210,3 +211,4 @@ test_stocks = [
 
 # 调用测试函数
 get_together_response(test_date, test_stocks)
+"""
