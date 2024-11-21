@@ -12981,6 +12981,9 @@ a:hover {
   margin: 10px; /* 卡片之間的間距 */
 }
 
+#news-results {
+  margin-top: 50px; /* 可調整距離大小 */
+}
 
 #dynamic-result-container .content-block {
   margin-right: 30px; /* 設定每個區塊的間距 */
@@ -13034,4 +13037,93 @@ a:hover {
 .move-box {
   margin-top: 100px; /* 往下移動 */
   margin-left: 100px; /* 往右移動 */
+}
+
+.press {
+  position: relative;
+  z-index: 1;
+  min-width: 300px; /* 按鈕寬度加大 */
+  padding: 20px 30px; /* 按鈕高度和內邊距加大 */
+  background: #F5DEB3; /* 淺棕色背景 */
+  color: #4B2E1A !important; /* 深棕字體 */
+  text-align: center;
+  border-radius: 8px; /* 圓角效果 */
+  font-size: 1.5rem; /* 字體大小增加 */
+  font-weight: bold;
+  letter-spacing: 5px; /* 字體間距加大 */
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* 靜態陰影 */
+  transition: 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.press:hover,
+.press:focus {
+  background: #E8D3B0; /* 微調背景顏色 */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3); /* 加強陰影效果 */
+  transform: translateY(-3px); /* 略微提升按鈕 */
+}
+.press:active {
+  background: #DFC8A4; /* 按下時更深色 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 減弱陰影 */
+  transform: translateY(2px); /* 按下時按鈕下沉 */
+}
+
+.press span {
+  display: inline-block;
+  font-size: 1.5rem; /* 字體大小匹配按鈕 */
+  font-weight: bold;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translate(0, -20px);
+  transition: 0.25s cubic-bezier(0.5, -1, 0.5, 2);
+  color: #4B2E1A; /* 深棕字體 */
+}
+.press:before {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  font-size: 1.5rem; /* 字體大小匹配按鈕 */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 5px; /* 字體間距加大 */
+  text-align: center;
+  opacity: 1;
+  transform: translate(0, 0px);
+  transition: 0.25s cubic-bezier(0.5, -1, 0.5, 2);
+  color: #4B2E1A; /* 深棕字體 */
+}
+.press:hover:before,
+.press:focus:before {
+  opacity: 0;
+  transform: translate(0, 20px);
+}
+.press:hover span,
+.press:focus span {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.press:hover span:nth-child(1),
+.press:focus span:nth-child(1) {
+  transition-delay: 0.025s;
+}
+.press:hover span:nth-child(2),
+.press:focus span:nth-child(2) {
+  transition-delay: 0.05s;
+}
+.press:hover span:nth-child(3),
+.press:focus span:nth-child(3) {
+  transition-delay: 0.075s;
+}
+.press:hover span:nth-child(4),
+.press:focus span:nth-child(4) {
+  transition-delay: 0.1s;
+}
+.press:hover span:nth-child(5),
+.press:focus span:nth-child(5) {
+  transition-delay: 0.125s;
+}
+.press:hover span:nth-child(6),
+.press:focus span:nth-child(6) {
+  transition-delay: 0.15s;
 }

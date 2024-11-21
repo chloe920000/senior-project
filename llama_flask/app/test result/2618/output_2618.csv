@@ -31,3 +31,4 @@ Date,Bullish/Bearish,Recommend buy or not,Recommended selling price,Recommended 
 2024-11-20,bullish,Yes,55 NTD,18 months,"Trailing stop loss with 10% threshold, sell if price falls below 37.71 NTD or if ROE and ROA decline in the next quarterly report."
 2024-11-20,bullish,Yes,55 NTD,18 months,"Set stop loss at 37.53 NTD (10% below the current price), and adjust the stop loss price to the break-even point when the stock price reaches 45 NTD."
 2024-11-20,bullish,Yes,55 NTD,18 months,"Set a trailing stop loss of 10% below the highest price reached since the investment, and sell if the stock price falls below this level."
+2024-11-21,bullish,Yes,55 NTD,18 months,"Trailing stop loss with 8% threshold, review every 3 months, sell if DBR exceeds 75% or ROE drops below 10%"

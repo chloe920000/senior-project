@@ -31,8 +31,8 @@ Assuming you are a stock analyst, please conduct a long-term (over 12 months) pr
 
 Evaluation criteria:
 
-* A "bullish" market is defined as a stock price increase of at least 10% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
-* A "bearish" market is defined as a stock price decline of at least 15% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
+* A "bullish" market is defined as a stock price increase of at least 25% over the next one year, but avoid being overly conservative; consider the potential for a stronger performance if indicators suggest growth.
+* A "bearish" market is defined as a stock price decline of at least 25% over the next one year, but ensure that a reasonable margin for error is accounted for, especially if the stock has stable fundamentals.
 * If bullish, the selling price will usually be higher than the buying price, but aim for a balanced target that captures potential gains without excessive risk.
 * If it is bearish, no need to answer question 2.3.4.5.
 * It is recommended that the selling price should be the take profit price when bullish. If the former is bearish, you can skip it directly.
