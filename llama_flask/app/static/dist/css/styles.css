@@ -2067,6 +2067,7 @@ progress {
   text-align: center; /* 文字居中 */
   vertical-align: middle; /* 垂直居中 */
 }
+
 .table> :not(caption)>*>* {
   padding: 0.5rem 0.5rem;
   border-bottom-width: 1px;
@@ -12665,26 +12666,6 @@ header.masthead {
   overflow: hidden;
 }
 
-/*
-header.masthead:before {
-  content: "";
-  position: absolute;
-  background-color: #1c375e;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-  z-index: 1;
-}
-
-header.masthead h1,
-header.masthead .h1 {
-  font-size: 2rem;
-  z-index: 2;
-  position: relative;
-}
-*/
 @media (min-width: 768px) {
   header.masthead h1,
   header.masthead .h1 {
@@ -12904,7 +12885,6 @@ footer.footer {
   color: white;
   z-index: 1; /* 讓文字層級高於背景 */
   text-align: center;
-  padding-top: 40vh; /* 讓文字置於區域中央 */
 }
 
 /* 設置背景圖片滿版和透明度 */
@@ -13020,10 +13000,11 @@ a:hover {
   color: #FF4500;
 }
 
-
-.underline {
+h3{
   font-size: 40px; /* 字體大小，可根據需要調整 */
   font-weight: bold; /* 加粗 */
+}
+.underline {
   text-align: center; /* 文字置中 */
   color: #6c757d; /* 字體顏色 */
   position: relative; /* 設定相對定位，用於放置底線 */
@@ -13135,3 +13116,21 @@ a:hover {
 .press:focus span:nth-child(6) {
   transition-delay: 0.15s;
 }
+
+
+
+/*歡迎來到漲lla!ma?標題*/
+h1{
+  font-size: 4rem; /* 調整文字大小 */
+  font-weight: bold; /* 加粗文字 */
+  letter-spacing: 8px;
+}
+.section-first {
+  display: flex; /* 使用 Flexbox */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 50px; /* 確保區塊的高度覆蓋整個視窗 */
+  text-align: center; /* 文字居中對齊 */
+  margin: 0; /* 去除預設邊距 */
+}
+

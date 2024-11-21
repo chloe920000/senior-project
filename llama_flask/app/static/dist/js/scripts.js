@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const { sentiment_mean, result, chart_filename, thirtydnews_response } = await predictResponse.json();
                 document.getElementById('loadingMessage').style.display = 'none';
 
-                // 顯示預測結果表格（行列顛倒）
+                // 顯示預測結果表格
                 let table = `
-                <table class="table table-bordered" style="width: 100%; table-layout: fixed;box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px;">
+                <table class="table table-bordered" style="width: 100%; table-layout: fixed; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px;">
                     <thead>
                         <tr>
                             <th style="text-align: center;">看漲/看跌</th>
@@ -37,14 +37,28 @@ document.addEventListener('DOMContentLoaded', function () {
                         <tr>
                 `;
 
-                        for (let key in result) {
-                            table += `<td style="text-align: center;">${result[key]}</td>`;
-                        }
-                        table += `</tr>`;
-                        table += `
+                // 確保表格的每一列有固定欄位，並處理是否推薦買入為 "No" 的情況
+                table += `<td style="text-align: center;">${result["Bullish/Bearish"] || ""}</td>`;
+                table += `<td style="text-align: center;">${result["Date"] || ""}</td>`;
+                table += `<td style="text-align: center;">${result["Recommend buy or not"] || ""}</td>`;
+
+                // 如果 "是否推薦買入" 是 "No"，後續三格填入空值
+                if (result["是否推薦買入"] === "No") {
+                    table += `<td style="text-align: center;"></td>`; // 推薦持有時間
+                    table += `<td style="text-align: center;"></td>`; // 推薦賣出價格
+                    table += `<td style="text-align: center;"></td>`; // 止損策略
+                } else {
+                    table += `<td style="text-align: center;">${result["Recommended holding period"] || ""}</td>`;
+                    table += `<td style="text-align: center;">${result["Recommended selling price"] || ""}</td>`;
+                    table += `<td style="text-align: center;">${result["Stop-loss strategy"] || ""}</td>`;
+                }
+
+                table += `
+                        </tr>
                     </tbody>
                 </table>
                 `;
+
                 document.getElementById('dynamic-result').innerHTML = table;
 
                 // Check if all conditions indicate no news data
