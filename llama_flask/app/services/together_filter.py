@@ -2,7 +2,11 @@ import asyncio
 from datetime import datetime, timedelta
 from supabase import create_client, Client
 from together import Together
-
+import os
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer
+import jieba
 import os
 from dotenv import load_dotenv
 
@@ -15,7 +19,52 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 # Together API client
-together_client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+together_client = Together(api_key=os.environ.get("TOGETHER_API_KEY3"))
+
+
+class ChineseTokenizer:
+    def tokenize(self, text):
+        return list(jieba.cut(text))  # 分詞
+
+    def to_sentences(self, text):
+        delimiters = ["。", "！", "？"]
+        sentences = []
+        start = 0
+        for i, char in enumerate(text):
+            if char in delimiters:
+                sentences.append(text[start : i + 1].strip())
+                start = i + 1
+        if start < len(text):  # 如果還有剩餘的文本
+            sentences.append(text[start:].strip())
+        return sentences
+
+    def to_words(self, text):
+        return self.tokenize(text)  # 实现 to_words 方法，调用 tokenize 方法
+
+
+# 使用 Sumy 生成新聞摘要
+def summarize_text(news, tokenizer, word_limit=512):
+    """
+    使用 Sumy 的 LSA 方法来生成摘要，限制摘要字數
+    :param news: string, 原始新闻
+    :param word_limit: int, 摘要的字數限制
+    :return: string, 摘要后的新闻
+    """
+    sentences = tokenizer.to_sentences(news)
+    if not sentences:
+        return ""  # 若無有效句子，直接返回空字符串
+    parser = PlaintextParser.from_string(" ".join(sentences), tokenizer)
+    summarizer = LsaSummarizer()
+
+    # 初步生成較多的句子
+    preliminary_summary = summarizer(parser.document, 10)  # 先生成 10 個句子的摘要
+    summary_text = " ".join(str(sentence) for sentence in preliminary_summary)
+
+    # 根據字數限制進行裁剪
+    if len(summary_text) > word_limit:
+        summary_text = summary_text[:word_limit] + "..."
+
+    return summary_text
 
 
 async def together_response(news, question):
@@ -52,8 +101,9 @@ async def together_response(news, question):
             max_tokens=512,
             temperature=0.7,
         )
-        print("Together Response:", response)
-        return response.choices[0].message.content.strip()
+        content = response.choices[0].message.content.strip()
+        # print(f"Together Response Content:\n{content}")  # 指印內容
+        return content
     except Exception as e:
         print(f"Error with Together API: {e}")
         return "exception"
@@ -82,6 +132,7 @@ async def chat(date, stocks):
 
     :param date: string 日期
     :param stocks: list 股票列表
+
     """
     end_date = datetime.strptime(date, "%Y-%m-%d")
     start_date = end_date - timedelta(days=30)
@@ -96,13 +147,15 @@ async def chat(date, stocks):
 
         # 從 Supabase 中提取數據
         response = (
-            supabase.from_("news_content").select("*").eq("stockID", stock_id).execute()
+            supabase.from_("news_test").select("*").eq("stockID", stock_id).execute()
         )
         news_data = response.data
 
         if not news_data:
-            print(f"No news found for stockID: {stock_id}")
+            print(f"No valid news content found for stockID: {stock_id}")
             continue
+
+        tokenizer = ChineseTokenizer()  # 初始化一次分詞器
 
         for news in news_data:
             date_obj = news["date"]
@@ -114,8 +167,15 @@ async def chat(date, stocks):
             if start_date.date() <= date_obj <= end_date.date():
                 print(f"Stock&News: {stock_name}, Date: {date_obj}")
 
-                ans = await together_response(news["content"], query)
-                print(ans)
+                # 先進行摘要
+                summary = summarize_text(news["content"], tokenizer, word_limit=512)
+                if not summary.strip():
+                    print(f"Skipping news ID {news['id']} due to empty summary.")
+                    continue
+
+                print("summary: ", summary)
+                ans = await together_response(summary, query)
+                print("answer:", ans)
                 sig = response_to_signal(ans)
 
                 if sig is None:
@@ -123,7 +183,7 @@ async def chat(date, stocks):
 
                 if sig == 0:
                     # 刪除該筆資料
-                    supabase.from_("news_content").delete().eq(
+                    supabase.from_("news_test").delete().eq(
                         "id",
                         news["id"],
                     ).execute()
@@ -132,23 +192,21 @@ async def chat(date, stocks):
                     signals.append([stock_name, news["id"], sig])
                     result = f"Stock&News: {stock_name}\nDate: {date_obj}\nSignal: {sig}\nAnswer: {ans}\n"
                     results.append(result)
-        print("無關新聞過濾完成。")
+
+        print("\n無關新聞過濾完成。")
 
 
 def get_together_response(date, stocks):
     asyncio.run(chat(date, stocks))
 
 
-"""
 # 示例日期
 test_date = "2024-11-01"
 
 # 示例股票数据
 test_stocks = [
-    {"stock_id": "2002", "stock_name": "中鋼"},
     {"stock_id": "1504", "stock_name": "東元"},
 ]
 
 # 调用测试函数
 get_together_response(test_date, test_stocks)
-"""
