@@ -12981,6 +12981,9 @@ a:hover {
   margin: 10px; /* 卡片之間的間距 */
 }
 
+#news-results {
+  margin-top: 50px; /* 可調整距離大小 */
+}
 
 #dynamic-result-container .content-block {
   margin-right: 30px; /* 設定每個區塊的間距 */

@@ -2,5 +2,6 @@
 2. Based on the current price, is it recommended to buy?: Yes
 3. Based on the current price, assuming the maximum loss of the stop loss strategy is 10%, what is the recommended selling price?: 55 NTD
 4. What is the recommended holding period for this investment?: 18 months
-5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Set a trailing stop loss of 10% below the highest price reached since the investment, and sell if the stock price falls below this level.
-6. Please give specific reasons why you think it is bullish or bearish.: Increasing ROE and ROA, decreasing debt-to-asset ratio, and a relatively low price-to-earnings ratio compared to historical values, indicating potential for growth and undervaluation.
+5. Suggested stop loss strategy? What are your criteria for triggering a sell order?: Trailing stop loss with 8% threshold, review every 3 months, sell if DBR exceeds 75% or ROE drops below 10%
+6. Please give specific reasons why you think it is bullish or bearish.: 
+Increasing ROE and ROA, decreasing debt-to-asset ratio, stable capital growth, and a relatively low P/E ratio compared to historical values.
